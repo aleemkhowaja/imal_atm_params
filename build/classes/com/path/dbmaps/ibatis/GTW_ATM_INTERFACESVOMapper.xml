@@ -1,0 +1,466 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GTW_ATM_INTERFACES" >
+  <resultMap id="BaseResultMap" type="com.path.dbmaps.vo.GTW_ATM_INTERFACESVO" >
+    <id column="COMP_CODE" property="COMP_CODE" />
+    <id column="INTERFACE_CODE" property="INTERFACE_CODE" />
+    <result column="DESCRIPTION" property="DESCRIPTION" />
+    <result column="INTERFACE_TYPE" property="INTERFACE_TYPE" />
+    <result column="INCLUDE_LENGTH" property="INCLUDE_LENGTH" />
+    <result column="MSG_LENGTH" property="MSG_LENGTH" />
+    <result column="HEADER_LENGTH" property="HEADER_LENGTH" />
+    <result column="HEADER_DATA" property="HEADER_DATA" />
+    <result column="BITMAP_TYPE" property="BITMAP_TYPE" />
+    <result column="LENGTH_TYPE" property="LENGTH_TYPE" />
+    <result column="CURRENT_DATE" property="CURRENT_DATE" />
+    <result column="INCLUDE_HEADER_YN" property="INCLUDE_HEADER_YN" />
+    <result column="POS_IN_HEADER_YN" property="POS_IN_HEADER_YN" />
+    <result column="ISO_PRESENT_YN" property="ISO_PRESENT_YN" />
+    <result column="SKIP_BITMAP_YN" property="SKIP_BITMAP_YN" />
+    <result column="STATUS" property="STATUS" />
+    <result column="CREATED_BY" property="CREATED_BY" />
+    <result column="CREATED_DATE" property="CREATED_DATE" />
+    <result column="MODIFIED_BY" property="MODIFIED_BY" />
+    <result column="MODIFIED_DATE" property="MODIFIED_DATE" />
+    <result column="APPROVED_BY" property="APPROVED_BY" />
+    <result column="APPROVED_DATE" property="APPROVED_DATE" />
+    <result column="DELETED_BY" property="DELETED_BY" />
+    <result column="DELETED_DATE" property="DELETED_DATE" />
+    <result column="SUSPENDED_BY" property="SUSPENDED_BY" />
+    <result column="SUSPENDED_DATE" property="SUSPENDED_DATE" />
+    <result column="REACTIVATED_BY" property="REACTIVATED_BY" />
+    <result column="REACTIVATED_DATE" property="REACTIVATED_DATE" />
+     <result column="PROTOCOL_IDENTITFICATION" property="PROTOCOL_IDENTITFICATION" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COMP_CODE, INTERFACE_CODE, DESCRIPTION, INTERFACE_TYPE, INCLUDE_LENGTH, MSG_LENGTH, 
+    HEADER_LENGTH, HEADER_DATA, BITMAP_TYPE, LENGTH_TYPE, CURRENT_DATE, INCLUDE_HEADER_YN, 
+    POS_IN_HEADER_YN, ISO_PRESENT_YN, SKIP_BITMAP_YN, STATUS, CREATED_BY, CREATED_DATE, 
+    MODIFIED_BY, MODIFIED_DATE, APPROVED_BY, APPROVED_DATE, DELETED_BY, DELETED_DATE, 
+    SUSPENDED_BY, SUSPENDED_DATE, REACTIVATED_BY, REACTIVATED_DATE, PROTOCOL_IDENTITFICATION
+  </sql>
+  <select id="selectGTW_ATM_INTERFACES" resultMap="BaseResultMap" parameterType="com.path.dbmaps.vo.GTW_ATM_INTERFACESVO" >
+    select 
+    <include refid="Base_Column_List" />
+    from GTW_ATM_INTERFACES
+    where COMP_CODE = #{COMP_CODE}
+      and INTERFACE_CODE = #{INTERFACE_CODE}
+  </select>
+  <delete id="deleteGTW_ATM_INTERFACES" parameterType="com.path.dbmaps.vo.GTW_ATM_INTERFACESVO" >
+    delete from GTW_ATM_INTERFACES
+    where COMP_CODE = #{COMP_CODE}
+      and INTERFACE_CODE = #{INTERFACE_CODE}
+  </delete>
+  <insert id="insertGTW_ATM_INTERFACES" parameterType="com.path.dbmaps.vo.GTW_ATM_INTERFACESVO" >
+    insert into GTW_ATM_INTERFACES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        COMP_CODE,
+      </if>
+      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+        INTERFACE_CODE,
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        DESCRIPTION,
+      </if>
+      <if test="INTERFACE_TYPE != null and !&quot;&quot;.equals(INTERFACE_TYPE)" >
+        INTERFACE_TYPE,
+      </if>
+      <if test="INCLUDE_LENGTH != null and INCLUDE_LENGTH != emptyBigDecimalValue" >
+        INCLUDE_LENGTH,
+      </if>
+      <if test="MSG_LENGTH != null and MSG_LENGTH != emptyBigDecimalValue" >
+        MSG_LENGTH,
+      </if>
+      <if test="HEADER_LENGTH != null and HEADER_LENGTH != emptyBigDecimalValue" >
+        HEADER_LENGTH,
+      </if>
+      <if test="HEADER_DATA != null and !&quot;&quot;.equals(HEADER_DATA)" >
+        HEADER_DATA,
+      </if>
+      <if test="BITMAP_TYPE != null and !&quot;&quot;.equals(BITMAP_TYPE)" >
+        BITMAP_TYPE,
+      </if>
+      <if test="LENGTH_TYPE != null and !&quot;&quot;.equals(LENGTH_TYPE)" >
+        LENGTH_TYPE,
+      </if>
+      <if test="CURRENT_DATE != null" >
+        CURRENT_DATE,
+      </if>
+      <if test="INCLUDE_HEADER_YN != null and !&quot;&quot;.equals(INCLUDE_HEADER_YN)" >
+        INCLUDE_HEADER_YN,
+      </if>
+      <if test="POS_IN_HEADER_YN != null and !&quot;&quot;.equals(POS_IN_HEADER_YN)" >
+        POS_IN_HEADER_YN,
+      </if>
+      <if test="ISO_PRESENT_YN != null and !&quot;&quot;.equals(ISO_PRESENT_YN)" >
+        ISO_PRESENT_YN,
+      </if>
+      <if test="SKIP_BITMAP_YN != null and !&quot;&quot;.equals(SKIP_BITMAP_YN)" >
+        SKIP_BITMAP_YN,
+      </if>
+      <if test="STATUS != null and !&quot;&quot;.equals(STATUS)" >
+        STATUS,
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        CREATED_BY,
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE,
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        MODIFIED_BY,
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE,
+      </if>
+      <if test="APPROVED_BY != null and !&quot;&quot;.equals(APPROVED_BY)" >
+        APPROVED_BY,
+      </if>
+      <if test="APPROVED_DATE != null" >
+        APPROVED_DATE,
+      </if>
+      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+        DELETED_BY,
+      </if>
+      <if test="DELETED_DATE != null" >
+        DELETED_DATE,
+      </if>
+      <if test="SUSPENDED_BY != null and !&quot;&quot;.equals(SUSPENDED_BY)" >
+        SUSPENDED_BY,
+      </if>
+      <if test="SUSPENDED_DATE != null" >
+        SUSPENDED_DATE,
+      </if>
+      <if test="REACTIVATED_BY != null and !&quot;&quot;.equals(REACTIVATED_BY)" >
+        REACTIVATED_BY,
+      </if>
+      <if test="REACTIVATED_DATE != null" >
+        REACTIVATED_DATE,
+      </if>
+      <if test="PROTOCOL_IDENTITFICATION != null and !&quot;&quot;.equals(PROTOCOL_IDENTITFICATION)" >
+        PROTOCOL_IDENTITFICATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+        #{INTERFACE_CODE},
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        #{DESCRIPTION},
+      </if>
+      <if test="INTERFACE_TYPE != null and !&quot;&quot;.equals(INTERFACE_TYPE)" >
+        #{INTERFACE_TYPE},
+      </if>
+      <if test="INCLUDE_LENGTH != null and INCLUDE_LENGTH != emptyBigDecimalValue" >
+        #{INCLUDE_LENGTH},
+      </if>
+      <if test="MSG_LENGTH != null and MSG_LENGTH != emptyBigDecimalValue" >
+        #{MSG_LENGTH},
+      </if>
+      <if test="HEADER_LENGTH != null and HEADER_LENGTH != emptyBigDecimalValue" >
+        #{HEADER_LENGTH},
+      </if>
+      <if test="HEADER_DATA != null and !&quot;&quot;.equals(HEADER_DATA)" >
+        #{HEADER_DATA},
+      </if>
+      <if test="BITMAP_TYPE != null and !&quot;&quot;.equals(BITMAP_TYPE)" >
+        #{BITMAP_TYPE},
+      </if>
+      <if test="LENGTH_TYPE != null and !&quot;&quot;.equals(LENGTH_TYPE)" >
+        #{LENGTH_TYPE},
+      </if>
+      <if test="CURRENT_DATE != null" >
+        #{CURRENT_DATE},
+      </if>
+      <if test="INCLUDE_HEADER_YN != null and !&quot;&quot;.equals(INCLUDE_HEADER_YN)" >
+        #{INCLUDE_HEADER_YN},
+      </if>
+      <if test="POS_IN_HEADER_YN != null and !&quot;&quot;.equals(POS_IN_HEADER_YN)" >
+        #{POS_IN_HEADER_YN},
+      </if>
+      <if test="ISO_PRESENT_YN != null and !&quot;&quot;.equals(ISO_PRESENT_YN)" >
+        #{ISO_PRESENT_YN},
+      </if>
+      <if test="SKIP_BITMAP_YN != null and !&quot;&quot;.equals(SKIP_BITMAP_YN)" >
+        #{SKIP_BITMAP_YN},
+      </if>
+      <if test="STATUS != null and !&quot;&quot;.equals(STATUS)" >
+        #{STATUS},
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        #{CREATED_BY},
+      </if>
+      <if test="CREATED_DATE != null" >
+        #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        #{MODIFIED_BY},
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        #{MODIFIED_DATE},
+      </if>
+      <if test="APPROVED_BY != null and !&quot;&quot;.equals(APPROVED_BY)" >
+        #{APPROVED_BY},
+      </if>
+      <if test="APPROVED_DATE != null" >
+        #{APPROVED_DATE},
+      </if>
+      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+        #{DELETED_BY},
+      </if>
+      <if test="DELETED_DATE != null" >
+        #{DELETED_DATE},
+      </if>
+      <if test="SUSPENDED_BY != null and !&quot;&quot;.equals(SUSPENDED_BY)" >
+        #{SUSPENDED_BY},
+      </if>
+      <if test="SUSPENDED_DATE != null" >
+        #{SUSPENDED_DATE},
+      </if>
+      <if test="REACTIVATED_BY != null and !&quot;&quot;.equals(REACTIVATED_BY)" >
+        #{REACTIVATED_BY},
+      </if>
+      <if test="REACTIVATED_DATE != null" >
+        #{REACTIVATED_DATE},
+      </if>
+       <if test="PROTOCOL_IDENTITFICATION != null and !&quot;&quot;.equals(PROTOCOL_IDENTITFICATION)" >
+        #{PROTOCOL_IDENTITFICATION},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateGTW_ATM_INTERFACES" >
+    update GTW_ATM_INTERFACES
+    <set >
+      <if test="DESCRIPTION != null" >
+        <choose >
+          <when test="DESCRIPTION.equals(&quot;&quot;)" >
+            DESCRIPTION = NULL ,
+          </when>
+          <otherwise >
+            DESCRIPTION = #{DESCRIPTION},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="INTERFACE_TYPE != null" >
+        <choose >
+          <when test="INTERFACE_TYPE.equals(&quot;&quot;)" >
+            INTERFACE_TYPE = NULL ,
+          </when>
+          <otherwise >
+            INTERFACE_TYPE = #{INTERFACE_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="INCLUDE_LENGTH != null" >
+        <choose >
+          <when test="INCLUDE_LENGTH == emptyBigDecimalValue" >
+            INCLUDE_LENGTH = NULL ,
+          </when>
+          <otherwise >
+            INCLUDE_LENGTH = #{INCLUDE_LENGTH},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="MSG_LENGTH != null" >
+        <choose >
+          <when test="MSG_LENGTH == emptyBigDecimalValue" >
+            MSG_LENGTH = NULL ,
+          </when>
+          <otherwise >
+            MSG_LENGTH = #{MSG_LENGTH},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="HEADER_LENGTH != null" >
+        <choose >
+          <when test="HEADER_LENGTH == emptyBigDecimalValue" >
+            HEADER_LENGTH = NULL ,
+          </when>
+          <otherwise >
+            HEADER_LENGTH = #{HEADER_LENGTH},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="HEADER_DATA != null" >
+        <choose >
+          <when test="HEADER_DATA.equals(&quot;&quot;)" >
+            HEADER_DATA = NULL ,
+          </when>
+          <otherwise >
+            HEADER_DATA = #{HEADER_DATA},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="BITMAP_TYPE != null" >
+        <choose >
+          <when test="BITMAP_TYPE.equals(&quot;&quot;)" >
+            BITMAP_TYPE = NULL ,
+          </when>
+          <otherwise >
+            BITMAP_TYPE = #{BITMAP_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="LENGTH_TYPE != null" >
+        <choose >
+          <when test="LENGTH_TYPE.equals(&quot;&quot;)" >
+            LENGTH_TYPE = NULL ,
+          </when>
+          <otherwise >
+            LENGTH_TYPE = #{LENGTH_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CURRENT_DATE != null" >
+        CURRENT_DATE = #{CURRENT_DATE},
+      </if>
+      <if test="INCLUDE_HEADER_YN != null" >
+        <choose >
+          <when test="INCLUDE_HEADER_YN.equals(&quot;&quot;)" >
+            INCLUDE_HEADER_YN = NULL ,
+          </when>
+          <otherwise >
+            INCLUDE_HEADER_YN = #{INCLUDE_HEADER_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="POS_IN_HEADER_YN != null" >
+        <choose >
+          <when test="POS_IN_HEADER_YN.equals(&quot;&quot;)" >
+            POS_IN_HEADER_YN = NULL ,
+          </when>
+          <otherwise >
+            POS_IN_HEADER_YN = #{POS_IN_HEADER_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="ISO_PRESENT_YN != null" >
+        <choose >
+          <when test="ISO_PRESENT_YN.equals(&quot;&quot;)" >
+            ISO_PRESENT_YN = NULL ,
+          </when>
+          <otherwise >
+            ISO_PRESENT_YN = #{ISO_PRESENT_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="SKIP_BITMAP_YN != null" >
+        <choose >
+          <when test="SKIP_BITMAP_YN.equals(&quot;&quot;)" >
+            SKIP_BITMAP_YN = NULL ,
+          </when>
+          <otherwise >
+            SKIP_BITMAP_YN = #{SKIP_BITMAP_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="STATUS != null" >
+        <choose >
+          <when test="STATUS.equals(&quot;&quot;)" >
+            STATUS = NULL ,
+          </when>
+          <otherwise >
+            STATUS = #{STATUS},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CREATED_BY != null" >
+        <choose >
+          <when test="CREATED_BY.equals(&quot;&quot;)" >
+            CREATED_BY = NULL ,
+          </when>
+          <otherwise >
+            CREATED_BY = #{CREATED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE = #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null" >
+        <choose >
+          <when test="MODIFIED_BY.equals(&quot;&quot;)" >
+            MODIFIED_BY = NULL ,
+          </when>
+          <otherwise >
+            MODIFIED_BY = #{MODIFIED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE = #{MODIFIED_DATE},
+      </if>
+      <if test="APPROVED_BY != null" >
+        <choose >
+          <when test="APPROVED_BY.equals(&quot;&quot;)" >
+            APPROVED_BY = NULL ,
+          </when>
+          <otherwise >
+            APPROVED_BY = #{APPROVED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="APPROVED_DATE != null" >
+        APPROVED_DATE = #{APPROVED_DATE},
+      </if>
+      <if test="DELETED_BY != null" >
+        <choose >
+          <when test="DELETED_BY.equals(&quot;&quot;)" >
+            DELETED_BY = NULL ,
+          </when>
+          <otherwise >
+            DELETED_BY = #{DELETED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DELETED_DATE != null" >
+        DELETED_DATE = #{DELETED_DATE},
+      </if>
+      <if test="SUSPENDED_BY != null" >
+        <choose >
+          <when test="SUSPENDED_BY.equals(&quot;&quot;)" >
+            SUSPENDED_BY = NULL ,
+          </when>
+          <otherwise >
+            SUSPENDED_BY = #{SUSPENDED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="SUSPENDED_DATE != null" >
+        SUSPENDED_DATE = #{SUSPENDED_DATE},
+      </if>
+      <if test="REACTIVATED_BY != null" >
+        <choose >
+          <when test="REACTIVATED_BY.equals(&quot;&quot;)" >
+            REACTIVATED_BY = NULL ,
+          </when>
+          <otherwise >
+            REACTIVATED_BY = #{REACTIVATED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REACTIVATED_DATE != null" >
+        REACTIVATED_DATE = #{REACTIVATED_DATE},
+      </if>
+      <if test="PROTOCOL_IDENTITFICATION != null" >
+        <choose >
+          <when test="PROTOCOL_IDENTITFICATION.equals(&quot;&quot;)" >
+            PROTOCOL_IDENTITFICATION = NULL ,
+          </when>
+          <otherwise >
+            PROTOCOL_IDENTITFICATION = #{PROTOCOL_IDENTITFICATION},
+          </otherwise>
+        </choose>
+      </if>
+    </set>
+    where COMP_CODE = #{COMP_CODE}
+      and INTERFACE_CODE = #{INTERFACE_CODE}
+  </sql>
+  <update id="updateGTW_ATM_INTERFACES" parameterType="com.path.dbmaps.vo.GTW_ATM_INTERFACESVO" >
+    <include refid="sql_updateGTW_ATM_INTERFACES" />
+  </update>
+</mapper>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="terminal" namespace="/path/terminal" extends="path-default">
+	
+		<action name="TerminalListAction_*" class="terminalListAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="TerminalMaintAction_*" class="terminalMaintAction" method="{1}">
+				<result name="terminallList">/WEB-INF/pages/atm/terminal/TerminalList.jsp</result>
+				<result name="terminalMaint">/WEB-INF/pages/atm/terminal/TerminalMaint.jsp</result>
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+				<result name="error" type="json">
+					<param name="ignoreHierarchy">false</param>
+				</result>
+		</action>
+	</package>
+</struts>

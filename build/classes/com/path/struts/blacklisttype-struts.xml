@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="blackListType" namespace="/path/blackListType"
+		extends="path-default">
+		<action name="BlackListTypeListAction_*"
+			class="blackListTypeListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="BlackListTypeMaintAction_*"
+			class="blackListTypeMaintAction" method="{1}">
+			<result name="blackListTypeList">/WEB-INF/pages/businesscommon/core/blacklisttype/BlackListTypeList.jsp
+			</result>
+			<result name="blackListTypeMaint">/WEB-INF/pages/businesscommon/core/blacklisttype/BlackListTypeMaint.jsp
+			</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="BlackListTypeStatusAction_*"
+			class="blackListTypeStatusAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+	</package>
+</struts>

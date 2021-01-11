@@ -1,0 +1,23 @@
+/* PathSolutions [Libin] cleaned the css removing unwanted styles and corrected the collapsible panel resolution */
+.collapsibleContainerTitle{
+    cursor:pointer;
+    white-space: nowrap;
+    padding-top:2px;
+    padding-left:10px;
+    padding-right:2px;
+    height: 17px;
+ }
+.collapsibleContainerContent{
+    padding: 0px;
+    <!--[width IE]>
+       width: 100%;
+	<![endif]-->
+}
+.collapsibleLabel{
+	 display:block;
+     float: left;
+}
+.collapsibleIcon{
+	float: right;
+}
+/* PathSolutions [Libin] removed the unwanted css style ".header" */

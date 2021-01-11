@@ -1,0 +1,121 @@
+ul.jd_menu
+{
+	margin: 0px;
+	padding: 3px;
+	list-style-type: none;
+	border-color:#6699CC;	
+	border-style:outset;
+	border-width:1px;
+	margin-left:auto;
+	margin-right:auto;
+}
+
+ul.jd_menu ul
+{
+	display: none;
+}
+ul.jd_menu li 
+{
+	float: left;
+	border-style:outset;
+	border-color: #2779AA;
+	border-width:0 1px 0 0px;
+	
+}
+
+/* -- Sub-Menus -- */
+ul.jd_menu ul
+{
+	position: absolute;
+	display: none;
+	list-style-type: none;
+	margin: 0px;
+	padding: 3px;
+	z-index: 10000;
+	
+	
+}
+
+ul.jd_menu ul li
+{
+	float: none;
+	margin: 0px;
+	border-style:none;
+	
+}
+
+ul.jd_menu,
+ul.jd_menu ul
+{
+	
+	height: 20px;
+}
+
+ul.jd_menu ul 
+{
+	height: auto;
+}
+
+* html ul.jd_menu ul 
+{
+	width: 1%;
+}
+
+ul.jd_menu li 
+{
+	
+	font-size: 12px;
+	color: #FFF;
+	z-index:10;																						
+	line-height: 14px;
+	margin: 1px;
+	padding: 4px 7px 3px 7px;
+	height: 13px;
+	cursor: pointer;
+	white-space: nowrap;
+	
+	
+}
+
+ul.jd_menu li li 
+{
+	width: auto;
+	z-index:10; 
+}
+
+ul.jd_menu li a {
+	
+	text-decoration: none;
+	z-index:10; 
+}
+
+ul.jd_menu li.jdm_hover,
+ul.jd_menu li.jdm_active 
+{
+    background: transparent;
+	background-color: #99ADD6;
+	color: #FFF;
+	display:block;
+	background-color:#FFFFF;
+	padding:4px;
+	text-decoration:none;
+	padding: 3px 6px 2px 6px;
+	border: 1px solid #369;
+	border-left: 1px solid #9CF;
+	border-top: 1px solid #9CF;
+	
+}
+
+.anchorstyle
+{
+	display:block;
+}
+
+.nextNavLi
+{
+	/*border-style:none !important;*/
+}
+.prevNavLi
+{
+	/*border-width:0 1px 0 0px !important;*/
+}

@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="acquirerMapper">
+
+	<!-- Result map of Acquirer -->
+	<resultMap id="acquirerListMap" type="acquirerCO">
+		<result property="gtw_ATM_ACQUIRER.ACQUIRER_ID" 			column="ACQUIRER_ID" />
+		<result property="gtw_ATM_ACQUIRER.COMP_CODE" 				column="COMP_CODE" />
+		<result property="gtw_ATM_ACQUIRER.DESCRIPTION"  			column="DESCRIPTION" />
+		<result property="gtw_ATM_ACQUIRER.INTERFACE_CODE" 			column="INTERFACE_CODE" />
+		<result property="gtw_ATM_ACQUIRER.ACQUIRER_MSG_SOURCE" 	column="ACQUIRER_MSG_SOURCE" />
+		<result property="gtw_ATM_ACQUIRER.BANK_ATM_YN" 			column="BANK_ATM_YN" />
+		<result property="gtw_ATM_ACQUIRER.TERMINAL_TYPE" 			column="TERMINAL_TYPE" />
+		<result property="gtw_ATM_ACQUIRER.TRANSACTION_BRANCH_CODE" column="TRANSACTION_BRANCH_CODE" />
+		<result property="gtw_ATM_ACQUIRER.TELLER_CODE" 			column="TELLER_CODE" />
+		<result property="gtw_ATM_ACQUIRER.TELLER_USER_ID" 			column="TELLER_USER_ID" />
+		<result property="branchDescription" 						column="branchDescription" />
+		<result property="tellerDescription" 						column="tellerDescription" />
+		<result property="bankATMDescription" 						column="bankATMDescription" />
+		<result property="atmInterfaceDescription" 					column="atmInterfaceDescription" />
+	</resultMap>
+
+	<!-- Select of Acquirer List-->
+	<select id="returnAcquirerList" parameterType="acquirerSC" resultMap="acquirerListMap">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="queryAcquirerSQL" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+
+	<!-- Select of Acquirer Count-->
+	<select id="returnAcquirerListCount" parameterType="acquirerSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="queryAcquirerSQL" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+
+	<!-- Select of Acquirer by id-->
+	<select id="edit" resultMap="acquirerListMap" parameterType="acquirerSC">
+		<include refid="queryAcquirerSQL" />
+		 AND acq.ACQUIRER_ID = #{acquirerCode}
+	</select>
+
+	<!-- SQL of Acquirer List and ID-->
+	<sql id="queryAcquirerSQL">
+		SELECT
+		acq.ACQUIRER_ID,
+		acq.COMP_CODE,
+		acq.DESCRIPTION,
+		acq.ACQUIRER_MSG_SOURCE,
+		acq.BANK_ATM_YN,
+		acq.TERMINAL_TYPE,
+		acq.INTERFACE_CODE,
+		
+		
+		(CASE WHEN acq.BANK_ATM_YN = 'Y' THEN 'Yes'
+		ELSE 'No'
+		END) AS bankATMDescription,
+		
+		(select BRANCHES.BRIEF_DESC_ENG from BRANCHES
+		where BRANCHES.COMP_CODE=acq.COMP_CODE AND
+		BRANCHES.BRANCH_CODE=acq.TRANSACTION_BRANCH_CODE) as branchDescription,
+			
+		(select GTW_ATM_INTERFACES.DESCRIPTION  from GTW_ATM_INTERFACES
+		where GTW_ATM_INTERFACES.INTERFACE_CODE=acq.INTERFACE_CODE) as atmInterfaceDescription,
+		
+		acq.TRANSACTION_BRANCH_CODE,
+		acq.TELLER_CODE,
+		acq.TELLER_USER_ID
+		
+		FROM
+			GTW_ATM_ACQUIRER  acq
+			
+		where acq.COMP_CODE=#{compCode}
+		
+		<!-- Add for Exporting Acquirer Details -->
+		<if test="interfaceCode != null and interfaceCode != emptyBigDecimalValue" >
+			AND acq.INTERFACE_CODE=#{interfaceCode}
+		</if>
+	</sql>
+	
+	<!-- SQL of Acquirer Insert-->
+	<insert id="insertGTW_ATM_ACQUIRER" parameterType="acquirerVO" >
+	  
+	  		<selectKey resultType="java.math.BigDecimal" keyProperty="ACQUIRER_ID" order="BEFORE" >
+				<if test="isOracle == 1">
+					SELECT GTW_ATM_ACQUIRER_SEQ.NEXTVAL FROM dual
+				</if>
+				<if test="isSybase == 1 and isSQLServer != 1 " >
+					SELECT next_identity('GTW_ATM_ACQUIRER')
+				</if>
+				<if test="isSQLServer == 1 " >
+					SELECT IDENT_CURRENT ('GTW_ATM_ACQUIRER') + 1
+				</if>
+			</selectKey>
+			insert into GTW_ATM_ACQUIRER
+			    <trim prefix="(" suffix=")" suffixOverrides="," >
+			       <if test="isOracle == 1">
+	        			ACQUIRER_ID,
+	      			</if>
+			      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+			        COMP_CODE,
+			      </if>
+			      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+			        DESCRIPTION,
+			      </if>
+			      <if test="ACQUIRER_MSG_SOURCE != null and !&quot;&quot;.equals(ACQUIRER_MSG_SOURCE)" >
+			        ACQUIRER_MSG_SOURCE,
+			      </if>
+			      <if test="BANK_ATM_YN != null and !&quot;&quot;.equals(BANK_ATM_YN)" >
+			        BANK_ATM_YN,
+			      </if>
+			      <if test="TERMINAL_TYPE != null and !&quot;&quot;.equals(TERMINAL_TYPE)" >
+			        TERMINAL_TYPE,
+			      </if>
+			      <if test="TRANSACTION_BRANCH_CODE != null and TRANSACTION_BRANCH_CODE != emptyBigDecimalValue" >
+			        TRANSACTION_BRANCH_CODE,
+			      </if>
+			      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+			        INTERFACE_CODE,
+			      </if>
+			      <if test="TELLER_CODE != null and TELLER_CODE != emptyBigDecimalValue" >
+			        TELLER_CODE,
+			      </if>
+			      <if test="TELLER_USER_ID != null and !&quot;&quot;.equals(TELLER_USER_ID)" >
+			        TELLER_USER_ID,
+			      </if>
+			      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+			        CREATED_BY,
+			      </if>
+			      <if test="CREATED_DATE != null" >
+			        CREATED_DATE,
+			      </if>
+			      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+			        MODIFIED_BY,
+			      </if>
+			      <if test="MODIFIED_DATE != null" >
+			        MODIFIED_DATE,
+			      </if>
+			      DATE_UPDATED,
+			      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+			        DELETED_BY,
+			      </if>
+			      <if test="DELETED_DATE != null" >
+			        DELETED_DATE,
+			      </if>
+			    </trim>
+			    <trim prefix="values (" suffix=")" suffixOverrides="," >
+			      	 <if test="isOracle == 1">
+	        			 #{ACQUIRER_ID},
+	      			</if>
+			      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+			        #{COMP_CODE},
+			      </if>
+			      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+			        #{DESCRIPTION},
+			      </if>
+			      <if test="ACQUIRER_MSG_SOURCE != null and !&quot;&quot;.equals(ACQUIRER_MSG_SOURCE)" >
+			        #{ACQUIRER_MSG_SOURCE},
+			      </if>
+			      <if test="BANK_ATM_YN != null and !&quot;&quot;.equals(BANK_ATM_YN)" >
+			        #{BANK_ATM_YN},
+			      </if>
+			      <if test="TERMINAL_TYPE != null and !&quot;&quot;.equals(TERMINAL_TYPE)" >
+			        #{TERMINAL_TYPE},
+			      </if>
+			      <if test="TRANSACTION_BRANCH_CODE != null and TRANSACTION_BRANCH_CODE != emptyBigDecimalValue" >
+			        #{TRANSACTION_BRANCH_CODE},
+			      </if>
+			      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+			        #{INTERFACE_CODE},
+			      </if>
+			      <if test="TELLER_CODE != null and TELLER_CODE != emptyBigDecimalValue" >
+			        #{TELLER_CODE},
+			      </if>
+			      <if test="TELLER_USER_ID != null and !&quot;&quot;.equals(TELLER_USER_ID)" >
+			        #{TELLER_USER_ID},
+			      </if>
+			      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+			        #{CREATED_BY},
+			      </if>
+			      <if test="CREATED_DATE != null" >
+			        #{CREATED_DATE},
+			      </if>
+			      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+			        #{MODIFIED_BY},
+			      </if>
+			      <if test="MODIFIED_DATE != null" >
+			        #{MODIFIED_DATE},
+			      </if>
+			      <choose >
+			        <when test="isSybase == 1" >
+			           GETDATE(),
+			        </when>
+			        <otherwise >
+			           SYSDATE,
+			        </otherwise>
+			      </choose>
+			      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+			        #{DELETED_BY},
+			      </if>
+			      <if test="DELETED_DATE != null" >
+			        #{DELETED_DATE},
+			      </if>
+			    </trim>
+  </insert>
+  
+  <!-- Result map of Acquirer Transaction -->
+  <resultMap id="acquirerTrxTypeListMap" type="acquirerTrxTypeVO">
+		<result property="TRX_TYPE_ID" column="TRX_TYPE_ID" />
+		<result property="ACQUIRER_ID" column="ACQUIRER_ID" />
+		<result property="TRX_TYPE" column="TRX_TYPE" />
+		<result property="TRX_EXPRESSION" column="TRX_EXPRESSION" />
+		<result property="CHARGES_TRX_TYPE" column="CHARGES_TRX_TYPE" />
+		<result property="CHARGES_TRX_EXPRESSION" column="CHARGES_TRX_EXPRESSION" />
+	</resultMap>
+	
+	<!-- Select of Acquirer Transactions List-->
+	<select id="returnAcquirerTrxTypeList"	parameterType="acquirerSC" resultMap="acquirerTrxTypeListMap">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="queryAcquirerTrxTypeSQL" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+
+	<!-- Select of Acquirer Transactions Count-->
+	<select id="returnAcquirerTrxTypeListCount" parameterType="acquirerSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="queryAcquirerTrxTypeSQL" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+	
+	<!-- SQL of Acquirer Transactions List by Acquirer Id-->
+	<sql id="queryAcquirerTrxTypeSQL">
+		SELECT
+			trx.TRX_TYPE_ID,
+			trx.ACQUIRER_ID,
+			trx.TRX_TYPE,
+			trx.TRX_EXPRESSION,
+			trx.CHARGES_TRX_TYPE,
+			trx.CHARGES_TRX_EXPRESSION,
+			trx.DESCRIPTION
+			FROM
+			GTW_ATM_ACQUIRER_TRX_TYPE trx
+			
+			<choose >
+				<when test="acquirerId != null and acquirerId != emptyBigDecimalValue" >
+	      			where ACQUIRER_ID = #{acquirerId}
+				</when>
+			    <otherwise >
+			           LEFT OUTER JOIN GTW_ATM_ACQUIRER acq ON trx.ACQUIRER_ID = acq.ACQUIRER_ID
+			           where acq.INTERFACE_CODE=#{interfaceCode}
+			    </otherwise>
+			</choose>
+	</sql>
+	
+	<!-- delete Acquirer andtrx types -->
+	<delete id="deleteGTW_ATM_ACQUIRER" parameterType="acquirerSC" >
+		BEGIN
+			delete from GTW_ATM_ACQUIRER_TRX_TYPE where ACQUIRER_ID = #{acquirerId} <if test="isOracle == 1">;</if>
+			
+			delete from GTW_ATM_ACQUIRER where ACQUIRER_ID = #{acquirerId}  <if test="isOracle == 1">;</if>
+		END  <if test="isOracle == 1">;</if>
+  	</delete>
+  	
+  		<!-- delete Terminals by Interface Code if BANK ATM of acquirer is checked -->
+	<delete id="deleteGTW_ATM_TERMINAL" parameterType="acquirerSC" >
+		delete from GTW_ATM_TERMINAL where INTERFACE_CODE = #{interfaceCode}
+  	</delete>
+  	
+  	<select id="validateBankAtmByTerminalTypeCount" parameterType="acquirerSC" resultType="int">
+  		select count(1) from GTW_ATM_ACQUIRER acq where acq.TERMINAL_TYPE=#{terminaltype} and acq.BANK_ATM_YN=#{bankAtmYN} AND acq.INTERFACE_CODE=#{interfaceCode}
+  	</select>
+</mapper>

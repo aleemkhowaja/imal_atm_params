@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+
+<package name="reporting" namespace="/path/reporting"  extends="path-default">
+	<action name="ReportsAction_*" class="reportsAction" method="{1}">
+		<result name="error" >/login/ErrorAction.jsp</result>
+		<result name="success" >/WEB-INF/pages/common/reporting/ReportMenu.jsp</result>
+		<result name="generate" type="redirectAction">
+           		 <param name="actionName">reportAction_generateReport</param>
+            	 <param name="namespace">/path/repCommon</param>
+            	 <param name="r_r">${r_r}</param>
+            	 <param name="d_p">${d_p}</param>
+            	 <param name="a_p">${a_p}</param>
+            	 <param name="r_a_p">${r_a_p}</param>
+        </result>
+	</action>
+	<action name="commonCustomReportAction_*" class="commonCustomReportAction" method="{1}">
+		<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param> 	
+		</result>
+	</action>
+</package>
+
+</struts>

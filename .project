@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectDescription>
+	<name>imal_atm_params</name>
+	<comment></comment>
+	<projects>
+	</projects>
+	<buildSpec>
+		<buildCommand>
+			<name>org.eclipse.jdt.core.javabuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.wst.common.project.facet.core.builder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+		<buildCommand>
+			<name>org.eclipse.wst.validation.validationbuilder</name>
+			<arguments>
+			</arguments>
+		</buildCommand>
+	</buildSpec>
+	<natures>
+		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
+		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
+		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
+	</natures>
+	<linkedResources>
+		<link>
+			<name>gateway_portal_common_resource</name>
+			<type>2</type>
+			<location>E:/imall project data/Gateway Project/Workspace/Gateway[18-07-2019]/imal_gateway_portal/gateway_portal_common_resource</location>
+		</link>
+		<link>
+			<name>gateway_portal_common_src</name>
+			<type>2</type>
+			<location>E:/imall project data/Gateway Project/Workspace/Gateway[18-07-2019]/imal_gateway_portal/gateway_portal_common_src</location>
+		</link>
+		<link>
+			<name>gateway_service_client_common_resource</name>
+			<type>2</type>
+			<location>E:/imall project data/Gateway Project/Workspace/Gateway[18-07-2019]/imal_gateway_services/gateway_service_client_common_resource</location>
+		</link>
+		<link>
+			<name>gateway_service_client_common_src</name>
+			<type>2</type>
+			<location>E:/imall project data/Gateway Project/Workspace/Gateway[18-07-2019]/imal_gateway_services/gateway_service_client_common_src</location>
+		</link>
+		<link>
+			<name>gateway_service_common</name>
+			<type>2</type>
+			<location>E:/imall project data/Gateway Project/Workspace/Gateway[18-07-2019]/imal_gateway_services/gateway_service_common</location>
+		</link>
+		<link>
+			<name>library_src</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_services/library_src</location>
+		</link>
+		<link>
+			<name>portal_common_resources</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_admin_portal/portal_common_resources</location>
+		</link>
+		<link>
+			<name>portal_common_resources_JQ_3_3_1</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_admin_portal_JQ_3_3_1/portal_common_resources</location>
+		</link>
+		<link>
+			<name>portal_common_resources_business</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_common_business_code/portal_common_resources_business</location>
+		</link>
+		<link>
+			<name>portal_common_src</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_admin_portal/portal_common_src</location>
+		</link>
+		<link>
+			<name>portal_common_src_JQ_3_3_1</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_admin_portal_JQ_3_3_1/portal_common_src</location>
+		</link>
+		<link>
+			<name>portal_common_src_business</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_common_business_code/portal_common_src_business</location>
+		</link>
+		<link>
+			<name>reporting_portal_common_resources</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_admin_portal/reporting_portal_common_resources</location>
+		</link>
+		<link>
+			<name>reporting_portal_common_src</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_admin_portal/reporting_portal_common_src</location>
+		</link>
+		<link>
+			<name>reporting_services_common_resources</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_services/reporting_services_common_resources</location>
+		</link>
+		<link>
+			<name>reporting_services_common_src</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_services/reporting_services_common_src</location>
+		</link>
+		<link>
+			<name>service_client_common_resources</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_services/service_client_common_resources</location>
+		</link>
+		<link>
+			<name>service_client_common_resources_business</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_common_business_code/service_client_common_resources_business</location>
+		</link>
+		<link>
+			<name>service_client_common_src</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_services/service_client_common_src</location>
+		</link>
+		<link>
+			<name>service_client_common_src_business</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_common_business_code/service_client_common_src_business</location>
+		</link>
+		<link>
+			<name>services_common</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_services/services_common</location>
+		</link>
+		<link>
+			<name>services_common_business</name>
+			<type>2</type>
+			<location>E:/imall project data/Common Project/COMMON_WORKSPACE/imal_common_business_code/services_common_business</location>
+		</link>
+	</linkedResources>
+</projectDescription>

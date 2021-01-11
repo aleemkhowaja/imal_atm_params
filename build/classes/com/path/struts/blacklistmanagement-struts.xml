@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="blacklistmanagement" namespace="/path/blacklistmanagement" extends="path-default">
+ 
+		<action name="BlackListIntSourceUploadMaint_*" class="blackListIntSourceUploadMaintAction" method="{1}">
+		    <result name="success">/WEB-INF/pages/businesscommon/core/blacklistmanagement/blacklistintsource/BlackListIntSourceUploadMaint.jsp</result>
+			<result name="loadJson" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			
+			<interceptor-ref name="fileUpload"></interceptor-ref>
+			<interceptor-ref name="pathDefaultStack"/>
+			
+			<result name="downloadError" type="json">           
+		      	<param name="contentType">text/plain</param>
+		      	<param name="inputName">scriptStream</param>               
+			  	<param name="ignoreHierarchy">false</param> 				   				   
+		    </result>
+		</action>
+
+		<action name="BlackListMatchedCIFListAction_*" class="BlackListMatchedCIFListAction" method="{1}">
+			<result name="success">/WEB-INF/pages/businesscommon/core/blacklistmanagement/blacklistintsource/BlackListMatchedCIFList.jsp</result>
+			<result name="loadGrid" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	
+		<action name="BlackListWhiteListAction_*" class="BlackListWhiteListAction" method="{1}">
+			<result name="success">/WEB-INF/pages/businesscommon/core/blacklistmanagement/blacklistintsource/BlackListWhiteList.jsp</result>
+			<result name="loadGrid" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+	</package>
+	
+	
+	<!-- Package for Black List -->
+	<package name="blackListManagement" namespace="/path/blackList" extends="path-default">
+	
+		<action name="BlackListMaint_*" class="blackListMaintAction" method="{1}">
+			<result name="blackListGridPage">/WEB-INF/pages/businesscommon/core/blacklistmanagement/BlackListGrid.jsp</result>
+			<result name="blackListDetailPage">/WEB-INF/pages/businesscommon/core/blacklistmanagement/BlackListMaint.jsp</result>	
+			<result name="success"  type="json" ><param name="ignoreHierarchy">false</param></result>
+			<result name="alert_success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>	
+		</action>	
+		<action name="BlackListMgntGrid_loadBlackListGrid" class="blackListGridAction" method="loadBlackListGrid">
+			<result name="success" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		<action name="BlackListMgntGrid_loadBlackListIdsGrid" class="blackListIdsGridAction" method="loadBlackListIdsGrid">
+			<result name="success" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		<action name="BlackListStatus_*" class="blackListStatusAction" method="{1}">
+			<result name="success" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		<action name="BlackListDependency_*" class="blackListDependencyAction" method="{1}">
+			<result name="loadJson" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="BlackListLogMaintAction_*" class="blackListLogMaintAction" method="{1}">
+			<result name="blackListLogPage">/WEB-INF/pages/businesscommon/core/blacklistmanagement/BlackListLogMaint.jsp</result>
+			<result name="successBlckListReason">/WEB-INF/pages/businesscommon/core/blacklistmanagement/BlackListReasonMaint.jsp</result>
+			<result name="successBlckListNameMatch">/WEB-INF/pages/businesscommon/core/blacklistmanagement/BlackListNameMatchMaint.jsp</result>	
+			<result name="success"  type="json" ><param name="ignoreHierarchy">false</param></result>
+	
+		</action>
+		
+		<!-- Black List Source Upload Lookup action -->
+		<action name="BlackListSourceUploadLookup_*" class="blackListSourceUploadLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+		
+	</package>
+	
+</struts>

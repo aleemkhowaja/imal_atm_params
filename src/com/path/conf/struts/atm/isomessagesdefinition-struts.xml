@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="iSOMessagesDefinition" namespace="/path/iSOMessagesDefinition" extends="path-default">
+		
+		<action name="ISOMessagesDefinitionListAction_*" class="isoMessagesDefinitionListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="ISOMessagesDefinitionMaintAction_*" class="isoMessagesDefinitionMaintAction" method="{1}">
+			<result name="isoMessagesDefinitionList">/WEB-INF/pages/atm/isomessagesdefinition/ISOMessagesDefinitionList.jsp		</result>
+			<result name="isoMessagesDefinitionMaint">/WEB-INF/pages/atm/isomessagesdefinition/ISOMessagesDefinitionMaint.jsp 	</result>
+			
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			
+		</action>
+		
+	</package>
+</struts>

@@ -1,0 +1,32 @@
+/*******for Log In Page RTL direction**********/
+
+		.buttonLayer
+		{
+			padding-left: 10px;
+			text-align: left;
+		}
+		.texta 
+		{	
+			padding-right: 10px;
+			padding-right: 5px;
+		}
+		.actionMessage
+		{
+			text-align:right;
+		}
+		
+		.fldLabelLeft
+		{
+			text-align:right;
+			padding-right:25px;	
+  		}
+		.fldDataLeft
+		{	
+			text-align:right;
+			padding-right:8px;	
+		}
+		.note
+		{
+		 text-align:right;
+		}
+		

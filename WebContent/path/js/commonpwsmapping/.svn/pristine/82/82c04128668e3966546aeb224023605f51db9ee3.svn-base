@@ -1,0 +1,73 @@
+function pwsWebServiceExplorerOnGridCompleteFn(event,data,id)
+{
+	webServiceExplorerOnGridCompleteFn(event,data);
+	var formId = "webServiceGuiGridForm_"+_pageRef;
+	var gridSelectorName = data.id;
+	var grid = $("#"+gridSelectorName);
+	var ids = grid.jqGrid('getDataIDs');
+	loadSubGridData(grid,ids);
+	var returnGridObjectFromColumnId = null;
+	var ids = grid.jqGrid('getDataIDs');
+	for (var i = 0; i < ids.length; i++) 
+	{
+		var checkVal = grid.jqGrid('getCell', ids[i], 'checkGridRow');
+		var value = grid.jqGrid('getCell', ids[i], 'value');
+		if ("" != checkVal && undefined != checkVal && null != checkVal) 
+		{
+			updateSelectOption(ids[i]);
+		}
+		else if(("" == checkVal || undefined == checkVal || null == checkVal) && ("" != value && undefined != value && null != value))
+		{
+			updateSelectOption(ids[i],false);
+		}
+
+	}
+}
+
+function onPwsExplorerRowSelTopic(rowObj)
+{
+	onRowSelTopic(rowObj);
+	$("#validation_dialog_"+_pageRef).val("1");
+	var fieldType = grid.jqGrid('getCell', rowObj.originalEvent.id, 'fieldType');
+	var fieldName = grid.jqGrid('getCell', rowObj.originalEvent.id, 'fieldName');
+	var gridId = rowObj.currentTarget.id;
+	var selectId = undefined;
+//	if(undefined != gridId && gridId.includes("_response"))
+//	{
+//		selectId = fieldName+"_"+_pageRef+"_response_mappingField";
+//		$("#"+selectId).children().first().remove();
+//		$("#"+selectId).prepend('<option value="'+fieldName+'"> '+fieldName+' </option>');
+//		$("#"+selectId).prepend('<option selected="selected"></option>');
+//	}
+//	else{
+//		rowId = rowObj.originalEvent.id;
+//		selectId = rowId+"_mappingField";
+//		$("#"+selectId).children().first().remove();
+//		$("#"+selectId).prepend('<option value="'+fieldName+'"> '+fieldName+' </option>');
+//		//$("#"+selectId).prepend('<option></option>').val(fieldName).html(fieldName)
+//		$("#"+selectId).prepend('<option selected="selected"></option>');
+//	}
+	
+    /*
+	if(!isNonPrimativeDataType(fieldType))
+    {
+    	grid.jqGrid('setCellReadOnly', rowObj.originalEvent.id, 'mappingField', "true");
+    }
+    */
+    
+}
+
+function applyOnMappingChange(e)
+{
+	var rowId = returnRowIdFromColumnId(e.currentTarget.id);
+    var idArr = rowId.split("_");
+    if(idArr.length<3)
+    {
+		var grid = returnGridObjectFromColumnId(e.currentTarget.id);
+		//grid.jqGrid('setCellReadOnly', getGridIdFromRow(e.currentTarget.id), 'mappingField', "true");
+		grid.jqGrid('setCellValue', rowId, 'expressionHiddenField', "");
+		$("#expressionTextArea_"+_pageRef).val("");
+    }
+	onMappingFieldChange(e);
+	$("#validation_dialog_"+_pageRef).val("1");
+}

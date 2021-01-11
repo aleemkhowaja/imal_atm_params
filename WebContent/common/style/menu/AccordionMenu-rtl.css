@@ -1,0 +1,31 @@
+
+
+
+.accordionmenu .accordionheader
+{ /*CSS class for menu headers in general (expanding or not!)*/
+	padding: 4px 10px 4px 4px; /*header text is indented 10px*/
+	margin-left: 0 !important;
+}
+
+#arrowbulletImgId
+{
+	padding-left:5px;
+	padding-right:0px;
+}
+
+.accordionmenu ul li
+{
+	margin-left: 0px;
+	margin-right: 15px;
+}
+
+.accordprefix 
+{
+	float: right;
+}
+
+.ui-icon-triangle-1-e 
+{  
+	background-position: -96px -16px;
+}
+ 

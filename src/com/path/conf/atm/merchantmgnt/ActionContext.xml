@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 
+	<bean id="merchantMgntMaintAction" class="com.path.atm.actions.merchantmgnt.MerchantMgntMaintAction" scope="prototype" parent="baseAction">
+		<property name="merchantMgntBO" ref="merchantMgntBO"></property>
+	</bean>
+
+	<!-- used for grid -->
+	<bean id="merchantMgntListAction" class="com.path.atm.actions.merchantmgnt.MerchantMgntListAction" scope="prototype" parent="baseAction">
+		<property name="merchantMgntBO" ref="merchantMgntBO"></property>  
+	</bean>
+	
+	<!-- used for status button  -->
+	<bean id="MerchantMgntStatusAction" class="com.path.atm.actions.merchantmgnt.MerchantMgntStatusAction"
+		scope="prototype" parent="baseAction">
+	</bean>
+
+
+</beans>

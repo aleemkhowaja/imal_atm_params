@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE
+ struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd"
+	>
+<struts>
+	<package name="globalview" namespace="/path/globalview" extends="path-default">
+		<action name="dashboardMain_*" class="dashboardMainAction" method="{1}">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/Dashboard.jsp</result>
+			<result name="loadJson" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="shareHolderPopup">/WEB-INF/pages/core/csmfom/YmcAddDetailsList.jsp</result>
+			
+		</action>
+		<action name="dashboardMainData" class="dashboardMainAction" method="loadMainData">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/DashboardMainData.jsp</result>
+			<result name="jsonError" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashAssetsAndLiabAcc" class="dashboardGridsListAction" method="loadAssetsLiabAccGrid">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+	 	 <action name="DashAccDetailsLoadAction_*"  method="{1}" class="dashAccDetailsListAction">
+			
+			<result name="loadPostDatedChequesBalForAccPage">/WEB-INF/pages/businesscommon/global360view/PostDatedChequeTransactions.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashAccDetailsLoadAction" class="dashAccDetailsListAction" method="loadAccountsDetailsPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/assetsandliabilities/DashAccountsDetailsList.jsp</result>
+		</action>
+		<action name="dashAccDetailsListAction" class="dashAccDetailsListAction" method="accountDetailsListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- dues in dashboard account grid -->
+		<action name="DashAccDtlDuesListAction_*" method="{1}" class="dashAccDtlDuesListAction" >
+			<result name="loadDuesForAccPage">/WEB-INF/pages/businesscommon/global360view/assetsandliabilities/dues/DashAccountsDuesList.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--  -->
+		<action name="dashAccDtlJvsLoadAction" class="dashAccDtlJvsListAction" method="loadAccDtlJvsPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/assetsandliabilities/jvs/DashAccDtlJVsList.jsp</result>
+		</action>
+		<action name="dashAccDtlJvsListAction" class="dashAccDtlJvsListAction" method="accDtlJvsListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashAccDtlTrxLoadAction" class="dashAccDtlTrxListAction" method="loadAccDtlTrxPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/assetsandliabilities/transaction/DashAccDtlTrxList.jsp</result>
+		</action>
+		<action name="dashAccDtlTrxListAction" class="dashAccDtlTrxListAction" method="accDtlTrxListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="finAppAndAprvdLines" class="dashboardGridsListAction" method="loadFinAppAndApprvdLinesGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="investTreasuryAction" class="dashboardGridsListAction" method="loadInvestTreasuryGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="financingDealsListAction" class="dashboardGridsListAction" method="loadFinancingDealsGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashDependencyByCif_*" class="dashboardDependencyAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="safeboxesListAction" class="safeboxesListAction" method="safeboxesListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="safeboxesLoadAction" class="safeboxesListAction" method="loadSafeboxesPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/safeboxes/SafeboxesList.jsp</result>
+		</action>
+		<action name="passbooksListAction" class="dashPassbooksListAction" method="passbooksListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="passbooksLoadAction" class="dashPassbooksListAction" method="loadPassbooksPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/passbooks/DashPassbooksList.jsp</result>
+		</action>
+		<action name="cardsListAction" class="cardsListAction" method="cardsListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="cardsLoadAction" class="cardsListAction" method="loadCardsPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/cards/CardsList.jsp</result>
+		</action>
+		
+		<action name="dashboardSmsSubscriptionListAction" class="dashboardSmsSubscriptionListAction" method="smsSubscriptionListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashboardSmsSubscriptionLoadAction" class="dashboardSmsSubscriptionListAction" method="loadSmsSubscriptionPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/smsSubscription/DashboardSmsSubscriptionList.jsp</result>
+		</action>
+		<action name="chequebooksListAction" class="dashChequebooksListAction" method="chequebooksListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="chequebooksLoadAction" class="dashChequebooksListAction" method="loadChequebooksPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/chequebooks/DashChequebooksList.jsp</result>
+		</action>
+		<action name="dashLostDocsLoadAction" class="dashLostDocsListAction" method="loadLostDocsPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/lostdocuments/DashLostDocsList.jsp</result>
+		</action>
+		<action name="dashLostDocsListAction" class="dashLostDocsListAction" method="lostDocsListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashBankersChequesLoadAction" class="dashBankersChequesListAction" method="loadBankersChequesPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/bankerscheques/DashBankersChequesList.jsp</result>
+		</action>
+		<action name="dashBankersChequesListAction" class="dashBankersChequesListAction" method="bankersChequesListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashVoidedChequesLoadAction" class="dashVoidedChequesListAction" method="loadVoidedChequesPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/cheques/DashVoidedChequesList.jsp</result>
+		</action>
+		<action name="dashVoidedChequesListAction" class="dashVoidedChequesListAction" method="voidedChequesListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashPostDatedChqWDrawalLoadAction" class="dashPostDatedChqWDrawalListAction" method="loadPostDatedChqWDrawalPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/cheques/DashPostDatedChqWDrawalList.jsp</result>
+		</action>
+		<action name="dashPostDatedChqWDrawalListAction" class="dashPostDatedChqWDrawalListAction" method="postDatedChqWDrawalListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashPostDatedChqDepLoadAction" class="dashPostDatedChqDepListAction" method="loadPostDatedChqDepPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/cheques/DashPostDatedChqDepList.jsp</result>
+		</action>
+		<action name="dashPostDatedChqDepListAction" class="dashPostDatedChqDepListAction" method="postDatedChqDepListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashChequesForColLoadAction" class="dashChequesForColListAction" method="loadChequesForColPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/cheques/DashChequesForColList.jsp</result>
+		</action>
+		<action name="dashChequesForColListAction" class="dashChequesForColListAction" method="chequesForColListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="fmsCollateralDetailsListAction_*" class="fmsCollateralDetailsListAction" method="{1}">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/fms/DashFMSCollateralDetail.jsp</result>
+			<result name="json" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="fmsNewAppDetailsListAction_*" class="fmsNewAppDetailsListAction" method="{1}">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/fms/DashFMSNewAppDetail.jsp</result>
+			<result name="json" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="fmsSuspendedFacilityDetailsListAction_*" class="fmsSuspendedFacilityDetailsListAction" method="{1}">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/fms/DashFMSSuspendedFacilityDetail.jsp</result>
+			<result name="json" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="fmsGuarantorDetailsListAction_*" class="fmsGuarantorDetailsListAction" method="{1}">
+			<result name="success">/WEB-INF/pages/common/global360view/fms/DashFMSGuarantorDetail.jsp</result>
+			<result name="json" type="json"><param name="ignoreHierarchy">false</param></result>
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/fms/DashFMSGuarantorDetail.jsp</result>
+			<result name="json" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="fmsApprovedLineDetailsListAction_*" class="fmsApprovedLineDetailsListAction" method="{1}">
+			<result name="approvedLinesCurrencyPage">/WEB-INF/pages/businesscommon/global360view/fms/DashFMSApprovedLinesDetail.jsp</result>
+			<result name="approvedLinesDetailPage">/WEB-INF/pages/businesscommon/global360view/fms/DashFMSApprovedLinesFacilityDetail.jsp</result>
+			<result name="approvedDrawdownDetailPage">/WEB-INF/pages/businesscommon/global360view/fms/DashFMSApprovedDrawdownDetails.jsp</result> <!--TP#674453;BMOUPI180297;Clint.Joy;16/07/2018 -->
+			<result name="json" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="financingDealsListAction_*" class="financingDealsListAction" method="{1}">
+			<result name="dealsByProduct">/WEB-INF/pages/businesscommon/global360view/financingDeals/FinancingDealsByProduct.jsp</result>
+			<result name="repaymentPlanDetails">/WEB-INF/pages/businesscommon/global360view/financingDeals/RepaymentPlanDetails.jsp</result>
+			<result name="productClass">/WEB-INF/pages/businesscommon/global360view/financingDeals/ProductClass.jsp</result>
+			<result name="collateralDetails">/WEB-INF/pages/businesscommon/global360view/financingDeals/CollateralDetails.jsp</result>
+			<result name="guarantorDetails">/WEB-INF/pages/businesscommon/global360view/financingDeals/GuarantorDetails.jsp</result>
+			<result name="limitUtilizationDtls">/WEB-INF/pages/businesscommon/global360view/financingDeals/LimitUtilization.jsp</result>
+			<result name="dealsPromissoryNotes">/WEB-INF/pages/businesscommon/global360view/financingDeals/FinancingDealsPromissoryNotes.jsp</result>
+			<result name="settlementDetails"> /WEB-INF/pages/businesscommon/global360view/financingDeals/SettlementDetails.jsp</result>
+			<result name="treasuryForexDeals">/WEB-INF/pages/businesscommon/global360view/financingDeals/TreasuryForexDeals.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="treasuryListAction_*" class="treasuryListAction" method="{1}">
+			<result name="treasuryDerivativesList">/WEB-INF/pages/businesscommon/global360view/treasury/TreasuryDerivativesList.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Others / Remittances	-->
+		<action name="dashRemittancesLoadAction" class="dashRemittancesListAction" method="loadRemittancesPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/others/DashRemittancesList.jsp</result>
+		</action>
+		<action name="dashRemittancesListAction" class="dashRemittancesListAction" method="remittancesListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Others / Special Conditions	-->
+		<action name="dashSpecialCondLoadAction" class="dashSpecialCondListAction" method="loadSpecialCondPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/others/DashSpecialCondList.jsp</result>
+		</action>
+		<action name="dashSpecialCondListAction_*" class="dashSpecialCondListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Others / Authorized Signatories	-->
+		<action name="dashAuthorizedSigLoadAction" class="dashAuthorizedSigListAction" method="loadAuthorizedSigPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/others/DashAuthorizedSigList.jsp</result>
+		</action>
+		<action name="dashAuthorizedSigListAction" class="dashAuthorizedSigListAction" method="authorizedSigListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Others / Links	-->
+		<action name="dashLinksLoadAction" class="dashLinksListAction" method="loadLinksPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/others/DashLinksList.jsp</result>
+		</action>
+		<action name="dashLinksListAction_*" class="dashLinksListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Others / SO	-->
+		<action name="dashSOLoadAction" class="dashSOListAction" method="loadSOPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/others/DashSOList.jsp</result>
+		</action>
+		<action name="dashSOListAction" class="dashSOListAction" method="soListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Others / Memos	-->
+		<action name="dashMemosLoadAction" class="dashMemosListAction" method="loadMemosPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/others/DashMemosList.jsp</result>
+		</action>
+		<action name="dashMemosListAction" class="dashMemosListAction" method="memosListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Trade Finance / In Out LC	-->
+		<action name="dashInOutLCLoadAction" class="dashInOutLCListAction" method="loadInOutLCPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/tradefinance/DashInOutLCList.jsp</result>
+		</action>
+		<action name="dashInOutLCListAction_*" class="dashInOutLCListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Trade Finance / LG	-->
+		<action name="dashLGLoadAction" class="dashLGListAction" method="loadLGPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/tradefinance/DashLGList.jsp</result>
+		</action>
+		<action name="dashLGListAction" class="dashLGListAction" method="lgListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Trade Finance / In Out Bills	-->
+		<action name="dashInOutBillsLoadAction" class="dashInOutBillsListAction" method="loadInOutBillsPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/tradefinance/DashInOutBillsList.jsp</result>
+		</action>
+		<action name="dashInOutBillsListAction" class="dashInOutBillsListAction" method="inOutBillsListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Trade Finance / Acceptance	-->
+		<action name="dashAcceptanceLoadAction" class="dashAcceptanceListAction" method="loadAcceptancePage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/tradefinance/DashAcceptanceList.jsp</result>
+		</action>
+		<action name="dashAcceptanceListAction" class="dashAcceptanceListAction" method="acceptanceListGrid">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!--Investments-->
+		<action name="dashInvestmentsLoadAction" class="dashInvestmentsListAction" method="loadInvestmentsPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/investments/DashInvestmentsList.jsp</result>
+		</action>
+		<action name="dashInvestmentsListAction_*" class="dashInvestmentsListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashPrtfCashPosHoldPosLoadAction" class="dashPrtfCashPosHoldPosListAction" method="loadDashPrtfCashPosHoldPosPage">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/investments/DashPrtfCashPosHoldPos.jsp</result>
+		</action>
+		<action name="dashPrtfCashPosHoldPosListAction_*" class="dashPrtfCashPosHoldPosListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- OneObligor Temp -->
+		<action name="dashOneObligorListAction_*" class="dashOneObligorListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashOneObligorMaintAction_*" class="dashOneObligorMaintAction" method="{1}">
+			<result name="oneObligorList">/WEB-INF/pages/businesscommon/global360view/oneobligor/DashOneObligorList.jsp</result>
+			<result name="oneObligorMaint">/WEB-INF/pages/businesscommon/global360view/oneobligor/DashOneObligorMaint.jsp</result>
+			<result name="moneyLaudOneObligorTrendsList">/WEB-INF/pages/businesscommon/global360view/oneobligor/DashMoneyLaudOneOblgTrendsDetlsList.jsp</result>
+		</action>
+		<!-- OneObligor Temp -->
+		<action name="financingDealsMaintAction_*" class="financingDealsMaintAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="fmsDrawdownDetailsListAction_*" class="fmsDrawdownDetailsListAction" method="{1}">
+			<result name="success">/WEB-INF/pages/businesscommon/global360view/fms/DashFMSDrawdownDetail.jsp</result>
+			<result name="json" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+		
+		<action name="dashChildCifListAction_*" class="dashChildCifListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="dashChildCifMaintAction_*" class="dashChildCifMaintAction" method="{1}">
+			<result name="childCifMainPageList">/WEB-INF/pages/businesscommon/global360view/DashChildCifList.jsp</result>
+											
+		</action>
+		
+				
+	</package>
+</struts>

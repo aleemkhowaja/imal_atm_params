@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TRSDEAL_STLMT_APTNMT_HISTORY" >
+  <resultMap id="BaseResultMap" type="com.path.dbmaps.vo.TRSDEAL_STLMT_APTNMT_HISTORYVO" >
+    <id column="APTNMT_SEQ" property="APTNMT_SEQ" />
+    <id column="BRANCH_CODE" property="BRANCH_CODE" />
+    <id column="COMP_CODE" property="COMP_CODE" />
+    <id column="LINE_NBR" property="LINE_NBR" />
+    <id column="SERIAL_NO" property="SERIAL_NO" />
+    <result column="APPORTIONMENT_IND" property="APPORTIONMENT_IND" />
+    <result column="DATE_CREATED" property="DATE_CREATED" />
+    <result column="CREATED_BY" property="CREATED_BY" />
+    <result column="SERVER_CREATED_DATE" property="SERVER_CREATED_DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    APTNMT_SEQ, BRANCH_CODE, COMP_CODE, LINE_NBR, SERIAL_NO, APPORTIONMENT_IND, DATE_CREATED, 
+    CREATED_BY, SERVER_CREATED_DATE
+  </sql>
+  <select id="selectTRSDEAL_STLMT_APTNMT_HISTORY" resultMap="BaseResultMap" parameterType="com.path.dbmaps.vo.TRSDEAL_STLMT_APTNMT_HISTORYVOKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TRSDEAL_STLMT_APTNMT_HISTORY
+    where APTNMT_SEQ = #{APTNMT_SEQ}
+      and BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and LINE_NBR = #{LINE_NBR}
+      and SERIAL_NO = #{SERIAL_NO}
+  </select>
+  <delete id="deleteTRSDEAL_STLMT_APTNMT_HISTORY" parameterType="com.path.dbmaps.vo.TRSDEAL_STLMT_APTNMT_HISTORYVOKey" >
+    delete from TRSDEAL_STLMT_APTNMT_HISTORY
+    where APTNMT_SEQ = #{APTNMT_SEQ}
+      and BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and LINE_NBR = #{LINE_NBR}
+      and SERIAL_NO = #{SERIAL_NO}
+  </delete>
+  <insert id="insertTRSDEAL_STLMT_APTNMT_HISTORY" parameterType="com.path.dbmaps.vo.TRSDEAL_STLMT_APTNMT_HISTORYVO" >
+    insert into TRSDEAL_STLMT_APTNMT_HISTORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="APTNMT_SEQ != null and APTNMT_SEQ != emptyBigDecimalValue" >
+        APTNMT_SEQ,
+      </if>
+      <if test="BRANCH_CODE != null and BRANCH_CODE != emptyBigDecimalValue" >
+        BRANCH_CODE,
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        COMP_CODE,
+      </if>
+      <if test="LINE_NBR != null and LINE_NBR != emptyBigDecimalValue" >
+        LINE_NBR,
+      </if>
+      <if test="SERIAL_NO != null and SERIAL_NO != emptyBigDecimalValue" >
+        SERIAL_NO,
+      </if>
+      <if test="APPORTIONMENT_IND != null and APPORTIONMENT_IND != emptyBigDecimalValue" >
+        APPORTIONMENT_IND,
+      </if>
+      <if test="DATE_CREATED != null" >
+        DATE_CREATED,
+      </if>
+      <if test="CREATED_BY != null" >
+        CREATED_BY,
+      </if>
+      <if test="SERVER_CREATED_DATE != null" >
+        SERVER_CREATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="APTNMT_SEQ != null and APTNMT_SEQ != emptyBigDecimalValue" >
+        #{APTNMT_SEQ},
+      </if>
+      <if test="BRANCH_CODE != null and BRANCH_CODE != emptyBigDecimalValue" >
+        #{BRANCH_CODE},
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="LINE_NBR != null and LINE_NBR != emptyBigDecimalValue" >
+        #{LINE_NBR},
+      </if>
+      <if test="SERIAL_NO != null and SERIAL_NO != emptyBigDecimalValue" >
+        #{SERIAL_NO},
+      </if>
+      <if test="APPORTIONMENT_IND != null and APPORTIONMENT_IND != emptyBigDecimalValue" >
+        #{APPORTIONMENT_IND},
+      </if>
+      <if test="DATE_CREATED != null" >
+        #{DATE_CREATED},
+      </if>
+      <if test="CREATED_BY != null" >
+        #{CREATED_BY},
+      </if>
+      <if test="SERVER_CREATED_DATE != null" >
+        #{SERVER_CREATED_DATE},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateTRSDEAL_STLMT_APTNMT_HISTORY" >
+    update TRSDEAL_STLMT_APTNMT_HISTORY
+    <set >
+      <if test="APPORTIONMENT_IND != null" >
+        <choose >
+          <when test="APPORTIONMENT_IND == emptyBigDecimalValue" >
+            APPORTIONMENT_IND = NULL ,
+          </when>
+          <otherwise >
+            APPORTIONMENT_IND = #{APPORTIONMENT_IND},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DATE_CREATED != null" >
+        DATE_CREATED = #{DATE_CREATED},
+      </if>
+      <if test="CREATED_BY != null" >
+        CREATED_BY = #{CREATED_BY},
+      </if>
+      <if test="SERVER_CREATED_DATE != null" >
+        SERVER_CREATED_DATE = #{SERVER_CREATED_DATE},
+      </if>
+    </set>
+    where APTNMT_SEQ = #{APTNMT_SEQ}
+      and BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and LINE_NBR = #{LINE_NBR}
+      and SERIAL_NO = #{SERIAL_NO}
+  </sql>
+  <update id="updateTRSDEAL_STLMT_APTNMT_HISTORY" parameterType="com.path.dbmaps.vo.TRSDEAL_STLMT_APTNMT_HISTORYVO" >
+    <include refid="sql_updateTRSDEAL_STLMT_APTNMT_HISTORY" />
+  </update>
+</mapper>

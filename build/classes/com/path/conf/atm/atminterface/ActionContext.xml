@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="aTMInterfaceListAction" class="com.path.atm.actions.atminterface.ATMInterfaceListAction" scope="prototype" parent="baseAction">
+		<property name="atmInterfaceBO" ref="atmInterfaceBO"></property>
+	</bean>
+	
+	<bean id="aTMInterfaceMaintAction" class="com.path.atm.actions.atminterface.ATMInterfaceMaintAction" scope="prototype" parent="baseAction">
+		<property name="atmInterfaceBO" ref="atmInterfaceBO"></property>
+	</bean>
+	
+	<bean id="aTMInterfaceStatusAction" class="com.path.atm.actions.atminterface.ATMInterfaceStatusAction" scope="prototype" parent="baseAction">
+	</bean>
+</beans>

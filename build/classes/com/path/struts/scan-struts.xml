@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="scan" namespace="/path/scan" extends="path-default">
+		<action name="previewImage" class="scanAction" method="previewImage">
+			<result name="previewScannedImage">/WEB-INF/pages/common/scan/ScanPreviewImage.jsp
+			</result>
+
+		</action>
+		<action name="checkImage" class="scanAction" method="checkImage">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="loadPreviewImage" class="scanAction" method="loadPreviewImage">
+		</action>
+		<action name="saveSignature" class="scanAction" method="saveSignature">
+			<result name="scanSuccess" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">scriptStream</param>
+			</result>
+		</action>
+		<action name="previewPaniniImg" class="scanAction" method="previewPaniniImg">
+			<result name="scanned">/WEB-INF/pages/common/scan/PaniniPreviewImage.jsp</result>
+			<result name="error" type="json">
+				<param name="ignoreHierarchy">false</param>					 
+			</result>
+		</action>
+		<action name="loadPaniniImages" class="scanAction" method="loadPaniniImages">
+		</action>
+	</package>
+
+	<package name="unsecureScan" namespace="/unsecureScan/scan"
+		extends="path-default">
+		<action name="saveImage" class="scanAction" method="saveImage">
+			<result name="scanSuccess" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">scriptStream</param>
+			</result>
+			<interceptor-ref name="pathDefaultStack" />
+		</action>
+		<action name="savePaniniImage" class="scanAction" method="savePaniniImage">
+			<result name="scanSuccess" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">scriptStream</param>
+			</result>
+			<interceptor-ref name="pathDefaultStack" />
+		</action>
+		<action name="saveTWAINCheque" class="scanAction" method="saveTWAINCheque">
+			<result name="scanSuccess" type="stream">
+				<param name="contentType">text/html</param>
+				<param name="inputName">scriptStream</param>
+			</result>
+			<interceptor-ref name="pathDefaultStack" />
+		</action>
+	</package>
+</struts>

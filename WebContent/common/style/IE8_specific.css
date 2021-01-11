@@ -1,0 +1,10 @@
+input[required="true"],select[required="true"],textarea[required="true"],
+input[required="required"],select[required="required"],textarea[required="required"]
+{
+     border: solid 1px red \0/IE8 !important;
+}
+
+.ui-state-disabled .ui-icon 
+{
+    filter:Alpha(Opacity=35);
+}

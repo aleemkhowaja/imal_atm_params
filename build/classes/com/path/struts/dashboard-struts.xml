@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="dashboard" namespace="/pathdesktop" extends="path-default">
+
+		<global-results>
+			<result name="businessVertical">/WEB-INF/pages/common/dashboard/widgets/businessVerticalWidget.jsp</result>
+			<result name="businessServices">/WEB-INF/pages/common/dashboard/widgets/commonBusinessServiceWidget.jsp</result>
+			<result name="configuration">/WEB-INF/pages/common/dashboard/widgets/configurationWidget.jsp</result>
+			<result name="tellercustom">/WEB-INF/pages/common/dashboard/widgets/TellerCustomTmpWidget.jsp</result>
+			<result name="accountcustom">/WEB-INF/pages/common/dashboard/widgets/AccountsTmpWidget.jsp</result>
+			<result name="alerts">/WEB-INF/pages/common/dashboard/widgets/alertWidget.jsp</result>
+			<result name="periodicProcess">/WEB-INF/pages/common/dashboard/widgets/periodicProcessWidget.jsp</result>
+			<result name="favorites">/WEB-INF/pages/common/dashboard/widgets/customWidget.jsp</result>
+			<result name="inbox">/WEB-INF/pages/common/dashboard/widgets/inboxWidget.jsp</result>
+			<result name="customerServices">/WEB-INF/pages/common/dashboard/widgets/customerServicesWidget.jsp</result>
+			<result name="weather">/WEB-INF/pages/common/dashboard/widgets/WeatherWidget.jsp</result>
+			<result name="suspendRedirect" type="redirectAction">
+				<param name="method">sessionTimeout</param>
+				<param name="actionName">unSecureAction_</param>
+				<param name="namespace">/login</param>
+			</result>			
+			
+		</global-results>
+
+		<action name="dashboard" class="portalDashboardAction">
+			<result name="success" type="freemarker">/WEB-INF/pages/common/dashboard/Dashboard.ftl</result>
+			<result name="error">/login/ErrorAction.jsp</result>
+		</action>
+
+		<action name="portalDashboardAction_*" class="portalDashboardAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param> 	
+			</result>
+			<result name="loadCustomDialog">/WEB-INF/pages/common/dashboard/widgets/AddCustomWidget.jsp</result>
+			<result name="loadResizeDialog">/WEB-INF/pages/common/dashboard/widgets/ResizeWidget.jsp</result>
+			<result name="loadCustomizeDialog">/WEB-INF/pages/common/dashboard/widgets/CustomizeWorkspace.jsp</result>
+			<result name="loadPwdChangeDialog">/WEB-INF/pages/common/login/ChangePwd.jsp</result>
+			<result name="loadUsrAllwdPortlets">/WEB-INF/pages/common/dashboard/widgets/UserAllowedPortlets.jsp</result>
+			<result name="defaultImg">/login/images/unknown-person.png</result>
+		</action>
+		
+		<action name="dashboardJsonWidget" class="com.path.actions.common.dashboard.DashboardJsonWidget">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param> 	
+			</result>
+		</action>
+		
+		<action name="dashboardWidgetContents" class="com.path.actions.common.dashboard.DashboardWidgetContents">
+		</action>
+		
+		<action name="dashboardWorkspaceAction_*" class="dashboardWorkspaceAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="portalDashboardListAction_*" class="portalDashboardListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="loadLoggedInUsrs">/WEB-INF/pages/common/login/LoggedInUsers.jsp
+			</result>
+			<result name="loadUnstldTransCashBal">/WEB-INF/pages/common/dashboard/UnsettledNotTransfUserList.jsp</result>			
+		</action>
+		
+		<action name="loadDashWorkspaceByUser" class="dashboardWorkspaceAction" method="loadDashWorkspaceByUser">
+			<result name="success" type="freemarker">/WEB-INF/pages/common/dashboard/widgets/WorkspaceWidget.ftl</result>
+		</action>
+		<action name="portletAssignAction_*" class="portletAssignAction"  method="{1}">
+			<result name="loadAssignDialog">/WEB-INF/pages/common/dashboard/widgets/AssignCustomWidget.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="dashboardFavorite" class="dashboardFavoriteAction" method="loadFavoritewidget">
+			<result name="success">/WEB-INF/pages/common/dashboard/favorites/Favorites.jsp</result>
+		</action>
+		<action name="dashboardFavoriteStatment_*" class="dashboardFavoriteAction" method="{1}">
+			<result name="success">/WEB-INF/pages/common/dashboard/favorites/Favorites.jsp</result>
+		</action>
+		<action name="dashboardFavDependency" class="dashboardFavoriteAction" method="externalDependencyMgnt">
+			<result name="success"  type="json" >
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		<action name="dashboardFavoriteMaint_*" class="dashboardFavoriteAction" method="{1}">
+			<result name="success">/WEB-INF/pages/common/dashboard/favorites/FavoritesMaint.jsp</result>
+		</action>
+		<action name="dashboardApplication" class="dashboardApplicationAction" method="loadApplicationWidget">
+			<result name="success">/WEB-INF/pages/common/dashboard/applications/Applications.jsp</result>
+		</action>
+		<action name="dashboardApplicationInfo" class="dashboardApplicationAction" method="loadApplicationInfos">
+			<result name="success">/WEB-INF/pages/common/dashboard/applications/ApplicationInfo.jsp</result>
+		</action>
+		<action name="dashboardAlerts" class="dashboardAlertsAction" method="loadAlertsWidget">
+			<result name="success">/WEB-INF/pages/common/dashboard/alerts/DashPortalAlerts.jsp</result>
+		</action>
+		<action name="switchCompAction_*" method="{1}" class="desktopAction">
+		     <result name="login_comp_br">/WEB-INF/pages/appcomponents/desktop/LoginCompBr.jsp</result>
+			 <result name="checkLoginSucess">/WEB-INF/pages/appcomponents/desktop/LoginCompBr.jsp</result>
+             <result name="error">/login/ErrorAction.jsp</result>
+		</action>
+		<action name="dashboardReportsAction_*" method="{1}" class="dashboardReportsAction">
+    		<result name="successtest" type="stream">
+			  <param name="contentType">application/octet-stream</param>
+			  <param name="contentDisposition">attachment;filename="${filename}"</param>
+			  <param name="bufferSize">1024</param>			
+		  	  <param name="inputName">fileStream</param>
+			</result>
+    		<result name="snapShots">/WEB-INF/pages/reporting/reports/Snapshots.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param> 	
+			</result>
+		</action>
+	</package>
+
+</struts>

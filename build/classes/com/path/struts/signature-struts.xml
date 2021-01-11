@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- Package for Signature Management-->
+	<package name="signature" namespace="/path/signature" extends="path-default">
+		<action name="Signature_*" class="signatureMainAction" method="{1}">
+			<result name="signatureMainPage">/WEB-INF/pages/businesscommon/signature/SignatureMain.jsp</result><!-- Load the Signature Tab Contents-->
+			<result name="signatureFormPage">/WEB-INF/pages/businesscommon/signature/SignatureMaint.jsp</result><!-- Load the Signature form page based on mode-->
+			<result name="signatureImageScreen">/WEB-INF/pages/common/signature/SignatureImage.jsp</result><!-- Load the Signature Image-->
+			<result name="viewAllSignaturesForCIF">/WEB-INF/pages/businesscommon/signature/SignatureViewAll.jsp</result><!-- Load the Signature Image-->
+			<result name="viewAllSignaturesForAcc">/WEB-INF/pages/businesscommon/signature/SignatureViewAll.jsp</result><!-- Load the Signature Image-->
+			<result name="documentFormPage">/WEB-INF/pages/businesscommon/signature/DocumentMaint.jsp</result><!-- Load the Signature form page based on mode-->
+			<result name="copySignaturePage">/WEB-INF/pages/businesscommon/signature/CopySignaturesList.jsp</result><!-- Load the Signature form page based on mode-->
+			<result name="documentListPage">/WEB-INF/pages/businesscommon/signature/DocumentList.jsp</result><!-- Load the Signature form page based on mode-->
+			<result name="sigAnnotationPage">/WEB-INF/pages/businesscommon/signature/GeneralAnnotation.jsp</result><!-- Load the Signature form page based on mode-->
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+			<result name="error" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+			<result name="sigCapSignature">/WEB-INF/pages/businesscommon/signature/SigCapSignatureMaint.jsp</result>
+		</action>	
+		<action name="SignatureList_*" class="signatureListAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		<action name="Signature_uploadSignatureImg" class="signatureMainAction" method="uploadSignatureImg">
+		  <interceptor-ref name="fileUpload">
+       		<!-- <param name="allowedTypes">image/png,image/gif,image/jpeg</param> -->
+       		 
+  	     </interceptor-ref> 
+  	     <interceptor-ref name="pathDefaultStack"/>
+  	     	<result name="signUploadStatus" type="json">
+  	     		    <param name="contentType">text/plain</param>				  
+				  	<param name="ignoreHierarchy">false</param> 				   				   
+			 </result>	
+		
+			 
+		</action>
+		
+		
+	</package>
+</struts>   

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="dynamicTemplateListAction" class="com.path.actions.common.dynamictemplate.DynamicTemplateListAction" scope="prototype" parent="baseAction">
+	 <property name="dynamicTemplateBO" ref="dynamicTemplateBO"></property>
+	</bean>
+	<bean id="dynamicTemplateMaintAction" class="com.path.actions.common.dynamictemplate.DynamicTemplateMaintAction" scope="prototype" parent="baseAction">
+	 <property name="dynamicTemplateBO" ref="dynamicTemplateBO"></property>
+	</bean>
+	<bean id="dynamicTemplateLookupAction" class="com.path.actions.common.dynamictemplate.DynamicTemplateLookupAction" scope="prototype" parent="baseAction">
+	 <property name="dynamicTemplateBO" ref="dynamicTemplateBO"></property>
+	</bean>
+	<bean id="dynamicTemplateDepAction" class="com.path.actions.common.dynamictemplate.DynamicTemplateDepAction" scope="prototype" parent="baseAction">
+	 <property name="dynamicTemplateBO" ref="dynamicTemplateBO"></property>
+	</bean>
+	<bean id="dynamicTemplateConventionListAction" class="com.path.actions.common.dynamictemplate.DynamicTemplateConventionListAction" scope="prototype" parent="baseAction">
+	 <property name="dynamicTemplateBO" ref="dynamicTemplateBO"></property>
+	</bean>
+	<bean id="dynamicTemplateConventionMaintAction" class="com.path.actions.common.dynamictemplate.DynamicTemplateConventionMaintAction" scope="prototype" parent="baseAction">
+		<property name="dynamicTemplateBO" ref="dynamicTemplateBO"></property>
+		<property name="accountBO" 		   ref="accountBO"></property>
+		<property name="custSegmentationBO" ref="custSegmentationBO"></property>
+		<property name="cifBO" 				ref="cifBO"></property>
+		<property name="alertsBO" 				ref="alertsBO"></property>
+	</bean>
+	<bean id="dynamicTemplateConvStatusAction" class="com.path.actions.common.dynamictemplate.DynamicTemplateConventionStatusAction" scope="prototype" parent="baseAction">
+	</bean>
+	<bean id="dynamicTemplateAppDepAction" class="com.path.actions.common.dynamictemplate.DynamicTemplateAppDepAction" scope="prototype" parent="baseAction">
+	 <property name="dynamicTemplateBO" ref="dynamicTemplateBO"></property>
+	</bean>
+</beans>

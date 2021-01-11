@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="adminlookups" namespace="/pathdesktop"
+		extends="path-default">
+		<!-- Companies - Companies Lookup main and grid action-->
+		<action name="CompaniesByUsrLookup_*" class="companiesByUsrLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<!-- Branches - Branches Lookup main and grid action-->
+		<action name="BranchesByUsrLookup_*" class="branchesByUsrLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Countries Region Lookup main and grid action -->
+		<action name="CountriesRegion_*" class="countriesRegionLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cities Lookup main and grid action -->
+		<action name="CitiesLookup_*" class="citiesLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+				
+		<!-- Countries Lookup main and grid action -->
+		<action name="CountriesLookup_*" class="countriesLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Memo Lookup -->
+		<action name="MemoLookup_*" class="memoLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- SmartAddOptions Lookup main and grid action -->
+		<action name="SmartAddOptions_*" class="smartAddOptionsLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Enquiry File Lookup action -->
+		<action name="EnqFileLookup_*" class="enquiryFileLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="GLLookup_*" class="glLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Tag value lookup action -->
+		<action name="TagValueLookup_*" class="tagValueLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- AdditionalFieldsbyType Lookup main and grid action -->
+		<action name="AddFieldsByTypeOptions_*" class="additionalFieldsbyTypeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Applications Lookup main and grid action -->
+		<action name="ApplicationsLookup_*" class="applicationsLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Translation Lookup main and grid action -->
+		<action name="TranslationLookup_*" class="translationLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="RoleLookupAction_*" class="roleLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- User Lookup action -->
+		<action name="UsrLookupAction_*" class="usrLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- User Reports Lookup action -->
+		<action name="UsrReportsLookup_*" class="usrReportsLookup" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="DashboardPortalLookupAction_*" class="dashboardPortalLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+				
+		<!-- Dynamic Client Params Lookup main and grid action -->
+		<action name="DynClientParamsLookup_*" class="dynClientParamsLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+</struts>   

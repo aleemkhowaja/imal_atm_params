@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE
+ struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd"
+	>
+<struts>
+	<package name="islamicCalculator" namespace="/path/islamicCalculator" extends="path-default">
+		<!-- To load the Page on menu click-->
+		<action name="islamicCalculator_*" class="islamicCalculatorAction" method="{1}">
+			<result name="csmIslamicCalc">/WEB-INF/pages/businesscommon/islamiccalculator/IslamicCalculatorMain.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="islamicCalculatorEventMgmt_*" class="islamicCalculatorEventMgmtAction" method="{1}">
+			<result name="populateIslamicCalculatorSchedulePopup">/WEB-INF/pages/businesscommon/islamiccalculator/IslamicCalculatorSchedulePopUp.jsp</result>
+			<result name="onChangeCifNumber" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangeCifCivilId" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="isCifBlackListed" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeProductClass" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangePurchaseAmount" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeDownPaymentPercentage" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeTotalFlatRate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeFinancingAmount" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeStartDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="setOnChangeStartDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangeMaturityDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeMaturityDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="setOnChangeMaturityDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeFirstPaymentAfter" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeFirstPaymentAfterPeriodicity" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeApprovedSalary" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeNoOfBalloons" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeVatInstallment" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeVatApplicable" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeVatCode" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeBalloonPercentage" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeDownPayment" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeAmountPerPayment" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeYield" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateSchedules" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<!-- VAT IN INSTALLMENT -->
+			<result name="onEnableVatInInstallment" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="calculate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeCivilId" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeBalloonPaymentAmount" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangeStartDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangePayEveryPeriodicity" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangePayEveryPosition" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangeFirstPayDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeFirstPayDate" type="json">	
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="calculateDealCharges" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangePayEvery" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangeNoOfPayments" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeNoOfPayments" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeTemplateCode" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeCurrencyCode" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateOnChangeRepaymentCriteriaFromDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateOnChangeRepaymentCriteriaToDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>			
+			<result name="populateOnChangeRepaymentCriteriaPeriodicityNumber" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateOnChangeRepaymentCriteriaNoOfPayments" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateOnChangeRepaymentCriteriaPeriodicityPeriod" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateOnChangeRepaymentCriteriaPeriodicityPosition" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateOnChangeRepaymentCriteriaPaymentType" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateOnChangeDealChargesGridAmounts" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateOnChangeSalaryWithBank" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateFieldsForDealCharges" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateMaxFinancingAmountForDealCharges" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateNoOfPaymentsForDealCharges" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="checkMaturityDateIsHoliday" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateOnChangeStartDateOnMaturityDate" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+				<result name="repaymentCriteria" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>		
+			<result name="setMaturityBasedonHoliday" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			
+			<result name="getEqualBalloonPaymentDetails" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="getUnEqualBalloonPaymentDetails" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="showWarningForCifSalaryMultiple" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateForCifSalaryMultiple" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="clearFields" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="calculateAnnualFloatingMarginRates" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeDealPeriodCompounding" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="validateRepayamentCriteriaList" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="onChangeCapitalAmount" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="printCalculateScreen">/WEB-INF/pages/businesscommon/islamiccalculator/IslamicCalculatorPrint.jsp</result>
+		</action>
+		<action name="islamicCalculatorDBRatio_*" class="islamicCalculatorDBRatioAction" method="{1}">
+			<result name="dbrRatio" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="populateIslamicCalculatorDebitBurdunRatioPopup">/WEB-INF/pages/businesscommon/islamiccalculator/IslamicCalculatorDebitBurdunRatioPopUp.jsp</result>
+		</action>
+	</package>
+</struts>

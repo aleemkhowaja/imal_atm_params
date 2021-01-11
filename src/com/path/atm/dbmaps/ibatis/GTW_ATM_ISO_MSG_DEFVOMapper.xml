@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GTW_ATM_ISO_MSG_DEF" >
+  <resultMap id="BaseResultMap" type="com.path.atm.dbmaps.vo.GTW_ATM_ISO_MSG_DEFVO" >
+    <id column="ISO_MSG_DEF_ID" property="ISO_MSG_DEF_ID" />
+    <result column="COMP_CODE" property="COMP_CODE" />
+    <result column="DESCRIPTION" property="DESCRIPTION" />
+    <result column="INTERFACE_CODE" property="INTERFACE_CODE" />
+    <result column="NETWORK_MESSAGE_YN" property="NETWORK_MESSAGE_YN" />
+    <result column="ATM_ISO_MSGS_CODE" property="ATM_ISO_MSGS_CODE" />
+    <result column="PROCESS_CODE" property="PROCESS_CODE" />
+    <result column="ADD_CRITERIA_EXPRESSION" property="ADD_CRITERIA_EXPRESSION" />
+    <result column="MAPPING_ID" property="MAPPING_ID" />
+    <result column="NETWORK_MESSAGE_TYPE" property="NETWORK_MESSAGE_TYPE" />
+    <result column="REQUEST_PRI_BITMAP" property="REQUEST_PRI_BITMAP" />
+    <result column="REQUEST_SEC_BITMAP" property="REQUEST_SEC_BITMAP" />
+    <result column="RESPONSE_PRI_BITMAP" property="RESPONSE_PRI_BITMAP" />
+    <result column="RESPONSE_SEC_BITMAP" property="RESPONSE_SEC_BITMAP" />
+    <result column="CREATED_BY" property="CREATED_BY" />
+    <result column="CREATED_DATE" property="CREATED_DATE" />
+    <result column="MODIFIED_BY" property="MODIFIED_BY" />
+    <result column="MODIFIED_DATE" property="MODIFIED_DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ISO_MSG_DEF_ID, COMP_CODE, DESCRIPTION, INTERFACE_CODE, NETWORK_MESSAGE_YN, ATM_ISO_MSGS_CODE, 
+    PROCESS_CODE, ADD_CRITERIA_EXPRESSION, MAPPING_ID, NETWORK_MESSAGE_TYPE, REQUEST_PRI_BITMAP, 
+    REQUEST_SEC_BITMAP, RESPONSE_PRI_BITMAP, RESPONSE_SEC_BITMAP, CREATED_BY, CREATED_DATE, 
+    MODIFIED_BY, MODIFIED_DATE
+  </sql>
+  <select id="selectGTW_ATM_ISO_MSG_DEF" resultMap="BaseResultMap" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_MSG_DEFVO" >
+    select 
+    <include refid="Base_Column_List" />
+    from GTW_ATM_ISO_MSG_DEF
+    where ISO_MSG_DEF_ID = #{ISO_MSG_DEF_ID}
+  </select>
+  <delete id="deleteGTW_ATM_ISO_MSG_DEF" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_MSG_DEFVO" >
+    delete from GTW_ATM_ISO_MSG_DEF
+    where ISO_MSG_DEF_ID = #{ISO_MSG_DEF_ID}
+  </delete>
+  <insert id="insertGTW_ATM_ISO_MSG_DEF" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_MSG_DEFVO" >
+    <selectKey resultType="java.math.BigDecimal" keyProperty="ISO_MSG_DEF_ID" order="BEFORE" >
+      SELECT <choose><when test="isSybase == 1">ISNULL(MAX(ISO_MSG_DEF_ID),0)+1</when><otherwise>NVL(MAX(ISO_MSG_DEF_ID),0)+1</otherwise></choose> FROM GTW_ATM_ISO_MSG_DEF
+    </selectKey>
+    insert into GTW_ATM_ISO_MSG_DEF
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ISO_MSG_DEF_ID,
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        COMP_CODE,
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        DESCRIPTION,
+      </if>
+      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+        INTERFACE_CODE,
+      </if>
+      <if test="NETWORK_MESSAGE_YN != null and !&quot;&quot;.equals(NETWORK_MESSAGE_YN)" >
+        NETWORK_MESSAGE_YN,
+      </if>
+      <if test="ATM_ISO_MSGS_CODE != null and ATM_ISO_MSGS_CODE != emptyBigDecimalValue" >
+        ATM_ISO_MSGS_CODE,
+      </if>
+      <if test="PROCESS_CODE != null and !&quot;&quot;.equals(PROCESS_CODE)" >
+        PROCESS_CODE,
+      </if>
+      <if test="ADD_CRITERIA_EXPRESSION != null and !&quot;&quot;.equals(ADD_CRITERIA_EXPRESSION)" >
+        ADD_CRITERIA_EXPRESSION,
+      </if>
+      <if test="MAPPING_ID != null and MAPPING_ID != emptyBigDecimalValue" >
+        MAPPING_ID,
+      </if>
+      <if test="NETWORK_MESSAGE_TYPE != null and !&quot;&quot;.equals(NETWORK_MESSAGE_TYPE)" >
+        NETWORK_MESSAGE_TYPE,
+      </if>
+      <if test="REQUEST_PRI_BITMAP != null and !&quot;&quot;.equals(REQUEST_PRI_BITMAP)" >
+        REQUEST_PRI_BITMAP,
+      </if>
+      <if test="REQUEST_SEC_BITMAP != null and !&quot;&quot;.equals(REQUEST_SEC_BITMAP)" >
+        REQUEST_SEC_BITMAP,
+      </if>
+      <if test="RESPONSE_PRI_BITMAP != null and !&quot;&quot;.equals(RESPONSE_PRI_BITMAP)" >
+        RESPONSE_PRI_BITMAP,
+      </if>
+      <if test="RESPONSE_SEC_BITMAP != null and !&quot;&quot;.equals(RESPONSE_SEC_BITMAP)" >
+        RESPONSE_SEC_BITMAP,
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        CREATED_BY,
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE,
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        MODIFIED_BY,
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{ISO_MSG_DEF_ID},
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        #{DESCRIPTION},
+      </if>
+      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+        #{INTERFACE_CODE},
+      </if>
+      <if test="NETWORK_MESSAGE_YN != null and !&quot;&quot;.equals(NETWORK_MESSAGE_YN)" >
+        #{NETWORK_MESSAGE_YN},
+      </if>
+      <if test="ATM_ISO_MSGS_CODE != null and ATM_ISO_MSGS_CODE != emptyBigDecimalValue" >
+        #{ATM_ISO_MSGS_CODE},
+      </if>
+      <if test="PROCESS_CODE != null and !&quot;&quot;.equals(PROCESS_CODE)" >
+        #{PROCESS_CODE},
+      </if>
+      <if test="ADD_CRITERIA_EXPRESSION != null and !&quot;&quot;.equals(ADD_CRITERIA_EXPRESSION)" >
+        #{ADD_CRITERIA_EXPRESSION},
+      </if>
+      <if test="MAPPING_ID != null and MAPPING_ID != emptyBigDecimalValue" >
+        #{MAPPING_ID},
+      </if>
+      <if test="NETWORK_MESSAGE_TYPE != null and !&quot;&quot;.equals(NETWORK_MESSAGE_TYPE)" >
+        #{NETWORK_MESSAGE_TYPE},
+      </if>
+      <if test="REQUEST_PRI_BITMAP != null and !&quot;&quot;.equals(REQUEST_PRI_BITMAP)" >
+        #{REQUEST_PRI_BITMAP},
+      </if>
+      <if test="REQUEST_SEC_BITMAP != null and !&quot;&quot;.equals(REQUEST_SEC_BITMAP)" >
+        #{REQUEST_SEC_BITMAP},
+      </if>
+      <if test="RESPONSE_PRI_BITMAP != null and !&quot;&quot;.equals(RESPONSE_PRI_BITMAP)" >
+        #{RESPONSE_PRI_BITMAP},
+      </if>
+      <if test="RESPONSE_SEC_BITMAP != null and !&quot;&quot;.equals(RESPONSE_SEC_BITMAP)" >
+        #{RESPONSE_SEC_BITMAP},
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        #{CREATED_BY},
+      </if>
+      <if test="CREATED_DATE != null" >
+        #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        #{MODIFIED_BY},
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        #{MODIFIED_DATE},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateGTW_ATM_ISO_MSG_DEF" >
+    update GTW_ATM_ISO_MSG_DEF
+    <set >
+      <if test="COMP_CODE != null" >
+        <choose >
+          <when test="COMP_CODE == emptyBigDecimalValue" >
+            COMP_CODE = NULL ,
+          </when>
+          <otherwise >
+            COMP_CODE = #{COMP_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DESCRIPTION != null" >
+        <choose >
+          <when test="DESCRIPTION.equals(&quot;&quot;)" >
+            DESCRIPTION = NULL ,
+          </when>
+          <otherwise >
+            DESCRIPTION = #{DESCRIPTION},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="INTERFACE_CODE != null" >
+        <choose >
+          <when test="INTERFACE_CODE == emptyBigDecimalValue" >
+            INTERFACE_CODE = NULL ,
+          </when>
+          <otherwise >
+            INTERFACE_CODE = #{INTERFACE_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="NETWORK_MESSAGE_YN != null" >
+        <choose >
+          <when test="NETWORK_MESSAGE_YN.equals(&quot;&quot;)" >
+            NETWORK_MESSAGE_YN = NULL ,
+          </when>
+          <otherwise >
+            NETWORK_MESSAGE_YN = #{NETWORK_MESSAGE_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="ATM_ISO_MSGS_CODE != null" >
+        <choose >
+          <when test="ATM_ISO_MSGS_CODE == emptyBigDecimalValue" >
+            ATM_ISO_MSGS_CODE = NULL ,
+          </when>
+          <otherwise >
+            ATM_ISO_MSGS_CODE = #{ATM_ISO_MSGS_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="PROCESS_CODE != null" >
+        <choose >
+          <when test="PROCESS_CODE.equals(&quot;&quot;)" >
+            PROCESS_CODE = NULL ,
+          </when>
+          <otherwise >
+            PROCESS_CODE = #{PROCESS_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="ADD_CRITERIA_EXPRESSION != null" >
+        <choose >
+          <when test="ADD_CRITERIA_EXPRESSION.equals(&quot;&quot;)" >
+            ADD_CRITERIA_EXPRESSION = NULL ,
+          </when>
+          <otherwise >
+            ADD_CRITERIA_EXPRESSION = #{ADD_CRITERIA_EXPRESSION},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="MAPPING_ID != null" >
+        <choose >
+          <when test="MAPPING_ID == emptyBigDecimalValue" >
+            MAPPING_ID = NULL ,
+          </when>
+          <otherwise >
+            MAPPING_ID = #{MAPPING_ID},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="NETWORK_MESSAGE_TYPE != null" >
+        <choose >
+          <when test="NETWORK_MESSAGE_TYPE.equals(&quot;&quot;)" >
+            NETWORK_MESSAGE_TYPE = NULL ,
+          </when>
+          <otherwise >
+            NETWORK_MESSAGE_TYPE = #{NETWORK_MESSAGE_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REQUEST_PRI_BITMAP != null" >
+        <choose >
+          <when test="REQUEST_PRI_BITMAP.equals(&quot;&quot;)" >
+            REQUEST_PRI_BITMAP = NULL ,
+          </when>
+          <otherwise >
+            REQUEST_PRI_BITMAP = #{REQUEST_PRI_BITMAP},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REQUEST_SEC_BITMAP != null" >
+        <choose >
+          <when test="REQUEST_SEC_BITMAP.equals(&quot;&quot;)" >
+            REQUEST_SEC_BITMAP = NULL ,
+          </when>
+          <otherwise >
+            REQUEST_SEC_BITMAP = #{REQUEST_SEC_BITMAP},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="RESPONSE_PRI_BITMAP != null" >
+        <choose >
+          <when test="RESPONSE_PRI_BITMAP.equals(&quot;&quot;)" >
+            RESPONSE_PRI_BITMAP = NULL ,
+          </when>
+          <otherwise >
+            RESPONSE_PRI_BITMAP = #{RESPONSE_PRI_BITMAP},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="RESPONSE_SEC_BITMAP != null" >
+        <choose >
+          <when test="RESPONSE_SEC_BITMAP.equals(&quot;&quot;)" >
+            RESPONSE_SEC_BITMAP = NULL ,
+          </when>
+          <otherwise >
+            RESPONSE_SEC_BITMAP = #{RESPONSE_SEC_BITMAP},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CREATED_BY != null" >
+        <choose >
+          <when test="CREATED_BY.equals(&quot;&quot;)" >
+            CREATED_BY = NULL ,
+          </when>
+          <otherwise >
+            CREATED_BY = #{CREATED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE = #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null" >
+        <choose >
+          <when test="MODIFIED_BY.equals(&quot;&quot;)" >
+            MODIFIED_BY = NULL ,
+          </when>
+          <otherwise >
+            MODIFIED_BY = #{MODIFIED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE = #{MODIFIED_DATE},
+      </if>
+    </set>
+    where ISO_MSG_DEF_ID = #{ISO_MSG_DEF_ID}
+  </sql>
+  <update id="updateGTW_ATM_ISO_MSG_DEF" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_MSG_DEFVO" >
+    <include refid="sql_updateGTW_ATM_ISO_MSG_DEF" />
+  </update>
+</mapper>

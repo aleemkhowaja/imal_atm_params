@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+         <!-- @author: tonyelkhoury 2017 -->
+<struts>
+	<package name="criteria" namespace="/path/criteria" extends="path-default">
+	
+		<!-- used for maint form -->
+		<action name="criteriaMaint_*" class="criteriaMaintAction" method="{1}">
+			<result name="loadCriteriaPage">/WEB-INF/pages/businesscommon/core/criteria/CriteriaList.jsp</result>
+			<result name="loadCriteriaMaintPage">/WEB-INF/pages/businesscommon/core/criteria/CriteriaMaint.jsp</result>			
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="alert_success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="loadProcedure">/WEB-INF/pages/businesscommon/core/criteria/ProcedureList.jsp</result>
+			<result name="loadParam">/WEB-INF/pages/businesscommon/core/criteria/CriteriaParamList.jsp</result>
+			<result name="loadParamMultiSelect">/WEB-INF/pages/businesscommon/core/criteria/CriteriaSelectParamList.jsp</result>
+			
+		</action>
+		
+		<!-- used for grid -->
+		<action name="criteriaList_*" class="criteriaListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+
+	
+	</package>
+</struts>
+

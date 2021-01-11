@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="blackListIntSourceUploadMaintAction" class="com.path.core.actions.blacklistmanagement.BlackListIntSourceUploadMaintAction" scope="prototype" parent="baseAction">
+		<property name="blackListIntSourceBO" ref="blackListIntSourceBO"></property>
+	</bean>
+
+	<bean id="BlackListMatchedCIFListAction" class="com.path.core.actions.blacklistmanagement.BlackListMatchedCIFListAction" scope="prototype" parent="baseAction">
+		<property name="blackListIntSourceBO" ref="blackListIntSourceBO"></property>
+	</bean>
+		
+	<bean id="BlackListWhiteListAction" class="com.path.core.actions.blacklistmanagement.BlackListWhiteListAction" scope="prototype" parent="baseAction">
+		<property name="blackListIntSourceBO" ref="blackListIntSourceBO"></property>
+	</bean>
+
+	<bean id="blackListGridAction" class="com.path.core.actions.blacklistmanagement.BlackListGridAction" scope="prototype" parent="baseAction">
+		<property name="blackListBO" ref="blackListBO"></property>
+	</bean>	
+	<bean id="blackListMaintAction" class="com.path.core.actions.blacklistmanagement.BlackListMaintAction" scope="prototype" parent="retailBaseAction">
+		<property name="blackListBO" ref="blackListBO"></property>
+		<property name="alertsBO" ref="alertsBO"></property>
+	 
+	</bean>	
+	<bean id="blackListStatusAction" class="com.path.core.actions.blacklistmanagement.BlackListStatusAction" scope="prototype" parent="baseAction">
+	</bean>
+	<bean id="blackListIdsGridAction" class="com.path.core.actions.blacklistmanagement.BlackListIdsGridAction" scope="prototype" parent="baseAction">
+		<property name="blackListBO" ref="blackListBO"></property>
+	</bean>
+	
+	<bean id="blackListDependencyAction" class="com.path.core.actions.blacklistmanagement.BlackListDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="blackListBO" ref="blackListBO"></property>
+	</bean>
+	
+		<bean id="blackListLogMaintAction" class="com.path.core.actions.blacklistmanagement.BlackListLogMaintAction" scope="prototype" parent="retailBaseAction">
+		<property name="blackListLogBO" ref="blackListLogBO"></property>
+	</bean>		
+
+	<bean id="blackListSourceUploadLookupAction" class="com.path.core.actions.blacklistmanagement.BlackListSourceUploadLookupAction" scope="prototype" parent="baseAction">
+		<property name="blackListIntSourceBO" ref="blackListIntSourceBO"></property>
+	</bean>	
+
+</beans>

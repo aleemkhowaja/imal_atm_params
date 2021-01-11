@@ -1,0 +1,11 @@
+.column  {
+  float:right;
+  margin:5;
+}
+.right {
+	float:left;
+	
+}
+.controls li {
+  float:right;
+}

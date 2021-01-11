@@ -1,0 +1,49 @@
+.liveSearchCompSize
+{
+	height:16px  !important; 
+}
+
+.liveSearchText
+{
+	/* IE9 Added to  eliminate padding in live search and it container */
+	padding-left: 0px;
+	padding-right: 0px;
+}
+/* PathSolutions [Libin] added to change the appearance(border boldness) for input fields on focus*/
+.textCompSize:focus ,.dateCompSize:focus ,.liveSearchCompSize:focus ,.selectCompSize:focus 
+{
+	border-width: 2px !important;
+}
+
+.textCompSize:hover ,.dateCompSize:hover ,.liveSearchCompSize:hover ,.selectCompSize:hover /* PathSolutions [Libin] added to change the appearance(border boldness) for input fields on mouse hover*/
+{
+	border-width: 2px !important;
+}
+
+.liveSearchCompSize:hover , .liveSearchCompSize:focus  /* PathSolutions [Libin] separated this entry to handle an IE screen issue of these components on hover and focus*/
+{
+	border-width: 2px !important;
+}
+
+.dateCompSize
+{
+	/*width: 100%; removed by Denisk not to stretch data component on whole it wrapper*/
+	height:16px !important;
+}
+
+.ui-widget input[type='text']
+{
+	height:16px;
+}
+
+/*correct the textbox style that contains the number of records*/
+.ui-jqgrid .ui-pg-input
+{
+ height: 13px !important;
+}
+.liveSearchText
+{
+	/* IE9 Added to  eliminate padding in live search and it container */
+	padding-left: 2px \0/IE9 !important;
+	padding-right: 2px \0/IE9 !important;
+}

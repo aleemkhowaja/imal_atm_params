@@ -1,0 +1,788 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="atmInterfaceMapper">
+	<!-- Code Starts For ATM Interface -->
+	<resultMap id="interfaceMap" type="atmInterfaceCO">
+		<id 	column="INTERFACE_CODE" 		property="iso_INTERFACESVO.INTERFACE_CODE" />
+	    <id 	column="COMP_CODE" 				property="iso_INTERFACESVO.COMP_CODE" />
+	    <result column="DESCRIPTION" 			property="iso_INTERFACESVO.DESCRIPTION" />
+	    <result column="INTERFACE_TYPE" 		property="iso_INTERFACESVO.INTERFACE_TYPE" />
+	    <result column="INCLUDE_LENGTH" 		property="iso_INTERFACESVO.INCLUDE_LENGTH" />
+	    <result column="MSG_LENGTH" 			property="iso_INTERFACESVO.MSG_LENGTH" />
+	    <result column="HEADER_LENGTH" 			property="iso_INTERFACESVO.HEADER_LENGTH" />
+	    <result column="HEADER_DATA" 			property="iso_INTERFACESVO.HEADER_DATA" />
+	    <result column="BITMAP_TYPE" 			property="iso_INTERFACESVO.BITMAP_TYPE" />
+	    <result column="LENGTH_TYPE" 			property="iso_INTERFACESVO.LENGTH_TYPE" />
+	    <result column="CURRENT_DATE" 			property="iso_INTERFACESVO.CURRENT_DATE" />
+	    <result column="INCLUDE_HEADER_YN" 		property="iso_INTERFACESVO.INCLUDE_HEADER_YN" />
+	    <result column="POS_IN_HEADER_YN" 		property="iso_INTERFACESVO.POS_IN_HEADER_YN" />
+	    <result column="ISO_PRESENT_YN" 		property="iso_INTERFACESVO.ISO_PRESENT_YN" />
+	    <result column="SKIP_BITMAP_YN" 		property="iso_INTERFACESVO.SKIP_BITMAP_YN" />
+	    <result column="STATUS" 				property="iso_INTERFACESVO.STATUS" />
+	    <result column="CREATED_BY" 			property="iso_INTERFACESVO.CREATED_BY" />
+	    <result column="CREATED_DATE" 			property="iso_INTERFACESVO.CREATED_DATE" />
+	    <result column="MODIFIED_BY" 			property="iso_INTERFACESVO.MODIFIED_BY" />
+	    <result column="MODIFIED_DATE" 			property="iso_INTERFACESVO.MODIFIED_DATE" />
+	    <result column="APPROVED_BY" 			property="iso_INTERFACESVO.APPROVED_BY" />
+	    <result column="APPROVED_DATE" 			property="iso_INTERFACESVO.APPROVED_DATE" />
+	    <result column="DELETED_BY" 			property="iso_INTERFACESVO.DELETED_BY" />
+	    <result column="DELETED_DATE" 			property="iso_INTERFACESVO.DELETED_DATE" />
+	    <result column="SUSPENDED_BY" 			property="iso_INTERFACESVO.SUSPENDED_BY" />
+	    <result column="SUSPENDED_DATE" 		property="iso_INTERFACESVO.SUSPENDED_DATE" />
+	    <result column="REACTIVATED_BY" 		property="iso_INTERFACESVO.REACTIVATED_BY" />
+	    <result column="REACTIVATED_DATE" 		property="iso_INTERFACESVO.REACTIVATED_DATE" />
+	    <result column="PROTOCOL_IDENTITFICATION" 		property="iso_INTERFACESVO.PROTOCOL_IDENTITFICATION" />
+	    <result column="STATUS_DESC" 			property="statusDesc" />
+	    <result column="interfaceTypeDesc" 		property="interfaceTypeDesc" />
+	</resultMap>
+
+	<select id="returnInterfaceList" resultMap="interfaceMap" parameterType="atmInterfaceSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip"/>
+		<include refid="returnInterfaceListSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftFlip"/>
+	    <include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	</select>
+	
+	<select id="returnInterfaceListCount" parameterType="atmInterfaceSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt"/>
+		<include refid="returnInterfaceListSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftCnt"/>
+	    <include refid="servicesCommon.commonGridCountWrpClose"/>
+	</select>
+	
+	<select id="returnInterfaceByCode" resultMap="interfaceMap" parameterType="atmInterfaceSC">
+		<include refid="returnInterfaceListSQL"/>
+		AND ii.INTERFACE_CODE = #{interfaceId}
+	</select>
+			
+	<sql id="returnInterfaceListSQL">
+		SELECT <include refid="GTW_ATM_INTERFACES.Base_Column_List"/>
+		,(SELECT SYS_PARAM_LOV_TRANS.VALUE_DESC 
+	         FROM SYS_PARAM_LOV_TRANS
+	         WHERE SYS_PARAM_LOV_TRANS.VALUE_CODE   = ii.STATUS 
+	         AND SYS_PARAM_LOV_TRANS.LOV_TYPE_ID = #{lovTypeId,jdbcType=NUMERIC}
+	         AND SYS_PARAM_LOV_TRANS.LANG_CODE   = #{preferredLanguage,jdbcType=VARCHAR} 
+	    )STATUS_DESC
+		,(SELECT SYS_PARAM_LOV_TRANS.VALUE_DESC 
+	         FROM SYS_PARAM_LOV_TRANS
+	         WHERE SYS_PARAM_LOV_TRANS.VALUE_CODE   = ii.INTERFACE_TYPE 
+	         AND SYS_PARAM_LOV_TRANS.LOV_TYPE_ID = #{interfaceTypeLovId,jdbcType=NUMERIC}
+	         AND SYS_PARAM_LOV_TRANS.LANG_CODE   = #{preferredLanguage,jdbcType=VARCHAR} 
+	    )interfaceTypeDesc
+		FROM GTW_ATM_INTERFACES ii 
+		<if test='crudMode != null and crudMode!="R" '>
+			, SYS_PARAM_LOV_LK_OPT lovOpt
+		</if>
+		WHERE ii.COMP_CODE =  #{compCode}
+		
+		<if test='status != null and status == "P" '>
+			AND ii.STATUS = #{status}
+		</if>
+		
+		<if test='crudMode != null and crudMode!="R" '>
+			AND ii.STATUS = lovOpt.VALUE_CODE
+            AND lovOpt.LOV_TYPE_ID  = #{lovTypeId,jdbcType=NUMERIC}
+            AND lovOpt.PROG_REF     = #{pageRef,jdbcType=VARCHAR}
+            AND lovOpt.APP_NAME     = #{currAppName,jdbcType=VARCHAR}
+		</if>
+		
+	</sql>
+	<!-- Code Ends For ATM Interface -->
+	
+	<!-- Code Starts For ISO Messages -->
+	<resultMap  id="messagesMap" type="atmInterfaceCO">
+	    <id 	column="INTERFACE_CODE" 			property="iso_INT_MSGSVO.INTERFACE_CODE" />
+	    <id 	column="ATM_ISO_MSGS_CODE" 			property="iso_INT_MSGSVO.ATM_ISO_MSGS_CODE" />
+	    <result column="REQUEST_MTI" 				property="iso_INT_MSGSVO.REQUEST_MTI" />
+	    <result column="REQUEST_BITMAP1" 			property="iso_INT_MSGSVO.REQUEST_BITMAP1" />
+	    <result column="REQUEST_BITMAP2" 			property="iso_INT_MSGSVO.REQUEST_BITMAP2" />
+	    <result column="RESPONSE_MTI" 				property="iso_INT_MSGSVO.RESPONSE_MTI" />
+    	<result column="RESPONSE_BITMAP1" 			property="iso_INT_MSGSVO.RESPONSE_BITMAP1" />
+    	<result column="RESPONSE_BITMAP2" 			property="iso_INT_MSGSVO.RESPONSE_BITMAP2" />
+    	<result column="RESPONSE_EXPRESSION" 		property="iso_INT_MSGSVO.RESPONSE_EXPRESSION" />
+	</resultMap>
+	
+	<select id="returnMessagesList" resultMap="messagesMap" parameterType="atmInterfaceSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip"/>
+		<include refid="returnMessagesListSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftFlip"/>
+	    <include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	</select>
+	
+	<select id="returnMessagesListCount" parameterType="atmInterfaceSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt"/>
+		<include refid="returnMessagesListSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftCnt"/>
+	    <include refid="servicesCommon.commonGridCountWrpClose"/>
+	</select>
+	
+	<select id="returnMessageByCode" resultMap="messagesMap" parameterType="atmInterfaceSC">
+		<include refid="returnMessagesListSQL"/>
+		
+		<if test="messageId != null" >
+			AND dim.ATM_ISO_MSGS_CODE = #{messageId}
+		</if>
+	</select>
+	
+	
+	<sql id="returnMessagesListSQL">
+		SELECT <include refid="GTW_ATM_INT_ISO_MSGS.Base_Column_List"/> ,
+		
+		<include refid="GTW_ATM_INT_ISO_MSGS.Blob_Column_List"/>
+		
+		FROM GTW_ATM_INT_ISO_MSGS dim
+		
+		
+		WHERE dim.INTERFACE_CODE = #{interfaceId}
+		
+		<if test="mtiCode != null" >
+        	and dim.REQUEST_MTI = #{mtiCode}
+        </if>
+        
+        <if test="messageId != null and messageId != emptyBigDecimalValue" >
+        	and dim.ATM_ISO_MSGS_CODE = #{messageId}
+        </if>
+      
+		
+		
+	</sql>
+	<!-- Code Ends For ISO Messages -->
+	
+	<!-- Code Starts For ISO Updated Fields -->
+	<resultMap id="fieldsMap" type="atmInterfaceCO">
+	    <id column="ATM_ISO_FLDS_CODE" 		property="iso_INT_FLDSVO.ATM_ISO_FLDS_CODE" />
+	    <result column="INTERFACE_CODE" 	property="iso_INT_FLDSVO.INTERFACE_CODE" />
+	     <result column="FIELD_CODE" 		property="iso_INT_FLDSVO.FIELD_CODE" />
+	    <result column="FIELD_NAME" 		property="iso_INT_FLDSVO.FIELD_NAME" />
+	    <result column="FIELD_TYPE" 		property="iso_INT_FLDSVO.FIELD_TYPE" />
+	    <result column="FIXED_LENGTH" 		property="iso_INT_FLDSVO.FIXED_LENGTH" />
+	    <result column="DYNAMIC_LENGTH" 	property="iso_INT_FLDSVO.DYNAMIC_LENGTH" />
+	    <result column="TOTAL_MASK_YN" 		property="iso_INT_FLDSVO.TOTAL_MASK_YN" />
+	    <result column="PARTIAL_MASK" 		property="iso_INT_FLDSVO.PARTIAL_MASK" />
+	    <result column="IS_DECIMAL_YN" 		property="iso_INT_FLDSVO.IS_DECIMAL_YN" />
+	    <result column="EXPRESSION" 		property="iso_INT_FLDSVO.EXPRESSION" />
+	    <result column="TYPE" 				property="TYPE" />
+	    
+	    
+	    <!-- Map Collection of  iso sub fields-->
+		<collection property="iso_SUB_FLDSVOs" 		ofType="gtwAtmIntIsoSubFldsVO">
+			<id 	column="ATM_ISO_SUB_FLDS_CODE" 		property="ATM_ISO_SUB_FLDS_CODE" />
+	     	<result column="ATM_ISO_FLDS_CODE" 			property="ATM_ISO_FLDS_CODE" />
+	    	<result column="SUB_FIELD_CODE" 			property="SUB_FIELD_CODE" />
+	    	<result column="SUB_FIELD_NAME" 			property="SUB_FIELD_NAME" />
+	    	<result column="SUB_FIELD_TYPE" 			property="SUB_FIELD_TYPE" />
+		</collection>
+		
+	</resultMap>
+	
+	<select id="returnFieldsList" resultMap="fieldsMap" parameterType="atmInterfaceSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip"/>
+		<include refid="returnFieldsSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftFlip"/>
+	    <include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	</select>
+	
+	<select id="returnFieldsListCount" parameterType="atmInterfaceSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt"/>
+		<include refid="returnFieldsSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftCnt"/>
+	    <include refid="servicesCommon.commonGridCountWrpClose"/>
+	</select>
+	
+	<select id="returnFieldDetailByCode" resultMap="fieldsMap" parameterType="atmInterfaceSC">
+		<include refid="returnFieldsSQL"/>
+		AND iif.FIELD_CODE = #{fieldCode}
+	</select>
+	
+	<select id="returnFieldListByBitmap" resultMap="fieldsMap" parameterType="atmInterfaceSC">
+		<include refid="returnFieldsSQL"/>
+		AND iif.FIELD_CODE IN 
+		<foreach item="field" collection="bitMapFields" separator="," open="(" close=")">
+	        #{field}
+	    </foreach>
+	    ORDER BY iif.FIELD_CODE
+	    <if test="withSubFields != null and withSubFields == true " >
+	      , subFields.ATM_ISO_SUB_FLDS_CODE ASC
+	    </if>
+	</select>
+	
+	<sql id="returnFieldsSQL">
+		SELECT 
+		iif.ATM_ISO_FLDS_CODE,
+        iif.INTERFACE_CODE,
+        iif.FIELD_CODE,
+        iif.FIELD_NAME,
+        iif.FIELD_TYPE,
+        iif.FIXED_LENGTH,
+        iif.DYNAMIC_LENGTH,
+        iif.TOTAL_MASK_YN,
+        iif.PARTIAL_MASK,
+        iif.IS_DECIMAL_YN,
+        iif.EXPRESSION,
+		(SELECT SYS_PARAM_LOV_TRANS.VALUE_DESC 
+	         FROM SYS_PARAM_LOV_TRANS
+	         WHERE SYS_PARAM_LOV_TRANS.VALUE_CODE   = iif.FIELD_TYPE 
+	         AND SYS_PARAM_LOV_TRANS.LOV_TYPE_ID = #{fieldTypeLovId,jdbcType=NUMERIC}
+	         AND SYS_PARAM_LOV_TRANS.LANG_CODE   = #{preferredLanguage,jdbcType=VARCHAR} 
+	    )TYPE
+	    <if test="withSubFields != null and withSubFields == true " >
+	        ,subFields.ATM_ISO_SUB_FLDS_CODE, 
+	    	subFields.SUB_FIELD_CODE, 
+	    	subFields.SUB_FIELD_NAME,
+	    	subFields.SUB_FIELD_TYPE
+	    </if>
+	      
+		FROM GTW_ATM_INT_ISO_FLDS iif
+		
+		<if test="withSubFields != null and withSubFields != emptyBigDecimalValue" >
+	    	left outer join  GTW_ATM_INT_ISO_SUB_FLDS subFields
+						on  iif.ATM_ISO_FLDS_CODE = subFields.ATM_ISO_FLDS_CODE AND subFields.INTERFACE_CODE = #{interfaceId}
+						  
+	    </if>
+	    
+		WHERE iif.INTERFACE_CODE = #{interfaceId}
+	</sql>
+	<!-- Code Ends For ISO Updated Fields -->
+	
+	<!-- Code Starts For ISO Static Fields -->
+	<resultMap id="isoFieldsMap" type="atmInterfaceCO">
+		<id 	column="SYS_PARAM_ISO_FLDS_ID" 		property="iso_INT_FLDSVO.FIELD_CODE" />
+	    <result column="NAME" 						property="iso_INT_FLDSVO.FIELD_NAME" />
+	    <result column="LENGTH" 					property="iso_INT_FLDSVO.FIXED_LENGTH" />
+	    <result column="FIELD_TYPE" 				property="iso_INT_FLDSVO.FIELD_TYPE" />
+	    <result column="TYPE" 						property="TYPE" />
+	    <result column="DYNAMIC_LENGTH" 			property="iso_INT_FLDSVO.DYNAMIC_LENGTH" />
+	</resultMap>
+	
+	<select id="returnIsoFieldsList" resultMap="isoFieldsMap" parameterType="atmInterfaceSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip"/>
+		<include refid="returnIsoFieldsListSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftFlip"/>
+	    <include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	</select>
+	
+	<select id="returnIsoFieldsListCount" parameterType="atmInterfaceSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt"/>
+		<include refid="returnIsoFieldsListSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftCnt"/>
+	    <include refid="servicesCommon.commonGridCountWrpClose"/>
+	</select>
+	
+	<sql id="returnIsoFieldsListSQL">
+		SELECT <include refid="GTW_ATM_SYS_PARAM_ISO_FLDS.Base_Column_List"/>
+		, (SELECT SYS_PARAM_LOV_TRANS.VALUE_DESC 
+	         FROM SYS_PARAM_LOV_TRANS
+	         WHERE SYS_PARAM_LOV_TRANS.VALUE_CODE   = spif.FIELD_TYPE 
+	         AND SYS_PARAM_LOV_TRANS.LOV_TYPE_ID = #{fieldTypeLovId,jdbcType=NUMERIC}
+	         AND SYS_PARAM_LOV_TRANS.LANG_CODE   = #{preferredLanguage,jdbcType=VARCHAR} 
+	    )TYPE
+		FROM GTW_ATM_SYS_PARAM_ISO_FLDS spif WHERE SYS_PARAM_ISO_FLDS_ID > 0
+	</sql>
+	<!-- Code ends For ISO Static Fields -->
+	
+	<!-- ISO Sub Fields Starts -->
+	<resultMap id="isoSubFieldsMap" type="atmInterfaceCO" >
+		<id 	column="ATM_ISO_SUB_FLDS_CODE" 		property="sub_FLDSVO.ATM_ISO_SUB_FLDS_CODE" />
+	    <result column="INTERFACE_CODE" 			property="sub_FLDSVO.INTERFACE_CODE" />
+	    <result column="ATM_ISO_FLDS_CODE" 			property="sub_FLDSVO.ATM_ISO_FLDS_CODE" />
+	    <result column="SUB_FIELD_CODE" 			property="sub_FLDSVO.SUB_FIELD_CODE" />
+	    <result column="SUB_FIELD_NAME" 			property="sub_FLDSVO.SUB_FIELD_NAME" />
+	    <result column="SUB_FIELD_TYPE" 			property="sub_FLDSVO.SUB_FIELD_TYPE" />
+	    <result column="FIXED_LENGTH" 				property="sub_FLDSVO.FIXED_LENGTH" />
+	    <result column="DYNAMIC_LENGTH" 			property="sub_FLDSVO.DYNAMIC_LENGTH" />
+	    <result column="EXPRESSION" 				property="sub_FLDSVO.EXPRESSION" />
+	   	<result column="STATUS" 					property="STATUS" />
+  	</resultMap>
+  	
+  	<select id="returnIsoSubFieldsList" resultMap="isoSubFieldsMap" parameterType="atmInterfaceSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip"/>
+		<include refid="returnSubFieldsByParentId"/>
+		<include refid="servicesCommon.commonGridWrpAftFlip"/>
+	    <include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	</select>
+	
+	<select id="returnIsoSubFieldsListCount" parameterType="atmInterfaceSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt"/>
+		<include refid="returnSubFieldsByParentId"/>
+		<include refid="servicesCommon.commonGridWrpAftCnt"/>
+	    <include refid="servicesCommon.commonGridCountWrpClose"/>
+	</select>
+  	
+  	<sql id="returnSubFieldsByParentId">
+  		SELECT <include refid="GTW_ATM_INT_ISO_SUB_FLDS.Base_Column_List"/>,<include refid="GTW_ATM_INT_ISO_SUB_FLDS.Blob_Column_List"/>,
+  		'A' STATUS
+  		FROM GTW_ATM_INT_ISO_SUB_FLDS 
+  		WHERE INTERFACE_CODE = #{interfaceId}
+  		<if test="fieldCode != null and fieldCode != emptyBigDecimalValue" >
+  			AND ATM_ISO_FLDS_CODE = #{fieldCode}
+  		</if>
+  	</sql>
+	<!-- ISO Sub Fields Ends -->
+	
+	<!-- Code To get New IDS -->
+	<select id="returnNewInterfaceId" resultType="int">
+		<choose> 
+		 	<when test="isSybase == 1" >
+		        SELECT top 1 INTERFACE_CODE+1 FROM GTW_ATM_INTERFACES ORDER BY INTERFACE_CODE DESC
+		    </when>
+		    <otherwise >
+		        SELECT  MAX(INTERFACE_CODE)+1 FROM GTW_ATM_INTERFACES
+		    </otherwise>
+		</choose>
+	</select>
+	
+	<select id="returnNewMessageCode" resultType="int">
+		<choose> 
+		 	<when test="isSybase == 1" >
+		        SELECT top 1 MESSAGE_CODE+1 FROM GTW_ATM_ISO_MSGS ORDER BY MESSAGE_CODE DESC
+		    </when>
+		    <otherwise >
+		        SELECT  MAX(MESSAGE_CODE)+1 FROM GTW_ATM_ISO_MSGS
+		    </otherwise>
+		</choose>
+	</select>
+	
+	<select id="returnProgOrder" resultType="Integer">
+	   SELECT (CASE
+           WHEN COUNT(TB1.PROG_ORDER) = 0 THEN
+            1
+           ELSE
+            max(TB1.PROG_ORDER)
+           END) as PROG_ORDER
+       FROM (SELECT PROG_ORDER +1 as PROG_ORDER
+            FROM OPT
+            WHERE PROG_REF = 'ROOT'
+            AND APP_NAME ='FCSR') TB1  
+	</select>
+	
+	
+ <insert id="insertGTW_ATM_INTERFACES" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INTERFACESVO" >
+ 	<selectKey resultType="java.math.BigDecimal" keyProperty="INTERFACE_CODE" order="BEFORE" >
+		<if test="isOracle == 1">
+			SELECT GTW_ATM_INTERFACES_SEQ.NEXTVAL FROM dual
+		</if>
+		<if test="isSybase == 1 and isSQLServer != 1 " >
+			SELECT next_identity('GTW_ATM_INTERFACES')
+		</if>
+		<if test="isSQLServer == 1 " >
+			SELECT IDENT_CURRENT ('GTW_ATM_INTERFACES') + 1
+		</if>
+	</selectKey>
+		
+    insert into GTW_ATM_INTERFACES
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+		<if test="isOracle == 1">
+			 INTERFACE_CODE,
+		</if>     
+	  <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+      	COMP_CODE,
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        DESCRIPTION,
+      </if>
+      <if test="INTERFACE_TYPE != null and !&quot;&quot;.equals(INTERFACE_TYPE)" >
+        INTERFACE_TYPE,
+      </if>
+      <if test="INCLUDE_LENGTH != null and INCLUDE_LENGTH != emptyBigDecimalValue" >
+        INCLUDE_LENGTH,
+      </if>
+      <if test="MSG_LENGTH != null and MSG_LENGTH != emptyBigDecimalValue" >
+        MSG_LENGTH,
+      </if>
+      <if test="HEADER_LENGTH != null and HEADER_LENGTH != emptyBigDecimalValue" >
+        HEADER_LENGTH,
+      </if>
+      <if test="HEADER_DATA != null and !&quot;&quot;.equals(HEADER_DATA)" >
+        HEADER_DATA,
+      </if>
+      <if test="BITMAP_TYPE != null and !&quot;&quot;.equals(BITMAP_TYPE)" >
+        BITMAP_TYPE,
+      </if>
+      <if test="LENGTH_TYPE != null and !&quot;&quot;.equals(LENGTH_TYPE)" >
+        LENGTH_TYPE,
+      </if>
+      <if test="CURRENT_DATE != null" >
+        CURRENT_DATE,
+      </if>
+      <if test="INCLUDE_HEADER_YN != null and !&quot;&quot;.equals(INCLUDE_HEADER_YN)" >
+        INCLUDE_HEADER_YN,
+      </if>
+      <if test="POS_IN_HEADER_YN != null and !&quot;&quot;.equals(POS_IN_HEADER_YN)" >
+        POS_IN_HEADER_YN,
+      </if>
+      <if test="ISO_PRESENT_YN != null and !&quot;&quot;.equals(ISO_PRESENT_YN)" >
+        ISO_PRESENT_YN,
+      </if>
+      <if test="SKIP_BITMAP_YN != null and !&quot;&quot;.equals(SKIP_BITMAP_YN)" >
+        SKIP_BITMAP_YN,
+      </if>
+      <if test="STATUS != null and !&quot;&quot;.equals(STATUS)" >
+        STATUS,
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        CREATED_BY,
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE,
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        MODIFIED_BY,
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE,
+      </if>
+      <if test="APPROVED_BY != null and !&quot;&quot;.equals(APPROVED_BY)" >
+        APPROVED_BY,
+      </if>
+      <if test="APPROVED_DATE != null" >
+        APPROVED_DATE,
+      </if>
+      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+        DELETED_BY,
+      </if>
+      <if test="DELETED_DATE != null" >
+        DELETED_DATE,
+      </if>
+      <if test="SUSPENDED_BY != null and !&quot;&quot;.equals(SUSPENDED_BY)" >
+        SUSPENDED_BY,
+      </if>
+      <if test="SUSPENDED_DATE != null" >
+        SUSPENDED_DATE,
+      </if>
+      <if test="REACTIVATED_BY != null and !&quot;&quot;.equals(REACTIVATED_BY)" >
+        REACTIVATED_BY,
+      </if>
+      <if test="REACTIVATED_DATE != null" >
+        REACTIVATED_DATE,
+      </if>
+      <if test="PROTOCOL_IDENTITFICATION != null and !&quot;&quot;.equals(PROTOCOL_IDENTITFICATION)" >
+        PROTOCOL_IDENTITFICATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="isOracle == 1">
+        #{INTERFACE_CODE},
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        #{DESCRIPTION},
+      </if>
+      <if test="INTERFACE_TYPE != null and !&quot;&quot;.equals(INTERFACE_TYPE)" >
+        #{INTERFACE_TYPE},
+      </if>
+      <if test="INCLUDE_LENGTH != null and INCLUDE_LENGTH != emptyBigDecimalValue" >
+        #{INCLUDE_LENGTH},
+      </if>
+      <if test="MSG_LENGTH != null and MSG_LENGTH != emptyBigDecimalValue" >
+        #{MSG_LENGTH},
+      </if>
+      <if test="HEADER_LENGTH != null and HEADER_LENGTH != emptyBigDecimalValue" >
+        #{HEADER_LENGTH},
+      </if>
+      <if test="HEADER_DATA != null and !&quot;&quot;.equals(HEADER_DATA)" >
+        #{HEADER_DATA},
+      </if>
+      <if test="BITMAP_TYPE != null and !&quot;&quot;.equals(BITMAP_TYPE)" >
+        #{BITMAP_TYPE},
+      </if>
+      <if test="LENGTH_TYPE != null and !&quot;&quot;.equals(LENGTH_TYPE)" >
+        #{LENGTH_TYPE},
+      </if>
+      <if test="CURRENT_DATE != null" >
+        #{CURRENT_DATE},
+      </if>
+      <if test="INCLUDE_HEADER_YN != null and !&quot;&quot;.equals(INCLUDE_HEADER_YN)" >
+        #{INCLUDE_HEADER_YN},
+      </if>
+      <if test="POS_IN_HEADER_YN != null and !&quot;&quot;.equals(POS_IN_HEADER_YN)" >
+        #{POS_IN_HEADER_YN},
+      </if>
+      <if test="ISO_PRESENT_YN != null and !&quot;&quot;.equals(ISO_PRESENT_YN)" >
+        #{ISO_PRESENT_YN},
+      </if>
+      <if test="SKIP_BITMAP_YN != null and !&quot;&quot;.equals(SKIP_BITMAP_YN)" >
+        #{SKIP_BITMAP_YN},
+      </if>
+      <if test="STATUS != null and !&quot;&quot;.equals(STATUS)" >
+        #{STATUS},
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        #{CREATED_BY},
+      </if>
+      <if test="CREATED_DATE != null" >
+        #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        #{MODIFIED_BY},
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        #{MODIFIED_DATE},
+      </if>
+      <if test="APPROVED_BY != null and !&quot;&quot;.equals(APPROVED_BY)" >
+        #{APPROVED_BY},
+      </if>
+      <if test="APPROVED_DATE != null" >
+        #{APPROVED_DATE},
+      </if>
+      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+        #{DELETED_BY},
+      </if>
+      <if test="DELETED_DATE != null" >
+        #{DELETED_DATE},
+      </if>
+      <if test="SUSPENDED_BY != null and !&quot;&quot;.equals(SUSPENDED_BY)" >
+        #{SUSPENDED_BY},
+      </if>
+      <if test="SUSPENDED_DATE != null" >
+        #{SUSPENDED_DATE},
+      </if>
+      <if test="REACTIVATED_BY != null and !&quot;&quot;.equals(REACTIVATED_BY)" >
+        #{REACTIVATED_BY},
+      </if>
+      <if test="REACTIVATED_DATE != null" >
+        #{REACTIVATED_DATE},
+      </if>
+      <if test="PROTOCOL_IDENTITFICATION != null and !&quot;&quot;.equals(PROTOCOL_IDENTITFICATION)" >
+        #{PROTOCOL_IDENTITFICATION},
+      </if>
+    </trim>
+  </insert>
+  
+   <insert id="insertGTW_ATM_INT_ISO_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_FLDSVO" >
+	    insert into GTW_ATM_INT_ISO_FLDS
+	    
+	    <selectKey resultType="java.math.BigDecimal" keyProperty="ATM_ISO_FLDS_CODE" order="BEFORE" >
+			<if test="isOracle == 1">
+				SELECT GTW_ATM_INT_ISO_FLDS_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+				SELECT next_identity('GTW_ATM_INT_ISO_FLDS')
+			</if>
+			<if test="isSQLServer == 1 " >
+				SELECT IDENT_CURRENT ('GTW_ATM_INT_ISO_FLDS') + 1
+			</if>
+		</selectKey>
+		
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="isOracle == 1">
+	        ATM_ISO_FLDS_CODE,
+	      </if>
+	      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+	        INTERFACE_CODE,
+	      </if>
+	      <if test="FIELD_CODE != null and FIELD_CODE != emptyBigDecimalValue" >
+	        FIELD_CODE,
+	      </if>
+	      <if test="FIELD_NAME != null and !&quot;&quot;.equals(FIELD_NAME)" >
+	        FIELD_NAME,
+	      </if>
+	      <if test="FIELD_TYPE != null and !&quot;&quot;.equals(FIELD_TYPE)" >
+	        FIELD_TYPE,
+	      </if>
+	      <if test="FIXED_LENGTH != null and FIXED_LENGTH != emptyBigDecimalValue" >
+	        FIXED_LENGTH,
+	      </if>
+	      <if test="DYNAMIC_LENGTH != null and DYNAMIC_LENGTH != emptyBigDecimalValue" >
+	        DYNAMIC_LENGTH,
+	      </if>
+	      <if test="TOTAL_MASK_YN != null and !&quot;&quot;.equals(TOTAL_MASK_YN)" >
+	        TOTAL_MASK_YN,
+	      </if>
+	      <if test="PARTIAL_MASK != null and !&quot;&quot;.equals(PARTIAL_MASK)" >
+	        PARTIAL_MASK,
+	      </if>
+	       <if test="IS_DECIMAL_YN != null and !&quot;&quot;.equals(IS_DECIMAL_YN)" >
+	        IS_DECIMAL_YN,
+	      </if>
+	      <if test="EXPRESSION != null" >
+	        EXPRESSION,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="isOracle == 1">
+	        #{ATM_ISO_FLDS_CODE},
+	      </if>
+	      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+	        #{INTERFACE_CODE},
+	      </if>
+	      <if test="FIELD_CODE != null and FIELD_CODE != emptyBigDecimalValue" >
+	        #{FIELD_CODE},
+	      </if>
+	      <if test="FIELD_NAME != null and !&quot;&quot;.equals(FIELD_NAME)" >
+	        #{FIELD_NAME},
+	      </if>
+	      <if test="FIELD_TYPE != null and !&quot;&quot;.equals(FIELD_TYPE)" >
+	        #{FIELD_TYPE},
+	      </if>
+	      <if test="FIXED_LENGTH != null and FIXED_LENGTH != emptyBigDecimalValue" >
+	        #{FIXED_LENGTH},
+	      </if>
+	      <if test="DYNAMIC_LENGTH != null and DYNAMIC_LENGTH != emptyBigDecimalValue" >
+	        #{DYNAMIC_LENGTH},
+	      </if>
+	      <if test="TOTAL_MASK_YN != null and !&quot;&quot;.equals(TOTAL_MASK_YN)" >
+	        #{TOTAL_MASK_YN},
+	      </if>
+	      <if test="PARTIAL_MASK != null and !&quot;&quot;.equals(PARTIAL_MASK)" >
+	        #{PARTIAL_MASK},
+	      </if>
+	      <if test="IS_DECIMAL_YN != null and !&quot;&quot;.equals(IS_DECIMAL_YN)" >
+	        #{IS_DECIMAL_YN},
+	      </if>
+	      <if test="EXPRESSION != null" >
+	        #{EXPRESSION},
+	      </if>
+	    </trim>
+  </insert>
+  
+  <insert id="insertGTW_ATM_INT_ISO_SUB_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_SUB_FLDSVO" >
+  		<selectKey resultType="java.math.BigDecimal" keyProperty="ATM_ISO_SUB_FLDS_CODE" order="BEFORE" >
+			<if test="isOracle == 1">
+				SELECT ATM_INT_ISO_SUB_FLDS_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+				SELECT next_identity('GTW_ATM_INT_ISO_SUB_FLDS')
+			</if>
+			<if test="isSQLServer == 1 " >
+				SELECT IDENT_CURRENT ('GTW_ATM_INT_ISO_SUB_FLDS') + 1
+			</if>
+		</selectKey>
+		
+	    insert into GTW_ATM_INT_ISO_SUB_FLDS
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="isOracle == 1">
+	        ATM_ISO_SUB_FLDS_CODE,
+	      </if>
+	      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+	        INTERFACE_CODE,
+	      </if>
+	      <if test="ATM_ISO_FLDS_CODE != null and ATM_ISO_FLDS_CODE != emptyBigDecimalValue" >
+	        ATM_ISO_FLDS_CODE,
+	      </if>
+	      <if test="SUB_FIELD_CODE != null and SUB_FIELD_CODE != emptyBigDecimalValue" >
+	        SUB_FIELD_CODE,
+	      </if>
+	      <if test="SUB_FIELD_NAME != null and !&quot;&quot;.equals(SUB_FIELD_NAME)" >
+	        SUB_FIELD_NAME,
+	      </if>
+	      <if test="SUB_FIELD_TYPE != null and !&quot;&quot;.equals(SUB_FIELD_TYPE)" >
+	        SUB_FIELD_TYPE,
+	      </if>
+	      <if test="FIXED_LENGTH != null and FIXED_LENGTH != emptyBigDecimalValue" >
+	        FIXED_LENGTH,
+	      </if>
+	      <if test="DYNAMIC_LENGTH != null and DYNAMIC_LENGTH != emptyBigDecimalValue" >
+	        DYNAMIC_LENGTH,
+	      </if>
+	      <if test="EXPRESSION != null" >
+	        EXPRESSION,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="isOracle == 1">
+	       	#{ATM_ISO_SUB_FLDS_CODE},
+	      </if>
+	      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+	        #{INTERFACE_CODE},
+	      </if>
+	      <if test="ATM_ISO_FLDS_CODE != null and ATM_ISO_FLDS_CODE != emptyBigDecimalValue" >
+	        #{ATM_ISO_FLDS_CODE},
+	      </if>
+	      <if test="SUB_FIELD_CODE != null and SUB_FIELD_CODE != emptyBigDecimalValue" >
+	        #{SUB_FIELD_CODE},
+	      </if>
+	      <if test="SUB_FIELD_NAME != null and !&quot;&quot;.equals(SUB_FIELD_NAME)" >
+	        #{SUB_FIELD_NAME},
+	      </if>
+	      <if test="SUB_FIELD_TYPE != null and !&quot;&quot;.equals(SUB_FIELD_TYPE)" >
+	        #{SUB_FIELD_TYPE},
+	      </if>
+	      <if test="FIXED_LENGTH != null and FIXED_LENGTH != emptyBigDecimalValue" >
+	        #{FIXED_LENGTH},
+	      </if>
+	      <if test="DYNAMIC_LENGTH != null and DYNAMIC_LENGTH != emptyBigDecimalValue" >
+	        #{DYNAMIC_LENGTH},
+	      </if>
+	      <if test="EXPRESSION != null" >
+	        #{EXPRESSION},
+	      </if>
+	    </trim>
+  </insert>
+
+   <insert id="insertGTW_ATM_INT_ISO_MSGS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_MSGSVO" >
+		<selectKey resultType="java.math.BigDecimal" keyProperty="ATM_ISO_MSGS_CODE" order="BEFORE" >
+			<if test="isOracle == 1">
+				SELECT GTW_ATM_INT_ISO_MSG_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+				SELECT next_identity('GTW_ATM_INT_ISO_MSGS')
+			</if>
+			<if test="isSQLServer == 1 " >
+				SELECT IDENT_CURRENT ('GTW_ATM_INT_ISO_MSGS') + 1
+			</if>
+		</selectKey>
+	   insert into GTW_ATM_INT_ISO_MSGS
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="isOracle == 1">
+	        ATM_ISO_MSGS_CODE,
+	      </if>
+	      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+	        INTERFACE_CODE,
+	      </if>
+	      <if test="REQUEST_MTI != null and !&quot;&quot;.equals(REQUEST_MTI)" >
+	        REQUEST_MTI,
+	      </if>
+	      <if test="REQUEST_BITMAP1 != null and !&quot;&quot;.equals(REQUEST_BITMAP1)" >
+	        REQUEST_BITMAP1,
+	      </if>
+	      <if test="REQUEST_BITMAP2 != null and !&quot;&quot;.equals(REQUEST_BITMAP2)" >
+	        REQUEST_BITMAP2,
+	      </if>
+	      <if test="RESPONSE_MTI != null and !&quot;&quot;.equals(RESPONSE_MTI)" >
+	        RESPONSE_MTI,
+	      </if>
+	      <if test="RESPONSE_BITMAP1 != null and !&quot;&quot;.equals(RESPONSE_BITMAP1)" >
+	        RESPONSE_BITMAP1,
+	      </if>
+	      <if test="RESPONSE_BITMAP2 != null and !&quot;&quot;.equals(RESPONSE_BITMAP2)" >
+	        RESPONSE_BITMAP2,
+	      </if>
+	      <if test="RESPONSE_EXPRESSION != null" >
+	        RESPONSE_EXPRESSION,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="isOracle == 1">
+	        #{ATM_ISO_MSGS_CODE},
+	      </if>
+	      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+	        #{INTERFACE_CODE},
+	      </if>
+	      <if test="REQUEST_MTI != null and !&quot;&quot;.equals(REQUEST_MTI)" >
+	        #{REQUEST_MTI},
+	      </if>
+	      <if test="REQUEST_BITMAP1 != null and !&quot;&quot;.equals(REQUEST_BITMAP1)" >
+	        #{REQUEST_BITMAP1},
+	      </if>
+	      <if test="REQUEST_BITMAP2 != null and !&quot;&quot;.equals(REQUEST_BITMAP2)" >
+	        #{REQUEST_BITMAP2},
+	      </if>
+	      <if test="RESPONSE_MTI != null and !&quot;&quot;.equals(RESPONSE_MTI)" >
+	        #{RESPONSE_MTI},
+	      </if>
+	      <if test="RESPONSE_BITMAP1 != null and !&quot;&quot;.equals(RESPONSE_BITMAP1)" >
+	        #{RESPONSE_BITMAP1},
+	      </if>
+	      <if test="RESPONSE_BITMAP2 != null and !&quot;&quot;.equals(RESPONSE_BITMAP2)" >
+	        #{RESPONSE_BITMAP2},
+	      </if>
+	      <if test="RESPONSE_EXPRESSION != null" >
+	        #{RESPONSE_EXPRESSION},
+	      </if>
+	    </trim>
+  </insert>
+  
+</mapper>

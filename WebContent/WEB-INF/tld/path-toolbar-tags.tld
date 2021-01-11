@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+      "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+    <tlib-version>2.2.3</tlib-version>
+    <jsp-version>1.2</jsp-version>
+    <short-name>toolbar</short-name>
+    <uri>/path-toolbar-tags</uri>
+    <display-name>Tool Bar</display-name>
+    <description><![CDATA["toolbar"]]></description>
+    <tag>
+        <name>toolBar</name>
+        <tag-class>com.path.struts2.taglib.toolbar.ToolBarTagSupport</tag-class>        
+        <body-content>JSP</body-content>
+        <description><![CDATA[]]></description>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                <![CDATA[id for referencing element]]></description>
+        </attribute>        
+        <attribute>
+            <name>width</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description><![CDATA[width of the toolbar]]></description>
+        </attribute>      
+         <attribute>
+            <name>hideInAlert</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description><![CDATA[hideInAlert indicate if the toolbar should be hidden on alert's screen]]></description>
+        </attribute>                  
+    </tag>
+    <tag>
+        <name>toolItem</name>
+        <tag-class>com.path.struts2.taglib.toolbar.ToolItemTagSupport</tag-class>        
+        <body-content>JSP</body-content>
+        <description><![CDATA[]]></description>
+        <attribute>
+            <name>id</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description>
+                <![CDATA[id for referencing element]]></description>
+        </attribute>        
+        <attribute>
+            <name>icon</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description><![CDATA[CSS class for icon]]></description>
+        </attribute>  
+        <attribute>
+            <name>actionName</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description><![CDATA[CSS class for icon]]></description>
+        </attribute>         
+    </tag>
+    
+    <tag>
+        <name>toolBarGroup</name>
+        <tag-class>com.path.struts2.taglib.toolbar.ToolBarGroupTagSupport</tag-class>        
+        <body-content>JSP</body-content>
+        <description><![CDATA[]]></description>
+        <attribute>
+            <name>id</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                <![CDATA[id for referencing element]]></description>
+        </attribute>        
+        <attribute>
+            <name>buttonLabel</name>
+            <required>true</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description><![CDATA[the button label of the toolbar group]]></description>
+        </attribute>         
+        <attribute>
+            <name>buttonIcon</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description><![CDATA[the button icon of the toolbar group]]></description>
+        </attribute>      
+        
+        <attribute>
+            <name>position</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description><![CDATA[the display position of the popup containing the button group]]></description>
+        </attribute>
+        
+        <attribute>
+            <name>hideOnClick</name>
+            <required>false</required>
+            <rtexprvalue>false</rtexprvalue>
+            <description><![CDATA[flag to indicate if we should hide the button group dialog on click]]></description>
+        </attribute>
+                  
+    </tag>
+           
+</taglib>

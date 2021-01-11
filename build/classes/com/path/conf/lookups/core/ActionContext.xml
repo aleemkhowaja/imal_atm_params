@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+ 
+ 	<bean id="accountLookupAction" class="com.path.actions.lookups.core.AccountLookupAction" scope="prototype" parent="baseAction">
+		<property name="accountBO" ref="accountBO"></property>
+	</bean>
+	
+ 	<bean id="cifLookupAction" class="com.path.actions.lookups.core.CifLookupAction" scope="prototype" parent="baseAction">
+		<property name="cifBO" ref="cifBO"></property>
+	</bean>
+	
+	<bean id="cifTypeLookupAction" class="com.path.actions.lookups.core.CifTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="cifTypeBO" ref="cifTypeBO"></property>
+	</bean>
+	
+	<bean id="legalStatusLookupAction" class="com.path.actions.lookups.core.LegalStatusLookupAction" scope="prototype" parent="baseAction" >
+		<property name="legalStatusBO" ref="legalStatusBO"></property>
+	</bean>
+	
+	<bean id="economicSectorLookupAction" class="com.path.actions.lookups.core.EconomicSectorLookupAction" scope="prototype" parent="baseAction" >
+		<property name="economicSectorBO" ref="economicSectorBO"></property>
+	</bean>
+	
+	<bean id="subEcoSectorLookupAction" class="com.path.actions.lookups.core.SubEcoSectorLookupAction" scope="prototype" parent="baseAction" >
+		<property name="subEcoSectorBO" ref="subEcoSectorBO"></property>
+	</bean>
+	
+	<bean id="rankingLookupAction" class="com.path.actions.lookups.core.RankingLookupAction" scope="prototype" parent="baseAction" >
+		<property name="rankingBO" ref="rankingBO"></property>
+	</bean>
+	
+	<bean id="educationalLevelLookupAction" class="com.path.actions.lookups.core.EducationalLevelLookupAction" scope="prototype" parent="baseAction" >
+		<property name="educationalLevelBO" ref="educationalLevelBO"></property>
+	</bean>
+	
+	<bean id="occupationLookupAction" class="com.path.actions.lookups.core.OccupationLookupAction" scope="prototype" parent="baseAction" >
+		<property name="occupationBO" ref="occupationBO"></property>
+	</bean>
+	
+	<bean id="positionLookupAction" class="com.path.actions.lookups.core.PositionLookupAction" scope="prototype" parent="baseAction" >
+		<property name="positionBO" ref="positionBO"></property>
+	</bean>
+	
+	<bean id="idTypeLookupAction" class="com.path.actions.lookups.core.IdTypeLookupAction" scope="prototype" parent="baseAction" >
+		<property name="idTypeBO" ref="idTypeBO"></property>
+	</bean>
+	
+	<bean id="nationalityLookupAction" class="com.path.actions.lookups.core.NationalityLookupAction" scope="prototype" parent="baseAction">
+		<property name="nationalityBO" ref="nationalityBO"></property>		
+	</bean>
+	
+	<bean id="religionLookupAction" class="com.path.actions.lookups.core.ReligionLookupAction" scope="prototype" parent="baseAction">
+		<property name="religionBO" ref="religionBO"></property>		
+	</bean>
+	
+	<bean id="raceLookupAction" class="com.path.actions.lookups.core.RaceLookupAction" scope="prototype" parent="baseAction">
+		<property name="raceBO" ref="raceBO"></property>		
+	</bean>
+	
+	<bean id="postalCodeLookupAction" class="com.path.actions.lookups.core.PostalCodeLookupAction" scope="prototype" parent="baseAction">
+		<property name="postalCodeBO" ref="postalCodeBO"></property>		
+	</bean>
+	
+	<bean id="residenceTypesLookupAction" class="com.path.actions.lookups.core.ResidenceTypesLookupAction" scope="prototype" parent="baseAction">
+		<property name="residenceTypesBO" ref="residenceTypesBO"></property>		
+	</bean>
+	
+	<bean id="vaultLookupAction" class="com.path.actions.lookups.core.VaultLookupAction" scope="prototype" parent="baseAction">
+		<property name="vaultBO" ref="vaultBO"></property>
+	</bean>
+	
+	<bean id="tellerLookupAction" class="com.path.actions.lookups.core.TellerLookupAction" scope="prototype" parent="baseAction">
+		<property name="tellerBO" ref="tellerBO"></property>
+	</bean>
+	
+	<bean id="remittanceTypeLookupAction" class="com.path.actions.lookups.core.RemittanceTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="remittanceBO" ref="remittanceBO"></property>
+	</bean>
+	
+	<bean id="productClassLookupAction" class="com.path.actions.lookups.core.ProductClassLookupAction" scope="prototype" parent="baseAction">
+		<property name="productClassBO" ref="productClassBO"></property>
+	</bean>
+	
+	<bean id="floatingRateCodeLookupAction" class="com.path.actions.lookups.core.FloatingRateCodeLookupAction" scope="prototype" parent="baseAction">
+		<property name="floatingRateCodeBO" ref="floatingRateCodeBO"></property>
+	</bean>
+	
+	<bean id="ctsTrxTypeLookupAction" class="com.path.actions.lookups.core.CtsTrxTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="trxTypeBO" ref="trxTypeBO"></property>
+	</bean>
+	
+	<bean id="cardTypeLookupAction" class="com.path.actions.lookups.core.CardTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="cardTypeBO" ref="cardTypeBO"></property>
+	</bean>
+	
+	<bean id="cardMgtLookupAction" class="com.path.actions.lookups.core.CardsMgtLookupAction" scope="prototype" parent="baseAction">
+		<property name="cardTypeBO" ref="cardTypeBO"></property>
+		<property name="cardsBO" ref="cardsBO"></property>
+	</bean>
+	
+	<bean id="branchesDestinationLookupAction" class="com.path.actions.lookups.core.BranchesDestinationLookupAction" scope="prototype" parent="baseAction">
+		<property name="branchesBO" ref="branchesBO"></property>
+	</bean>
+	
+	<bean id="creditTypeLookupAction" class="com.path.actions.lookups.core.CreditTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="creditTypeBO" ref="creditTypeBO"></property>
+	</bean>
+	
+	<bean id="oneObligorLookupAction" class="com.path.actions.lookups.core.OneObligorLookupAction" scope="prototype" parent="baseAction">
+		<property name="oneObligorBO" ref="oneObligorBO"></property>
+	</bean>
+	
+	<bean id="cifProfileLookupAction" class="com.path.actions.lookups.core.CifProfileLookupAction" scope="prototype" parent="baseAction">
+		<property name="cifProfileBO" ref="cifProfileBO"></property>
+	</bean>
+	
+	<bean id="cifRatingLookupAction" class="com.path.actions.lookups.core.CifRatingLookupAction" scope="prototype" parent="baseAction">
+		<property name="cifRatingBO" ref="cifRatingBO"></property>
+	</bean>
+	
+	<bean id="relationLookupAction" class="com.path.actions.lookups.core.RelationLookupAction" scope="prototype" parent="baseAction">
+		<property name="relationBO" ref="relationBO"></property>
+	</bean>
+	
+	<bean id="salutationLookupAction" class="com.path.actions.lookups.core.SalutationLookupAction" scope="prototype" parent="baseAction">
+		<property name="salutationBO" ref="salutationBO"></property>		
+	</bean>
+	
+	<bean id="chargesSchemaLookupAction" class="com.path.actions.lookups.core.ChargesSchemaLookupAction" scope="prototype" parent="baseAction">
+		<property name="chargesSchemaBO" ref="chargesSchemaBO"></property>		
+	</bean>
+	
+	<bean id="citiesLookupAction" class="com.path.actions.lookups.core.CitiesLookupAction" scope="prototype" parent="baseAction">
+		<property name="citiesBO" ref="citiesBO"></property>		
+	</bean>
+	
+	<bean id="sectorsLookupAction" class="com.path.actions.lookups.core.SectorsLookupAction" scope="prototype" parent="baseAction">
+		<property name="sectorsBO" ref="sectorsBO"></property>		
+	</bean>
+	
+	<bean id="divisionLookupAction" class="com.path.actions.lookups.core.DivisionLookupAction" scope="prototype" parent="baseAction">
+		<property name="divisionBO" ref="divisionBO"></property>
+	</bean>
+	
+	<bean id="departmentLookupAction" class="com.path.actions.lookups.core.DepartmentLookupAction" scope="prototype" parent="baseAction">
+		<property name="departmentBO" ref="departmentBO"></property>
+	</bean>
+	
+	<bean id="linkLookupAction" class="com.path.actions.lookups.core.LinkLookupAction" scope="prototype"  parent="baseAction">
+		<property name="linkBO" ref="linkBO"></property>
+	</bean>
+	
+	<bean id="chequeLookupAction" class="com.path.actions.lookups.core.ChequeLookupAction" scope="prototype" parent="baseAction">
+		<property name="chequeBO" ref="chequeBO"></property>
+	</bean>
+	
+	<bean id="lostFoundLookupAction" class="com.path.actions.lookups.core.LostFoundLookupAction" scope="prototype" parent="baseAction">
+		<property name="lostFoundBO" ref="lostFoundBO"></property>
+	</bean>
+	
+	<bean id="reasonLookupAction" class="com.path.actions.lookups.core.ReasonLookupAction" scope="prototype" parent="baseAction">
+		<property name="reasonBO" ref="reasonBO"></property>
+	</bean>
+	
+	<bean id="chargesFeesPolicyLookupAction" class="com.path.actions.lookups.core.ChargesFeesPolicyLookupAction" scope="prototype"  parent="baseAction">
+		<property name="chargesFeesPolicyBO" ref="chargesFeesPolicyBO"></property>
+	</bean>
+	
+	<bean id="cifRoleLookupAction" class="com.path.actions.lookups.core.CifRoleLookupAction" scope="prototype"  parent="baseAction">
+		<property name="cifRoleBO" ref="cifRoleBO"></property>
+	</bean>
+	
+	<bean id="employeeLookupAction" class="com.path.actions.lookups.core.EmployeeLookupAction" scope="prototype"  parent="baseAction">
+		<property name="employeeBO" ref="employeeBO"></property>
+	</bean>
+	
+	<bean id="currencyLookupAction" class="com.path.actions.lookups.core.CurrencyLookupAction" scope="prototype" parent="baseAction">
+		<property name="currencyBO" ref="currencyBO"></property>
+	</bean>
+		
+	<bean id="merchantLookupAction" class="com.path.actions.lookups.core.MerchantLookupAction" scope="prototype" parent="baseAction">
+		<property name="merchantBO" ref="merchantBO"></property>
+	</bean>
+
+	<bean id="transferAccCriteriaExcepLookupAction" class="com.path.actions.lookups.core.TransferAccCriteriaExcepLookupAction" scope="prototype" parent="baseAction">
+	</bean>
+		
+	<bean id="servicesLookupAction" class="com.path.actions.lookups.core.ServicesLookupAction" scope="prototype" parent="baseAction">
+		<property name="servicesBO" ref="servicesBO"></property>
+	</bean>
+	
+	<bean id="currencyNominationDetLookupAction" class="com.path.actions.lookups.core.CurrencyNominationDetLookupAction" scope="prototype" parent="baseAction">
+		<property name="currencyNominationDetBO" ref="currencyNominationDetBO"></property>
+	</bean>
+	
+ 	<bean id="chequeBookDesignLookupAction" class="com.path.actions.lookups.core.ChequeBookDesignLookupAction" scope="prototype" parent="baseAction">
+		<property name="chequeBookDesignBO" ref="chequeBookDesignBO"></property>
+	</bean>
+	
+ 	<bean id="chequeBookLeavesLookupAction" class="com.path.actions.lookups.core.ChequeBookLeavesLookupAction" scope="prototype" parent="baseAction">
+		<property name="chequeBookLeavesBO" ref="chequeBookLeavesBO"></property>
+	</bean>
+	
+ 	<bean id="chequeBookTypesLookupAction" class="com.path.actions.lookups.core.ChequeBookTypesLookupAction" scope="prototype" parent="baseAction">
+		<property name="chequeBookTypesBO" ref="chequeBookTypesBO"></property>
+	</bean>
+	
+ 	<bean id="chequeBookLookupAction" class="com.path.actions.lookups.core.ChequeBookLookupAction" scope="prototype" parent="baseAction">
+		<property name="chequeBookLkpBO" ref="chequeBookLkpBO"></property>
+	</bean>
+	
+	<bean id="certificateTypesLookupAction" class="com.path.actions.lookups.core.CertificateTypesLookupAction" scope="prototype" parent="baseAction">
+		<property name="certificateTypesBO" ref="certificateTypesBO"></property>
+	</bean>
+	
+	<bean id="dynIntegrationLookupAction" class="com.path.actions.lookups.core.DynIntegrationLookupAction" scope="prototype" parent="baseAction">
+		<property name="integrationDynamicBO" ref="integrationDynamicBO"></property>
+	</bean>
+		
+	<bean id="smsServicesLookupAction" class="com.path.actions.lookups.core.SmsServicesLookupAction" scope="prototype" parent="baseAction">
+		<property name="smsServicesBO" ref="smsServicesBO"></property>
+	</bean>
+	
+	<bean id="relationBetweenCIFLookupAction" class="com.path.actions.lookups.core.RelationBetweenCIFLookupAction" scope="prototype" parent="baseAction">
+		<property name="cifRelationBO" ref="cifRelationBO"></property>
+	</bean>
+	
+	<bean id="tempCodeLookupAction" class="com.path.actions.lookups.core.TempCodeLookupAction" scope="prototype" parent="baseAction">
+		<property name="tempCodeBO" ref="tempCodeBO"></property>
+	</bean>
+	
+	<bean id="vatCodeLookupAction" class="com.path.actions.lookups.core.VatCodeLookupAction" scope="prototype" parent="baseAction">
+		<property name="vatCodeBO" ref="vatCodeBO"></property>
+	</bean>
+	
+	<bean id="facilityTypeLookupAction" class="com.path.actions.lookups.core.FacilityTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="facilityTypeBO" ref="facilityTypeBO"></property>
+	</bean>
+	
+	<bean id="todoTemplateLookupAction" class="com.path.actions.lookups.core.ToDoTemplateLookupAction" scope="prototype" parent="baseAction">
+		<property name="toDoTemplateBO" ref="toDoTemplateBO"></property>
+	</bean>
+	
+	<bean id="integrationControlLookupAction" class="com.path.actions.lookups.core.IntegrationControlLookupAction" scope="prototype" parent="baseAction">
+		<property name="integrationControlBO" ref="integrationControlBO"></property>
+	</bean>
+	
+	<bean id="userLevelLookupAction" class="com.path.actions.lookups.core.UserLevelLookupAction" scope="prototype" parent="baseAction">
+		<property name="userLevelBO" ref="userLevelBO"></property>
+	</bean>
+	
+	<bean id="chargesLookupAction" class="com.path.actions.lookups.core.ChargesLookupAction" scope="prototype" parent="baseAction">
+		<property name="chargesBO" ref="chargesBO"></property>
+	</bean>
+	
+	<bean id="cifSwiftLookupAction" class="com.path.actions.lookups.core.CifSwiftLookupAction" scope="prototype" parent="baseAction">
+		<property name="cifSwiftBO" ref="cifSwiftBO"></property>		
+	</bean>
+	
+	<bean id="swiftInfoLookupAction" class="com.path.actions.lookups.core.SwiftInfoLookupAction" scope="prototype" parent="baseAction">
+		<property name="swiftInfoBO" ref="swiftInfoBO"></property>		
+	</bean>
+	
+	 <bean id="billTypeLookupAction" class="com.path.actions.lookups.core.BillTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="billTypeBO" ref="billTypeBO"></property>
+	</bean>
+	
+	<bean id="passbookLookupAction" class="com.path.actions.lookups.core.PassbookLookupAction" scope="prototype" parent="baseAction">
+		<property name="passbookBO" ref="passbookBO"></property>		
+	</bean>
+	
+	<bean id="providerReportLookupAction" class="com.path.actions.lookups.core.ProviderReportLookupAction" scope="prototype" parent="baseAction">
+		<property name="providerReportBO" ref="providerReportBO"></property>
+	</bean>
+	
+	<bean id="ctsReportArgLookupAction" class="com.path.actions.lookups.core.CtsReportArgLookupAction" scope="prototype" parent="baseAction">
+		<property name="ctsReportArgBO" ref="ctsReportArgBO"></property>
+	</bean>
+	
+	<bean id="printReportsLookupAction" class="com.path.actions.lookups.core.PrintReportsLookupAction" scope="prototype" parent="baseAction">
+		<property name="printReportsBO" ref="printReportsBO"></property>
+	</bean>
+	
+	<bean id="rifcttGlLookupAction" class="com.path.actions.lookups.core.RifcttGlLookupAction" scope="prototype" parent="baseAction">
+		<property name="rifcttGlBO" ref="rifcttGlBO"></property>		
+	</bean>
+	
+	<bean id="ctsClearingHouseLookupAction" class="com.path.actions.lookups.core.CtsClearingHouseLookupAction" scope="prototype" parent="baseAction">
+		<property name="ctsClearingHouseBO" ref="ctsClearingHouseBO"></property>		
+	</bean>
+	
+	<bean id="unitsLookupAction" class="com.path.actions.lookups.core.UnitsLookupAction" scope="prototype" parent="baseAction" >
+		<property name="unitsBO" ref="unitsBO"></property>
+	</bean>
+	
+	<bean id="amfStatusReasonLookupAction" class="com.path.actions.lookups.core.AmfStatusReasonLookupAction" scope="prototype" parent="baseAction" >
+		<property name="amfStatusReasonBO" ref="amfStatusReasonBO"></property>
+	</bean>
+	
+	<bean id="accountNumberLookupAction" class="com.path.actions.lookups.core.AccountNumberLookupAction" scope="prototype" parent="baseAction" >
+		<property name="accountBO" ref="accountBO"></property>
+	</bean>
+	
+	<bean id="facilityLookupAction" class="com.path.actions.lookups.core.FacilityLookupAction" scope="prototype" parent="baseAction">
+		<property name="facilityTypeBO" ref="facilityTypeBO"></property>		
+	</bean>
+	
+	<bean id="fmsDrawdownsLookupAction" class="com.path.actions.lookups.core.FmsDrawdownsLookupAction" scope="prototype" parent="baseAction">
+		<property name="fmsDrawdownsBO" ref="fmsDrawdownsBO"></property>		
+	</bean>
+    <bean id="ctstrsOwingLookupAction" class="com.path.actions.lookups.core.CtstrsOwingLookupAction" scope="prototype" parent="baseAction">
+        <property name="ctstrsOwingBO" ref="ctstrsOwingBO"/> 
+    </bean>
+    
+    <bean id="accountTypeLookupAcion" class="com.path.actions.lookups.core.AccountTypeLookupAcion" scope="prototype" parent="baseAction">
+		<property name="accountTypeBO" ref="accountTypeBO"></property>		
+	</bean>
+	
+	<bean id="fmsIndicatorLookupAction" class="com.path.actions.lookups.core.FmsIndicatorLookupAction" scope="prototype" parent="baseAction">
+		<property name="fmsIndicatorBO" ref="fmsIndicatorBO"></property>		
+	</bean>
+	<bean id="fmsFundLimitLookupAction" class="com.path.actions.lookups.core.FmsFundLimitLookupAction" scope="prototype" parent="baseAction">
+		<property name="fmsFundLimitBO" ref="fmsFundLimitBO"></property>		
+	</bean>
+	<bean id="pmsDealLookupAction" class="com.path.actions.lookups.core.PmsDealLookupAction" scope="prototype" parent="baseAction">
+		<property name="pmsDealBO" ref="pmsDealBO"></property>
+	</bean>
+	
+	<bean id="blackSourceLookupAction" class="com.path.actions.lookups.core.BlackSourceLookupAction" scope="prototype" parent="baseAction">
+		<property name="blackSourceBO" ref="blackSourceBO"></property>		
+	</bean>
+	
+	<bean id="blackListTypeLookupAction" class="com.path.actions.lookups.core.BlackListTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="blackListTypeBO" ref="blackListTypeBO"></property>		
+	</bean>
+	
+	<bean id="usrLookupAction" class="com.path.actions.lookups.core.UsrLookupAction" scope="prototype" parent="baseAction">
+		<property name="usrBO" ref="usrBO"></property>
+	</bean>
+	
+	<bean id="cardsMessageLookupAction" class="com.path.actions.lookups.core.CardsMessageLookupAction" scope="prototype" parent="baseAction">
+		<property name="cardsMessageBO" ref="cardsMessageBO"></property>
+	</bean>
+	
+	<bean id="cardsDesignLookupAction" class="com.path.actions.lookups.core.CardsDesignLookupAction" scope="prototype" parent="baseAction">
+		<property name="cardsDesignBO" ref="cardsDesignBO"></property>
+	</bean>
+	
+	<bean id="referenceLookupAction" class="com.path.actions.lookups.core.ReferenceLookupAction" scope="prototype" parent="baseAction">
+		<property name="referenceBO" ref="referenceBO"></property>
+	</bean>
+	
+	<!--  JvType -->
+	 <bean id="jvTypesLookupAction" class="com.path.actions.lookups.core.JVTypesLookupAction" scope="prototype" parent="baseAction">
+  	 <property name="jvTypesBO" ref="jvTypesBO" /> 
+  	</bean>
+	
+	<!--  Bill Collection -->
+	 <bean id="billCollectionLookupAction" class="com.path.actions.lookups.core.BillCollectionLookupAction" scope="prototype" parent="baseAction">
+  	 <property name="billCollectionBO" ref="billCollectionBO" /> 
+  	</bean>
+  	
+    <!--  Letter Of Guarantee-->
+	 <bean id="letterGuaranteeLookupAction" class="com.path.actions.lookups.core.LetterGuaranteeLookupAction" scope="prototype" parent="baseAction">
+  	 <property name="letterGuaranteeBO" ref="letterGuaranteeBO" /> 
+  	</bean>
+  	
+	<!-- Dashboard Lookup -->
+  	<bean id="dashboardLookupAction" class="com.path.actions.lookups.core.DashboardLookupAction" scope="prototype" parent="baseAction">
+		<property name="dashInvestmentsBO" ref="dashInvestmentsBO"></property>
+	</bean>
+	
+	<!-- Letter Credit -->
+  	<bean id="letterCreditLookupAction" class="com.path.actions.lookups.core.LetterCreditLookupAction" scope="prototype" parent="baseAction">
+		<property name="letterCreditBO" ref="letterCreditBO"></property>
+	</bean>
+	
+	<!-- tr types code -->
+	<bean id="trCodeLookupAction" class="com.path.actions.lookups.core.TrCodeLookupAction" 
+		scope="prototype" parent="baseAction">
+		<property name="trTypesLookupBO" ref="trTypesLookupBO"></property>
+	</bean>
+	
+	<bean id="trCodeDependencyAction"
+		class="com.path.actions.dependencies.core.TrCodeDependencyAction"
+		scope="prototype" parent="baseAction">
+		<property name="trTypesLookupBO" ref="trTypesLookupBO"></property>
+	</bean>
+	
+	<!-- Batch Lookup  -->
+  	<bean id="ctsBatchLookupAction" class="com.path.actions.lookups.core.CtsBatchLookupAction" scope="prototype" parent="baseAction">
+		<property name="ctsBatchBO" ref="ctsBatchBO" />
+	</bean>
+	
+	<bean id="administrationLookupAction" class="com.path.actions.lookups.core.AdministrationLookupAction" scope="prototype" parent="baseAction">
+		<property name="administrationBO" ref="administrationBO"></property>
+	</bean>
+	
+	<bean id="facilityTypeClassLookupAction" class="com.path.actions.lookups.core.FacilityTypeClassLookupAction" scope="prototype" parent="baseAction">
+		<property name="facilityTypeClassBO" ref="facilityTypeClassBO"></property>
+	</bean>
+	
+	 <bean id="itemPropertydetLookupAction" class="com.path.actions.lookups.core.ItemPropertydetLookupAction" scope="prototype" parent="baseAction">
+		<property name="itemPropertydetBO" ref="itemPropertydetBO"></property>
+	</bean>
+	
+	<bean id="vendorCIFLookupAction" class="com.path.actions.lookups.core.VendorCIFLookupAction" scope="prototype" parent="baseAction">
+		<property name="vendorCIFBO" ref="vendorCIFBO"></property>
+	</bean>
+	
+	<bean id ="itemsLookupAction" class="com.path.actions.lookups.core.ItemsLookupAction" scope="prototype"  parent="baseAction">
+		<property name="itemsBO" ref="itemsBO"></property>
+	</bean>
+	
+	<bean id="ctsRequestTypeLookupAction" class="com.path.actions.lookups.core.CtsRequestTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="ctsRequestBO" ref="ctsRequestBO"></property>
+	</bean>
+	
+	<bean id="trxFieldsNameLookupAction" class="com.path.actions.lookups.core.TrxFieldsNameLookupAction" scope="prototype" parent="baseAction">
+		<property name="trxFieldsNameBO" ref="trxFieldsNameBO"></property>
+	</bean>
+	
+	<bean id="entityCodeLookupAction" class="com.path.actions.lookups.core.EntityCodeLookupAction" scope="prototype" parent="baseAction">
+	</bean>
+	
+	<bean id="tfsDocTypeLookupAction" class="com.path.actions.lookups.core.TfsDocTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="tfsDocTypeBO" ref="tfsDocTypeBO"></property>
+	</bean>
+	
+	<bean id="accountChargesProductsLookupAction" class="com.path.actions.lookups.core.AccountChargesProductsLookupAction" scope="prototype" parent="baseAction">
+		<property name="accountChargesProductsBO" ref="accountChargesProductsBO"></property>
+	</bean>
+	
+	<!-- Procedure lookup -->
+	<bean id="procedureIdLookupAction" class="com.path.actions.lookups.core.ProcedureIdLookupAction" scope="prototype" parent="baseAction">
+		<property name="procedureIdBO" ref="procedureIdBO"></property>
+	</bean>
+	
+	
+	<bean id="authSignatoriesLookupAction" class="com.path.actions.lookups.core.AuthSignatoriesLookupAction" scope="prototype" parent="baseAction">
+		<property name="authSignatoriesBO" ref="authSignatoriesBO"></property>
+	</bean>
+	
+	<bean id="queryIdLookupAction" class="com.path.actions.lookups.core.QueryIdLookupAction" scope="prototype" parent="baseAction">
+	 	<property name="queryIdBO" ref="queryIdBO"></property>
+	</bean>
+	  <!-- Provider Code-->
+  <bean id="providerCodeLookupAction" class="com.path.actions.lookups.core.ProviderCodeLookupAction" scope="prototype" parent="baseAction">
+   <property name="providerBO" ref="providerBO"></property>
+  </bean>	
+
+	<bean id="accountTierNoLookupAction" class="com.path.actions.lookups.core.AccountTierNoLookupAction" scope="prototype" parent="baseAction">
+		<property name="accountTierNoBO" ref="accountTierNoBO"></property>
+	</bean>  	
+	
+	<bean id="avaCategoryLookupAction" class="com.path.actions.lookups.core.AvaCategoryLookupAction" scope="prototype" parent="baseAction">
+	 <property name="avaCategoryBO" ref="avaCategoryBO"></property>
+	</bean>
+	
+	<bean id="avaFileLookupAction" class="com.path.actions.lookups.core.AvaFileLookupAction" scope="prototype" parent="baseAction">
+	 <property name="avaFileLkpBO" ref="avaFileLkpBO"></property>
+	</bean>
+	
+	<bean id="avaFileCompanionLookupAction" class="com.path.actions.lookups.core.AvaFileCompanionLookupAction" scope="prototype" parent="baseAction">
+	 <property name="avaFileCompanionLkpBO" ref="avaFileCompanionLkpBO"></property>
+	</bean>
+	
+	<bean id="ctsOperationsTypeLookupAction" class="com.path.actions.lookups.core.CtsOperationsTypeLookupAction" scope="prototype" parent="baseAction">
+	 	 <property name="ctsOperationsTypeLkpBO" ref="ctsOperationsTypeLkpBO"></property> 
+	</bean>
+	
+	<bean id="avaPaymentLookupAction" class="com.path.actions.lookups.core.AvaPaymentLookupAction" scope="prototype" parent="baseAction">
+	 <property name="avaPaymentLkpBO" ref="avaPaymentLkpBO"></property>
+	 <property name="coreCommonBO" ref="coreCommonBO"></property>
+	</bean>
+	
+	<bean id="avaBenefLineNoLookupAction" class="com.path.actions.lookups.core.AvaBenefLineNoLookupAction" scope="prototype" parent="baseAction">
+	 <property name="avaBeneficiariesLkpBO" ref="avaBeneficiariesLkpBO"></property>
+	</bean>
+	
+	<bean id="clubbingLookupAction" class="com.path.actions.lookups.core.ClubbingLookupAction" scope="prototype" parent="baseAction">
+	 <property name="clubbingBO" ref="clubbingBO"></property>
+	</bean>
+	
+	
+	<bean id="segmentationCodeLookupAction" class="com.path.actions.lookups.core.SegmentationCodeLookupAction" scope="prototype" parent="baseAction">
+		<property name="custSegmentationBO" ref="custSegmentationBO"></property>
+	</bean>
+	
+	<bean id="segmentGroupingCodeLookupAction" class="com.path.actions.lookups.core.SegmentGroupingCodeLookupAction" scope="prototype" parent="baseAction">
+		<property name="segmentGroupingBO" ref="segmentGroupingBO"></property>
+	</bean>
+	
+	<!-- EWBI160074 - John Massaad-->
+	<bean id="educationNatureLookupAction" class="com.path.actions.lookups.core.EducationNatureLookupAction" scope="prototype" parent="baseAction">
+	 <property name="educationNatureBO" ref="educationNatureBO"></property>
+	</bean>
+	
+	<!-- BMOI150250 - Raed Saad -->
+	<bean id="cardsFacilityLookupAction" class="com.path.actions.lookups.core.CardsFacilityLookupAction" scope="prototype" parent="baseAction">
+		<property name="facilityTypeBO" ref="facilityTypeBO"></property>		
+	</bean>
+	
+	<bean id="criteriaCodeLookupAction" class="com.path.actions.lookups.core.CriteriaCodeLookupAction" scope="prototype" parent="baseAction">
+		<property name="criteriaLkpBO" ref="criteriaLkpBO"></property>
+	</bean>
+	
+	<!-- added by nour for #777000 -->
+	<bean id="amlCifLookupAction"
+		class="com.path.actions.lookups.core.AmlCifLookupAction"
+		scope="prototype" parent="baseAction">
+		<property name="amlCifBO" ref="amlCifBO"></property>
+	</bean>
+	
+	<bean id="ClubbedAccountsLookupAction" class="com.path.actions.lookups.core.ClubbedAccountsLookupAction" scope="prototype" parent="baseAction">
+	 <property name="clubbingBO" ref="clubbingBO"></property>
+	</bean>
+	
+	<bean id="blackListSourceUploadLookupAction" class="com.path.actions.lookups.core.BlackListSourceUploadLookupAction" scope="prototype" parent="baseAction">
+	 <property name="blackListIntSourceBO" ref="blackListIntSourceBO"></property>
+	</bean>
+	
+	<bean id="cardIntegrationLookupAction" class="com.path.actions.lookups.core.CardIntegrationLookupAction" scope="prototype" parent="baseAction">
+		<property name="cardIntegrationBO" ref="cardIntegrationBO"></property>
+	</bean>
+	<!-- Instruction Definition Lookup -->
+	<bean id="instructionDefinitionLookupAction" class="com.path.actions.lookups.core.InstructionDefinitionLookupAction" scope="prototype" parent="baseAction">
+		<property name="instructionDefinitionBO" ref="instructionDefinitionBO"></property>
+	</bean>
+	
+	<!-- Registration Center -->
+	<bean id="registrationCenterLookupAction" class="com.path.actions.lookups.core.RegistrationCenterLookupAction" scope="prototype" parent="baseAction">
+		<property name="registrationCenterBO" ref="registrationCenterBO"></property>
+	</bean>
+	
+	<!-- Instruction - Sub Instruction Definition Lookup -->
+	<bean id="instructionSubInstrLookupAction" class="com.path.actions.lookups.core.InstructionSubInstrLookupAction" scope="prototype" parent="baseAction">
+		<property name="instructionSubInstrBO" ref="instructionSubInstrBO"></property>
+	</bean>
+	
+	<!-- Economic Agent -->
+	<bean id="economicAgentLookupAction" class="com.path.actions.lookups.core.EconomicAgentLookupAction" scope="prototype" parent="baseAction" >
+		<property name="economicAgentBO" ref="economicAgentBO"></property>
+	</bean>	
+	
+	<!-- Profession Category -->
+	<bean id="professionCategoryLookupAction" class="com.path.actions.lookups.core.ProfessionCategoryLookupAction" scope="prototype" parent="baseAction" >
+		<property name="professionCategoryBO" ref="professionCategoryBO"></property>
+	</bean>	
+
+	<!-- Profession Segment -->
+	<bean id="professionSegmentLookupAction" class="com.path.actions.lookups.core.ProfessionSegmentLookupAction" scope="prototype" parent="baseAction" >
+		<property name="professionSegmentBO" ref="professionSegmentBO"></property>
+	</bean>	
+	
+	<!-- Profession -->
+	<bean id="professionLookupAction" class="com.path.actions.lookups.core.ProfessionLookupAction" scope="prototype" parent="baseAction" >
+		<property name="professionBO" ref="professionBO"></property>
+	</bean>		
+	<!-- added by maria for BMO180067 -->
+	<bean id="vatZoneLookupAction" class="com.path.actions.lookups.core.VatZoneLookupAction" scope="prototype" parent="baseAction">
+		<property name="vatZoneBO" ref="vatZoneBO"></property>
+	</bean>		
+	
+	<!-- added by maria for BMO180181 -->
+	<bean id="proofAddressLookupAction" class="com.path.actions.lookups.core.ProofAddressLookupAction" scope="prototype" parent="baseAction">
+		<property name="proofAddressBO" ref="proofAddressBO"></property>
+	</bean>
+	<!-- added by maria for BMO180181 -->
+	<bean id="proofOccupationLookupAction" class="com.path.actions.lookups.core.ProofOccupationLookupAction" scope="prototype" parent="baseAction">
+		<property name="proofOccupationBO" ref="proofOccupationBO"></property>
+	</bean>
+	<!-- added by maria for BMO180181 -->
+	<bean id="employmentStatusLookupAction" class="com.path.actions.lookups.core.EmploymentStatusLookupAction" scope="prototype" parent="baseAction">
+		<property name="employmentStatusBO" ref="employmentStatusBO"></property>
+	</bean>
+	<!-- added by maria for BMO180181 -->
+	<bean id="sourceFundsLookupAction" class="com.path.actions.lookups.core.SourceFundsLookupAction" scope="prototype" parent="baseAction">
+		<property name="sourceFundsBO" ref="sourceFundsBO"></property>
+	</bean>	
+	
+	<bean id="visitReasonLookupAction" class="com.path.actions.lookups.core.VisitReasonLookupAction" scope="prototype" parent="baseAction">
+		<property name="visitReasonBO" ref="visitReasonBO"></property>
+	</bean>
+	
+	<bean id="schedCodeLookupAction" class="com.path.actions.lookups.core.SchedCodeLookupAction" scope="prototype" parent="baseAction" >
+		<property name="schedCodeLookupBO" ref="schedCodeLookupBO"></property>
+	</bean>
+	
+	<bean id="giftClassLookupAction" class="com.path.actions.lookups.core.GiftClassLookupAction" scope="prototype" parent="baseAction" >
+		<property name="giftClassLookupBO" ref="giftClassLookupBO"></property>
+	</bean>		
+	
+	<bean id="RelationManagerLookupAction" class="com.path.actions.lookups.core.RelationManagerLookupAction" scope="prototype" parent="baseAction">
+		<property name="transferEntityBO" ref="transferEntityBO"></property>
+	</bean>
+</beans>

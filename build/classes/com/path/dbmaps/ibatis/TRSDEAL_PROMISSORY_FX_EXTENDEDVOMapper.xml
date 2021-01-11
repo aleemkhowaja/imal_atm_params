@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TRSDEAL_PROMISSORY_FX_EXTENDED" >
+  <resultMap id="BaseResultMap" type="com.path.dbmaps.vo.TRSDEAL_PROMISSORY_FX_EXTENDEDVO" >
+    <id column="BRANCH_CODE" property="BRANCH_CODE" />
+    <id column="COMP_CODE" property="COMP_CODE" />
+    <id column="PROMISSORY_FX_TYPE" property="PROMISSORY_FX_TYPE" />
+    <id column="SERIAL_NO" property="SERIAL_NO" />
+    <result column="DEALER_TRX_LIMITS_AMT" property="DEALER_TRX_LIMITS_AMT" />
+    <result column="DEALER_TRX_LIMITS_CY" property="DEALER_TRX_LIMITS_CY" />
+    <result column="DEALER_TRX_LIMITS_CROSS_RATE" property="DEALER_TRX_LIMITS_CROSS_RATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BRANCH_CODE, COMP_CODE, PROMISSORY_FX_TYPE, SERIAL_NO, DEALER_TRX_LIMITS_AMT, DEALER_TRX_LIMITS_CY, 
+    DEALER_TRX_LIMITS_CROSS_RATE
+  </sql>
+  <select id="selectTRSDEAL_PROMISSORY_FX_EXTENDED" resultMap="BaseResultMap" parameterType="com.path.dbmaps.vo.TRSDEAL_PROMISSORY_FX_EXTENDEDVOKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TRSDEAL_PROMISSORY_FX_EXTENDED
+    where BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and PROMISSORY_FX_TYPE = #{PROMISSORY_FX_TYPE}
+      and SERIAL_NO = #{SERIAL_NO}
+  </select>
+  <delete id="deleteTRSDEAL_PROMISSORY_FX_EXTENDED" parameterType="com.path.dbmaps.vo.TRSDEAL_PROMISSORY_FX_EXTENDEDVOKey" >
+    delete from TRSDEAL_PROMISSORY_FX_EXTENDED
+    where BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and PROMISSORY_FX_TYPE = #{PROMISSORY_FX_TYPE}
+      and SERIAL_NO = #{SERIAL_NO}
+  </delete>
+  <insert id="insertTRSDEAL_PROMISSORY_FX_EXTENDED" parameterType="com.path.dbmaps.vo.TRSDEAL_PROMISSORY_FX_EXTENDEDVO" >
+    insert into TRSDEAL_PROMISSORY_FX_EXTENDED
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="BRANCH_CODE != null and BRANCH_CODE != emptyBigDecimalValue" >
+        BRANCH_CODE,
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        COMP_CODE,
+      </if>
+      <if test="PROMISSORY_FX_TYPE != null" >
+        PROMISSORY_FX_TYPE,
+      </if>
+      <if test="SERIAL_NO != null and SERIAL_NO != emptyBigDecimalValue" >
+        SERIAL_NO,
+      </if>
+      <if test="DEALER_TRX_LIMITS_AMT != null and DEALER_TRX_LIMITS_AMT != emptyBigDecimalValue" >
+        DEALER_TRX_LIMITS_AMT,
+      </if>
+      <if test="DEALER_TRX_LIMITS_CY != null and DEALER_TRX_LIMITS_CY != emptyBigDecimalValue" >
+        DEALER_TRX_LIMITS_CY,
+      </if>
+      <if test="DEALER_TRX_LIMITS_CROSS_RATE != null and DEALER_TRX_LIMITS_CROSS_RATE != emptyBigDecimalValue" >
+        DEALER_TRX_LIMITS_CROSS_RATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="BRANCH_CODE != null and BRANCH_CODE != emptyBigDecimalValue" >
+        #{BRANCH_CODE},
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="PROMISSORY_FX_TYPE != null" >
+        #{PROMISSORY_FX_TYPE},
+      </if>
+      <if test="SERIAL_NO != null and SERIAL_NO != emptyBigDecimalValue" >
+        #{SERIAL_NO},
+      </if>
+      <if test="DEALER_TRX_LIMITS_AMT != null and DEALER_TRX_LIMITS_AMT != emptyBigDecimalValue" >
+        #{DEALER_TRX_LIMITS_AMT},
+      </if>
+      <if test="DEALER_TRX_LIMITS_CY != null and DEALER_TRX_LIMITS_CY != emptyBigDecimalValue" >
+        #{DEALER_TRX_LIMITS_CY},
+      </if>
+      <if test="DEALER_TRX_LIMITS_CROSS_RATE != null and DEALER_TRX_LIMITS_CROSS_RATE != emptyBigDecimalValue" >
+        #{DEALER_TRX_LIMITS_CROSS_RATE},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateTRSDEAL_PROMISSORY_FX_EXTENDED" >
+    update TRSDEAL_PROMISSORY_FX_EXTENDED
+    <set >
+      <if test="DEALER_TRX_LIMITS_AMT != null" >
+        <choose >
+          <when test="DEALER_TRX_LIMITS_AMT == emptyBigDecimalValue" >
+            DEALER_TRX_LIMITS_AMT = NULL ,
+          </when>
+          <otherwise >
+            DEALER_TRX_LIMITS_AMT = #{DEALER_TRX_LIMITS_AMT},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DEALER_TRX_LIMITS_CY != null" >
+        <choose >
+          <when test="DEALER_TRX_LIMITS_CY == emptyBigDecimalValue" >
+            DEALER_TRX_LIMITS_CY = NULL ,
+          </when>
+          <otherwise >
+            DEALER_TRX_LIMITS_CY = #{DEALER_TRX_LIMITS_CY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DEALER_TRX_LIMITS_CROSS_RATE != null" >
+        <choose >
+          <when test="DEALER_TRX_LIMITS_CROSS_RATE == emptyBigDecimalValue" >
+            DEALER_TRX_LIMITS_CROSS_RATE = NULL ,
+          </when>
+          <otherwise >
+            DEALER_TRX_LIMITS_CROSS_RATE = #{DEALER_TRX_LIMITS_CROSS_RATE},
+          </otherwise>
+        </choose>
+      </if>
+    </set>
+    where BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and PROMISSORY_FX_TYPE = #{PROMISSORY_FX_TYPE}
+      and SERIAL_NO = #{SERIAL_NO}
+  </sql>
+  <update id="updateTRSDEAL_PROMISSORY_FX_EXTENDED" parameterType="com.path.dbmaps.vo.TRSDEAL_PROMISSORY_FX_EXTENDEDVO" >
+    <include refid="sql_updateTRSDEAL_PROMISSORY_FX_EXTENDED" />
+  </update>
+</mapper>

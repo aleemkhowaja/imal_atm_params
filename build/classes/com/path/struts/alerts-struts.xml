@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="alerts" namespace="/path/alerts" extends="path-default">
+		
+		<action name="AlertsGrid_*"  class="alertsGridAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>		
+		 
+			 		
+		<action name="AlertsMaint_*"  class="alertsMaintAction" method="{1}">
+		     <!--<result name="loadPage">/WEB-INF/pages/common/alerts/CheckAlertsMaint.jsp</result> -->
+		    <result name="loadPage">/WEB-INF/pages/common/alerts/SendAlertsMaint.jsp</result> 
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		<action name="AlertsForwardMaint_*"  class="alertsForwardMaintAction" method="{1}">
+		    <result name="loadForwardPage">/WEB-INF/pages/common/alerts/ForwardAlertsMaint.jsp</result> 
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+		<action name="AlertsForwardGrid_*"  class="alertsForwardGridAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>		
+		
+		<action name="ApproveAlertsMaint_*"  class="approveAlertsMaintAction" method="{1}">
+		    <result name="loadApproveAlertsPage">/WEB-INF/pages/common/alerts/ApproveAlertsMaint.jsp</result>
+		    <result name="loadApproveAlertsItem">/WEB-INF/pages/common/alerts/AlertsOpenItem.jsp</result> 
+		    <result name="loadCheckPassWordAlert">/WEB-INF/pages/common/alerts/ApproveAlertsMaint.jsp?isCheckForPassWord=true</result> 
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="loadTrxDetailsIframe">/WEB-INF/pages/common/alerts/AlertsIframeDetails.jsp</result>
+			<result name="loadForwardIframe">/WEB-INF/pages/common/alerts/AlertsIframeForward.jsp</result>
+		</action>	
+		<action name="TrsAckTOutAlertsGrid_*"  class="trsAckTOutAlertsAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="loadTrsAckTOutList">/WEB-INF/pages/common/alerts/TrsAckTOutAlertsList.jsp</result> 
+			<result name="loadTrxDetailsIframe">/WEB-INF/pages/common/alerts/AlertsIframeDetails.jsp</result>
+		</action>	
+		<action name="TrsAckTOutAlertsMaint_*"  class="trsAckTOutAlertsMaintAction" method="{1}">
+		    <result name="loadTrsAckTOutMaint">/WEB-INF/pages/common/alerts/TrsAckTOutAlertsMaint.jsp</result> 
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+		<action name="AlertsLoginMgnt_*"  class="alertsLoginMgntAction" method="{1}">
+			<result name="loadAlertsLoginMgnt">/WEB-INF/pages/common/alerts/AlertsLoginMgnt.jsp</result>
+			<result name="alert_success" type="json">
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>	
+		
+		
+			
+	 </package>
+	 
+	 
+	
+</struts>   

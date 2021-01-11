@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
+
+
+      <global-method-security secured-annotations="disabled">     
+      </global-method-security>      
+      
+       <!-- needed to allow double slashes in the URLs based on Spring 5.x upgrade-->
+	   <beans:bean id="httpFirewall"	class="org.springframework.security.web.firewall.DefaultHttpFirewall">
+			<beans:property name="allowUrlEncodedSlash" value="true" />
+	   </beans:bean>
+       <http-firewall ref="httpFirewall" />
+  
+      <http  security="none" pattern="/login/**"/>
+      
+      <http auto-config="false" use-expressions="false" disable-url-rewriting="true" entry-point-ref="authenticationProcessingFilterEntryPoint" create-session="always">
+	    <!-- Enable Opening the pages in iFrames -->
+	    <headers>
+	      	<frame-options disabled="true"/>
+	    </headers>
+        <csrf disabled="true"/>
+        <access-denied-handler error-page="/login/AccessDenied.jsp"/>
+        <!--   <intercept-url pattern="/j_spring_security_check" access="IS_AUTHENTICATED_ANONYMOUSLY" />--> 
+        <intercept-url pattern="/common/**" access="ROLE_DESKTOP_ACCESS,ROLE_FULL_ACCESS,ROLE_CHANGEPWD_ACCESS" />
+        <intercept-url pattern="/path/PreMain.jsp" access="ROLE_DESKTOP_ACCESS,ROLE_FULL_ACCESS,ROLE_CHANGEPWD_ACCESS" />
+        <intercept-url pattern="/path/images/**" access="ROLE_DESKTOP_ACCESS,ROLE_FULL_ACCESS,ROLE_CHANGEPWD_ACCESS" />
+        <intercept-url pattern="/pathdesktop/TopMenuAction_menuLang**" access="ROLE_DESKTOP_ACCESS,ROLE_FULL_ACCESS,ROLE_CHANGEPWD_ACCESS" />
+        <intercept-url pattern="/pathdesktop/DesktopAction_returnExternalUrls**" access="ROLE_DESKTOP_ACCESS,ROLE_FULL_ACCESS,ROLE_CHANGEPWD_ACCESS"/>
+		<intercept-url pattern="/path/customization/ThemeCustomizationAction_**" access="ROLE_DESKTOP_ACCESS,ROLE_FULL_ACCESS,ROLE_CHANGEPWD_ACCESS" />
+   		<intercept-url pattern="/pathdesktop/DesktopAction_**" access="ROLE_FULL_ACCESS" />
+		<intercept-url pattern="/pathdesktop/**" access="ROLE_DESKTOP_ACCESS,ROLE_FULL_ACCESS" />
+		<intercept-url pattern="/path/**" access="ROLE_FULL_ACCESS" />
+		
+		<intercept-url pattern="/pwdchange/**" access="ROLE_CHANGEPWD_ACCESS,ROLE_FULL_ACCESS" />
+		
+      	<intercept-url pattern="/**" access="IS_AUTHENTICATED_ANONYMOUSLY" /> 
+    
+         <!--logout  invalidate-session="true" logout-url="/j_spring_security_logout" logout-success-url="/"/-->
+         
+         <remember-me key="CSMApp"/>
+         <custom-filter ref="secureFilter" before="FORM_LOGIN_FILTER" />
+        <!--  
+          <session-management session-authentication-strategy-ref="sas"/>
+          -->
+          <!---->
+         <!--<custom-filter ref="concurrentSessionFilter" position="CONCURRENT_SESSION_FILTER"/>
+         -->
+         <custom-filter ref="pathLogoutFilter" position="LOGOUT_FILTER"/>
+         
+         <!-- PathSolutions fix issue #266635 create pathSessionManagementFilter as a custom filter to handle external screen session timeout
+         <session-management invalid-session-url="/login/unSecureAction_sessionTimeout">
+         </session-management>
+         -->
+         <session-management session-fixation-protection="none" />
+         
+         <custom-filter ref="pathSessionManagementFilter" position="SESSION_MANAGEMENT_FILTER" />
+         
+      </http>    
+      
+	  <beans:bean id="pathSessionManagementFilter" class="com.path.bo.security.PathSessionManagementFilter">
+			<beans:constructor-arg ref="httpSessionSecurityContextRepository" />
+			<beans:property name="invalidSessionStrategy" ref="invalidSessionStrategy" />
+			<!--  
+			<beans:property name="invalidSessionUrl" value="/login/unSecureAction_sessionTimeout " />
+			-->
+	  </beans:bean>
+	
+	  <beans:bean id="httpSessionSecurityContextRepository" class="org.springframework.security.web.context.HttpSessionSecurityContextRepository" />
+	  <!--  redirect to timeout in case of Invalid Session -->
+	  <beans:bean id="invalidSessionStrategy" class="org.springframework.security.web.session.SimpleRedirectInvalidSessionStrategy">
+	   		<beans:constructor-arg value="/login/unSecureAction_sessionTimeout"/>
+	  </beans:bean>
+	  
+      <beans:bean id="pathWebAuthDetSource" class="com.path.bo.security.PathWebAuthDetSource"/>
+      
+      <beans:bean id="secureFilter" class="com.path.bo.security.PathCustomAuthenticationFilter" >
+    	
+    	<beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+    	<beans:property name="authenticationFailureHandler" ref="failureHandler" />
+	    <beans:property name="authenticationSuccessHandler" ref="successHandler" />
+	    <!-- used to pass additional parameters other than j_username,j_password autologin.jsp -->
+    	<beans:property name="authenticationDetailsSource" ref="pathWebAuthDetSource"/>
+    	<beans:property name="usernameParameter" value="j_username"/>
+    	<beans:property name="passwordParameter" value="j_password"/>
+    	<beans:property name="filterProcessesUrl" value="/j_spring_security_check"></beans:property>
+    	<beans:property name="allowSessionCreation" value="true" />
+    	<beans:property name="sessionAuthenticationStrategy" ref="sas"/>
+    	<beans:property name="loginBO" ref="loginBO"></beans:property>
+    	
+  	  </beans:bean>
+  	  
+	 <beans:bean id="successHandler" class="org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler" >
+		<beans:property name="defaultTargetUrl" value="/path/PreMain.jsp" /> <!-- which is the default value -->
+		<beans:property name="alwaysUseDefaultTargetUrl" value="true" />
+	</beans:bean>
+	<beans:bean id="failureHandler" class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler" >
+		<beans:property name="defaultFailureUrl" value="/login/unSecureAction_failLogin" />
+	</beans:bean>
+	<beans:bean id="sas" class="org.springframework.security.web.authentication.session.SessionFixationProtectionStrategy">
+		<beans:property name="migrateSessionAttributes" value="true" />
+	</beans:bean>
+  	 
+  	 
+   	<authentication-manager alias="authenticationManager">
+	<authentication-provider ref="pathDaoAuthenticationProvider" />
+	</authentication-manager>
+	
+   	  <beans:bean id="pathDaoAuthenticationProvider"
+		class="com.path.bo.security.PathDaoAuthenticationProvider">
+	  </beans:bean>
+	  
+	  <!-- for concurrent session control --><!--
+	  <beans:bean id="concurrentSessionFilter"
+		class="org.springframework.security.concurrent.ConcurrentSessionFilter">
+		
+		<beans:property name="sessionRegistry" ref="sessionRegistry"/>
+		<beans:property name="expiredUrl" value="/login/unSecureAction_expiredLogin"/>
+	 </beans:bean>
+	 
+   	  -->
+   	  <beans:bean id="sessionRegistry" class="org.springframework.security.core.session.SessionRegistryImpl" /> 
+	  
+	  <!--<beans:bean id="mySessionController" class="org.springframework.security.concurrent.ConcurrentSessionControllerImpl">
+		    <beans:property name="sessionRegistry" ref="sessionRegistry" />
+			<beans:property name="exceptionIfMaximumExceeded" value="true" />  if set to false or removed the the login invalidates first user 
+			<beans:property name="maximumSessions" value="10" />  usually set to 1 for unique user access 
+	  </beans:bean>
+	  -->
+	  <!-- **************** -->
+	  
+	  <beans:bean id="pathLogoutFilter"
+		class="org.springframework.security.web.authentication.logout.LogoutFilter">
+		
+		
+		<beans:property name="filterProcessesUrl" value="/j_spring_security_logout"/>
+		<beans:constructor-arg value="/login/unSecureAction_logout"/>
+		<beans:constructor-arg>
+			<beans:list>
+				<beans:bean 
+					class="com.path.bo.security.PathLogoutFilterHandler">
+					<beans:property name="invalidateHttpSession" value="false"/>
+				 </beans:bean>
+			</beans:list>
+		</beans:constructor-arg>
+	 </beans:bean>
+	
+	  
+	   <!--beans:bean id="interceptorFilter"
+		class="com.path.bo.security.PathFilterSecurityInterceptor">
+		<custom-filter position="FILTER_SECURITY_INTERCEPTOR"/>
+	 </beans:bean-->
+	 
+   	  
+  	  <beans:bean id="authenticationProcessingFilterEntryPoint" class="com.path.bo.security.CustomLoginUrlEntryPoint">
+	     <beans:constructor-arg value="/login/unSecureAction_login"/>
+   	  </beans:bean>
+      <beans:bean id="userDetailsService" class="com.path.bo.security.SecurityBaseDAOImpl" >
+	  </beans:bean>
+  </beans:beans>

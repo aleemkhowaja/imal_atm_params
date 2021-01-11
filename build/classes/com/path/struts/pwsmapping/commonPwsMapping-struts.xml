@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="pws" namespace="/path/common/pws"
+		extends="path-default">
+		
+		<action name="testpaty_*" class="testpaty" method="{1}">
+			<result name="success">/WEB-INF/pages/commonpwsmapping/mappingexpression/PwsMappingExpressionDialog.jsp
+			</result>
+		</action>
+		
+		
+	<!-- 799705 PWS mapping screen -->
+		<action name="CommonPwsMappingAction_*" method="{1}" class="commonPwsMappingAction">
+			<result name="loadPwsDialog">/WEB-INF/pages/commonpwsmapping/loadPwsDialog.jsp </result>
+			<result name="loadWebserviceExplorerDialog">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerMaint.jsp </result>
+			<result name="loadWebserviceExplorerTreeandList">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerServicesParamsOperations.jsp </result>
+			
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="jsonError" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="CommonPwsMappingGridAction_*" method="{1}" class="commonPwsMappingGridAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="jsonError" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- USER STORY #799705	Control record - PWS mapping screen -->
+		<action name="PwsWebServiceExplorerList_*" class="pwsWebserviceExplorerList" method="{1}">
+			<result name="loadAlertGridSection">/WEB-INF/pages/commonpwsmapping/pwswebserviceexplorer/PwsWebServiceExplorerList.jsp
+			</result>
+			<result name="loadAlertSubGrid">/WEB-INF/pages/commonpwsmapping/pwswebserviceexplorer/PwsWebServiceExplorerSubGridList.jsp
+			</result>
+			<result name="loadPwsListSubGrid">/WEB-INF/pages/commonpwsmapping/pwswebserviceexplorer/PwsWebServiceExplorerListSubGridList.jsp
+			</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="PwsWebServiceExplorerMainAction_*" class="pwsWebServiceExplorerMainAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- END USER STORY #799705	Control record - PWS mapping screen -->
+		
+	 </package>
+
+</struts>

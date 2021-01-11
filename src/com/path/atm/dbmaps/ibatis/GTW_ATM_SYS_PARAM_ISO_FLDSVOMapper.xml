@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GTW_ATM_SYS_PARAM_ISO_FLDS" >
+  <resultMap id="BaseResultMap" type="com.path.atm.dbmaps.vo.GTW_ATM_SYS_PARAM_ISO_FLDSVO" >
+    <id column="SYS_PARAM_ISO_FLDS_ID" property="SYS_PARAM_ISO_FLDS_ID" />
+    <result column="LENGTH" property="LENGTH" />
+    <result column="NAME" property="NAME" />
+    <result column="FIELD_TYPE" property="FIELD_TYPE" />
+    <result column="DYNAMIC_LENGTH" property="DYNAMIC_LENGTH" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    SYS_PARAM_ISO_FLDS_ID, LENGTH, NAME, FIELD_TYPE,DYNAMIC_LENGTH
+  </sql>
+  <select id="selectGTW_ATM_SYS_PARAM_ISO_FLDS" resultMap="BaseResultMap" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_SYS_PARAM_ISO_FLDSVO" >
+    select 
+    <include refid="Base_Column_List" />
+    from GTW_ATM_SYS_PARAM_ISO_FLDS
+    where SYS_PARAM_ISO_FLDS_ID = #{SYS_PARAM_ISO_FLDS_ID}
+  </select>
+  <delete id="deleteGTW_ATM_SYS_PARAM_ISO_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_SYS_PARAM_ISO_FLDSVO" >
+    delete from GTW_ATM_SYS_PARAM_ISO_FLDS
+    where SYS_PARAM_ISO_FLDS_ID = #{SYS_PARAM_ISO_FLDS_ID}
+  </delete>
+  <insert id="insertGTW_ATM_SYS_PARAM_ISO_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_SYS_PARAM_ISO_FLDSVO" >
+    insert into GTW_ATM_SYS_PARAM_ISO_FLDS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="SYS_PARAM_ISO_FLDS_ID != null and SYS_PARAM_ISO_FLDS_ID != emptyBigDecimalValue" >
+        SYS_PARAM_ISO_FLDS_ID,
+      </if>
+      <if test="LENGTH != null and LENGTH != emptyBigDecimalValue" >
+        LENGTH,
+      </if>
+      <if test="NAME != null and !&quot;&quot;.equals(NAME)" >
+        NAME,
+      </if>
+      <if test="FIELD_TYPE != null and !&quot;&quot;.equals(FIELD_TYPE)" >
+        FIELD_TYPE,
+      </if>
+       <if test="DYNAMIC_LENGTH != null and LENGTH != emptyBigDecimalValue" >
+        DYNAMIC_LENGTH,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="SYS_PARAM_ISO_FLDS_ID != null and SYS_PARAM_ISO_FLDS_ID != emptyBigDecimalValue" >
+        #{SYS_PARAM_ISO_FLDS_ID},
+      </if>
+      <if test="LENGTH != null and LENGTH != emptyBigDecimalValue" >
+        #{LENGTH},
+      </if>
+      <if test="NAME != null and !&quot;&quot;.equals(NAME)" >
+        #{NAME},
+      </if>
+      <if test="FIELD_TYPE != null and !&quot;&quot;.equals(FIELD_TYPE)" >
+        #{FIELD_TYPE},
+      </if>
+      <if test="DYNAMIC_LENGTH != null and !&quot;&quot;.equals(DYNAMIC_LENGTH)" >
+        #{DYNAMIC_LENGTH},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateGTW_ATM_SYS_PARAM_ISO_FLDS" >
+    update GTW_ATM_SYS_PARAM_ISO_FLDS
+    <set >
+      <if test="LENGTH != null" >
+        <choose >
+          <when test="LENGTH == emptyBigDecimalValue" >
+            LENGTH = NULL ,
+          </when>
+          <otherwise >
+            LENGTH = #{LENGTH},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="NAME != null" >
+        <choose >
+          <when test="NAME.equals(&quot;&quot;)" >
+            NAME = NULL ,
+          </when>
+          <otherwise >
+            NAME = #{NAME},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="FIELD_TYPE != null" >
+        <choose >
+          <when test="FIELD_TYPE.equals(&quot;&quot;)" >
+            FIELD_TYPE = NULL ,
+          </when>
+          <otherwise >
+            FIELD_TYPE = #{FIELD_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DYNAMIC_LENGTH != null" >
+        <choose >
+          <when test="DYNAMIC_LENGTH == emptyBigDecimalValue" >
+            DYNAMIC_LENGTH = NULL ,
+          </when>
+          <otherwise >
+            DYNAMIC_LENGTH = #{DYNAMIC_LENGTH},
+          </otherwise>
+        </choose>
+      </if>
+    </set>
+    where SYS_PARAM_ISO_FLDS_ID = #{SYS_PARAM_ISO_FLDS_ID}
+  </sql>
+  <update id="updateGTW_ATM_SYS_PARAM_ISO_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_SYS_PARAM_ISO_FLDSVO" >
+    <include refid="sql_updateGTW_ATM_SYS_PARAM_ISO_FLDS" />
+  </update>
+</mapper>

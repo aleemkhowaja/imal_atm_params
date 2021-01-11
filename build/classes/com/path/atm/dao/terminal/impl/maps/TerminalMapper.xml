@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="terminalMapper">
+
+	<resultMap id="terminalListMap" type="terminalCO">
+		<result property="gtw_ATM_TERMINALVO.TERMINAL_ID" 				column="TERMINAL_ID" />
+		<result property="gtw_ATM_TERMINALVO.TERMINAL_CODE" 			column="TERMINAL_CODE" />
+		<result property="gtw_ATM_TERMINALVO.DESCRIPTION"     			column="DESCRIPTION" />
+		<result property="gtw_ATM_TERMINALVO.INTERFACE_CODE"     		column="INTERFACE_CODE" />
+		<result property="gtw_ATM_TERMINALVO.ACQUIRER_ID" 				column="ACQUIRER_ID" />
+		<result property="gtw_ATM_TERMINALVO.MERCHANT_CODE" 			column="MERCHANT_CODE" />
+		<result property="gtw_ATM_TERMINALVO.TRANSACTION_BRANCH_CODE" 	column="TRANSACTION_BRANCH_CODE" />
+		<result property="gtw_ATM_TERMINALVO.TELLER_CODE" 				column="TELLER_CODE" />
+		<result property="gtw_ATM_TERMINALVO.TELLER_USER_ID" 			column="TELLER_USER_ID" />
+		<result property="gtw_ATM_TERMINALVO.ADDRESS" 					column="ADDRESS" />
+		<result property="gtw_ATM_TERMINALVO.TELEPHONE" 				column="TELEPHONE" />
+		<result property="gtw_ATM_TERMINALVO.EMAIL" 					column="EMAIL" />
+		<result property="gtw_ATM_MERCHANTVO.ADDITIONAL_REFERENCE" 		column="ADDITIONAL_REFERENCE" />
+		<result property="gtw_ATM_MERCHANTVO.IBAN_ACC_NO" 				column="IBAN_ACC_NO" />
+		<result property="branchDescription" 							column="branchDescription" />
+		<result property="tellerDescription" 							column="tellerDescription" />
+		<result property="merchantDescription" 							column="merchantDescription" />
+		<result property="atmInterfaceDescription" 						column="atmInterfaceDescription" />
+		<result property="acquirerDescription" 							column="acquirerDescription" />
+		<result property="terminalType" 								column="terminalType" />
+	</resultMap>
+
+
+	<select id="returnTerminalList"
+		parameterType="terminalSC"
+		resultMap="terminalListMap">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="queryTerminalSQL" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+
+	<select id="returnTerminalListCount"
+		parameterType="terminalSC"
+		resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="queryTerminalSQL" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+
+	<select id="edit" resultMap="terminalListMap"
+		parameterType="terminalSC">
+		<include refid="queryTerminalSQL" />
+		 AND  gtwTER.TERMINAL_ID = #{terminalId}
+	</select>
+	
+	<sql id="queryTerminalSQL">
+		SELECT
+		gtwTER.TERMINAL_ID,
+		gtwTER.TERMINAL_CODE,
+		gtwTER.COMP_CODE,
+		gtwTER.DESCRIPTION,
+		gtwTER.INTERFACE_CODE,
+		gtwTER.ACQUIRER_ID,
+		gtwTER.MERCHANT_CODE,
+		gtwTER.TRANSACTION_BRANCH_CODE,
+		gtwTER.TELLER_CODE,
+		gtwTER.TELLER_USER_ID,
+		gtwTER.TELEPHONE,
+		gtwTER.ADDRESS,
+		gtwTER.EMAIL,
+		
+		(select GTW_ATM_ACQUIRER.DESCRIPTION  from GTW_ATM_ACQUIRER
+			where GTW_ATM_ACQUIRER.ACQUIRER_ID=gtwTER.ACQUIRER_ID) as acquirerDescription,
+			
+		(select GTW_ATM_ACQUIRER.TERMINAL_TYPE  from GTW_ATM_ACQUIRER
+			where GTW_ATM_ACQUIRER.ACQUIRER_ID=gtwTER.ACQUIRER_ID) as terminalType,
+		
+		(select mercahnt.IBAN_ACC_NO from GTW_ATM_MERCHANT mercahnt where mercahnt.COMP_CODE=gtwTER.COMP_CODE AND 
+			mercahnt.MERCHANT_CODE = gtwTER.MERCHANT_CODE ) as IBAN_ACC_NO,
+					
+		(select mercahnt.ADDITIONAL_REFERENCE from GTW_ATM_MERCHANT mercahnt where mercahnt.COMP_CODE=gtwTER.COMP_CODE AND
+		 	mercahnt.MERCHANT_CODE = gtwTER.MERCHANT_CODE ) as ADDITIONAL_REFERENCE,
+				 	
+		(select GTW_ATM_INTERFACES.DESCRIPTION  from GTW_ATM_INTERFACES
+			where GTW_ATM_INTERFACES.INTERFACE_CODE=gtwTER.INTERFACE_CODE) as atmInterfaceDescription
+		
+		FROM
+		GTW_ATM_TERMINAL gtwTER
+		
+		where gtwTER.COMP_CODE=#{compCode}
+		
+		<!-- Add for Exporting Terminal Details by Interface Code -->
+		<if test="interfaceCode != null and interfaceCode != emptyBigDecimalValue" >
+			AND gtwTER.INTERFACE_CODE=#{interfaceCode}
+		</if>
+
+	</sql>
+	
+	
+	<select id="validateTemplateId"
+		parameterType="terminalSC"
+		resultType="int">
+		SELECT COUNT(1) 
+		FROM GTW_ATM_TERMINAL
+		WHERE TERMINAL_CODE = #{terminalCode} AND ACQUIRER_ID=#{acquirerId}
+	</select>
+	
+	
+	<insert id="insertGTW_ATM_TERMINAL" parameterType="terminalVO" >
+	
+		<selectKey resultType="java.math.BigDecimal" keyProperty="TERMINAL_ID" order="BEFORE" >
+			<if test="isOracle == 1">
+				SELECT GTW_ATM_TERMINAL_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+				SELECT next_identity('GTW_ATM_TERMINAL')
+			</if>
+			<if test="isSQLServer == 1 " >
+				SELECT IDENT_CURRENT ('GTW_ATM_TERMINAL') + 1
+			</if>
+		</selectKey>
+	    insert into GTW_ATM_TERMINAL
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	    	<if test="isOracle == 1">
+	    		 TERMINAL_ID,
+	    	</if>
+	      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+	        COMP_CODE,
+	      </if>
+	      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+	        DESCRIPTION,
+	      </if>
+	      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+	        INTERFACE_CODE,
+	      </if>
+	      <if test="ACQUIRER_ID != null and ACQUIRER_ID != emptyBigDecimalValue" >
+	        ACQUIRER_ID,
+	      </if>
+	      <if test="MERCHANT_CODE != null and MERCHANT_CODE != emptyBigDecimalValue" >
+	        MERCHANT_CODE,
+	      </if>
+	      <if test="TRANSACTION_BRANCH_CODE != null and TRANSACTION_BRANCH_CODE != emptyBigDecimalValue" >
+	        TRANSACTION_BRANCH_CODE,
+	      </if>
+	      <if test="TELLER_CODE != null and TELLER_CODE != emptyBigDecimalValue" >
+	        TELLER_CODE,
+	      </if>
+	      <if test="TELLER_USER_ID != null and !&quot;&quot;.equals(TELLER_USER_ID)" >
+	        TELLER_USER_ID,
+	      </if>
+	      <if test="ADDRESS != null and !&quot;&quot;.equals(ADDRESS)" >
+	        ADDRESS,
+	      </if>
+	      <if test="TELEPHONE != null and !&quot;&quot;.equals(TELEPHONE)" >
+	        TELEPHONE,
+	      </if>
+	      <if test="EMAIL != null and !&quot;&quot;.equals(EMAIL)" >
+	        EMAIL,
+	      </if>
+	      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+	        CREATED_BY,
+	      </if>
+	      <if test="CREATED_DATE != null" >
+	        CREATED_DATE,
+	      </if>
+	      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+	        MODIFIED_BY,
+	      </if>
+	      <if test="MODIFIED_DATE != null" >
+	        MODIFIED_DATE,
+	      </if>
+	      DATE_UPDATED,
+	      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+	        DELETED_BY,
+	      </if>
+	      <if test="DELETED_DATE != null" >
+	        DELETED_DATE,
+	      </if>
+	      <if test="TERMINAL_CODE != null and !&quot;&quot;.equals(TERMINAL_CODE)" >
+	        TERMINAL_CODE,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      <if test="isOracle == 1">
+	       	#{TERMINAL_ID },
+	      </if>
+	      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+	        #{COMP_CODE},
+	      </if>
+	      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+	        #{DESCRIPTION},
+	      </if>
+	      <if test="INTERFACE_CODE != null and !&quot;&quot;.equals(INTERFACE_CODE)" >
+	        #{INTERFACE_CODE},
+	      </if>
+	      <if test="ACQUIRER_ID != null and ACQUIRER_ID != emptyBigDecimalValue" >
+	        #{ACQUIRER_ID},
+	      </if>
+	      <if test="MERCHANT_CODE != null and MERCHANT_CODE != emptyBigDecimalValue" >
+	        #{MERCHANT_CODE},
+	      </if>
+	      <if test="TRANSACTION_BRANCH_CODE != null and TRANSACTION_BRANCH_CODE != emptyBigDecimalValue" >
+	        #{TRANSACTION_BRANCH_CODE},
+	      </if>
+	      <if test="TELLER_CODE != null and TELLER_CODE != emptyBigDecimalValue" >
+	        #{TELLER_CODE},
+	      </if>
+	      <if test="TELLER_USER_ID != null and !&quot;&quot;.equals(TELLER_USER_ID)" >
+	        #{TELLER_USER_ID},
+	      </if>
+	      <if test="ADDRESS != null and !&quot;&quot;.equals(ADDRESS)" >
+	        #{ADDRESS},
+	      </if>
+	      <if test="TELEPHONE != null and !&quot;&quot;.equals(TELEPHONE)" >
+	        #{TELEPHONE},
+	      </if>
+	      <if test="EMAIL != null and !&quot;&quot;.equals(EMAIL)" >
+	        #{EMAIL},
+	      </if>
+	      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+	        #{CREATED_BY},
+	      </if>
+	      <if test="CREATED_DATE != null" >
+	        #{CREATED_DATE},
+	      </if>
+	      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+	        #{MODIFIED_BY},
+	      </if>
+	      <if test="MODIFIED_DATE != null" >
+	        #{MODIFIED_DATE},
+	      </if>
+	      <choose >
+	        <when test="isSybase == 1" >
+	           GETDATE(),
+	        </when>
+	        <otherwise >
+	           SYSDATE,
+	        </otherwise>
+	      </choose>
+	      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+	        #{DELETED_BY},
+	      </if>
+	      <if test="DELETED_DATE != null" >
+	        #{DELETED_DATE},
+	      </if>
+	      <if test="TERMINAL_CODE != null and !&quot;&quot;.equals(TERMINAL_CODE)" >
+	        #{TERMINAL_CODE},
+	      </if>
+	    </trim>
+  </insert>
+
+</mapper>

@@ -1,0 +1,10 @@
+
+ul.jd_menu li {
+	float: right !important ;   /* -- RTL -- */
+	border-width:0 0px 0 1px;
+}
+ul.jd_menu ul li {   
+	-moz-border-radius-topright:5px;
+	-moz-border-radius-bottomright:5px;
+	float: inherit !important;
+}

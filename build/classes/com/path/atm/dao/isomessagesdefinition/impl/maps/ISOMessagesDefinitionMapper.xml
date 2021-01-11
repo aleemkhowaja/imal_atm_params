@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="isoMessagesDefinitionMapper">
+
+	<!-- Result map of ISO Message Definition -->
+	<resultMap id="isoMessagesDefinitionListMap" 						type="isoMessagesDefinitionCO">
+	
+		<result property="gtw_ATM_ISO_MSG_DEF.ISO_MSG_DEF_ID" 			column="ISO_MSG_DEF_ID" />
+		<result property="gtw_ATM_ISO_MSG_DEF.COMP_CODE" 				column="COMP_CODE" />
+		<result property="gtw_ATM_ISO_MSG_DEF.DESCRIPTION"  			column="DESCRIPTION" />
+		<result property="gtw_ATM_ISO_MSG_DEF.INTERFACE_CODE" 			column="INTERFACE_CODE" />
+		<result property="gtw_ATM_ISO_MSG_DEF.NETWORK_MESSAGE_YN" 		column="NETWORK_MESSAGE_YN" />
+		<result property="gtw_ATM_ISO_MSG_DEF.NETWORK_MESSAGE_TYPE" 	column="NETWORK_MESSAGE_TYPE" />
+		<result property="gtw_ATM_ISO_MSG_DEF.ATM_ISO_MSGS_CODE" 		column="ATM_ISO_MSGS_CODE" />
+		<result property="gtw_ATM_ISO_MSG_DEF.PROCESS_CODE" 			column="PROCESS_CODE" />
+		<result property="gtw_ATM_ISO_MSG_DEF.ADD_CRITERIA_EXPRESSION" 	column="ADD_CRITERIA_EXPRESSION" />
+		<result property="gtw_ATM_ISO_MSG_DEF.MAPPING_ID" 				column="MAPPING_ID" />
+		
+	</resultMap>
+
+	<!-- Select of iso Message Definition List-->
+	<select id="returnISOMessagesDefinitionList" parameterType="isoMessagesDefinitionSC" resultMap="isoMessagesDefinitionListMap">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="queryISOMessagesDefinitionSQL" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+
+	<!-- Select of iso Message Definition Count-->
+	<select id="returnISOMessagesDefinitionListCount" parameterType="isoMessagesDefinitionSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="queryISOMessagesDefinitionSQL" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+
+	<!-- Select of iso Message Definition by id-->
+	<select id="edit" resultMap="isoMessagesDefinitionListMap" parameterType="isoMessagesDefinitionSC">
+		<include refid="queryISOMessagesDefinitionSQL" />
+		 AND gtw_ATM_ISO_MSG_DEF.ISO_MSG_DEF_ID = #{ISOMessagesDefinitionId} 
+	</select>
+	
+	<!-- SQL of iso Message Definition List and ID-->
+	<sql id="queryISOMessagesDefinitionSQL">
+		SELECT
+		gtw_ATM_ISO_MSG_DEF.ISO_MSG_DEF_ID,
+		gtw_ATM_ISO_MSG_DEF.COMP_CODE,
+		gtw_ATM_ISO_MSG_DEF.DESCRIPTION,
+		gtw_ATM_ISO_MSG_DEF.INTERFACE_CODE,
+		gtw_ATM_ISO_MSG_DEF.NETWORK_MESSAGE_YN,
+		gtw_ATM_ISO_MSG_DEF.NETWORK_MESSAGE_TYPE,
+		gtw_ATM_ISO_MSG_DEF.ATM_ISO_MSGS_CODE,
+		gtw_ATM_ISO_MSG_DEF.PROCESS_CODE,
+		gtw_ATM_ISO_MSG_DEF.ADD_CRITERIA_EXPRESSION,
+		gtw_ATM_ISO_MSG_DEF.MAPPING_ID,
+		
+		(select GTW_ATM_INTERFACES.DESCRIPTION  from GTW_ATM_INTERFACES
+		where GTW_ATM_INTERFACES.INTERFACE_CODE=gtw_ATM_ISO_MSG_DEF.INTERFACE_CODE) as atmInterfaceDescription,
+		
+		(select GTW_ATM_INT_ISO_MSGS.REQUEST_MTI  from GTW_ATM_INT_ISO_MSGS
+		where GTW_ATM_INT_ISO_MSGS.ATM_ISO_MSGS_CODE=gtw_ATM_ISO_MSG_DEF.ATM_ISO_MSGS_CODE AND gtw_ATM_ISO_MSG_DEF.ATM_ISO_MSGS_CODE IS NOT NULL) as mtiDescription
+		
+		FROM
+		GTW_ATM_ISO_MSG_DEF gtw_ATM_ISO_MSG_DEF
+		
+		where gtw_ATM_ISO_MSG_DEF.COMP_CODE = #{compCode}
+		
+		<!-- Add for Exporting ISO Message defintion Details -->
+		<if test="interfaceId != null and interfaceId != emptyBigDecimalValue" >
+			AND gtw_ATM_ISO_MSG_DEF.INTERFACE_CODE=#{interfaceId}
+		</if>
+		
+	</sql>
+
+	<!-- Insert ISO Message Defintion Record -->
+	<insert id="saveGTW_ATM_ISO_MSG_DEFVO" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_MSG_DEFVO">
+		<selectKey resultType="java.math.BigDecimal" keyProperty="ISO_MSG_DEF_ID" order="BEFORE">
+			<if test="isOracle == 1">
+				SELECT GTW_ATM_ISO_MSG_DEF_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 ">
+				SELECT
+				next_identity('GTW_ATM_ISO_MSG_DEF')
+			</if>
+			<if test="isSQLServer == 1 ">
+				SELECT IDENT_CURRENT
+				('GTW_ATM_ISO_MSG_DEF') + 1
+			</if>
+		</selectKey>
+
+		insert into GTW_ATM_ISO_MSG_DEF
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="isOracle == 1">
+				ISO_MSG_DEF_ID,
+			</if>
+			<if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        		COMP_CODE,
+      		</if>
+      		<if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        		DESCRIPTION,
+      		</if>
+	      	<if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+	        	INTERFACE_CODE,
+	      	</if>
+      		<if test="NETWORK_MESSAGE_YN != null and !&quot;&quot;.equals(NETWORK_MESSAGE_YN)" >
+        		NETWORK_MESSAGE_YN,
+      		</if>
+      		<if test="ATM_ISO_MSGS_CODE != null and ATM_ISO_MSGS_CODE != emptyBigDecimalValue" >
+        		ATM_ISO_MSGS_CODE,
+      		</if>
+      		<if test="PROCESS_CODE != null and !&quot;&quot;.equals(PROCESS_CODE)" >
+        		PROCESS_CODE,
+      		</if>
+      		<if test="ADD_CRITERIA_EXPRESSION != null and !&quot;&quot;.equals(ADD_CRITERIA_EXPRESSION)" >
+        		ADD_CRITERIA_EXPRESSION,
+      		</if>
+      		<if test="MAPPING_ID != null and MAPPING_ID != emptyBigDecimalValue" >
+        		MAPPING_ID,
+      		</if>
+      		<if test="REQUEST_PRI_BITMAP != null and !&quot;&quot;.equals(REQUEST_PRI_BITMAP)" >
+        		REQUEST_PRI_BITMAP,
+      		</if>
+      		<if test="REQUEST_SEC_BITMAP != null and !&quot;&quot;.equals(REQUEST_SEC_BITMAP)" >
+        		REQUEST_SEC_BITMAP,
+      		</if>
+      		<if test="RESPONSE_PRI_BITMAP != null and !&quot;&quot;.equals(RESPONSE_PRI_BITMAP)" >
+        		RESPONSE_PRI_BITMAP,
+      		</if>
+      		<if test="RESPONSE_SEC_BITMAP != null and !&quot;&quot;.equals(RESPONSE_SEC_BITMAP)" >
+        		RESPONSE_SEC_BITMAP,
+      		</if>
+      		<if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        		CREATED_BY,
+      		</if>
+      		<if test="CREATED_DATE != null" >
+        		CREATED_DATE,
+      		</if>
+      		<if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        		MODIFIED_BY,
+      		</if>
+      		<if test="MODIFIED_DATE != null" >
+        		MODIFIED_DATE,
+      		</if>
+      		<if test="NETWORK_MESSAGE_TYPE != null and !&quot;&quot;.equals(NETWORK_MESSAGE_TYPE)" >
+        		NETWORK_MESSAGE_TYPE,
+      		</if>
+    	</trim>
+    	<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="isOracle == 1">
+				#{ISO_MSG_DEF_ID},
+			</if>
+			<if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+		        #{COMP_CODE},
+		    </if>
+		    <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+		       #{DESCRIPTION},
+		    </if>
+		    <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+		        #{INTERFACE_CODE},
+		    </if>
+		    <if test="NETWORK_MESSAGE_YN != null and !&quot;&quot;.equals(NETWORK_MESSAGE_YN)" >
+		        #{NETWORK_MESSAGE_YN},
+		    </if>
+		    <if test="ATM_ISO_MSGS_CODE != null and ATM_ISO_MSGS_CODE != emptyBigDecimalValue" >
+		        #{ATM_ISO_MSGS_CODE},
+		    </if>
+		    <if test="PROCESS_CODE != null and !&quot;&quot;.equals(PROCESS_CODE)" >
+		        #{PROCESS_CODE},
+		    </if>
+		    <if test="ADD_CRITERIA_EXPRESSION != null and !&quot;&quot;.equals(ADD_CRITERIA_EXPRESSION)" >
+		        #{ADD_CRITERIA_EXPRESSION},
+		    </if>
+		    <if test="MAPPING_ID != null and MAPPING_ID != emptyBigDecimalValue" >
+		        #{MAPPING_ID},
+		    </if>
+		    <if test="REQUEST_PRI_BITMAP != null and !&quot;&quot;.equals(REQUEST_PRI_BITMAP)" >
+        		#{REQUEST_PRI_BITMAP},
+      		</if>
+      		<if test="REQUEST_SEC_BITMAP != null and !&quot;&quot;.equals(REQUEST_SEC_BITMAP)" >
+        		#{REQUEST_SEC_BITMAP},
+      		</if>
+      		<if test="RESPONSE_PRI_BITMAP != null and !&quot;&quot;.equals(RESPONSE_PRI_BITMAP)" >
+        		#{RESPONSE_PRI_BITMAP},
+      		</if>
+      		<if test="RESPONSE_SEC_BITMAP != null and !&quot;&quot;.equals(RESPONSE_SEC_BITMAP)" >
+        		#{RESPONSE_SEC_BITMAP},
+      		</if>
+		    <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+		        #{CREATED_BY},
+		    </if>
+		    <if test="CREATED_DATE != null" >
+		        #{CREATED_DATE},
+		    </if>
+		    <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+		        #{MODIFIED_BY},
+		    </if>
+		    <if test="MODIFIED_DATE != null" >
+		        #{MODIFIED_DATE},
+		    </if>
+		    <if test="NETWORK_MESSAGE_TYPE != null and !&quot;&quot;.equals(NETWORK_MESSAGE_TYPE)" >
+		        #{NETWORK_MESSAGE_TYPE},
+		    </if>
+		</trim>
+	</insert>
+	
+	<insert id="saveGTW_ATM_ISO_NET_MSG_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_NET_MSG_FLDSVO" >
+    	<selectKey resultType="java.math.BigDecimal" keyProperty="NET_MSG_FLD_ID" order="BEFORE">
+			<if test="isOracle == 1">
+				SELECT GTW_ISO_NET_MSG_FLDS_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 ">
+				SELECT next_identity('GTW_ATM_ISO_NET_MSG_FLD')
+			</if>
+			<if test="isSQLServer == 1 ">
+				SELECT IDENT_CURRENT ('GTW_ATM_ISO_NET_MSG_FLD') + 1
+			</if>
+		</selectKey>
+	    insert into GTW_ATM_ISO_NET_MSG_FLDS
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      <if test="isOracle == 1">
+	      	 NET_MSG_FLD_ID,
+	      </if>
+	      <if test="ISO_MSG_DEF_ID != null and ISO_MSG_DEF_ID != emptyBigDecimalValue" >
+	        ISO_MSG_DEF_ID,
+	      </if>
+	      <if test="FIELD_CODE != null and FIELD_CODE != emptyBigDecimalValue" >
+	        FIELD_CODE,
+	      </if>
+	      <if test="REQUEST_FIELD_YN != null and !&quot;&quot;.equals(REQUEST_FIELD_YN)" >
+	        REQUEST_FIELD_YN,
+	      </if>
+	      <if test="EXPRESSION != null and !&quot;&quot;.equals(EXPRESSION)" >
+	        EXPRESSION,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	    	<if test="isOracle == 1">
+	    		#{NET_MSG_FLD_ID},
+	    	</if>
+	      	<if test="ISO_MSG_DEF_ID != null and ISO_MSG_DEF_ID != emptyBigDecimalValue" >
+	        	#{ISO_MSG_DEF_ID},
+	      	</if>
+	     	<if test="FIELD_CODE != null and FIELD_CODE != emptyBigDecimalValue" >
+	        	#{FIELD_CODE},
+	      	</if>
+	      	<if test="REQUEST_FIELD_YN != null and !&quot;&quot;.equals(REQUEST_FIELD_YN)" >
+	        	#{REQUEST_FIELD_YN},
+	      	</if>
+	      	<if test="EXPRESSION != null and !&quot;&quot;.equals(EXPRESSION)" >
+	        	#{EXPRESSION},
+	      	</if>
+	    </trim>
+  </insert>
+	
+	
+	<!-- delete Acquirer andtrx types -->
+	<delete id="deleteATMISOMessagesMappings" parameterType="isoMessagesDefinitionSC" >
+		BEGIN
+			  delete from COMMON_PWS_MAPPING_DEF 		where MAPPING_ID 		= #{mappingId}		<if test="isOracle == 1">;</if>
+			  delete from COMMON_PWS_MAPPING_DETAILS 	where MAPPING_ID 		= #{mappingId}		<if test="isOracle == 1">;</if>
+			  delete from COMMON_PWS_MAPPING 			where MAPPING_ID 		= #{mappingId}		<if test="isOracle == 1">;</if>
+		END  <if test="isOracle == 1">;</if>
+  	</delete>
+  	
+  	<!-- Result map of ISO Message Definition Network Request and Response Fields -->
+	<resultMap id="isoMessagesDefNetFldsListMap" 						type="isoMessagesDefinitionCO">
+		<result property="net_MSG_FLDSVO.NET_MSG_FLD_ID" 				column="NET_MSG_FLD_ID" />
+		<result property="net_MSG_FLDSVO.ISO_MSG_DEF_ID" 				column="ISO_MSG_DEF_ID" />
+		<result property="net_MSG_FLDSVO.FIELD_CODE"  					column="FIELD_CODE" />
+		<result property="net_MSG_FLDSVO.REQUEST_FIELD_YN" 				column="REQUEST_FIELD_YN" />
+		<result property="net_MSG_FLDSVO.EXPRESSION" 					column="EXPRESSION" />
+	</resultMap>
+
+	<!-- Select of ISO Message Definition Network Request and Response Fields List-->
+	<select id="returnIsoMessagesDefNetFldsList" parameterType="isoMessagesDefinitionSC" resultMap="isoMessagesDefNetFldsListMap">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="queryIsoMessagesDefNetFldsSQL" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+
+	<!-- Select of ISO Message Definition Network Request and Response Fields Count-->
+	<select id="returnIsoMessagesDefNetFldsCount" parameterType="isoMessagesDefinitionSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="queryIsoMessagesDefNetFldsSQL" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+	
+	<!-- SQL of ISO Message Definition Network Request and Response Fields-->
+	<sql id="queryIsoMessagesDefNetFldsSQL">
+		SELECT
+			netMsgFlds.NET_MSG_FLD_ID,
+			netMsgFlds.ISO_MSG_DEF_ID,
+			netMsgFlds.FIELD_CODE,
+			netMsgFlds.REQUEST_FIELD_YN,
+			netMsgFlds.EXPRESSION
+			
+			FROM
+			
+		GTW_ATM_ISO_NET_MSG_FLDS netMsgFlds
+		<if test="ISOMessagesDefinitionId != null and ISOMessagesDefinitionId != emptyBigDecimalValue" >
+			WHERE netMsgFlds.ISO_MSG_DEF_ID = #{ISOMessagesDefinitionId} 
+		</if>
+		<if test="interfaceId != null and interfaceId != emptyBigDecimalValue" >
+			LEFT OUTER JOIN GTW_ATM_ISO_MSG_DEF isoMsgDef ON isoMsgDef.ISO_MSG_DEF_ID=netMsgFlds.ISO_MSG_DEF_ID
+			WHERE isoMsgDef.INTERFACE_CODE=#{interfaceId}
+		</if>
+	</sql>
+	
+	<!-- delete ISO Message Definition Request Response Fields  -->
+	<delete id="deleteIsoMessagesDefNetFlds" parameterType="isoMessagesDefinitionSC" >
+		 delete from GTW_ATM_ISO_NET_MSG_FLDS where ISO_MSG_DEF_ID = #{ISOMessagesDefinitionId} 
+  	</delete>
+	
+</mapper>

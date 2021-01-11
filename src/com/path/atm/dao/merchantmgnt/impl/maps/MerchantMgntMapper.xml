@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="merchantMgntMapper">
+
+	<sql id="select_merchantMgnt">			
+		SELECT  	
+				GTW_ATM_MERCHANT.COMP_CODE,    
+				GTW_ATM_MERCHANT.MERCHANT_CODE,   				
+				GTW_ATM_MERCHANT.IBAN_ACC_NO,
+				GTW_ATM_MERCHANT.ADDITIONAL_REFERENCE,
+				GTW_ATM_MERCHANT.REMARK,
+				GTW_ATM_MERCHANT.STATUS,   
+				(CASE
+					WHEN TO_BE_STATUS IN ('TS', 'TD', 'TR')  THEN TO_BE_STATUS_DATE
+					WHEN STATUS = 'A' THEN CREATED_DATE
+					WHEN STATUS = 'P' THEN APPROVED_DATE
+					WHEN STATUS = 'S' THEN SUSPENDED_DATE
+					WHEN STATUS = 'D' THEN DELETED_DATE
+				END) statusTime,
+
+				
+				(SELECT SYS_PARAM_LOV_TRANS.VALUE_DESC 
+      	  		 FROM SYS_PARAM_LOV_TRANS
+      	  		 WHERE SYS_PARAM_LOV_TRANS.VALUE_CODE = 
+      	  		 	(CASE WHEN GTW_ATM_MERCHANT.TO_BE_STATUS IS NOT NULL THEN GTW_ATM_MERCHANT.TO_BE_STATUS
+						ELSE GTW_ATM_MERCHANT.STATUS END)    	 		 
+      	  		 AND SYS_PARAM_LOV_TRANS.LOV_TYPE_ID   = #{lovType}
+      	  		 AND SYS_PARAM_LOV_TRANS.LANG_CODE     = #{lang} ) statusDesc,
+      	  		GTW_ATM_MERCHANT.CREATED_BY, 
+				GTW_ATM_MERCHANT.CREATED_DATE, 
+				GTW_ATM_MERCHANT.APPROVED_BY, 
+				GTW_ATM_MERCHANT.APPROVED_DATE, 
+				GTW_ATM_MERCHANT.MODIFIED_BY, 
+				GTW_ATM_MERCHANT.MODIFIED_DATE,
+				GTW_ATM_MERCHANT.SUSPENDED_BY,
+				GTW_ATM_MERCHANT.SUSPENDED_DATE,  				 
+				GTW_ATM_MERCHANT.TO_BE_STATUS,
+				GTW_ATM_MERCHANT.TO_BE_STATUS_BY, 
+				GTW_ATM_MERCHANT.TO_BE_STATUS_DATE,
+				GTW_ATM_MERCHANT.DELETED_BY, 
+				GTW_ATM_MERCHANT.DELETED_DATE					
+		FROM 	GTW_ATM_MERCHANT
+		<if test='ivCrud!="R"'>
+        	, SYS_PARAM_LOV_LK_OPT lovOpt
+  		</if>
+		WHERE   GTW_ATM_MERCHANT.COMP_CODE    = (#{compCode,    jdbcType=NUMERIC})
+		
+		<if test="status != null and !&quot;&quot;.equals(status)" >
+        	AND GTW_ATM_MERCHANT.STATUS=#{status}
+      	</if>
+      	
+		<if test='ivCrud!="R"'>
+       		<if test="progRef=='MER00P' || progRef=='MER00UP'">
+       			AND GTW_ATM_MERCHANT.STATUS  = lovOpt.VALUE_CODE
+       		</if>
+       		<if test="progRef=='MER00S' || progRef=='MER00R' || progRef=='MER00D'">
+       			AND GTW_ATM_MERCHANT.STATUS  = lovOpt.VALUE_CODE
+       			AND GTW_ATM_MERCHANT.TO_BE_STATUS IS NULL
+       		</if>
+			<if test="progRef=='MER00AS' || progRef=='MER00AD' || progRef=='MER00AR'">
+       			AND GTW_ATM_MERCHANT.TO_BE_STATUS  = lovOpt.VALUE_CODE
+       		</if>    		
+       		AND lovOpt.LOV_TYPE_ID  = #{lovType,jdbcType=NUMERIC}
+       		AND lovOpt.PROG_REF     = #{progRef,jdbcType=VARCHAR}
+       		AND lovOpt.APP_NAME     = #{appName,jdbcType=VARCHAR}
+       	</if> 
+	</sql>
+		
+	<select id ="returnActiveResult" parameterType="merchantMgntCO" resultType="int">
+		select count(1)
+		  From GTW_ATM_MERCHANT
+		 WHERE COMP_CODE = #{loginCompCode}
+		   AND CODE = #{gtwAtmMerchantVO.MERCHANT_CODE}
+		   AND STATUS  IN ('A','P')
+	</select>
+<!--	-->
+	<sql id="select_merchantMgntDetails">			
+		SELECT  	
+				GTW_ATM_MERCHANT.COMP_CODE,   
+				GTW_ATM_MERCHANT.MERCHANT_CODE,   				
+				GTW_ATM_MERCHANT.IBAN_ACC_NO,
+				GTW_ATM_MERCHANT.ADDITIONAL_REFERENCE,
+				GTW_ATM_MERCHANT.REMARK,
+				GTW_ATM_MERCHANT.STATUS,   
+				(CASE
+					WHEN TO_BE_STATUS IN ('TS', 'TD', 'TR')  THEN TO_BE_STATUS_DATE
+					WHEN STATUS = 'A' THEN CREATED_DATE
+					WHEN STATUS = 'P' THEN APPROVED_DATE
+					WHEN STATUS = 'S' THEN SUSPENDED_DATE
+					WHEN STATUS = 'D' THEN DELETED_DATE
+				END) statusTime,
+				
+				(SELECT SYS_PARAM_LOV_TRANS.VALUE_DESC 
+      	  		 FROM SYS_PARAM_LOV_TRANS
+      	  		 WHERE SYS_PARAM_LOV_TRANS.VALUE_CODE = 
+      	  		 	(CASE WHEN GTW_ATM_MERCHANT.TO_BE_STATUS IS NOT NULL THEN GTW_ATM_MERCHANT.TO_BE_STATUS
+						ELSE GTW_ATM_MERCHANT.STATUS END)    	 		 
+      	  		 AND SYS_PARAM_LOV_TRANS.LOV_TYPE_ID   = #{lovType}
+      	  		 AND SYS_PARAM_LOV_TRANS.LANG_CODE     = #{lang} ) statusDesc,
+      	  		GTW_ATM_MERCHANT.CREATED_BY, 
+				GTW_ATM_MERCHANT.CREATED_DATE, 
+				GTW_ATM_MERCHANT.APPROVED_BY, 
+				GTW_ATM_MERCHANT.APPROVED_DATE, 
+				GTW_ATM_MERCHANT.MODIFIED_BY, 
+				GTW_ATM_MERCHANT.MODIFIED_DATE,
+				GTW_ATM_MERCHANT.SUSPENDED_BY,
+				GTW_ATM_MERCHANT.SUSPENDED_DATE,
+				GTW_ATM_MERCHANT.TO_BE_STATUS,			 
+				GTW_ATM_MERCHANT.TO_BE_STATUS_BY, 
+				GTW_ATM_MERCHANT.TO_BE_STATUS_DATE,
+				GTW_ATM_MERCHANT.DELETED_BY, 
+				GTW_ATM_MERCHANT.DELETED_DATE						
+		FROM 	GTW_ATM_MERCHANT
+		WHERE   GTW_ATM_MERCHANT.COMP_CODE     = (#{compCode,jdbcType=NUMERIC})
+		AND     GTW_ATM_MERCHANT.MERCHANT_CODE = (#{code,jdbcType=NUMERIC})	
+		
+		<if test="status != null and !&quot;&quot;.equals(status)" >
+        	AND GTW_ATM_MERCHANT.STATUS=#{status}
+      	</if>
+		
+	</sql>
+	
+	
+	<resultMap id="merchantMgntResultMap" type="merchantMgntCO">
+		<result property="gtwAtmMerchantVO.COMP_CODE"				column="COMP_CODE" />
+		<result property="gtwAtmMerchantVO.MERCHANT_CODE"			column="MERCHANT_CODE" />
+		<result property="gtwAtmMerchantVO.IBAN_ACC_NO"				column="IBAN_ACC_NO" /> 
+		<result property="gtwAtmMerchantVO.ADDITIONAL_REFERENCE"	column="ADDITIONAL_REFERENCE" />
+		<result property="gtwAtmMerchantVO.REMARK"					column="REMARK" />
+		<result property="gtwAtmMerchantVO.STATUS"					column="STATUS" />
+		<result property="gtwAtmMerchantVO.CREATED_BY"				column="CREATED_BY" />
+		<result property="gtwAtmMerchantVO.CREATED_DATE"			column="CREATED_DATE" />
+		<result property="gtwAtmMerchantVO.APPROVED_BY"				column="APPROVED_BY" />
+		<result property="gtwAtmMerchantVO.APPROVED_DATE"			column="APPROVED_DATE" />
+		<result property="gtwAtmMerchantVO.MODIFIED_BY"				column="MODIFIED_BY" />
+		<result property="gtwAtmMerchantVO.MODIFIED_DATE"			column="MODIFIED_DATE" />		
+		<result property="gtwAtmMerchantVO.TO_BE_STATUS"			column="TO_BE_STATUS" />
+		<result property="gtwAtmMerchantVO.TO_BE_STATUS_BY"			column="TO_BE_STATUS_BY" />
+		<result property="gtwAtmMerchantVO.TO_BE_STATUS_DATE"		column="TO_BE_STATUS_DATE" />
+		<result property="gtwAtmMerchantVO.DELETED_BY"				column="DELETED_BY" />
+		<result property="gtwAtmMerchantVO.DELETED_DATE"			column="DELETED_DATE" />
+	</resultMap>
+	
+	<select id="returnMerchantMgntList" resultMap="merchantMgntResultMap"	parameterType="merchantMgntSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="select_merchantMgnt" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+	
+	<select id="returnMerchantMgntListCount" resultType="int" parameterType="merchantMgntSC">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="select_merchantMgnt" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+	
+	<select id="returnMerchantMgntDetails" resultMap="merchantMgntResultMap" parameterType="merchantMgntSC">
+		<include refid="select_merchantMgntDetails"/>
+	</select>
+
+	<insert id="insertMERCHANT" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_MERCHANTVO" >
+   	  	  <selectKey resultType="java.math.BigDecimal" keyProperty="MERCHANT_CODE" order="BEFORE" >
+			<if test="isOracle == 1">
+				SELECT GTW_ATM_MERCHANT_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1" >
+				SELECT next_identity('GTW_ATM_MERCHANT')
+			</if>
+			<if test="isSQLServer == 1" >
+				SELECT IDENT_CURRENT ('GTW_ATM_MERCHANT') + 1
+			</if>
+		</selectKey>
+    insert into GTW_ATM_MERCHANT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+    	
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        COMP_CODE,
+      </if>
+      <if test="isOracle == 1">
+	  	MERCHANT_CODE,
+	  </if>      
+      <if test="ADDITIONAL_REFERENCE != null and !&quot;&quot;.equals(ADDITIONAL_REFERENCE)" >
+        ADDITIONAL_REFERENCE,
+      </if>
+      <if test="IBAN_ACC_NO != null and !&quot;&quot;.equals(IBAN_ACC_NO)" >
+        IBAN_ACC_NO,
+      </if>
+      <if test="REMARK != null and !&quot;&quot;.equals(REMARK)" >
+        REMARK,
+      </if>
+      <if test="STATUS != null and !&quot;&quot;.equals(STATUS)" >
+        STATUS,
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        CREATED_BY,
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="isOracle == 1">
+      	 #{MERCHANT_CODE},
+      </if>
+      <if test="ADDITIONAL_REFERENCE != null and !&quot;&quot;.equals(ADDITIONAL_REFERENCE)" >
+        #{ADDITIONAL_REFERENCE},
+      </if>
+      <if test="IBAN_ACC_NO != null and !&quot;&quot;.equals(IBAN_ACC_NO)" >
+        #{IBAN_ACC_NO},
+      </if>
+      <if test="REMARK != null and !&quot;&quot;.equals(REMARK)" >
+        #{REMARK},
+      </if>
+      <if test="STATUS != null and !&quot;&quot;.equals(STATUS)" >
+        #{STATUS},
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        #{CREATED_BY},
+      </if>
+      <if test="CREATED_DATE != null" >
+        #{CREATED_DATE},
+      </if>      
+    </trim>
+  </insert>
+  
+  
+  	<select id="countAccountByIbanORAddRef" parameterType="merchantMgntSC" resultType="int">
+  		SELECT 
+  			COUNT(*)
+  			  FROM AMF
+		  			WHERE	AMF.COMP_CODE  		= #{compCode}
+		  	<if test='IBAN != null and !"".equals(IBAN)'>
+			 	AND  AMF.IBAN_ACC_NO = #{IBAN}
+			</if>
+			<if test='additionalRef != null and !"".equals(additionalRef)'>
+			  	AND  AMF.ADDITIONAL_REFERENCE = #{additionalRef}
+			</if>
+			  	AND AMF.STATUS IN ('I', 'A')
+  	</select>
+	
+</mapper>
+
+ 

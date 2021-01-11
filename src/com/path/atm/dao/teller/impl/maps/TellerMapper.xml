@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="atmTellerMapper">
+
+	<resultMap id="atmTellerListMap" type="atmTellerCO">
+		<result property="companyCode"  	column="COMP_CODE" />
+		<result property="branchCode" 		column="BRANCH_CODE" />
+		<result property="tellerCode"     	column="CODE" />
+		<result property="userID"   		column="USER_ID" />
+		<result property="tellerType" 		column="TELLER_TYPE" />
+		<result property="briefNameEnglish" column="BRIEF_NAME_ENG" />
+		<result property="briefNameArabic" 	column="BRIEF_NAME_ARAB" />
+		<result property="longNameEnglish" 	column="LONG_NAME_ENG" />
+		<result property="longNameArabic" 	column="LONG_NAME_ARAB" />
+	</resultMap>
+
+
+	<select id="returnTellerList" parameterType="atmTellerSC" resultMap="atmTellerListMap">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="queryTellerSQL" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+
+	<select id="returnTellerListCount" parameterType="atmTellerSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="queryTellerSQL" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+
+	<select id="returnTellerDetails" resultMap="atmTellerListMap" parameterType="atmTellerSC">
+		<include refid="queryTellerSQL" />
+		AND CTSTELLER.CODE = #{tellerCode}
+	</select>
+
+	<sql id="queryTellerSQL">
+		SELECT
+		    CTSTELLER.COMP_CODE,
+			CTSTELLER.BRANCH_CODE,
+			CTSTELLER.CODE,
+			CTSTELLER.BRIEF_NAME_ENG,
+			CTSTELLER.LONG_NAME_ENG,
+			CTSTELLER.BRIEF_NAME_ARAB,
+			CTSTELLER.LONG_NAME_ARAB,
+			CTSTELLER.STATUS,
+			CTSTELLER.USER_ID,
+			CTSTELLER.TELLER_TYPE,
+			CTSTELLER.PRIVILEGE_LEVEL,
+			CTSTELLER.DIVISION_CODE,
+			CTSTELLER.DEPT_CODE,
+			CTSTELLER.ROLE_CODE
+							
+			FROM CTSTELLER LEFT OUTER JOIN CTSCONTROL  ON   CTSTELLER.COMP_CODE = CTSCONTROL.COMP_CODE
+			AND  CTSTELLER.BRANCH_CODE = CTSCONTROL.BRANCH_CODE
+			WHERE ( CTSTELLER.COMP_CODE   = #{compCode})
+			AND ( CTSTELLER.BRANCH_CODE = #{branchCode})
+			AND ( CTSTELLER.STATUS = #{status})
+	</sql>
+	
+</mapper>

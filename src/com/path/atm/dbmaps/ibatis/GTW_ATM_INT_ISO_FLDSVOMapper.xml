@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GTW_ATM_INT_ISO_FLDS" >
+  <resultMap id="BaseResultMap" type="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_FLDSVO" >
+    <id column="ATM_ISO_FLDS_CODE" property="ATM_ISO_FLDS_CODE" />
+    <result column="INTERFACE_CODE" property="INTERFACE_CODE" />
+    <result column="FIELD_CODE" property="FIELD_CODE" />
+    <result column="FIELD_NAME" property="FIELD_NAME" />
+    <result column="FIELD_TYPE" property="FIELD_TYPE" />
+    <result column="FIXED_LENGTH" property="FIXED_LENGTH" />
+    <result column="DYNAMIC_LENGTH" property="DYNAMIC_LENGTH" />
+    <result column="TOTAL_MASK_YN" property="TOTAL_MASK_YN" />
+    <result column="PARTIAL_MASK" property="PARTIAL_MASK" />
+    <result column="IS_DECIMAL_YN" property="IS_DECIMAL_YN" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_FLDSVO" extends="BaseResultMap" >
+    <result column="EXPRESSION" property="EXPRESSION" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ATM_ISO_FLDS_CODE, INTERFACE_CODE, FIELD_CODE, FIELD_NAME, FIELD_TYPE, FIXED_LENGTH, 
+    DYNAMIC_LENGTH, TOTAL_MASK_YN, PARTIAL_MASK, IS_DECIMAL_YN
+  </sql>
+  <sql id="Blob_Column_List" >
+    EXPRESSION
+  </sql>
+  <select id="selectGTW_ATM_INT_ISO_FLDS" resultMap="ResultMapWithBLOBs" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_FLDSVO" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from GTW_ATM_INT_ISO_FLDS
+    where ATM_ISO_FLDS_CODE = #{ATM_ISO_FLDS_CODE}
+  </select>
+  <delete id="deleteGTW_ATM_INT_ISO_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_FLDSVO" >
+    delete from GTW_ATM_INT_ISO_FLDS
+    where ATM_ISO_FLDS_CODE = #{ATM_ISO_FLDS_CODE}
+  </delete>
+  <insert id="insertGTW_ATM_INT_ISO_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_FLDSVO" >
+    insert into GTW_ATM_INT_ISO_FLDS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ATM_ISO_FLDS_CODE != null and ATM_ISO_FLDS_CODE != emptyBigDecimalValue" >
+        ATM_ISO_FLDS_CODE,
+      </if>
+      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+        INTERFACE_CODE,
+      </if>
+      <if test="FIELD_CODE != null and FIELD_CODE != emptyBigDecimalValue" >
+        FIELD_CODE,
+      </if>
+      <if test="FIELD_NAME != null and !&quot;&quot;.equals(FIELD_NAME)" >
+        FIELD_NAME,
+      </if>
+      <if test="FIELD_TYPE != null and !&quot;&quot;.equals(FIELD_TYPE)" >
+        FIELD_TYPE,
+      </if>
+      <if test="FIXED_LENGTH != null and FIXED_LENGTH != emptyBigDecimalValue" >
+        FIXED_LENGTH,
+      </if>
+      <if test="DYNAMIC_LENGTH != null and DYNAMIC_LENGTH != emptyBigDecimalValue" >
+        DYNAMIC_LENGTH,
+      </if>
+      <if test="TOTAL_MASK_YN != null and !&quot;&quot;.equals(TOTAL_MASK_YN)" >
+        TOTAL_MASK_YN,
+      </if>
+      <if test="PARTIAL_MASK != null and !&quot;&quot;.equals(PARTIAL_MASK)" >
+        PARTIAL_MASK,
+      </if>
+      <if test="IS_DECIMAL_YN != null and !&quot;&quot;.equals(IS_DECIMAL_YN)" >
+        IS_DECIMAL_YN,
+      </if>
+      <if test="EXPRESSION != null" >
+        EXPRESSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ATM_ISO_FLDS_CODE != null and ATM_ISO_FLDS_CODE != emptyBigDecimalValue" >
+        #{ATM_ISO_FLDS_CODE},
+      </if>
+      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+        #{INTERFACE_CODE},
+      </if>
+      <if test="FIELD_CODE != null and FIELD_CODE != emptyBigDecimalValue" >
+        #{FIELD_CODE},
+      </if>
+      <if test="FIELD_NAME != null and !&quot;&quot;.equals(FIELD_NAME)" >
+        #{FIELD_NAME},
+      </if>
+      <if test="FIELD_TYPE != null and !&quot;&quot;.equals(FIELD_TYPE)" >
+        #{FIELD_TYPE},
+      </if>
+      <if test="FIXED_LENGTH != null and FIXED_LENGTH != emptyBigDecimalValue" >
+        #{FIXED_LENGTH},
+      </if>
+      <if test="DYNAMIC_LENGTH != null and DYNAMIC_LENGTH != emptyBigDecimalValue" >
+        #{DYNAMIC_LENGTH},
+      </if>
+      <if test="TOTAL_MASK_YN != null and !&quot;&quot;.equals(TOTAL_MASK_YN)" >
+        #{TOTAL_MASK_YN},
+      </if>
+      <if test="PARTIAL_MASK != null and !&quot;&quot;.equals(PARTIAL_MASK)" >
+        #{PARTIAL_MASK},
+      </if>
+      <if test="IS_DECIMAL_YN != null and !&quot;&quot;.equals(IS_DECIMAL_YN)" >
+        #{IS_DECIMAL_YN},
+      </if>
+      <if test="EXPRESSION != null" >
+        #{EXPRESSION},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateGTW_ATM_INT_ISO_FLDS" >
+    update GTW_ATM_INT_ISO_FLDS
+    <set >
+      <if test="INTERFACE_CODE != null" >
+        <choose >
+          <when test="INTERFACE_CODE == emptyBigDecimalValue" >
+            INTERFACE_CODE = NULL ,
+          </when>
+          <otherwise >
+            INTERFACE_CODE = #{INTERFACE_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="FIELD_CODE != null" >
+        <choose >
+          <when test="FIELD_CODE == emptyBigDecimalValue" >
+            FIELD_CODE = NULL ,
+          </when>
+          <otherwise >
+            FIELD_CODE = #{FIELD_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="FIELD_NAME != null" >
+        <choose >
+          <when test="FIELD_NAME.equals(&quot;&quot;)" >
+            FIELD_NAME = NULL ,
+          </when>
+          <otherwise >
+            FIELD_NAME = #{FIELD_NAME},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="FIELD_TYPE != null" >
+        <choose >
+          <when test="FIELD_TYPE.equals(&quot;&quot;)" >
+            FIELD_TYPE = NULL ,
+          </when>
+          <otherwise >
+            FIELD_TYPE = #{FIELD_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="FIXED_LENGTH != null" >
+        <choose >
+          <when test="FIXED_LENGTH == emptyBigDecimalValue" >
+            FIXED_LENGTH = NULL ,
+          </when>
+          <otherwise >
+            FIXED_LENGTH = #{FIXED_LENGTH},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DYNAMIC_LENGTH != null" >
+        <choose >
+          <when test="DYNAMIC_LENGTH == emptyBigDecimalValue" >
+            DYNAMIC_LENGTH = NULL ,
+          </when>
+          <otherwise >
+            DYNAMIC_LENGTH = #{DYNAMIC_LENGTH},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="TOTAL_MASK_YN != null" >
+        <choose >
+          <when test="TOTAL_MASK_YN.equals(&quot;&quot;)" >
+            TOTAL_MASK_YN = NULL ,
+          </when>
+          <otherwise >
+            TOTAL_MASK_YN = #{TOTAL_MASK_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="PARTIAL_MASK != null" >
+        <choose >
+          <when test="PARTIAL_MASK.equals(&quot;&quot;)" >
+            PARTIAL_MASK = NULL ,
+          </when>
+          <otherwise >
+            PARTIAL_MASK = #{PARTIAL_MASK},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="IS_DECIMAL_YN != null" >
+        <choose >
+          <when test="IS_DECIMAL_YN.equals(&quot;&quot;)" >
+            IS_DECIMAL_YN = NULL ,
+          </when>
+          <otherwise >
+            IS_DECIMAL_YN = #{IS_DECIMAL_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="EXPRESSION != null" >
+        EXPRESSION = #{EXPRESSION},
+      </if>
+    </set>
+    where ATM_ISO_FLDS_CODE = #{ATM_ISO_FLDS_CODE}
+  </sql>
+  <update id="updateGTW_ATM_INT_ISO_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_FLDSVO" >
+    <include refid="sql_updateGTW_ATM_INT_ISO_FLDS" />
+  </update>
+</mapper>

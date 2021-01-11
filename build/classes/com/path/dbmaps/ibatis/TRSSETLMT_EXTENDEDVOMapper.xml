@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TRSSETLMT_EXTENDED" >
+  <resultMap id="BaseResultMap" type="com.path.dbmaps.vo.TRSSETLMT_EXTENDEDVO" >
+    <id column="BRANCH" property="BRANCH" />
+    <id column="COMP_CODE" property="COMP_CODE" />
+    <id column="SETTLEMENT_NBR" property="SETTLEMENT_NBR" />
+    <result column="SWITCH_DEAL_TYPE" property="SWITCH_DEAL_TYPE" />
+    <result column="INCLUDE_CURRENT_INSTALLMENT_YN" property="INCLUDE_CURRENT_INSTALLMENT_YN" />
+    <result column="PAST_DUE_AMOUNT_SWITCHING" property="PAST_DUE_AMOUNT_SWITCHING" />
+    <result column="PRINCIPAL_OUTSTANDING" property="PRINCIPAL_OUTSTANDING" />
+    <result column="INCIDENTAL_CHARGE_COLLECTED" property="INCIDENTAL_CHARGE_COLLECTED" />
+    <result column="INCIDENTAL_CHARGE_DUE" property="INCIDENTAL_CHARGE_DUE" />
+    <result column="REPOSSESSION_TYPE" property="REPOSSESSION_TYPE" />
+    <result column="ADVANCE_USUFRUCT" property="ADVANCE_USUFRUCT" />
+    <result column="REIMBURSE_ADVANCE_USUFRUCT" property="REIMBURSE_ADVANCE_USUFRUCT" />
+    <result column="COLLECTED_INSURANCE_CHARGES" property="COLLECTED_INSURANCE_CHARGES" />
+    <result column="SECURITY_DEPOSIT" property="SECURITY_DEPOSIT" />
+    <result column="OUTSTANDING_INSURANCE_CHARGES" property="OUTSTANDING_INSURANCE_CHARGES" />
+    <result column="ASSET_MATURITY_ACTION" property="ASSET_MATURITY_ACTION" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    BRANCH, COMP_CODE, SETTLEMENT_NBR, SWITCH_DEAL_TYPE, INCLUDE_CURRENT_INSTALLMENT_YN, 
+    PAST_DUE_AMOUNT_SWITCHING, PRINCIPAL_OUTSTANDING, INCIDENTAL_CHARGE_COLLECTED, INCIDENTAL_CHARGE_DUE, 
+    REPOSSESSION_TYPE, ADVANCE_USUFRUCT, REIMBURSE_ADVANCE_USUFRUCT, COLLECTED_INSURANCE_CHARGES, 
+    SECURITY_DEPOSIT, OUTSTANDING_INSURANCE_CHARGES, ASSET_MATURITY_ACTION
+  </sql>
+  <select id="selectTRSSETLMT_EXTENDED" resultMap="BaseResultMap" parameterType="com.path.dbmaps.vo.TRSSETLMT_EXTENDEDVOKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TRSSETLMT_EXTENDED
+    where BRANCH = #{BRANCH}
+      and COMP_CODE = #{COMP_CODE}
+      and SETTLEMENT_NBR = #{SETTLEMENT_NBR}
+  </select>
+  <delete id="deleteTRSSETLMT_EXTENDED" parameterType="com.path.dbmaps.vo.TRSSETLMT_EXTENDEDVOKey" >
+    delete from TRSSETLMT_EXTENDED
+    where BRANCH = #{BRANCH}
+      and COMP_CODE = #{COMP_CODE}
+      and SETTLEMENT_NBR = #{SETTLEMENT_NBR}
+  </delete>
+  <insert id="insertTRSSETLMT_EXTENDED" parameterType="com.path.dbmaps.vo.TRSSETLMT_EXTENDEDVO" >
+    insert into TRSSETLMT_EXTENDED
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="BRANCH != null and BRANCH != emptyBigDecimalValue" >
+        BRANCH,
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        COMP_CODE,
+      </if>
+      <if test="SETTLEMENT_NBR != null and SETTLEMENT_NBR != emptyBigDecimalValue" >
+        SETTLEMENT_NBR,
+      </if>
+      <if test="SWITCH_DEAL_TYPE != null and SWITCH_DEAL_TYPE != emptyBigDecimalValue" >
+        SWITCH_DEAL_TYPE,
+      </if>
+      <if test="INCLUDE_CURRENT_INSTALLMENT_YN != null and !&quot;&quot;.equals(INCLUDE_CURRENT_INSTALLMENT_YN)" >
+        INCLUDE_CURRENT_INSTALLMENT_YN,
+      </if>
+      <if test="PAST_DUE_AMOUNT_SWITCHING != null and PAST_DUE_AMOUNT_SWITCHING != emptyBigDecimalValue" >
+        PAST_DUE_AMOUNT_SWITCHING,
+      </if>
+      <if test="PRINCIPAL_OUTSTANDING != null and PRINCIPAL_OUTSTANDING != emptyBigDecimalValue" >
+        PRINCIPAL_OUTSTANDING,
+      </if>
+      <if test="INCIDENTAL_CHARGE_COLLECTED != null and INCIDENTAL_CHARGE_COLLECTED != emptyBigDecimalValue" >
+        INCIDENTAL_CHARGE_COLLECTED,
+      </if>
+      <if test="INCIDENTAL_CHARGE_DUE != null and INCIDENTAL_CHARGE_DUE != emptyBigDecimalValue" >
+        INCIDENTAL_CHARGE_DUE,
+      </if>
+      <if test="REPOSSESSION_TYPE != null and REPOSSESSION_TYPE != emptyBigDecimalValue" >
+        REPOSSESSION_TYPE,
+      </if>
+      <if test="ADVANCE_USUFRUCT != null and ADVANCE_USUFRUCT != emptyBigDecimalValue" >
+        ADVANCE_USUFRUCT,
+      </if>
+      <if test="REIMBURSE_ADVANCE_USUFRUCT != null and REIMBURSE_ADVANCE_USUFRUCT != emptyBigDecimalValue" >
+        REIMBURSE_ADVANCE_USUFRUCT,
+      </if>
+      <if test="COLLECTED_INSURANCE_CHARGES != null and COLLECTED_INSURANCE_CHARGES != emptyBigDecimalValue" >
+        COLLECTED_INSURANCE_CHARGES,
+      </if>
+      <if test="SECURITY_DEPOSIT != null and SECURITY_DEPOSIT != emptyBigDecimalValue" >
+        SECURITY_DEPOSIT,
+      </if>
+      <if test="OUTSTANDING_INSURANCE_CHARGES != null and OUTSTANDING_INSURANCE_CHARGES != emptyBigDecimalValue" >
+        OUTSTANDING_INSURANCE_CHARGES,
+      </if>
+      <if test="ASSET_MATURITY_ACTION != null and !&quot;&quot;.equals(ASSET_MATURITY_ACTION)" >
+        ASSET_MATURITY_ACTION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="BRANCH != null and BRANCH != emptyBigDecimalValue" >
+        #{BRANCH},
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="SETTLEMENT_NBR != null and SETTLEMENT_NBR != emptyBigDecimalValue" >
+        #{SETTLEMENT_NBR},
+      </if>
+      <if test="SWITCH_DEAL_TYPE != null and SWITCH_DEAL_TYPE != emptyBigDecimalValue" >
+        #{SWITCH_DEAL_TYPE},
+      </if>
+      <if test="INCLUDE_CURRENT_INSTALLMENT_YN != null and !&quot;&quot;.equals(INCLUDE_CURRENT_INSTALLMENT_YN)" >
+        #{INCLUDE_CURRENT_INSTALLMENT_YN},
+      </if>
+      <if test="PAST_DUE_AMOUNT_SWITCHING != null and PAST_DUE_AMOUNT_SWITCHING != emptyBigDecimalValue" >
+        #{PAST_DUE_AMOUNT_SWITCHING},
+      </if>
+      <if test="PRINCIPAL_OUTSTANDING != null and PRINCIPAL_OUTSTANDING != emptyBigDecimalValue" >
+        #{PRINCIPAL_OUTSTANDING},
+      </if>
+      <if test="INCIDENTAL_CHARGE_COLLECTED != null and INCIDENTAL_CHARGE_COLLECTED != emptyBigDecimalValue" >
+        #{INCIDENTAL_CHARGE_COLLECTED},
+      </if>
+      <if test="INCIDENTAL_CHARGE_DUE != null and INCIDENTAL_CHARGE_DUE != emptyBigDecimalValue" >
+        #{INCIDENTAL_CHARGE_DUE},
+      </if>
+      <if test="REPOSSESSION_TYPE != null and REPOSSESSION_TYPE != emptyBigDecimalValue" >
+        #{REPOSSESSION_TYPE},
+      </if>
+      <if test="ADVANCE_USUFRUCT != null and ADVANCE_USUFRUCT != emptyBigDecimalValue" >
+        #{ADVANCE_USUFRUCT},
+      </if>
+      <if test="REIMBURSE_ADVANCE_USUFRUCT != null and REIMBURSE_ADVANCE_USUFRUCT != emptyBigDecimalValue" >
+        #{REIMBURSE_ADVANCE_USUFRUCT},
+      </if>
+      <if test="COLLECTED_INSURANCE_CHARGES != null and COLLECTED_INSURANCE_CHARGES != emptyBigDecimalValue" >
+        #{COLLECTED_INSURANCE_CHARGES},
+      </if>
+      <if test="SECURITY_DEPOSIT != null and SECURITY_DEPOSIT != emptyBigDecimalValue" >
+        #{SECURITY_DEPOSIT},
+      </if>
+      <if test="OUTSTANDING_INSURANCE_CHARGES != null and OUTSTANDING_INSURANCE_CHARGES != emptyBigDecimalValue" >
+        #{OUTSTANDING_INSURANCE_CHARGES},
+      </if>
+      <if test="ASSET_MATURITY_ACTION != null and !&quot;&quot;.equals(ASSET_MATURITY_ACTION)" >
+        #{ASSET_MATURITY_ACTION},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateTRSSETLMT_EXTENDED" >
+    update TRSSETLMT_EXTENDED
+    <set >
+      <if test="SWITCH_DEAL_TYPE != null" >
+        <choose >
+          <when test="SWITCH_DEAL_TYPE == emptyBigDecimalValue" >
+            SWITCH_DEAL_TYPE = NULL ,
+          </when>
+          <otherwise >
+            SWITCH_DEAL_TYPE = #{SWITCH_DEAL_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="INCLUDE_CURRENT_INSTALLMENT_YN != null" >
+        <choose >
+          <when test="INCLUDE_CURRENT_INSTALLMENT_YN.equals(&quot;&quot;)" >
+            INCLUDE_CURRENT_INSTALLMENT_YN = NULL ,
+          </when>
+          <otherwise >
+            INCLUDE_CURRENT_INSTALLMENT_YN = #{INCLUDE_CURRENT_INSTALLMENT_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="PAST_DUE_AMOUNT_SWITCHING != null" >
+        <choose >
+          <when test="PAST_DUE_AMOUNT_SWITCHING == emptyBigDecimalValue" >
+            PAST_DUE_AMOUNT_SWITCHING = NULL ,
+          </when>
+          <otherwise >
+            PAST_DUE_AMOUNT_SWITCHING = #{PAST_DUE_AMOUNT_SWITCHING},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="PRINCIPAL_OUTSTANDING != null" >
+        <choose >
+          <when test="PRINCIPAL_OUTSTANDING == emptyBigDecimalValue" >
+            PRINCIPAL_OUTSTANDING = NULL ,
+          </when>
+          <otherwise >
+            PRINCIPAL_OUTSTANDING = #{PRINCIPAL_OUTSTANDING},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="INCIDENTAL_CHARGE_COLLECTED != null" >
+        <choose >
+          <when test="INCIDENTAL_CHARGE_COLLECTED == emptyBigDecimalValue" >
+            INCIDENTAL_CHARGE_COLLECTED = NULL ,
+          </when>
+          <otherwise >
+            INCIDENTAL_CHARGE_COLLECTED = #{INCIDENTAL_CHARGE_COLLECTED},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="INCIDENTAL_CHARGE_DUE != null" >
+        <choose >
+          <when test="INCIDENTAL_CHARGE_DUE == emptyBigDecimalValue" >
+            INCIDENTAL_CHARGE_DUE = NULL ,
+          </when>
+          <otherwise >
+            INCIDENTAL_CHARGE_DUE = #{INCIDENTAL_CHARGE_DUE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REPOSSESSION_TYPE != null" >
+        <choose >
+          <when test="REPOSSESSION_TYPE == emptyBigDecimalValue" >
+            REPOSSESSION_TYPE = NULL ,
+          </when>
+          <otherwise >
+            REPOSSESSION_TYPE = #{REPOSSESSION_TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="ADVANCE_USUFRUCT != null" >
+        <choose >
+          <when test="ADVANCE_USUFRUCT == emptyBigDecimalValue" >
+            ADVANCE_USUFRUCT = NULL ,
+          </when>
+          <otherwise >
+            ADVANCE_USUFRUCT = #{ADVANCE_USUFRUCT},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REIMBURSE_ADVANCE_USUFRUCT != null" >
+        <choose >
+          <when test="REIMBURSE_ADVANCE_USUFRUCT == emptyBigDecimalValue" >
+            REIMBURSE_ADVANCE_USUFRUCT = NULL ,
+          </when>
+          <otherwise >
+            REIMBURSE_ADVANCE_USUFRUCT = #{REIMBURSE_ADVANCE_USUFRUCT},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="COLLECTED_INSURANCE_CHARGES != null" >
+        <choose >
+          <when test="COLLECTED_INSURANCE_CHARGES == emptyBigDecimalValue" >
+            COLLECTED_INSURANCE_CHARGES = NULL ,
+          </when>
+          <otherwise >
+            COLLECTED_INSURANCE_CHARGES = #{COLLECTED_INSURANCE_CHARGES},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="SECURITY_DEPOSIT != null" >
+        <choose >
+          <when test="SECURITY_DEPOSIT == emptyBigDecimalValue" >
+            SECURITY_DEPOSIT = NULL ,
+          </when>
+          <otherwise >
+            SECURITY_DEPOSIT = #{SECURITY_DEPOSIT},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="OUTSTANDING_INSURANCE_CHARGES != null" >
+        <choose >
+          <when test="OUTSTANDING_INSURANCE_CHARGES == emptyBigDecimalValue" >
+            OUTSTANDING_INSURANCE_CHARGES = NULL ,
+          </when>
+          <otherwise >
+            OUTSTANDING_INSURANCE_CHARGES = #{OUTSTANDING_INSURANCE_CHARGES},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="ASSET_MATURITY_ACTION != null" >
+        <choose >
+          <when test="ASSET_MATURITY_ACTION.equals(&quot;&quot;)" >
+            ASSET_MATURITY_ACTION = NULL ,
+          </when>
+          <otherwise >
+            ASSET_MATURITY_ACTION = #{ASSET_MATURITY_ACTION},
+          </otherwise>
+        </choose>
+      </if>
+    </set>
+    where BRANCH = #{BRANCH}
+      and COMP_CODE = #{COMP_CODE}
+      and SETTLEMENT_NBR = #{SETTLEMENT_NBR}
+  </sql>
+  <update id="updateTRSSETLMT_EXTENDED" parameterType="com.path.dbmaps.vo.TRSSETLMT_EXTENDEDVO" >
+    <include refid="sql_updateTRSSETLMT_EXTENDED" />
+  </update>
+</mapper>

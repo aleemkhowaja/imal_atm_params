@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="auditDetails" namespace="/path/audit" extends="path-default">
+		<!-- Audit Report Action and Action Details-->
+		<action name="audit_*" class="auditReportAction" method="{1}">
+			<result name="auditReport">/WEB-INF/pages/common/audit/AuditReport.jsp</result>
+			<result name="trackReport">/WEB-INF/pages/common/audit/TrackReportsMain.jsp</result>
+			<result name="loadAuditReportDetailsPage">/WEB-INF/pages/common/audit/AuditReportDetails.jsp</result>
+			<result name="auditActions" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+			<result name="auditActionDetails" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+			<result name="JSON_DUMMY" type="json">
+			 <!-- any attribute to be returned as empty to have properly rendered at client side-->
+			 	<param name="root">emptyResult</param>
+			 </result>	
+		</action>
+	
+	</package>
+
+</struts>   

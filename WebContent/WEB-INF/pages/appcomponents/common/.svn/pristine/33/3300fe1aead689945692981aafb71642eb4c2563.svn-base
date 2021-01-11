@@ -1,0 +1,15 @@
+<decorators>
+	<!-- decorator of the screens -->
+    <decorator name="main" page="/WEB-INF/decorators/AppMain.jsp">
+       <pattern>/pathdesktop/indexDesktopAction.action</pattern>
+       <pattern>/pathdesktop/DesktopAction_*</pattern>
+    </decorator>
+    <decorator name="logincompbr" page="/WEB-INF/pages/appcomponents/common/LoginCompBrMain.jsp">
+    	<pattern>/pathdesktop/loginCompBrAction*</pattern>
+    </decorator>
+    <decorator name="desktop" page="/WEB-INF/decorators/WelcomeMain.jsp">
+       <pattern>/pathdesktop/loadDecorationAction*</pattern>
+       <pattern>/pwdchange/*</pattern>
+		<pattern>/pathdesktop/dashboard.action*</pattern>       
+    </decorator>
+</decorators>

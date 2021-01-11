@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="atmInterfacesMapper">
+	<!-- Code Starts For ATM Interface -->
+	<resultMap id="interfaceMap" type="com.path.vo.atminterfaces.AtmInterfacesCO">
+		<id 	column="INTERFACE_CODE" 		property="iso_INTERFACESVO.INTERFACE_CODE" />
+	    <id 	column="COMP_CODE" 				property="iso_INTERFACESVO.COMP_CODE" />
+	    <result column="DESCRIPTION" 			property="iso_INTERFACESVO.DESCRIPTION" />
+	    <result column="INTERFACE_TYPE" 		property="iso_INTERFACESVO.INTERFACE_TYPE" />
+	    <result column="STATUS" 				property="iso_INTERFACESVO.STATUS" />
+	    <result column="interfaceTypeDesc" 		property="interfaceTypeDesc" />
+	</resultMap>
+
+	<select id="returnInterfaceList" resultMap="interfaceMap" parameterType="com.path.vo.atminterfaces.AtmInterfacesSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip"/>
+		<include refid="returnInterfaceListSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftFlip"/>
+	    <include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	</select>
+	
+	<select id="returnInterfaceListCount" parameterType="com.path.vo.atminterfaces.AtmInterfacesSC" resultType="int">
+		<include refid="servicesCommon.commonGridWrpBefCnt"/>
+		<include refid="returnInterfaceListSQL"/>
+		<include refid="servicesCommon.commonGridWrpAftCnt"/>
+	    <include refid="servicesCommon.commonGridCountWrpClose"/>
+	</select>
+	
+	<select id="returnInterfaceByCode" resultMap="interfaceMap" parameterType="com.path.vo.atminterfaces.AtmInterfacesSC">
+		<include refid="returnInterfaceListSQL"/>
+		AND ii.INTERFACE_CODE = #{interfaceId}
+	</select>
+			
+	<sql id="returnInterfaceListSQL">
+		SELECT <include refid="GTW_ATM_INTERFACES.Base_Column_List"/>
+		,(SELECT SYS_PARAM_LOV_TRANS.VALUE_DESC 
+	         FROM SYS_PARAM_LOV_TRANS
+	         WHERE SYS_PARAM_LOV_TRANS.VALUE_CODE   = ii.INTERFACE_TYPE 
+	         AND SYS_PARAM_LOV_TRANS.LOV_TYPE_ID = #{interfaceTypeLovId,jdbcType=NUMERIC}
+	         AND SYS_PARAM_LOV_TRANS.LANG_CODE   = #{preferredLanguage,jdbcType=VARCHAR} 
+	    )interfaceTypeDesc
+		FROM GTW_ATM_INTERFACES ii 
+		WHERE ii.COMP_CODE =  #{compCode}
+
+		<if test='status != null and status == "P" '>
+			AND ii.STATUS = #{status}
+		</if>
+	</sql>
+	<!-- Code Ends For ATM Interface -->
+	
+	<select id="returnChannelByInterfaceCodeCount" resultType="int" parameterType="com.path.vo.atminterfaces.AtmInterfacesSC">
+		SELECT 
+		COUNT(*)
+		FROM GTW_CHANNEL CHNLGTW
+		where  CHNLGTW.INTERFACE_CODE = #{interfaceId} AND CHNLGTW.STATUS != 'D'
+	</select>
+	
+</mapper>

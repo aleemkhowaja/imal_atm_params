@@ -1,0 +1,23 @@
+.dropdown_2columns {
+	/* Rounded Corners */
+	-moz-border-radius: 0px 5px 5px 5px;
+    -webkit-border-radius: 0px 5px 5px 5px;
+    border-radius: 0px 5px 5px 5px;
+}
+
+.menu-header-elmnt li
+{
+	float: right;	
+}
+
+.greybox li 
+{
+	text-align:right;
+}
+.dropdown_1column, .dropdown_2columns, .dropdown_3columns, .dropdown_4columns, .dropdown_5columns
+{
+	text-align:right;
+}
+
+
+

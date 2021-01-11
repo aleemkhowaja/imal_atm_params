@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GTW_ATM_INT_ISO_MSGS" >
+  <resultMap id="BaseResultMap" type="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_MSGSVO" >
+    <id column="ATM_ISO_MSGS_CODE" property="ATM_ISO_MSGS_CODE" />
+    <result column="INTERFACE_CODE" property="INTERFACE_CODE" />
+    <result column="REQUEST_MTI" property="REQUEST_MTI" />
+    <result column="REQUEST_BITMAP1" property="REQUEST_BITMAP1" />
+    <result column="REQUEST_BITMAP2" property="REQUEST_BITMAP2" />
+    <result column="RESPONSE_MTI" property="RESPONSE_MTI" />
+    <result column="RESPONSE_BITMAP1" property="RESPONSE_BITMAP1" />
+    <result column="RESPONSE_BITMAP2" property="RESPONSE_BITMAP2" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_MSGSVO" extends="BaseResultMap" >
+    <result column="RESPONSE_EXPRESSION" property="RESPONSE_EXPRESSION" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ATM_ISO_MSGS_CODE, INTERFACE_CODE, REQUEST_MTI, REQUEST_BITMAP1, REQUEST_BITMAP2, 
+    RESPONSE_MTI, RESPONSE_BITMAP1, RESPONSE_BITMAP2
+  </sql>
+  <sql id="Blob_Column_List" >
+    RESPONSE_EXPRESSION
+  </sql>
+  <select id="selectGTW_ATM_INT_ISO_MSGS" resultMap="ResultMapWithBLOBs" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_MSGSVO" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from GTW_ATM_INT_ISO_MSGS
+    where ATM_ISO_MSGS_CODE = #{ATM_ISO_MSGS_CODE}
+  </select>
+  <delete id="deleteGTW_ATM_INT_ISO_MSGS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_MSGSVO" >
+    delete from GTW_ATM_INT_ISO_MSGS
+    where ATM_ISO_MSGS_CODE = #{ATM_ISO_MSGS_CODE}
+  </delete>
+  <insert id="insertGTW_ATM_INT_ISO_MSGS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_MSGSVO" >
+    insert into GTW_ATM_INT_ISO_MSGS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ATM_ISO_MSGS_CODE != null and ATM_ISO_MSGS_CODE != emptyBigDecimalValue" >
+        ATM_ISO_MSGS_CODE,
+      </if>
+      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+        INTERFACE_CODE,
+      </if>
+      <if test="REQUEST_MTI != null and !&quot;&quot;.equals(REQUEST_MTI)" >
+        REQUEST_MTI,
+      </if>
+      <if test="REQUEST_BITMAP1 != null and !&quot;&quot;.equals(REQUEST_BITMAP1)" >
+        REQUEST_BITMAP1,
+      </if>
+      <if test="REQUEST_BITMAP2 != null and !&quot;&quot;.equals(REQUEST_BITMAP2)" >
+        REQUEST_BITMAP2,
+      </if>
+      <if test="RESPONSE_MTI != null and !&quot;&quot;.equals(RESPONSE_MTI)" >
+        RESPONSE_MTI,
+      </if>
+      <if test="RESPONSE_BITMAP1 != null and !&quot;&quot;.equals(RESPONSE_BITMAP1)" >
+        RESPONSE_BITMAP1,
+      </if>
+      <if test="RESPONSE_BITMAP2 != null and !&quot;&quot;.equals(RESPONSE_BITMAP2)" >
+        RESPONSE_BITMAP2,
+      </if>
+      <if test="RESPONSE_EXPRESSION != null" >
+        RESPONSE_EXPRESSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ATM_ISO_MSGS_CODE != null and ATM_ISO_MSGS_CODE != emptyBigDecimalValue" >
+        #{ATM_ISO_MSGS_CODE},
+      </if>
+      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+        #{INTERFACE_CODE},
+      </if>
+      <if test="REQUEST_MTI != null and !&quot;&quot;.equals(REQUEST_MTI)" >
+        #{REQUEST_MTI},
+      </if>
+      <if test="REQUEST_BITMAP1 != null and !&quot;&quot;.equals(REQUEST_BITMAP1)" >
+        #{REQUEST_BITMAP1},
+      </if>
+      <if test="REQUEST_BITMAP2 != null and !&quot;&quot;.equals(REQUEST_BITMAP2)" >
+        #{REQUEST_BITMAP2},
+      </if>
+      <if test="RESPONSE_MTI != null and !&quot;&quot;.equals(RESPONSE_MTI)" >
+        #{RESPONSE_MTI},
+      </if>
+      <if test="RESPONSE_BITMAP1 != null and !&quot;&quot;.equals(RESPONSE_BITMAP1)" >
+        #{RESPONSE_BITMAP1},
+      </if>
+      <if test="RESPONSE_BITMAP2 != null and !&quot;&quot;.equals(RESPONSE_BITMAP2)" >
+        #{RESPONSE_BITMAP2},
+      </if>
+      <if test="RESPONSE_EXPRESSION != null" >
+        #{RESPONSE_EXPRESSION},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateGTW_ATM_INT_ISO_MSGS" >
+    update GTW_ATM_INT_ISO_MSGS
+    <set >
+      <if test="INTERFACE_CODE != null" >
+        <choose >
+          <when test="INTERFACE_CODE == emptyBigDecimalValue" >
+            INTERFACE_CODE = NULL ,
+          </when>
+          <otherwise >
+            INTERFACE_CODE = #{INTERFACE_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REQUEST_MTI != null" >
+        <choose >
+          <when test="REQUEST_MTI.equals(&quot;&quot;)" >
+            REQUEST_MTI = NULL ,
+          </when>
+          <otherwise >
+            REQUEST_MTI = #{REQUEST_MTI},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REQUEST_BITMAP1 != null" >
+        <choose >
+          <when test="REQUEST_BITMAP1.equals(&quot;&quot;)" >
+            REQUEST_BITMAP1 = NULL ,
+          </when>
+          <otherwise >
+            REQUEST_BITMAP1 = #{REQUEST_BITMAP1},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REQUEST_BITMAP2 != null" >
+        <choose >
+          <when test="REQUEST_BITMAP2.equals(&quot;&quot;)" >
+            REQUEST_BITMAP2 = NULL ,
+          </when>
+          <otherwise >
+            REQUEST_BITMAP2 = #{REQUEST_BITMAP2},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="RESPONSE_MTI != null" >
+        <choose >
+          <when test="RESPONSE_MTI.equals(&quot;&quot;)" >
+            RESPONSE_MTI = NULL ,
+          </when>
+          <otherwise >
+            RESPONSE_MTI = #{RESPONSE_MTI},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="RESPONSE_BITMAP1 != null" >
+        <choose >
+          <when test="RESPONSE_BITMAP1.equals(&quot;&quot;)" >
+            RESPONSE_BITMAP1 = NULL ,
+          </when>
+          <otherwise >
+            RESPONSE_BITMAP1 = #{RESPONSE_BITMAP1},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="RESPONSE_BITMAP2 != null" >
+        <choose >
+          <when test="RESPONSE_BITMAP2.equals(&quot;&quot;)" >
+            RESPONSE_BITMAP2 = NULL ,
+          </when>
+          <otherwise >
+            RESPONSE_BITMAP2 = #{RESPONSE_BITMAP2},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="RESPONSE_EXPRESSION != null" >
+        RESPONSE_EXPRESSION = #{RESPONSE_EXPRESSION},
+      </if>
+    </set>
+    where ATM_ISO_MSGS_CODE = #{ATM_ISO_MSGS_CODE}
+  </sql>
+  <update id="updateGTW_ATM_INT_ISO_MSGS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_INT_ISO_MSGSVO" >
+    <include refid="sql_updateGTW_ATM_INT_ISO_MSGS" />
+  </update>
+</mapper>

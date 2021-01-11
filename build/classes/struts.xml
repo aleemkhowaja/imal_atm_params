@@ -1,0 +1,870 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+
+    
+	<!-- Some or all of these can be flipped to true for debugging -->
+	<!-- <constant name="struts.i18n.reload" value="false" /> -->
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="path-xhtml" />
+	<constant name="struts.multipart.maxSize" value="2147483648" /> <!-- 2GB max Whole size upload -->
+	<!--
+	
+	
+		<constant name="struts.configuration.xml.reload" value="false" />
+		<constant name="struts.action.extension" value="action,," />
+	-->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	
+	<!--  regular expression is for struts 2.5 upgrade to avoid js and images to path through interceptor -->
+	<constant name="struts.action.excludePattern" value="/,\S+(?&lt;!\/struts\/utils|\\struts\\utils)\.js$,\S+\.css$,\S+\.jpeg$,\S+\.jpg$,\S+\.png$,/path/AlertsAjaxServlet/*,/path/BatchProcessingServlet/*,/path/UpgradeServlet/*,/servlets/image,/path/notificationsWS.*"/>	
+	<constant name="struts.mapper.class" value="com.path.struts2.redirectaction.PathDefaultActionMapper" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true"/>
+	
+	<package name="path-default" extends="struts-default,json-default">
+		<result-types>
+		<result-type name="redirectAction" class="com.path.struts2.redirectaction.PathServletActionRedirectResult"></result-type>
+		<result-type name="json" class="com.path.struts2.json.PathJSONResult">
+		<!-- To Exclude all properties that are null value to be returned in JSON Response Object -->
+  		  <param name="excludeNullProperties">true</param>
+  		  <!-- compressing the Response of JSON with GZIP, works only if request Accepts gzip
+  		  but this causes errors in JSON Response return  
+  		  <param name="enableGZIP">true</param>
+  		  -->
+		</result-type>
+		</result-types>
+	
+		<interceptors>
+		    <interceptor name="fileUpload" class="com.path.lib.common.interceptor.PathFileUploadInterceptor"></interceptor>
+		    <interceptor name="path-http_session" class="com.path.lib.common.interceptor.PathSessionInterceptor"></interceptor>
+			 
+			<!-- <interceptor name="path-parameters" class="com.opensymphony.xwork2.interceptor.ParametersInterceptor"></interceptor> -->
+			
+			
+			<interceptor-stack name="pathDefaultStack">
+			<!-- <interceptor-ref name="defaultStack"></interceptor-ref>  -->
+			<!-- for details of each interceptor refer to http://struts.apache.org/2.2.1/docs/interceptors.html -->
+				<!-- interceptor to check if user still logged in or forced to logout -->
+				
+				<interceptor-ref name="exception"/>
+               <!--   
+                Makes the previous Action's properties available to the current Action. Commonly used together with <result type="chain"> (in the previous Action). 
+                <interceptor-ref name="alias"/> 
+                -->
+                <interceptor-ref name="servletConfig"/>
+                <!-- session interceptor checking to be applied after servletConfig to get use of data available in session -->
+                <interceptor-ref name="path-http_session"/>
+                <interceptor-ref name="i18n"/>
+               <!--
+                 If the Action implements Preparable, calls its prepare method. 
+                 <interceptor-ref name="prepare"/>
+                 <interceptor-ref name="chain"/> 
+                 -->
+                 <!-- 
+                <interceptor-ref name="debugging"/>
+                 -->
+               <!-- <interceptor-ref name="scopedModelDriven"/> -->
+                <interceptor-ref name="modelDriven"/>
+                <!-- 	 An Interceptor that adds easy access to file upload support. 
+                <interceptor-ref name="fileUpload"/>
+                -->
+                <interceptor-ref name="checkbox"/>
+                <interceptor-ref name="multiselect"/>
+                <!-- Sets the struts.xml defined parameters onto the action. These are the <param> tags that are direct children of the <action> tag.  
+                <interceptor-ref name="staticParams"/>
+                -->
+                <interceptor-ref name="actionMappingParams"/>
+            
+                <interceptor-ref name="params"/> 
+                  
+                <interceptor-ref name="conversionError"/>
+                <!-- 
+                <interceptor-ref name="validation">
+                       <param name="excludeMethods">*</param>
+                    <param name="includeMethods">submit*</param>
+                </interceptor-ref>
+                 -->
+                <!-- 
+                <interceptor-ref name="workflow">
+                    <param name="excludeMethods">*</param>
+                    <param name="includeMethods">submit*</param>
+                </interceptor-ref>
+                 -->
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="pathDefaultStack"/>
+		
+		<global-results>
+		   <result name="SUCCESS_DYNAMIC_PARAM" type="freemarker">/WEB-INF/pages/technical/dynamicparams/DynamicParams.ftl</result>
+		   <result name="SUCCESS_STATUS">/WEB-INF/pages/common/status/StatusList.jsp</result>
+		   <result name="ERROR_ACTION">/login/ErrorAction.jsp</result>
+		   <result name="APP_MAIN_CTXROOT">/</result>	
+		   <result name="error">/login/ErrorPage.jsp</result>
+		   <result name="session_checking">/WEB-INF/pages/appcomponents/common/LoginSessionChecking.jsp</result>
+		   <result name="login_alert_redirection">/login/LoginAlertRedirection.jsp</result>
+		   <result name="login_comp_br">/WEB-INF/pages/appcomponents/desktop/LoginCompBr.jsp</result>
+		   <!-- redirecting to force logout method in UnsecureAction with different package to overcome accessing interceptor path-http-session -->
+		   <result name="forced_logged_out" type="redirectAction">
+			    <param name="actionName">forceLogoutAction</param>
+				<param name="namespace">/forcelogout</param>
+		   </result>
+  		   <result name="loginToLandingPage" type="redirectAction">
+		   		<param name="actionName">dashboard</param>
+				<param name="namespace">/pathdesktop</param>
+		   </result>
+		             
+             <result name="loadExternalScreenErrorPage" type="redirectAction">
+             	<param name="actionName">targetScreenErrorAction</param>
+             </result>
+             
+            <result name="loadDestinationScreen" type="redirectAction">
+				<param name="actionName">commonDecoration</param>
+            	<param name="namespace">/</param>
+            	<param name="_pageRef">${_pageRef}</param>
+            	<param name="isRTL">${isRTL}</param>            	
+            	<param name="language">${language}</param>
+            	
+            	<param name="appId">${appId}</param>
+            	<param name="favoriteId">${favoriteId}</param>
+            	<param name="originalProgRef">${originalProgRef}</param>
+            	<param name="originalAppUrl">${originalAppUrl}</param>
+            	<param name="originalAppName">${originalAppName}</param>
+            	<param name="externalScreen">${externalScreen}</param>
+            	<param name="destinationScreenUrl">${destinationScreenUrl}</param>
+            	<param name="destinationProgRef">${destinationProgRef}</param>
+            	<param name="additionalParams">${additionalParams}</param>
+            	
+            	<!-- additional parameters defined in DesktopAction fillOtherCommonParams() -->
+            	<param name="isArbMnthEng">${isArbMnthEng}</param>
+            	<param name="printReportAsPDF">${printReportAsPDF}</param>
+            	
+			</result> 	
+             
+             <result name="SUCCESS_JSON" type="json">
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+		 	<result name="SUCCESS_STRING" type="stream">	    	  			
+				  <param name="contentType">text/plain</param>
+				  <param name="inputName">inputStream</param>
+			 </result>
+			 <result name="JSON_TREE" type="json">
+			 	<param name="ignoreHierarchy">false</param> 
+			 	<param name="root">nodes</param>
+			 </result>
+			 <!-- used for token failure -->
+			 <result name="redirectLogin" type="redirectAction">
+				<param name="method">login</param>
+				<param name="actionName">loginAction_</param>
+				<param name="namespace">/login</param>
+			 </result>	
+			 
+			 <result name="excel" type="stream">
+				 <param name="contentType">application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</param>
+				 <param name="contentDisposition">attachment; filename="${streamFileName}"</param>
+				 <param name="bufferSize">1024</param> 
+				 <param name="inputName">streamExcel</param> 
+			</result>
+			<result name="excel_error" type="stream">
+				 <param name="contentType">text/plain</param>
+				 <param name="inputName">streamExcel</param> 
+			</result>
+			
+			<result name="doc" type="stream">
+				 <param name="contentType">application/octet-stream</param>
+				 <param name="contentDisposition">attachment; filename="${streamFileName}"</param>
+				 <param name="bufferSize">1024</param> 
+				 <param name="inputName">streamDoc</param> 
+			</result>
+			<result name="doc_error" type="stream">
+				 <param name="contentType">text/plain</param>
+				 <param name="inputName">streamDoc</param> 
+			</result>
+						
+			<result name="css" type="stream">
+				 <param name="contentType">text/css</param>
+				 <param name="contentDisposition">attachment; filename="themeCustomization.css"</param>
+				 <param name="bufferSize">1024</param> 
+				 <param name="inputName">cssStream</param> 
+			</result>
+			<result name="returnImage" type="stream">
+				 <param name="contentType">image/png</param>
+				 <param name="contentDisposition">attachment; filename="image.png"</param>
+				 <param name="bufferSize">1024</param> 
+				 <param name="inputName">imageStream</param> 
+			</result>
+			<result name="returnImageSvg" type="stream">
+				 <param name="contentType">image/svg+xml</param>
+				 <param name="contentDisposition">attachment; filename="image.svg"</param>
+				 <param name="bufferSize">1024</param> 
+				 <param name="inputName">imageStream</param> 
+			</result>
+			<result name="returnImage_error" type="stream">
+				 <param name="contentType">text/plain</param>
+				 <param name="inputName">imageStream</param> 
+			</result>
+			 		
+		</global-results>
+		
+		<action name="targetScreenErrorAction"  class="desktopAction" method="loadExternalScreenErrorPage">
+		</action>
+		
+		<action name="redirectToErrorAction"  class="desktopAction" method="redirectToErrorAction">
+		</action>
+		
+		<action name="commonDecoration"  class="desktopAction" method="commonDecoration">
+			<result>/WEB-INF/pages/appcomponents/common/CommonScreenContainer.jsp</result>
+		</action>
+		
+		<action name="loadIframeScreenAction"  class="desktopAction" method="loadIframeScreen">
+			<result>/WEB-INF/pages/appcomponents/common/CommonScreenFrameLoader.jsp</result>
+		</action>
+		
+		<action name="showMenu" class="treeMenuAction" >
+			<result name="success">/AccordionMenu.jsp</result>
+		</action>
+		<action name="generateMenuOnRequest" class="treeMenuAction" method="generateMenuOnRequest">
+			<result name="success" type="freemarker">/WEB-INF/pages/common/menu/MenuScreen.ftl</result>
+		</action>	
+	</package>
+	<!-- used to avoid the interceptor in case of force logout, to not pass by httpSession interceptor-->
+	<package name="forcelogout" namespace="/forcelogout" extends="struts-default">
+		<action name="forceLogoutAction" method="forcedLoggedOut"
+			class="unSecureAction">
+			<result name="post_login" type="redirectAction">
+				<param name="actionName">unSecureAction_prelogin?request_locale=${languages}</param>
+				<param name="namespace">/login</param>
+			</result>
+		</action>
+	</package>
+		<!-- used dummy call to the server in case need to know if http session is still alive-->
+	<package name="dummy" namespace="/path/dummy" extends="path-default">
+		<action name="DummyAction" method="checkAlive" class="desktopAction">
+		 	<result name="JSON_DUMMY" type="json">
+			 <!-- additionalParams is just any attribute to be returned as empty to have properly rendered at client side-->
+			 	<param name="root">additionalParams</param>
+			 </result>	
+		</action>
+		<!-- used in landing page favorite/application/workspace to reload session details like running date to be taken into consideration before clicking the workspace/favorite/application button -->
+		<action name="SessionDetails" method="returnSessionDetails" class="desktopAction">
+		 	<result name="jsonSuccess" type="json">
+				<param name="ignoreHierarchy">false</param> 
+			 </result>	
+		</action>
+		
+	</package>
+	<!--TP 500032 Websphere automatic login Issue -->
+	<package name="autologincheck" namespace="/path" extends="path-default">
+		<action name="AutoLoginAction" method="checkAutoLogin" class="unSecureAction">
+		 	<result name="APP_MAIN_PAGE">/path/PreMain.jsp</result>	
+		</action>
+	</package>
+  <package name="pwdchange" namespace="/pwdchange" extends="path-default">
+		
+		<global-results>
+			<result name="error">/login/ErrorPage.jsp</result>
+			<result name="suspendRedirect" type="redirectAction">
+				<param name="method">sessionTimeout</param>
+				<param name="actionName">unSecureAction_</param>
+				<param name="namespace">/login</param>
+			</result>   
+		</global-results>
+		
+		
+		<action name="changePwdAction" method="openChangePwd" class="pwdChangeAction">
+			<result name="pwdChange">/WEB-INF/pages/common/login/ChangePwd.jsp</result>
+		</action>
+		
+		<action name="reloginAction" method="reloginAction" class="pwdChangeAction">
+			<result >/WEB-INF/pages/common/login/ChangePwd.jsp</result>
+		</action>
+		
+		<action name="updatePwdAction" method="updatePwd" class="pwdChangeAction">
+			<result type="json">
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="checkOldPwdAction" method="checkOldPwd" class="pwdChangeAction">
+			<result type="json">
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="changePwdTheme" method="loadCssFromRepository" class="themeCustomizationAction">
+		</action>
+	</package>
+	
+	<package name="loginCustomization" namespace="/login/logincustomization" extends="path-default">
+		<action name="loginThemeCustomization_*" method="{1}" class="unSecureAction">
+		</action>
+	</package>
+	
+	<!-- Package for different investigation and debuggin purposes -->
+	<package name="investigation" namespace="/path/investigation" extends="path-default">
+		<global-results>
+			<result name="saveScript" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="log.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="fileError" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">inputStream</param>
+			</result>
+		</global-results>
+		<action name="ShowDBMissingMessages" method="showDbMissingMsgs" class="unSecureAction"></action>
+		<action name="ShowDBEmptyMessages" method="showDbEmptyMsgs" class="unSecureAction"></action>
+        <action name="ShowDBCorruptedMessages" method="showDbCorruptedMsgs" class="unSecureAction"></action>
+	</package>
+	<package name="customization" namespace="/path/customization" extends="path-default">
+	    <action name="CustomizationMaint_*" method="{1}" class="customizationAction">
+			<result name="success">/WEB-INF/pages/common/customization/FieldCustomization.jsp</result>
+			<result name="success_prntr_list">/WEB-INF/pages/common/customization/UserPrintersList.jsp</result>
+			<result name="success_save_as">/WEB-INF/pages/common/customization/SaveAsScreen.jsp</result>
+			<result name="success_delete_saved_screens">/WEB-INF/pages/common/customization/DeleteSavedScreens.jsp</result>
+			<result name="jsonSuccess" type="json">
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+			<result name="logLevelPage">/WEB-INF/pages/common/customization/LogLevel.jsp</result>
+			<result name="loadExpImpCustom">/WEB-INF/pages/common/customization/ExpImpCustom.jsp</result>
+		</action>
+	    <action name="CustomElementActivity_*" method="{1}" class="customElementActivity">
+			<result name="jsonSuccess" type="json">
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		<action name="fileCustomization_*" class="fileCustomizationAction" method="{1}">
+			<interceptor-ref name="pathDefaultStack" />
+			<result name="download" type="stream">
+				<param name="contentType">${mimeType}</param>
+				<param name="contentLength">${contentLength}</param>
+				<param name="inputName">exportStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>	
+		</action>
+		
+		<action name="seriesListAction_*" class="saveAsSeriesListAction" method="{1}">
+			<result name="success">/WEB-INF/pages/common/customization/OptSeriesList.jsp</result>
+			<result name="jsonSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ThemeCustomizationAction_*" class="themeCustomizationAction" method="{1}">
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="pathDefaultStack" />
+			<result name="init">/WEB-INF/pages/common/customization/ThemeCustomization.jsp</result>
+			<result name="themedetails">/WEB-INF/pages/common/customization/themespages/ThemeCustomizationDetails.jsp</result>
+			<result name="buildCustomizationDialog">/WEB-INF/pages/common/customization/themespages/ThemeCustomizationDialog.jsp</result>
+			<result name="openImportDialog">/WEB-INF/pages/common/customization/themespages/ThemeCustomizationImport.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="fileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>
+		<action name="themeCustExport_*" class="themeCustomizationAction" method="{1}">
+			<interceptor-ref name="fileUpload"></interceptor-ref>
+			<interceptor-ref name="pathDefaultStack" />
+			<result name="exported" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">exportStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="fileError" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">errorStream</param>
+			</result>
+			<result name="fileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+                 <param name="contentType">text/plain</param>
+            </result>		
+		</action>
+		<action name="CustomizationFileMaint_*" method="{1}"
+			class="customizationAction">
+			<interceptor-ref name="fileUpload"></interceptor-ref>
+			<interceptor-ref name="pathDefaultStack" />
+			<result name="saveScript" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">scriptStream</param>
+				<param name="contentDisposition">attachment;filename="CustomizationScript.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="fileError" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">scriptStream</param>
+			</result>
+			<result name="fileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+                 <param name="contentType">text/plain</param>
+            </result>
+		</action>
+		<!--will be used in elements contruction in case there is no dependency and there is dynamic expression to make a dummy request-->
+		<action name="DefaultDependency" method="callDefaultDependency" class="customizationAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>		    
+		</action>
+	</package>
+	<package name="objectCustomization" namespace="/path/objectCustomization" extends="path-default">
+	    <action name="objectCustomizationMain_*" method="{1}" class="objectCustomizationMainAction">
+			<result name="success">/WEB-INF/pages/common/customization/object/ObjectCustomization.jsp</result>
+			<result name="jsonSuccess" type="json">
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+	    <action name="objectCustomizationDetailsListAction_*" method="{1}" class="objectCustomizationDetailsListAction">
+			<result name="jsonSuccess" type="json">
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		<action name="objectCustomizationFileMaint_*" method="{1}"
+			class="objectCustomizationMainAction">
+			<interceptor-ref name="fileUpload"></interceptor-ref>
+			<interceptor-ref name="pathDefaultStack" />
+			<result name="saveScript" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">scriptStream</param>
+				<param name="contentDisposition">attachment;filename="ObjectCustomizationScript.txt"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="fileError" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">scriptStream</param>
+			</result>
+			<result name="fileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+                 <param name="contentType">text/plain</param>
+            </result>
+		</action>
+	</package>
+	
+	<package name="clusterCache" namespace="/login/cache" extends="path-default">
+	<action name="ClearCache" method="clearCache" class="desktopAction">
+			<result name="jsonSuccess" type="json">	
+				<param name="ignoreHierarchy">false</param>
+                 <param name="contentType">text/plain</param>
+			</result>
+	</action>
+	</package>
+	
+	<package name="clusterLogging" namespace="/login/logging" extends="path-default">
+		<action name="UpdateLogLevel" method="updateLogLevel" class="customizationAction">
+			<result name="jsonSuccess" type="json">	
+				<param name="ignoreHierarchy">false</param>
+                <param name="contentType">text/plain</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="translation" namespace="/path" extends="path-default">
+		<action name="TranslationMaint_*" method="{1}" class="translationAction">
+			<result name="success">/WEB-INF/pages/common/translation/Translation.jsp
+			</result>
+			<result name="loadGrpDep">/WEB-INF/pages/common/translation/GroupDependentList.jsp
+			</result>
+			<result name="loadImpExp">/WEB-INF/pages/common/translation/ExportTrans.jsp
+			</result>
+			<result name="loadLOVTypeList">/WEB-INF/pages/common/translation/LOVTypeList.jsp
+			</result>
+			<result name="newKeyLabel">/WEB-INF/pages/common/translation/NewKeyLabelPopup.jsp
+			</result>
+			<result name="newKeyGroup">/WEB-INF/pages/common/translation/NewKeyGroupPopup.jsp
+			</result>
+			<result name="jsonSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="TranslationFileMaint_*" method="{1}"
+			class="translationAction">
+			<interceptor-ref name="fileUpload"></interceptor-ref>
+			<interceptor-ref name="pathDefaultStack" />
+			<result name="saveScript" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">scriptStream</param>
+				<param name="contentDisposition">attachment;filename="LabelScript.csv"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="fileError" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">scriptStream</param>
+			</result>
+			<result name="fileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+                 <param name="contentType">text/plain</param>
+            </result>
+		</action>
+	</package>
+	
+	<package name="buttonCustomization" namespace="/path/buttoncustomization" extends="path-default">
+		
+		<action name="ButtonCustomizationMaint_*" method="{1}" class="buttonCustomizationMaintAction">
+		   <interceptor-ref name="fileUpload"></interceptor-ref>
+		   <interceptor-ref name="pathDefaultStack"/>
+			<result name="loadButtonCustDialog">/WEB-INF/pages/common/customization/button/ButtonCustomization.jsp</result>
+			<result name="loadButtonCustCopyDialog">/WEB-INF/pages/common/customization/button/ButtonCustomizationCopy.jsp</result>
+			<result name="loadButtonCustDetails">/WEB-INF/pages/common/customization/button/ButtonCustomizationDetails.jsp</result>
+			<result name="loadButtonCustActionsDetails">/WEB-INF/pages/common/customization/button/ButtonCustomizationActionsDetails.jsp</result>
+			<result name="SUCCESS_DYNAMIC_PARAM" type="freemarker">/WEB-INF/pages/common/dynamicparams/DynamicParamsContent.ftl</result>
+			<result name="reloadMappingSource">/WEB-INF/pages/common/customization/button/ButtonCustomizationReloadMapSource.jsp</result>
+			<result name="loadButtonActionsArgList">/WEB-INF/pages/common/customization/button/ButtonCustomizationActionArgList.jsp</result>
+			<result name="jsonSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			
+			<result name="jsonFileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+                <param name="contentType">text/plain</param>
+            </result>		
+			
+		</action>
+		
+		<action name="ButtonCustomizationGrid_*" method="{1}" class="buttonCustomizationGridAction">
+			<result name="jsonSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="ButtonCustomizationLookupAction_*" method="{1}" class="buttonCustomizationLookupAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="buttonCustomizationParamListAction_*" method="{1}" class="buttonCustomizationParamListAction">
+			<result name="loadButtonCustomizationParamList">/WEB-INF/pages/common/customization/button/ButtonCustomizationParamMapList.jsp</result>
+			<result name="loadObjectCustomizationParamList">/WEB-INF/pages/common/customization/object/ObjectCustomizationParamMapList.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="buttonCustomizationOutMapListAction_*" method="{1}" class="buttonCustomizationOutMapListAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="buttonCustomizationArgListAction_*" method="{1}" class="buttonCustomizationArgListAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+	</package>	
+	
+
+	<package name="rundatechange" namespace="/path/rundatechange" extends="path-default">
+		
+		<global-results>
+			<result name="error">/login/ErrorPage.jsp</result>
+		</global-results>
+		
+		
+		<action name="ChangeRunDateAction_*" method="{1}" class="desktopAction">
+			<result name="success">/WEB-INF/pages/common/login/ChangeRunningDate.jsp</result>
+			<result name="jsonSuccess" type="json">
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+	</package>
+	<!-- Common Package for Menu items screen Loading -->
+	<package name="menu" namespace="/path" extends="path-default">				
+		<action name="loadScreen" class="treeMenuAction" method="loadScreen"> 
+		
+		<result name="successExtScreen">
+           		/WEB-INF/pages/appcomponents/common/ExternalAppFrameLoader.jsp
+	    </result>	
+		<result name="success" type="redirectAction">
+           		 <param name="actionName">${actionUrl}</param>
+            	 <param name="namespace">${nameSpacePath}</param>
+	        </result>	
+		<result name="error">/login/ErrorAction.jsp</result>
+		<result name="errorMsg" type="json">
+			<param name="ignoreHierarchy">false</param>
+		</result>
+		</action>
+		<action name="loadTreeMenu" class="treeGridMenuAction" method="loadTreeMenu">
+		   <result name="success">/WEB-INF/pages/common/treemenu/TreeMenu.jsp</result>
+		</action>
+		<action name="treeGridMenu" class="treeGridMenuAction" method="loadMenuTreeGrid">
+ 		  <result name="success" type="json">
+ 			  <param name="ignoreHierarchy">false</param>
+ 		  </result>
+		</action>
+		<action name="gridBaseAction_*" class="gridBaseAction" method="{1}">
+ 		  <result name="success" type="json">
+ 			  <param name="ignoreHierarchy">false</param>
+ 		  </result>
+		</action>
+	</package>
+	
+	<!-- frame loader -->
+	<package name="frameLoader" namespace="/path/frameloader" extends="path-default" >
+			<action name="loadFrame" class="frameLoaderAction" method="loadFrame">
+				<result name="success">/WEB-INF/pages/appcomponents/common/AppFrameLoader.jsp</result>
+			</action>
+			<action name="loadFrameContent" class="frameLoaderAction" method="loadFrameContent">
+				<result name="success">/WEB-INF/pages/appcomponents/common/AppFrameContainer.jsp</result>
+			</action>
+	</package>
+	
+	<!-- Status Customization -->
+	<package name="statusCustomization" namespace="/path/statusCustomization" extends="path-default">
+		<action name="StatusCustomizationListAction_*" class="statusCustomizationListAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="StatusCustomizationMaintAction_*" class="statusCustomizationMaintAction" method="{1}">
+				<result name="statusCustomizationList">/WEB-INF/pages/common/statuscustomization/StatusCustomizationList.jsp</result>
+				<result name="success">/WEB-INF/pages/common/statuscustomization/StatusCustomizationMaint.jsp</result>
+				<result name="jsonSuccess" type="json">
+		     	    <param name="ignoreHierarchy">false</param> 
+		        </result>
+		</action>
+		<action name="StatusCustomizationSubmit_*" class="statusCustomizationMaintAction" method="{1}">
+			<result name="success" type="json">
+		     	<param name="ignoreHierarchy">false</param> 
+		    </result>
+		</action>
+
+		<action name="StatusCustLookup_*" class="statusCustLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+	</package>
+	<package name="screenGenerator" namespace="/path/screenGenerator" extends="path-default">
+		<action name="ScreenGeneratorListAction_*" class="screenGeneratorListAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="ScreenGeneratorMaintAction_*" class="screenGeneratorMaintAction" method="{1}">
+				<result name="screenGeneratorList">/WEB-INF/pages/common/screengenerator/ScreenGeneratorList.jsp</result>
+				<result name="success">/WEB-INF/pages/common/screengenerator/ScreenGeneratorMaint.jsp</result>
+				<result name="btnSourceScreen">/WEB-INF/pages/common/screengenerator/ButtonSourceMaint.jsp</result>
+				<result name="onLoadScriptScreen">/WEB-INF/pages/common/screengenerator/LoadScriptDataMain.jsp</result>
+				<result name="loadTableGenerator">/WEB-INF/pages/common/screengenerator/DynScrTablesGeneratorList.jsp</result>
+				<result name="loadGeneTblMaint">/WEB-INF/pages/common/screengenerator/DynScrTablesGenerator.jsp</result>
+				<result name="openImportDialog">/WEB-INF/pages/common/screengenerator/ScreenGeneratorImport.jsp</result>
+				<result name="dynGridColPropMaint">/WEB-INF/pages/common/screengenerator/DynGridWidgetColPropMaint.jsp</result>
+				<result name="successJson" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="generatorMaint_*" class="generatorMaintAction" method="{1}">
+		    <result name="success">/WEB-INF/pages/common/screengenerator/GeneratorMaint.jsp</result>
+			<result name="successJson" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+			<result name="optionsScreen">/WEB-INF/pages/common/screengenerator/SelectOptionsList.jsp</result>
+			<result name="queryScreen">/WEB-INF/pages/common/screengenerator/QueryDataMain.jsp</result>
+			<result name="smartLabel">/WEB-INF/pages/common/screengenerator/EditLabelKeysMaint.jsp</result>
+			<result name="tabbedPanelScreen">/WEB-INF/pages/common/screengenerator/TabbedPanelGridGenerator.jsp</result>
+			<result name="datasourceScreen">/WEB-INF/pages/common/screengenerator/DataSourceMain.jsp</result>
+			<result name="globalActivityScreen">/WEB-INF/pages/common/screengenerator/GlobalActivityCustomization.jsp</result>
+		</action>
+		<action name="dynScreenExport_*" class="screenGeneratorMaintAction" method="{1}">
+			<interceptor-ref name="fileUpload"></interceptor-ref>
+			<interceptor-ref name="pathDefaultStack" />
+			<result name="exported" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">exportStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="fileError" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">errorStream</param>
+			</result>
+			<result name="fileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+                 <param name="contentType">text/plain</param>
+            </result>		
+		</action>
+		<action name="dynScreenImport_*" class="screenGeneratorMaintAction" method="{1}">
+			<interceptor-ref name="fileUpload"></interceptor-ref>
+			<interceptor-ref name="pathDefaultStack"></interceptor-ref>
+			<result name="fileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+                <param name="contentType">text/plain</param>
+            </result>
+		</action>
+		<action name="generatorMaintDesigner" class="generatorMaintAction" method="loadTheSelectedScreen">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="submitLayout" class="generatorMaintAction" method="submitLayout">
+			<result name="success">/WEB-INF/pages/common/screengenerator/GeneratorMaint.jsp</result>
+		</action>
+		
+		<action name="propertiesDetailsDynAction_*" class="propertiesDetailsDynAction" method="{1}">
+		</action>
+		<action name="optionsScreenAction_*" class="elementsOptionsListAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="screenGeneratorDepAction_*" class="screenGeneratorDepAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="dynScrTablesListAction_*" class="dynScrTablesListAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="generatorLookupAction_*" class="generatorLookupAction" method="{1}">
+		    <result name="success" type="json">
+		      <param name="ignoreHierarchy">false</param>
+		    </result>
+		</action>
+		<action name="tabbedPanelScreenAction_*" class="tabbedPanelListAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+	</package>
+	<package name="dynamicScreen" namespace="/path/dynamicScreen" extends="path-default">
+		<action name="dynDependencyAction_*" class="dynDependencyAction" method="{1}">
+		    <result name="success" type="json">
+		      <param name="ignoreHierarchy">false</param>
+		    </result>
+		</action>
+		<action name="dynLookupAction_*" class="dynLookupAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="dynamicScreenMainAction_*" class="dynamicScreenMainAction" method="{1}">
+			<interceptor-ref name="fileUpload" />
+		    <interceptor-ref name="pathDefaultStack" />
+			<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+			<result name="dSstatus" type="json">
+				<param name="contentType">text/plain</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="jsonError" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+					<param name="root">_error</param> 
+			</result>
+			<result name="exported" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">exportStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="fileError" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">exportStream</param>
+			</result>
+			<result name="SUCCESS_DYNAMIC_GRID">/WEB-INF/pages/common/dynamicscreen/DynScrGridList.jsp</result>
+		</action>
+		<action name="dynScreenLookupAction_*" class="dynScreenLookupAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="dynScreenParamListAction_*" class="dynScreenParamListAction" method="{1}">
+			<result name="loadDynamicScreenParamMapList">/WEB-INF/pages/common/dynamicscreen/DynamicScreenParamMapList.jsp</result>
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		<action name="linkDynScreenMainAction_*" class="linkDynScreenMainAction" method="{1}">
+			<result name="link_dyn_screen">/WEB-INF/pages/common/dynamicscreen/LinkDynamicScreen.jsp</result>
+			<result name="mainInformation">/WEB-INF/pages/common/dynamicscreen/LinkDynamicScreenMaint.jsp</result>
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		<action name="linkDynScreenListAction_*" class="linkDynScreenListAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		<action name="linkDynScrTabMainAction_*" class="linkDynScrTabMainAction" method="{1}">
+			<result name="link_dyn_screen_tab">/WEB-INF/pages/common/dynamicscreen/LinkDynScrTab.jsp</result>
+			<result name="mainInformation">/WEB-INF/pages/common/dynamicscreen/LinkDynScrTabMaint.jsp</result>
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		<action name="linkDynScrTabListAction_*" class="linkDynScrTabListAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+				<action name="dynScrGridListAction_*" class="DynScrGridListAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+			   
+	</package>
+	<!-- Dynamic Client Params -->
+		
+	<package name="dynClientParams" namespace="/path" extends="path-default">
+		<action name="DynClientParamsMaint_*" method="{1}" class="dynClientParamsAction">
+			<result name="success">/WEB-INF/pages/common/dynclientparams/DynClientParams.jsp
+			</result>
+			<result name="loadColsScreen">/WEB-INF/pages/common/dynclientparams/ColumnsList.jsp
+			</result>
+			<result name="loadDynClientScreenData">/WEB-INF/pages/common/dynclientparams/DynCltParamsData.jsp
+			</result>
+			<result name="jsonSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+		
+	<package name="dynClientDynamicParams" namespace="/path" extends="path-default">
+		<action name="DynClientDynamicParamsMaint_*" method="{1}" class="dynClientDynamicParamsAction">
+			<result name="SUCCESS_DYNAMIC_PARAM" type="freemarker">/WEB-INF/pages/technical/dynamicparams/DynamicParams.ftl</result>
+			<result name="jsonSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+	
+	<package name="optCategory" namespace="/path/optCategory" extends="path-default">
+		<action name="categoryLookupAction_*" class="categoryLookupAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="categoryDependencyAction_*" class="categoryDependencyAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+	</package>
+	
+	<package name="config" namespace="/pathdesktop/config" extends="path-default">
+		<action name="ConfigurationValidationAction_*" class="configurationValidationAction" method="{1}">
+			<result name="CONFIG_VALIDATION_MESSAGE">/login/ConfigurationValidation.jsp</result>
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+	</package>	
+
+	<include file="**/*-struts.xml"></include>
+	
+</struts>

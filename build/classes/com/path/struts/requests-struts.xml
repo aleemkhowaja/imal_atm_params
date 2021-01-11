@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+
+	<package name="request" namespace="/path/requests" extends="path-default">
+		<action name="CtsRequestListAction_*" class="ctsRequestCommonListAction" method="{1}" >
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result> 
+		</action>
+		
+		<action name="CtsRequestMaintAction_*" class="ctsRequestCommonMaintAction" method="{1}" >
+	    	<result name="loadChargesSection">/WEB-INF/pages/businesscommon/requests/csm/RequestCharges.jsp</result>
+	    	<result name="chargesMaint">/WEB-INF/pages/businesscommon/charges/ChargesMaint.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result> 
+		</action>
+		
+		<action name="CtsRequestStatus_*" class="ctsRequestStatusAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>  

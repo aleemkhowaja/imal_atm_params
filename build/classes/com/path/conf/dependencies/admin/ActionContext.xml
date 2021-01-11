@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+ 	 <bean id="companiesDependencyAction" class="com.path.actions.dependencies.admin.CompaniesDependencyAction" scope="prototype" parent="baseAction">
+		<property name="companiesBO" ref="companiesBO"></property>
+	</bean>
+	
+	<bean id="categoryDependencyAction" class="com.path.actions.dependencies.admin.CategoryDependencyAction" scope="prototype" parent="baseAction">
+		<property name="categoryBO" ref="categoryBO"></property>
+	</bean>
+	
+ 	<bean id="branchesDependencyAction" class="com.path.actions.dependencies.admin.BranchesDependencyAction" scope="prototype" parent="baseAction">
+		<property name="branchesBO" ref="branchesBO"></property>
+	</bean>
+	
+	<bean id="countriesDependencyAction" class="com.path.actions.dependencies.admin.CountriesDependencyAction" scope="prototype" parent="baseAction">
+		<property name="countriesBO" ref="countriesBO"></property>
+		<property name="coreCommonServiceBO" ref="coreCommonServiceBO"></property>
+	</bean>
+	
+	<bean id="countriesRegionDependencyAction" class="com.path.actions.dependencies.admin.CountriesRegionDependencyAction" scope="prototype" parent="baseAction">
+		<property name="countriesRegionBO" ref="countriesRegionBO"></property>
+		<property name="coreCommonServiceBO" ref="coreCommonServiceBO"></property>
+	</bean>
+	
+	<bean id="smartAddOptionsDependencyAction" class="com.path.actions.dependencies.admin.SmartAddOptionsDependencyAction" scope="prototype" parent="baseAction">
+		<property name="smartAddOptionsBO" ref="smartAddOptionsBO"></property>
+	</bean>
+	
+	<bean id="additionalFieldsByTypeDependencyAction" class="com.path.actions.dependencies.admin.AdditionalFieldsByTypeDependencyAction" scope="prototype" parent="baseAction">
+		<property name="additionalFieldsBO" ref="additionalFieldsBO"></property>
+	</bean>
+	
+	<bean id="translationDependencyAction" class="com.path.actions.dependencies.admin.TranslationDependencyAction" scope="prototype" parent="baseAction">
+		<property name="translationBO" ref="translationBO"></property>
+	</bean>
+	
+	<bean id="userDependencyAction" class="com.path.actions.dependencies.admin.UserDependencyAction" scope="prototype" parent="baseAction">
+		<property name="usrBO" ref="usrBO"></property>
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+	
+	<bean id="roleDependencyAction" class="com.path.actions.dependencies.admin.RoleDependencyAction" scope="prototype" parent="baseAction">
+		<property name="roleBO" ref="roleBO"></property>
+	</bean>
+	
+	<bean id="applicationDependencyAction" class="com.path.actions.dependencies.admin.ApplicationDependencyAction" scope="prototype" parent="baseAction">
+	</bean>
+	
+	<bean id="dashboardPortalDependencyAction" class="com.path.actions.dependencies.admin.DashboardPortalDependencyAction" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+</beans>

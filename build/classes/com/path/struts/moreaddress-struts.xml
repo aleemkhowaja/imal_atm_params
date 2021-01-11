@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="moreAddress" namespace="/path/moreAddress" extends="path-default">
+		
+		
+		<action name="moreAddressList_*" class="addressListAction" method="{1}">
+			<result name="success" type="json"><param name="ignoreHierarchy">false</param></result>
+			<result name="populateMoreAddressPopupforFOM">/WEB-INF/pages/businesscommon/address/MoreAddressPopup.jsp</result>
+			<result name="populateMoreAddressAdd">/WEB-INF/pages/businesscommon/address/MoreAddressDetail.jsp</result>
+			<result name="populateMoreAddressPopupforFOMKYC">/WEB-INF/pages/businesscommon/core/csmfom/MoreAddressPopupKyc.jsp</result>
+		</action>
+		<action name="moreAddressMaint_*" class="addressMaintAction" method="{1}">
+			<result name="showFOMAddressDetails">/WEB-INF/pages/businesscommon/address/MoreAddressDetail.jsp</result>
+			<result name="showFOMAddressDetailsKyc">/WEB-INF/pages/businesscommon/core/csmfom/MoreAddressDetailKyc.jsp</result>
+			<result name="success" type="json"><param name="ignoreHierarchy">false</param></result>
+		</action>
+		
+	</package>	
+</struts>  

@@ -1,0 +1,56 @@
+ /*
+ * jQuery UI Tabs 1.8.6
+ * RTL direction for Tabs 
+ */
+.ui-tabs .ui-tabs-nav li, .ui-tabs-nav li a
+{ 
+	float: right\0/IE9 !important;
+	float: right;
+}
+
+.ui-jqgrid .ui-jqgrid-pager .ui-pg-div SPAN.ui-icon
+{
+	float:right !important;
+}
+
+.ui-jqgrid .ui-paging-info 
+{
+float: left;
+}
+
+.floatLeftRight
+{
+ float: left;
+ 
+}
+.floatLeftRightOverride
+{
+ float: left !important;
+ 
+}
+.floatRightLeft
+{
+ float: right !important;
+}
+.ui-dialog .ui-dialog-title
+{
+	float: right;
+	float: right\0/IE9 !important;
+}
+.ui-dialog .ui-dialog-titlebar-close
+{
+	left: .3em !important;
+	right: auto;
+}
+.path-welcome-left-pane {
+	border-top-right-radius: 12px;
+	border-bottom-right-radius: 12px;
+	border-top-left-radius: 0px !important;
+	border-bottom-left-radius: 0px !important;
+}
+.path-welcome-right-pane {
+	border-top-left-radius: 12px;
+	border-bottom-left-radius: 12px;
+	border-top-right-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="bpm" namespace="/path/bpm" extends="path-default">
+		
+		<action name="BpmGrid_*"  class="bpmGridAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>		
+			 		
+		<action name="BpmMaint_*"  class="bpmMaintAction" method="{1}">
+			<interceptor-ref name="fileUpload" />
+			<interceptor-ref name="pathDefaultStack" />
+			<result name="loadProcessInstanceTasksGrid">/WEB-INF/pages/common/bpm/BpmUserTasksList.jsp</result>
+			<result name="loadBpmUserTasksPage">/WEB-INF/pages/common/bpm/BpmUserTasksMaint.jsp</result> 
+		    <result name="loadBpmProcessInstantiationPage">/WEB-INF/pages/common/bpm/BpmProcessInstMaint.jsp</result>
+		    <result name="loadBpmProcessImage">/WEB-INF/pages/common/bpm/BpmProcessImage.jsp</result>
+		    <result name="loadBpmProcessMappingPage">/WEB-INF/pages/common/bpm/BpmProcessMappingMaint.jsp</result>
+		    <result name="loadBpmUserTaskMappingList">/WEB-INF/pages/common/bpm/BpmUserTaskMappingList.jsp</result>
+		    <result name="loadDynamicParams" type="freemarker">/WEB-INF/pages/technical/dynamicparams/DynamicParams.ftl</result>
+		    <result name="reloadInMappingSource">/WEB-INF/pages/common/bpm/BpmInArgReloadMapSource.jsp</result>
+		    <result name="reloadOutMappingSource">/WEB-INF/pages/common/bpm/BpmOutArgReloadMapSource.jsp</result>
+		    <result name="loadUploadProcMaintPage">/WEB-INF/pages/common/bpm/BpmUploadProcMaint.jsp</result>
+		    <result name="loadTaskAssignmentPage">/WEB-INF/pages/common/bpm/BpmUserTaskAssignMaint.jsp</result>
+		    <result name="loadBpmTaskForwardPage">/WEB-INF/pages/common/bpm/BpmTaskForwardMaint.jsp</result>
+		    <result name="loadProcessAccessRightList">/WEB-INF/pages/common/bpm/BpmProcessAccessRightList.jsp</result>
+		    <result name="loadProcessVariablesList">/WEB-INF/pages/common/bpm/BpmProcessVariablesList.jsp</result>
+		    <result name="loadBpmExternalTaskForm">/WEB-INF/pages/common/bpm/BpmLoadExternalForm.jsp</result>
+		    <result name="loadBpmCommonCommentPage">/WEB-INF/pages/common/bpm/BpmCommonCommentMaint.jsp</result>
+		    <result name="loadBpmLogsList">/WEB-INF/pages/common/bpm/BpmLogsList.jsp</result>
+		    <result name="loadBpmDocsList">/WEB-INF/pages/common/bpm/BpmDocsList.jsp</result>
+		    <result name="openImportDialog">/WEB-INF/pages/common/bpm/BpmImportProcDef.jsp</result>
+		    <result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="fileSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/plain</param>
+			</result>
+		</action>	
+			
+		<action name="BpmLookupAction_*" method="{1}" class="bpmLookupAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+			
+			
+	 </package>
+	
+</struts>   

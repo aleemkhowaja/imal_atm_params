@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!-- Start Dependancy injection of Teller Lookup -->
+	<bean id="atmTellerLookupAction"
+		class="com.path.atm.actions.lookups.teller.TellerLookupAction"
+		scope="prototype" parent="baseAction">
+		<property name="atmTellerBO" ref="atmTellerBO"></property>
+	</bean>
+	
+	<bean id="atmTellerLookupDependancyAction"
+		class="com.path.atm.actions.lookups.teller.TellerLookupDependancyAction"
+		scope="prototype" parent="baseAction">
+		<property name="atmTellerBO" ref="atmTellerBO"></property>
+	</bean>
+	<!-- End Dependancy injection of Teller Lookup -->
+ 	
+ 	<!-- Start Dependancy injection of Merchant Lookup -->
+	<bean id="atmMerchantLookupAction"
+		class="com.path.atm.actions.lookups.merchant.MerchantLookupAction"
+		scope="prototype" parent="baseAction">
+		<property name="merchantMgntBO" ref="merchantMgntBO"></property>
+	</bean>
+	
+	<bean id="atmMerchantLookupDependancyAction"
+		class="com.path.atm.actions.lookups.merchant.MerchantLookupDependancyAction"
+		scope="prototype" parent="baseAction">
+		<property name="merchantMgntBO" ref="merchantMgntBO"></property>
+	</bean>
+	<!-- End Dependancy injection of Merchant Lookup -->
+	
+	<!-- Start Dependancy injection of MTI Lookup -->
+	<bean id="mtiLookupAction"
+		class="com.path.atm.actions.lookups.mti.MTILookupAction"
+		scope="prototype" parent="baseAction">
+		<property name="atmInterfaceBO" ref="atmInterfaceBO"></property>
+	</bean>
+	
+	<bean id="mtiLookupDependancyAction"
+		class="com.path.atm.actions.lookups.mti.MTILookupDependancyAction"
+		scope="prototype" parent="baseAction">
+		<property name="atmInterfaceBO" ref="atmInterfaceBO"></property>
+	</bean>
+	<!-- End Dependancy injection of MTI Lookup -->
+	
+		<!-- Start Dependancy injection of Acquirer Lookup -->
+	<bean id="acquirerLookupAction"
+		class="com.path.atm.actions.lookups.acquirer.AcquirerLookupAction"
+		scope="prototype" parent="baseAction">
+		<property name="acquirerBO" ref="acquirerBO"></property>
+	</bean>
+	
+	<bean id="aquirerLookupDependancyAction"
+		class="com.path.atm.actions.lookups.acquirer.AcquirerLookupDependancyAction"
+		scope="prototype" parent="baseAction">
+		<property name="acquirerBO" ref="acquirerBO"></property>
+	</bean>
+	<!-- End Dependancy injection of Acquirer Lookup -->
+	
+	<!-- Start Dependancy injection of Branch Lookup -->
+	<bean id="atmBranchLookupAction"
+		class="com.path.atm.actions.lookups.branch.BranchLookupAction"
+		scope="prototype" parent="baseAction">
+		<property name="atmBranchBO" ref="atmBranchBO"></property>
+	</bean>
+	
+	<bean id="atmBranchLookupDependancyAction"
+		class="com.path.atm.actions.lookups.branch.BranchLookupDependancyAction"
+		scope="prototype" parent="baseAction">
+		<property name="atmBranchBO" ref="atmBranchBO"></property>
+	</bean>
+	<!-- End Dependancy injection of Branch Lookup -->
+	
+</beans>

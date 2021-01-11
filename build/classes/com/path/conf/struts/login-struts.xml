@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="unsecure" namespace="/login"
+		extends="path-default">
+		<default-action-ref name="loginAction" />
+
+		<global-results>
+			<result name="input">/login/Login.jsp?appName=ATMP</result>
+			<result name="login">/login/Login.jsp?appName=ATMP</result>
+			<result name="prelogin">/login/PreLogin.jsp</result>
+			<result name="autoLogin">/login/AutoLogin.jsp</result>
+			<result name="error">/login/ErrorPage.jsp</result>
+		</global-results>
+
+		<action name="unSecureAction_*" method="{1}"
+			class="unSecureAction">
+		</action>
+
+		<action name="loginAction" method="login"
+			class="unSecureAction">
+		</action>
+
+	</package>
+
+	<package name="path" namespace="/pathdesktop"
+		extends="path-default">
+
+		<global-results>
+			
+			<result name="ATMP" type="redirectAction">
+				<param name="method">atmpPortal</param>
+				<param name="actionName">DesktopAction_</param>
+				<param name="namespace">/pathdesktop</param>
+			</result>
+
+			<result name="error">/login/ErrorPage.jsp</result>
+			<result name="timeout" type="redirectAction">
+				<param name="method">sessionTimeout</param>
+				<param name="actionName">unSecureAction_</param>
+				<param name="namespace">/login</param>
+			</result>
+			<result name="loadDecoration" type="redirectAction">
+				<param name="actionName">loadDecorationAction</param>
+				<param name="namespace">/pathdesktop</param>
+				<param name="menuVar">${menuVar}</param>
+			</result>
+			<result name="loadTargetScreen" type="redirectAction">
+				<param name="actionName">newDecorationAction</param>
+				<param name="namespace">/pathdesktop</param>
+				<param name="_pageRef">${_pageRef}</param>
+				<param name="originalAppUrl">${originalAppUrl}</param>
+				<param name="targetAppScreenUrl">${targetAppScreenUrl}</param>
+				<param name="isRTL">${isRTL}</param>
+			</result>
+		</global-results>
+
+		<action name="newDecorationAction" class="desktopAction"
+			method="newDecoration">
+			<result name="success">/WEB-INF/pages/appcomponents/common/AppScreenContainer.jsp
+			</result>
+		</action>
+
+		<action name="loadDecorationAction" class="desktopAction"
+			method="loadDecoration">
+			<result name="success">/WEB-INF/pages/appcomponents/common/AppScreenLoader.jsp
+			</result>
+		</action>
+
+		<action name="TopMenuAction_*" method="{1}"
+			class="desktopAction">
+			<result name="menuLang">/WEB-INF/pages/common/headermenu/Languages.jsp
+			</result>
+		</action>
+
+		<action name="indexDesktopAction" method="login"
+			class="desktopAction">
+			<result name="success" type="redirectAction">
+				<param name="method">atmpPortal</param>
+				<param name="actionName">DesktopAction_</param>
+				<param name="namespace">/pathdesktop</param>
+			</result>
+		</action>
+
+		<action name="DesktopAction_*" method="{1}" class="desktopAction">			
+			<result name="atmp_customer">/WEB-INF/pages/atm/atmcommon/ATMMainPage.jsp</result>
+			<result type="json" name="jsonSuccess">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="loginCompBrAction_*" method="{1}"
+			class="desktopAction">
+			<result name="login_comp_br">/WEB-INF/pages/appcomponents/desktop/LoginCompBr.jsp
+			</result>
+
+			<result name="loginCompBr" type="redirectAction">
+				<param name="method">loginCompBr</param>
+				<param name="actionName">loginCompBrAction_</param>
+				<param name="namespace">/pathdesktop</param>
+			</result>
+
+			<result name="checkLoginSucess" type="redirectAction">
+				<param name="method">atmpPortal</param>
+				<param name="actionName">DesktopAction_</param>
+				<param name="namespace">/pathdesktop</param>
+			</result>
+		</action>
+
+	</package>
+
+</struts>

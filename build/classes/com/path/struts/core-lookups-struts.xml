@@ -1,0 +1,1085 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="corelookups" namespace="/pathdesktop"
+		extends="path-default">
+		<!-- Account Lookup main and grid action -->
+		<action name="AccountLookup_*" class="accountLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- CTSTRS Owing Lookup  -->
+		<action name="CtstrsOwingLookupAction_*" class="ctstrsOwingLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- CIF Lookup main and grid action -->
+		<action name="CifLookup_*" class="cifLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Product Class Lookup main and grid action -->
+		<action name="productClassLookup_*" class="productClassLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+			<!-- Floating Rate Lookup main and grid action -->
+		<action name="floatingRateCodeLookup_*" class="floatingRateCodeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- CIF Type Lookup main and grid action -->
+		<action name="CifTypeLookup_*" class="cifTypeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		
+		<!-- Nationality Lookup main and grid action -->
+		<action name="NationalityLookup_*" class="nationalityLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Religion Lookup main and grid action -->
+		<action name="ReligionLookup_*" class="religionLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Race Lookup main and grid action -->
+		<action name="RaceLookup_*" class="raceLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Postal Code Lookup main and grid action -->
+		<action name="PostalCodeLookup_*" class="postalCodeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Residence Types Lookup main and grid action -->
+		<action name="ResidenceTypes_*" class="residenceTypesLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Vault Lookup -->
+		<action name="VaultLookup_*" class="vaultLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- User Lookup -->
+		<action name="TellerLookup_*" class="tellerLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		
+		<!-- Remittance Type Lookup -->
+		<action name="RemittanceTypeLookup_*" class="remittanceTypeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Economic Sector Lookup main and grid action -->
+		<action name="EconomicSector_*" class="economicSectorLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Legal status Lookup main and grid action -->
+		<action name="LegalStatus_*" class="legalStatusLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Sub Eco sector Lookup action -->
+		<action name="SubEcoSector_*" class="subEcoSectorLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Ranking Lookup action -->
+		<action name="Ranking_*" class="rankingLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Educational level action -->
+		<action name="EducationalLevel_*" class="educationalLevelLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Occupation action -->
+		<action name="Occupation_*" class="occupationLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Position action -->
+		<action name="Position_*" class="positionLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Id Type action -->
+		<action name="IdType_*" class="idTypeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="CardTypeLookup_*" class="cardTypeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="CardMgtLookup_*" class="cardMgtLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="BranchesDestinationLookup_*" class="branchesDestinationLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="CreditTypeLookup_*" class="creditTypeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		
+		<!-- One Obligor -->
+		<action name="OneObligor_*" class="oneObligorLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cif Profile -->
+		<action name="CifProfile_*" class="cifProfileLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cif Rating -->
+		<action name="CifRating_*" class="cifRatingLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Relation -->
+		<action name="Relation_*" class="relationLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Salutation Lookup main and grid action -->
+		<action name="Salutation_*" class="salutationLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Charges Schema Lookup main and grid action -->
+		<action name="ChargesSchema_*" class="chargesSchemaLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cities Lookup main and grid action -->
+		<action name="CityLookup_*" class="citiesLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Sector Lookup main and grid action -->
+		<action name="SectorLookup_*" class="sectorsLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Division -->
+		<action name="Division_*" class="divisionLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Department -->
+		<action name="Department_*" class="departmentLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Link -->
+		<action name="LinkLookupAction_*" class="linkLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Checks -->
+		<action name="ChequeLookupAction_*" class="chequeLookupAction" method="{1}">
+			<result name="drawingChequeGrid" type="json">
+		     	<param name="ignoreHierarchy">false</param> 
+		    </result>
+			<result name="success" type="json">
+		       	<param name="ignoreHierarchy">false</param> 
+		    </result>
+		</action>
+		
+		<!-- Lost Found -->
+		<action name="LostFoundLookup_*" class="lostFoundLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Reason -->
+		<action name="ReasonLookup_*" class="reasonLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	
+		<!-- Charges Fees Policy -->
+		<action name="ChargesFeesPolicyLookup_*" class="chargesFeesPolicyLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- CIF Role -->
+		<action name="CifRole_*" class="cifRoleLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Employee -->
+		<action name="Employee_*" class="employeeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+			<!-- Currency Lookup main and grid action -->
+		<action name="currencyLookup_*" class="currencyLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+			<!-- Services Lookup main and grid action -->
+		<action name="servicesLookup_*" class="servicesLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+			<!-- Merchant Lookup main and grid action -->
+		<action name="merchantLookup_*" class="merchantLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Currency nomination det Lookup main and grid action -->
+		<action name="currencyNominationDetLookup_*" class="currencyNominationDetLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cheque Book Design - Cheque Book Design Lookup main and grid action-->
+		<action name="ChequeBookDesignLookup_*" class="chequeBookDesignLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cheque Book Leaves - Cheque Book Leaves Lookup main and grid action-->
+		<action name="ChequeBookLeavesLookup_*" class="chequeBookLeavesLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cheque Book Types - Cheque Book Types Lookup main and grid action-->
+		<action name="ChequeBookTypesLookup_*" class="chequeBookTypesLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="ChequeBookLookup_*" class="chequeBookLookupAction" method="{1}">
+			<result name="success" type="json">
+		       	<param name="ignoreHierarchy">false</param> 
+		    </result>
+		</action>
+		
+		<!-- Certificate Type LKP -->
+		<action name="CertificateTypeLookup_*" class="certificateTypesLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!--  Dynamic Integration Lkp -->
+		
+		<action name="DynIntegrationLookup_*" class="dynIntegrationLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Relation b/w Cif -->
+		<action name="RelationBwCif_*" class="relationBetweenCIFLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- TempCode Lookup main and grid action -->
+		<action name="TempCodeLookup_*" class="tempCodeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- VatCode Lookup main and grid action -->
+		<action name="VatCodeLookup_*" class="vatCodeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Facility Type main and grid action -->
+		<action name="FacilityTypeLookup_*" class="facilityTypeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- TODO Template -->
+		<action name="ToDoTemplate_*" class="todoTemplateLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+			<!-- Integration Control -->
+		<action name="IntegrationControl_*" class="integrationControlLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+			<!-- User Level -->
+		<action name="UserLevel_*" class="userLevelLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	
+			<!-- Charges -->
+		<action name="Charges_*" class="chargesLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>		
+		
+		<!-- Provider Report -->
+		<action name="CtsReportArg_*" class="ctsReportArgLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Provider Report -->
+		<action name="ProviderReport_*" class="providerReportLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Print Reports -->
+		<action name="PrintReports_*" class="printReportsLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="printReportsGird">/WEB-INF/pages/common/printreports/PrintReportsList.jsp</result>
+		</action>
+		
+		
+		 <!-- CIF Swift main and grid action -->
+		<action name="CifSwiftLookup_*" class="cifSwiftLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Swift Info main and grid action -->
+		<action name="SwiftInfoLookup_*" class="swiftInfoLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Bill Type -->
+		 <action name="BillTypeLookup_*" class="billTypeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Passbook Lookup main and grid action -->
+		<action name="PassbookLookup_*" class="passbookLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- RIFCTT_GL Lookup main and grid action -->
+		<action name="RifcttGlLookup_*" class="rifcttGlLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- CTS Clearing House Lookup action -->
+		<action name="CtsClearingHouseLookup_*" class="ctsClearingHouseLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Units Lookup main and grid action -->
+		<action name="Units_*" class="unitsLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Amf Status Reason Lookup main and grid action -->
+		<action name="AmfStatusReason_*" class="amfStatusReasonLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Account Number Lookup main and grid action -->
+		<action name="AccountNumber_*" class="accountNumberLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Facility Number Lookup main and grid action -->
+		<action name="FacilityLookup_*" class="facilityLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Fms Drawdowns Lookup action -->
+		<action name="FmsDrawdowns_*" class="fmsDrawdownsLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Account Type Lookup action -->
+		<action name="AccountTypeLookup_*" class="accountTypeLookupAcion" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Fms Indicator Lookup action -->
+		<action name="FmsIndicatorLookup_*" class="fmsIndicatorLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Fms Fund Limit Lookup action -->
+		<action name="FmsFundLimitLookup_*" class="fmsFundLimitLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- PMSDeal Lookup action -->
+		<action name="PmsDealLookup_*" class="pmsDealLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Black Source Lookup action -->
+		<action name="BlackSourceLookup_*" class="blackSourceLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Black List Type Lookup action -->
+		<action name="BlackListTypeLookup_*" class="blackListTypeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- User Lookup action -->
+		<action name="UserLookup_*" class="usrLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cards Message Lookup action -->
+		<action name="CardsMessageLookup_*" class="cardsMessageLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Cards Design Lookup action -->
+		<action name="CardsDesignLookup_*" class="cardsDesignLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Reference -->
+		<action name="Reference_*" class="referenceLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!--  JV lookup -->
+		<action name="JVTypesLookup_*" class="jvTypesLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		
+		<!-- Bill Collection -->
+		<action name="BillCollectionLookup_*" class="billCollectionLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		 <!-- Bill Collection -->
+		<action name="LetterGuaranteeLookup_*" class="letterGuaranteeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Dashboard Lookup -->
+		<action name="DashboardLookup_*" class="dashboardLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!--Letter of Credit -->
+		<action name="LetterCreditLookup_*" class="letterCreditLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- tr types Code Lookup main and grid action -->
+		<action name="TrCodeLookupAction_*" class="trCodeLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="TrCodeDependencyAction_*" method="{1}"
+			class="trCodeDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Batch Lookup  -->
+		<action name="CtsBatchLookupAction_*" class="ctsBatchLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		
+		
+		 <!-- Administration-->
+		<action name="AdministrationLookup_*" class="administrationLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+				<!-- Draw Down Types main and grid action -->
+		<action name="FacilityTypeClassLookup_*" class="facilityTypeClassLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Items  Lookup main and grid action -->
+		<action name="ItemsLookup_*" class="itemsLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Vendor CIF Lookup main and grid action -->
+		<action name="VendorCifLookup_*" class="vendorCIFLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Item Property Details Lookup main and grid action -->
+		<action name="ItemPropertydetLookup_*" class="itemPropertydetLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!--  Service SMS lookup -->
+		<action name="SmsServicesLookupAction_*" class="smsServicesLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- CtsRequestType Lookup action -->
+		<action name="CtsRequestTypeLookup_*" class="ctsRequestTypeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Trx Fields Name Lookup action -->
+		<action name="TrxFieldsNameLookup_*" class="trxFieldsNameLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Product Value Dates action -->
+		<action name="EntityCodeLookup_*" class="entityCodeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- TFS Doc Type action -->
+		<action name="tfsDocTypeLookup_*" class="tfsDocTypeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Account Charges Products Lookup -->
+		<action name="AccountChargesProductsLookupAction_*" class="accountChargesProductsLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Trx Type action -->
+		<action name="CtsTrxTypeLookup_*" class="ctsTrxTypeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="trxTypeGrid">/WEB-INF/pages/businesscommon/trxtype/TrxTypeList.jsp</result>
+		</action>
+		
+		<!-- Segmentation Criteria - Procedure ID LKP -->
+		<action name="ProcedureIdLookup_*" class="procedureIdLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Segmentation Criteria - Query ID LKP -->
+		<action name="QueryIdLookup_*" class="queryIdLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!--  criteria  LKP -->
+		<action name="criteriaCodeLookup_*" class="criteriaCodeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	   <!-- Provider Code -->
+		<action name="ProviderCodeLookupAction_*" class="providerCodeLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>				
+
+		<action name="AccountTierNo_*" class="accountTierNoLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+		<!-- Card Integration -->
+		<action name="CardIntegrationLookupAction_*" class="cardIntegrationLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		
+		<!-- Transfer Accounts -->
+		<action name="TransferAccCriteriaExcepLookupAction_*" class="transferAccCriteriaExcepLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		
+		<action name="AvaCategoryLookupAction_*" class="avaCategoryLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="AvaFileLookupAction_*" class="avaFileLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="AvaFileCompanionLookupAction_*" class="avaFileCompanionLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="CtsOperationsTypeLookupAction_*" class="ctsOperationsTypeLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="AvaPaymentLookupAction_*" class="avaPaymentLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="AvaBenefLineNoLookupAction_*" class="avaBenefLineNoLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="EducationNatureLookupAction_*" class="educationNatureLookupAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<!--  Clubbing LKP -->
+		<action name="ClubbingLookupAction_*" class="clubbingLookupAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<!--  Clubbed Accounts for Tagged Groups LKP -->
+		<action name="ClubbedAccountsLookupAction_*" class="ClubbedAccountsLookupAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+			
+		
+		<action name="SegmentationCodeLookupAction_*" class="segmentationCodeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="SegmentGroupingCodeLookupAction_*" class="segmentGroupingCodeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+		<!-- AMLCIF Lookup main and grid action added by nour for 777000 -->
+		<action name="AmlCifLookup_*" class="amlCifLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+		<!-- Black List Source Upload Lookup action -->
+		<action name="BlackListSourceUploadLookup_*" class="blackListSourceUploadLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<!-- AuthSignatoriesLookup main and grid action -->
+		<action name="AuthSignatoriesLookup_*" class="authSignatoriesLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="TransferAccCriteriaExcepLookupAction_*" class="transferAccCriteriaExcepLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- Merchant Lookup main and grid action -->
+		<action name="merchantLookup_*" class="merchantLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	
+		<!-- Services Lookup main and grid action -->
+		<action name="servicesLookup_*" class="servicesLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Certificate Code -->
+		<action name="CertificateCodeLookupAction_*" class="certificateCodeLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="CardsFacilityLkpAction_*" class="cardsFacilityLookupAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+	   
+	
+		<!-- Instruction Definition -->
+		<action name="InstructionLookup_*" class="instructionDefinitionLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Registration Center -->
+		<action name="RegCenterLookup_*" class="registrationCenterLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Instruction - Sub Instruction Definition -->
+		<action name="InstrSubInstrLookup_*" class="instructionSubInstrLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Economic Agent Lookup main and grid action -->
+		<action name="EconomicAgent_*" class="economicAgentLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>		
+		<!-- Profession Category Lookup main and grid action -->
+		<action name="ProfessionCategory_*" class="professionCategoryLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>			
+
+		<!-- Profession Segment Lookup main and grid action -->
+		<action name="ProfessionSegment_*" class="professionSegmentLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+		<!-- Profession Lookup main and grid action -->
+		<action name="Profession_*" class="professionLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+				
+		<action name="VisitReasonLookup_*" class="visitReasonLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- VatZone Lookup main and grid action by maria for BMO180067 -->
+		<action name="VatZoneLookup_*" class="vatZoneLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+	<!-- Proof of Address Lookup main and grid action by maria for BMO180181 -->
+		<action name="ProofAddressLookup_*" class="proofAddressLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	
+    <!-- Proof of Occupation Lookup main and grid action by maria for BMO180181 -->
+		<action name="ProofOccupationLookup_*" class="proofOccupationLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>		
+	
+	 <!-- Employment Status Lookup main and grid action by maria for BMO180181 -->
+		<action name="EmploymentStatusLookup_*" class="employmentStatusLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+	
+	 <!-- Source of Funds Lookup main and grid action by maria for BMO180181 -->
+		<action name="SourceFundsLookup_*" class="sourceFundsLookupAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="VisitReasonLookup_*" class="visitReasonLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="SchedCode_*" class="schedCodeLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Gift Class Lookup main and grid action -->
+		<action name="GiftClass_*" class="giftClassLookupAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+    
+   
+</struts>   

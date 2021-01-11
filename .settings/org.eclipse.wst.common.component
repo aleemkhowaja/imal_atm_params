@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+                                
+    
+    
+    
+    
+    
+    
+    <wb-module deploy-name="imal_atm_params">
+                                                                
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+                                                                
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+                                                                
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/services_common_business"/>
+                                                                
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/services_common"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/gateway_portal_common_resource"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/gateway_portal_common_src"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/gateway_service_client_common_resource"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/gateway_service_client_common_src"/>
+                        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/gateway_service_common"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/portal_common_resources"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/portal_common_resources_JQ_3_3_1"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/portal_common_src_JQ_3_3_1"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/portal_common_src"/>
+                                                                
+        
+        
+        
+        
+        
+        
+        <property name="java-output-path" value="/imal_atm_params/build/classes"/>
+                                        
+        
+        
+        
+        <property name="context-root" value="imal_atm_params"/>
+                                                            
+    
+    
+    
+    
+    
+    
+    </wb-module>
+                            
+
+
+
+
+
+
+</project-modules>

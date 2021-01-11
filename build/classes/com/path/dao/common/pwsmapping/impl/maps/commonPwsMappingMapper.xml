@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="commonPwsMappingMapper">
+ 
+<cache />
+
+	<!--  query the object Mapping definition  -->
+	<select id="returnPwsInfo" resultMap="pwsInfoMap" parameterType="com.path.vo.common.pwsmapping.PwsDefinitionCO">
+		SELECT def.MAPPING_ID MAPPING_ID, MAP_DESCRIPTION,APP_NAME,WS_NAME,OPER_NAME,
+			SERVICE_APP_NAME,mapping.API_CODE , mapping.*, api.*,
+			CASE WHEN mapping.API_CODE IS NULL 
+                 THEN 'pws' ELSE api.SERVICE_TYPE END API_SERVICE_TYPE
+		FROM COMMON_PWS_MAPPING_DEF def
+		LEFT JOIN COMMON_PWS_MAPPING mapping
+			ON def.MAPPING_ID = mapping.MAPPING_ID
+		LEFT JOIN IM_IMAL_API api
+			ON api.API_CODE = mapping.API_CODE
+		WHERE def.MAPPING_ID = #{mappingVO.MAPPING_ID}	
+	</select>
+	
+	<select id="getMaxApiCode"  resultType="java.math.BigDecimal"> 	 
+		SELECT MAX(API_CODE)
+		FROM IM_IMAL_API
+		WHERE API_CODE >= 600000
+	</select>
+	
+	<select id="getMaxMappingID"  resultType="java.math.BigDecimal"> 	 
+		 SELECT MAX(MAPPING_ID + 1) 
+		 FROM COMMON_PWS_MAPPING_DEF 
+		 WHERE MAPPING_ID >= 300000 
+	</select>
+	
+	<resultMap type="com.path.dbmaps.vo.COMMON_PWS_MAPPING_DETAILSVO" id="commonPwsMappingDetailsVOMap">
+		<result property="MAPPING_ID" column="MAPPING_ID"/>
+		<result property="WS_NAME" column="WS_NAME"/>
+		<result property="OPER_NAME" column="OPER_NAME"/>
+		<result property="SOURCE_KEY" column="SOURCE_KEY"/>
+		<result property="DESTINATION_KEY" column="DESTINATION_KEY"/>
+		<result property="MAPPING_ARG_TYPE" column="MAPPING_ARG_TYPE"/>
+		<result property="MAPPING_ARG_VALUE" column="MAPPING_ARG_VALUE"/>
+		<result property="CREATED_BY" column="CREATED_BY"/>
+    	<result property="CREATED_DATE" column="CREATED_DATE"/>
+		<result property="MODIFIED_BY" column="MODIFIED_BY"/>
+		<result property="ARG_ID" column="ARG_ID"/>
+	</resultMap>
+	
+	<resultMap type="com.path.vo.common.pwsmapping.PwsDefinitionCO" id="pwsInfoMap">
+		<result property="serviceType" column="API_SERVICE_TYPE"/>
+		<result property="definitionVO.MAPPING_ID" column="MAPPING_ID" />
+		<result property="definitionVO.MAP_DESCRIPTION" column="MAP_DESCRIPTION" />
+		<result property="definitionVO.APP_NAME" column="APP_NAME" />
+		<result property="mappingVO.CREATED_BY" column="MAPPING_ID" />
+		<result property="mappingVO.CREATED_DATE" column="CREATED_DATE" />
+		<result property="mappingVO.MODIFIED_BY" column="MODIFIED_BY" />
+		<result property="mappingVO.MODIFIED_DATE" column="MODIFIED_DATE" />
+		
+		<result property="mappingVO.MAPPING_ID" column="MAPPING_ID" />
+		<result property="mappingVO.WS_NAME" column="WS_NAME" />
+		<result property="mappingVO.OPER_NAME" column="OPER_NAME" />
+		<result property="mappingVO.SERVICE_APP_NAME" column="SERVICE_APP_NAME" />
+		<result property="mappingVO.API_CODE" column="API_CODE" />
+		
+		<!--  definition section Rest -->
+		<result property="apiDefinitionVO.SERVICE_TYPE" column="SERVICE_TYPE" />
+		<result property="apiDefinitionVO.WS_ENDPOINT" column="WS_ENDPOINT" />
+		<result property="apiDefinitionVO.WS_CONTENT_TYPE" column="WS_CONTENT_TYPE" />
+		<result property="apiDefinitionVO.WS_ACCEPT_TYPE" column="WS_ACCEPT_TYPE" />
+		
+		<!--  definition section Soap -->
+		<result property="apiDefinitionVO.SOAP_ACTION" column="SOAP_ACTION" />
+		<result property="apiDefinitionVO.SOAP_MESSAGE_PREFIX" column="SOAP_MESSAGE_PREFIX" />
+		<result property="apiDefinitionVO.SOAP_NAMESPACES" column="SOAP_NAMESPACES" />
+		<result property="apiDefinitionVO.SOAP_OPERATION" column="SOAP_OPERATION" />
+		<result property="apiDefinitionVO.SOAP_OPERATION_LOCAL_PART" column="SOAP_OPERATION_LOCAL_PART" />
+	</resultMap>
+	
+	
+	<resultMap type="com.path.vo.common.pwsmapping.CommonMappingArgCO" id="pwsApiArgMap">
+		<result property="apiArgVO.ARG_ID" column="ARG_ID" />
+		<result property="apiArgVO.API_CODE" column="API_CODE" />
+		<result property="apiArgVO.ARG_NAME" column="ARG_NAME" />
+		<result property="apiArgVO.DESCRIPTION" column="DESCRIPTION" />
+		<result property="apiArgVO.ARG_TYPE" column="ARG_TYPE" />
+		<result property="apiArgVO.STATUS" column="STATUS" />
+		<result property="argMap.SOURCE_KEY" column="SOURCE_KEY" />
+		<result property="argMap.DESTINATION_KEY" column="DESTINATION_KEY" />
+	</resultMap>
+						
+	
+	<select id="returnApiMappingArgs" resultMap="pwsApiArgMap" parameterType="com.path.vo.common.pwsmapping.PwsDefinitionCO">
+		SELECT arg.*,SOURCE_KEY,DESTINATION_KEY
+		FROM IM_API_ARGUMENT arg
+		LEFT JOIN COMMON_PWS_MAPPING_DETAILS detail 
+			ON detail.ARG_ID = arg.ARG_ID AND detail.MAPPING_ID = #{mappingVO.MAPPING_ID}
+		WHERE arg.API_CODE = #{mappingVO.API_CODE}
+		ORDER BY arg.ARG_ID
+	</select>
+	
+	<!--  Grid Section -->
+	<delete id="deleteApiMappingArg" parameterType="com.path.vo.common.pwsmapping.PwsDefinitionCO">
+		BEGIN
+			DELETE FROM IM_API_ARGUMENT
+			WHERE API_CODE = #{mappingVO.API_CODE}<if test="isOracle == 1">;</if>
+			
+			DELETE FROM COMMON_PWS_MAPPING_DETAILS
+			WHERE MAPPING_ID = #{mappingVO.MAPPING_ID}<if test="isOracle == 1">;</if>
+						
+	    END <if test="isOracle == 1">;</if>
+	</delete>
+	
+	<select id="loadCommonPWSMappingDetails" resultMap="commonPwsMappingDetailsVOMap" parameterType="com.path.dbmaps.vo.COMMON_PWS_MAPPING_DETAILSVO" useCache="false">
+		SELECT MAPPING_DET_ID, 
+			MAPPING_ID, 
+			OPER_NAME, 
+			SOURCE_KEY, 
+			WS_NAME, 
+			DESTINATION_KEY,
+			PARAM_NAME,
+			MAPPING_ARG_TYPE, 
+    		MAPPING_ARG_VALUE, 
+  	  		CREATED_BY, 
+    		CREATED_DATE, 
+    		MODIFIED_BY, 
+    		MODIFIED_DATE, 
+    		ARG_ID, 
+    		MAPPING_ARG_MODE
+		FROM COMMON_PWS_MAPPING_DETAILS
+		<if test='null != MAPPING_ID'>
+				WHERE COMMON_PWS_MAPPING_DETAILS.MAPPING_ID = #{MAPPING_ID}	
+					<if test='null != WS_NAME'>
+							AND WS_NAME = #{WS_NAME}
+					</if>
+					<if test = 'null != OPER_NAME'>
+							AND OPER_NAME = #{OPER_NAME}
+					</if>
+					<if test = 'null != MAPPING_ARG_MODE'>
+						AND MAPPING_ARG_MODE = #{MAPPING_ARG_MODE}
+					</if>
+		</if>
+	</select>
+	
+	<select id="loadCommonPWSMappingDetailsSub" resultMap="commonPwsMappingDetailsVOMap" parameterType="com.path.vo.common.pwswebserviceexplorer.PwsWebServiceExplorerCO">
+	SELECT MAPPING_DET_ID,
+		MAPPING_ID,
+		OPER_NAME,
+		SOURCE_KEY,
+		WS_NAME,
+		DESTINATION_KEY,
+		PARAM_NAME,
+		MAPPING_ARG_TYPE,
+		MAPPING_ARG_VALUE,
+		CREATED_BY,
+		CREATED_DATE,
+		MODIFIED_BY,
+		MODIFIED_DATE,
+		ARG_ID,
+		MAPPING_ARG_MODE
+	FROM COMMON_PWS_MAPPING_DETAILS
+	<if test='null != commonPwsMappingDetailsVO.MAPPING_ID'>
+		WHERE COMMON_PWS_MAPPING_DETAILS.MAPPING_ID = #{commonPwsMappingDetailsVO.MAPPING_ID}
+		<if test='null != commonPwsMappingDetailsVO.WS_NAME'>
+			AND WS_NAME = #{commonPwsMappingDetailsVO.WS_NAME}
+		</if>
+		<if test='null != commonPwsMappingDetailsVO.OPER_NAME'>
+			AND OPER_NAME = #{commonPwsMappingDetailsVO.OPER_NAME}
+		</if>
+		<if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_MODE'>
+			AND MAPPING_ARG_MODE = #{commonPwsMappingDetailsVO.MAPPING_ARG_MODE}
+		</if>
+		<if test = 'null != filter'>
+			AND MAPPING_ARG_TYPE like #{filter}
+		</if>
+		<if test = 'null != paramNameFilter'>
+			AND PARAM_NAME like #{paramNameFilter}
+		</if>
+	</if>
+	</select>
+	
+
+ <delete id = "deleteCommonPWSMapping" parameterType="com.path.vo.common.pwswebserviceexplorer.PwsWebServiceExplorerCO">
+		DELETE FROM COMMON_PWS_MAPPING 
+			WHERE MAPPING_ID =  #{commonPwsMappingVO.MAPPING_ID} 
+ </delete>
+ 
+ <delete id = "deleteCommonPWSMappingDetails" parameterType="com.path.vo.common.pwswebserviceexplorer.PwsWebServiceExplorerCO">
+      DELETE FROM COMMON_PWS_MAPPING_DETAILS
+       WHERE MAPPING_ID = #{commonPwsMappingVO.MAPPING_ID}
+ </delete>
+ 
+ <select id="loadCommonPwsMapping" parameterType="com.path.vo.common.pwswebserviceexplorer.PwsWebServiceExplorerCO" resultMap="pwsInfoMap"> 	 
+ 	  SELECT 
+	 	 	 MAPPING_ID,
+			 WS_NAME,
+			 OPER_NAME,
+			 CREATED_BY,
+			 CREATED_DATE,
+			 MODIFIED_BY,
+			 MODIFIED_DATE,
+			 SERVICE_APP_NAME,
+			 API_CODE
+	  FROM COMMON_PWS_MAPPING WHERE MAPPING_ID = #{mappingVO.MAPPING_ID}
+ </select>
+	
+ <select id="loadSequenceNumber" parameterType="com.path.vo.common.pwswebserviceexplorer.PwsWebServiceExplorerCO" resultType="java.math.BigDecimal" useCache="false"> 	 
+			<if test="isOracle == 1">
+					SELECT COMMON_PWS_MAPPING_DETAIL_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+					SELECT next_identity('COMMON_PWS_MAPPING_DETAILS')
+			</if>
+			<if test="isSQLServer == 1 " >
+					SELECT IDENT_CURRENT ('COMMON_PWS_MAPPING_DETAILS') + 1
+			</if>
+ </select>
+	
+ <insert id="insertApiDefinition" parameterType="com.path.vo.common.pwsmapping.PwsDefinitionCO">
+ 		
+ 		<selectKey resultType="java.math.BigDecimal" keyProperty="apiCode" order="BEFORE" >
+				SELECT 
+					<choose>
+						<when test="isSybase == 1">ISNULL(MAX(API_CODE),0)+1</when>
+						<otherwise>NVL(MAX(API_CODE),0)+1</otherwise>
+					</choose> 
+				FROM IM_IMAL_API 
+				WHERE API_CODE >= 600000
+		</selectKey>
+	INSERT INTO IM_IMAL_API
+	(
+		API_CODE
+		<if test='null != apiDefinitionVO.DESCRIPTION'>
+			,DESCRIPTION
+		</if>
+		<if test='null != apiDefinitionVO.PROCEDURE_NAME'>
+			,PROCEDURE_NAME
+		</if>
+	  	 <if test='null != apiDefinitionVO.WB_SERVICE_NAME'>
+			,WB_SERVICE_NAME
+		 </if>
+		 <if test='null != apiDefinitionVO.SUSPENDED'>
+			,SUSPENDED
+		 </if>
+		 <if test='null != apiDefinitionVO.RELATED_APP'>
+			,RELATED_APP
+		 </if>
+		 <if test='null != apiDefinitionVO.API_TYPE'>
+			,API_TYPE
+		 </if>
+		 <if test='null != apiDefinitionVO.API_VERSION'>
+			,API_VERSION
+		 </if>
+		 <if test='null != apiDefinitionVO.API_LOCATION'>
+			,API_LOCATION
+		 </if>
+		 <if test='null != apiDefinitionVO.SERVICE_TYPE'>
+			,SERVICE_TYPE
+		 </if>
+		 <if test='null != apiDefinitionVO.WS_ACCEPT_TYPE'>
+			,WS_ACCEPT_TYPE
+		 </if>
+		 <if test='null != apiDefinitionVO.WS_CONTENT_TYPE'>
+			,WS_CONTENT_TYPE
+		 </if>
+		 <if test='null != apiDefinitionVO.WS_ENDPOINT'>
+			,WS_ENDPOINT
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_ACTION'>
+			,SOAP_ACTION
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_MESSAGE_PREFIX'>
+			,SOAP_MESSAGE_PREFIX
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_NAMESPACES'>
+			,SOAP_NAMESPACES
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_OPERATION'>
+			,SOAP_OPERATION
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_OPERATION_LOCAL_PART'>
+			,SOAP_OPERATION_LOCAL_PART
+		 </if>
+	   )
+		VALUES
+		(
+			#{apiCode}
+		<if test='null != apiDefinitionVO.DESCRIPTION'>
+			,#{apiDefinitionVO.DESCRIPTION}
+		</if>
+		<if test='null != apiDefinitionVO.PROCEDURE_NAME'>
+			,#{apiDefinitionVO.PROCEDURE_NAME}
+		</if>
+	  	 <if test='null != apiDefinitionVO.WB_SERVICE_NAME'>
+			,#{apiDefinitionVO.WB_SERVICE_NAME}
+		 </if>
+		 <if test='null != apiDefinitionVO.SUSPENDED'>
+			,#{apiDefinitionVO.SUSPENDED}
+		 </if>
+		 <if test='null != apiDefinitionVO.RELATED_APP'>
+			,#{apiDefinitionVO.RELATED_APP}
+		 </if>
+		 <if test='null != apiDefinitionVO.API_TYPE'>
+			,#{apiDefinitionVO.API_TYPE}
+		 </if>
+		 <if test='null != apiDefinitionVO.API_VERSION'>
+			,#{apiDefinitionVO.API_VERSION}
+		 </if>
+		 <if test='null != apiDefinitionVO.API_LOCATION'>
+			,#{apiDefinitionVO.API_LOCATION}
+		 </if>
+		 <if test='null != apiDefinitionVO.SERVICE_TYPE'>
+			,#{apiDefinitionVO.SERVICE_TYPE}
+		 </if>
+		 <if test='null != apiDefinitionVO.WS_ACCEPT_TYPE'>
+			,#{apiDefinitionVO.WS_ACCEPT_TYPE}
+		 </if>
+		 <if test='null != apiDefinitionVO.WS_CONTENT_TYPE'>
+			,#{apiDefinitionVO.WS_CONTENT_TYPE}
+		 </if>
+		 <if test='null != apiDefinitionVO.WS_ENDPOINT'>
+			,#{apiDefinitionVO.WS_ENDPOINT}
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_ACTION'>
+			,#{apiDefinitionVO.SOAP_ACTION}
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_MESSAGE_PREFIX'>
+			,#{apiDefinitionVO.SOAP_MESSAGE_PREFIX}
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_NAMESPACES'>
+			,#{apiDefinitionVO.SOAP_NAMESPACES}
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_OPERATION'>
+			,#{apiDefinitionVO.SOAP_OPERATION}
+		 </if>
+		 <if test='null != apiDefinitionVO.SOAP_OPERATION_LOCAL_PART'>
+			,#{apiDefinitionVO.SOAP_OPERATION_LOCAL_PART}
+		 </if>
+		)
+</insert>		
+	
+<insert id="insertIntoCommonPWSMappingDef" parameterType="com.path.vo.common.pwswebserviceexplorer.PwsWebServiceExplorerCO">
+	INSERT 
+	INTO COMMON_PWS_MAPPING_DEF
+	(
+	    MAPPING_ID
+	   ,APP_NAME
+	   ,MAP_DESCRIPTION
+	)
+	VALUES
+	(
+		 #{commonPwsMappingDefVO.MAPPING_ID}
+		,#{commonPwsMappingDefVO.APP_NAME}
+		,#{commonPwsMappingDefVO.MAP_DESCRIPTION}
+	)
+</insert>
+		
+<insert id="saveCommonPWSMappingDetails" parameterType="com.path.vo.common.pwswebserviceexplorer.PwsWebServiceExplorerCO">
+	<!-- 
+		<selectKey resultType="java.math.BigDecimal" keyProperty="mappingDetID" order="BEFORE" >
+			<if test="isOracle == 1">
+					SELECT COMMON_PWS_MAPPING_DETAIL_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+					SELECT next_identity('COMMON_PWS_MAPPING_DETAILS')
+			</if>
+			<if test="isSQLServer == 1 " >
+					SELECT IDENT_CURRENT ('COMMON_PWS_MAPPING_DETAILS') + 1
+			</if>
+	</selectKey>
+	-->
+<if test="isOracle == 1">
+	INSERT ALL
+	INTO COMMON_PWS_MAPPING
+	(
+	    MAPPING_ID
+	   ,WS_NAME
+	   ,OPER_NAME
+	 <if test='null != userName'>
+	  	  ,CREATED_BY
+	 </if>
+	  <if test='null != runningDate'>
+	  	  ,CREATED_DATE
+	 </if>
+	  <if test='null != commonPwsMappingVO.MODIFIED_BY'>
+	  	  ,MODIFIED_BY
+	 </if>
+	  <if test='null != modifiedDate'>
+	  	  ,MODIFIED_DATE
+	 </if>
+	  <if test='null != commonPwsMappingVO.SERVICE_APP_NAME'>
+	  	  ,SERVICE_APP_NAME
+	 </if>
+	  <if test='null != commonPwsMappingVO.API_CODE'>
+	   ,API_CODE
+	 </if>
+	)
+	VALUES
+	(
+		 #{commonPwsMappingVO.MAPPING_ID}
+		,#{commonPwsMappingVO.WS_NAME}
+		,#{commonPwsMappingVO.OPER_NAME}
+		 <if test='null != userName'>
+		  	  ,#{userName,jdbcType=VARCHAR}
+		 </if>
+		  <if test='null != runningDate'>
+		  	  ,#{runningDate}
+		 </if>
+		  <if test='null != commonPwsMappingVO.MODIFIED_BY'>
+		  	  ,#{commonPwsMappingVO.MODIFIED_BY,jdbcType=VARCHAR}
+		 </if>
+		  <if test='null != modifiedDate'>
+		  	  ,#{modifiedDate}
+		 </if>
+		  <if test='null != commonPwsMappingVO.SERVICE_APP_NAME'>
+		  	  ,#{commonPwsMappingVO.SERVICE_APP_NAME,jdbcType=VARCHAR}
+		 </if>
+		  <if test='null != commonPwsMappingVO.API_CODE'>
+		      ,#{commonPwsMappingVO.API_CODE}
+		 </if>
+	)
+<foreach item = "commonPwsMappingDetailsVO" index = "index" collection = "lstCommonPwsMappingDetailsVO" open = "" separator = "" close = "">
+	INTO COMMON_PWS_MAPPING_DETAILS
+	(
+		 MAPPING_DET_ID 
+		,MAPPING_ID
+		,WS_NAME
+		,OPER_NAME
+		,SOURCE_KEY
+		<if test='null != commonPwsMappingDetailsVO.DESTINATION_KEY'>
+		,DESTINATION_KEY
+		</if>
+		 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_TYPE'>
+		  	  ,MAPPING_ARG_TYPE
+		 </if>
+		 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_VALUE'>
+		  	  ,MAPPING_ARG_VALUE
+		 </if>
+		 <if test='null != userName'>
+		  	  ,CREATED_BY
+		 </if>
+		 <if test='null != runningDate'>
+		  	  ,CREATED_DATE
+		 </if>
+		 <if test='null != modifiedBy'>
+		  	  ,MODIFIED_BY
+		 </if>
+		 <if test='null != modifiedDate'>
+		  	 ,MODIFIED_DATE
+		 </if>
+		 <if test='null != commonPwsMappingDetailsVO.ARG_ID'>
+		   	,ARG_ID
+		 </if>
+		 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_MODE'>
+		   	,MAPPING_ARG_MODE
+		 </if>
+		 <if test='null != commonPwsMappingDetailsVO.PARAM_NAME'>
+		  	  ,PARAM_NAME
+		 </if>		 
+	)
+	VALUES
+	(
+		 #{commonPwsMappingDetailsVO.MAPPING_DET_ID}
+		,#{commonPwsMappingVO.MAPPING_ID}
+		,#{commonPwsMappingDetailsVO.WS_NAME}
+		,#{commonPwsMappingDetailsVO.OPER_NAME}
+		<if test='null != commonPwsMappingDetailsVO.SOURCE_KEY'>
+		,#{commonPwsMappingDetailsVO.SOURCE_KEY}
+		</if>
+		<if test='null != commonPwsMappingDetailsVO.DESTINATION_KEY'>
+		,#{commonPwsMappingDetailsVO.DESTINATION_KEY}
+		</if>
+		 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_TYPE'>
+		  	  ,#{commonPwsMappingDetailsVO.MAPPING_ARG_TYPE}
+		 </if>
+		 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_VALUE'>
+		  	  ,#{commonPwsMappingDetailsVO.MAPPING_ARG_VALUE}
+		 </if>
+		 <if test='null != userName'>
+		  	  ,#{userName,jdbcType=VARCHAR}
+		 </if>
+		 <if test='null != runningDate'>
+		  	  ,#{runningDate}
+		 </if>
+		 <if test='null != modifiedBy'>
+		  	  ,#{modifiedBy,jdbcType=VARCHAR}
+		 </if>
+		 <if test='null != modifiedDate'>
+		  	 ,#{modifiedDate}
+		 </if>
+		 <if test='null != commonPwsMappingDetailsVO.ARG_ID'>
+		   	,#{commonPwsMappingDetailsVO.ARG_ID}
+		 </if>
+		 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_MODE'>
+		   	,#{commonPwsMappingDetailsVO.MAPPING_ARG_MODE}
+		 </if>
+		 <if test='null != commonPwsMappingDetailsVO.PARAM_NAME'>
+		  	  ,#{commonPwsMappingDetailsVO.PARAM_NAME}
+		 </if>
+	)
+</foreach>
+	SELECT * FROM DUAL
+</if>
+<if test = "isSybase == 1">	
+	INSERT INTO COMMON_PWS_MAPPING
+	(
+	   MAPPING_ID
+	   ,WS_NAME
+	   ,OPER_NAME
+	 <if test='null != userName'>
+	  	  ,CREATED_BY
+	 </if>
+	  <if test='null != runningDate'>
+	  	  ,CREATED_DATE
+	 </if>
+	  <if test='null != commonPwsMappingVO.MODIFIED_BY'>
+	  	  ,MODIFIED_BY
+	 </if>
+	  <if test='null != modifiedDate'>
+	  	  ,MODIFIED_DATE
+	 </if>
+	  <if test='null != commonPwsMappingVO.SERVICE_APP_NAME'>
+	  	  ,SERVICE_APP_NAME
+	 </if>
+	  <if test='null != commonPwsMappingVO.API_CODE'>
+	   ,API_CODE
+	 </if>
+	)
+	VALUES
+	(
+		 #{commonPwsMappingVO.MAPPING_ID}
+		,#{commonPwsMappingVO.WS_NAME}
+		,#{commonPwsMappingVO.OPER_NAME}
+		 <if test='null != userName'>
+		  	  ,#{userName,jdbcType=VARCHAR}
+		 </if>
+		  <if test='null != runningDate'>
+		  	  ,#{runningDate}
+		 </if>
+		  <if test='null != commonPwsMappingVO.MODIFIED_BY'>
+		  	  ,#{commonPwsMappingVO.MODIFIED_BY,jdbcType=VARCHAR}
+		 </if>
+		  <if test='null != modifiedDate'>
+		  	  ,#{modifiedDate}
+		 </if>
+		  <if test='null != commonPwsMappingVO.SERVICE_APP_NAME'>
+		  	  ,#{commonPwsMappingVO.SERVICE_APP_NAME,jdbcType=VARCHAR}
+		 </if>
+		  <if test='null != commonPwsMappingVO.API_CODE'>
+		      ,#{commonPwsMappingVO.API_CODE}
+		 </if>
+	)
+<foreach item = "commonPwsMappingDetailsVO" index = "index" collection = "lstCommonPwsMappingDetailsVO" open = "" separator = "" close = "">
+	BEGIN
+		INSERT INTO COMMON_PWS_MAPPING_DETAILS
+		(
+				 MAPPING_ID
+				,WS_NAME
+				,OPER_NAME
+				<if test='null != commonPwsMappingDetailsVO.SOURCE_KEY'>
+				,SOURCE_KEY
+				</if>
+				<if test='null != commonPwsMappingDetailsVO.DESTINATION_KEY'>
+				,DESTINATION_KEY
+				</if>
+				 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_TYPE'>
+				  	  ,MAPPING_ARG_TYPE
+				 </if>
+				 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_VALUE'>
+				  	  ,MAPPING_ARG_VALUE
+				 </if>
+				 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_MODE'>
+				  	  ,MAPPING_ARG_MODE
+				 </if>
+				  <if test='null != commonPwsMappingDetailsVO.PARAM_NAME'>
+		  	 		 ,PARAM_NAME
+				 </if>
+				 <if test='null != userName'>
+				  	  ,CREATED_BY
+				 </if>
+				 <if test='null != runningDate'>
+				  	  ,CREATED_DATE
+				 </if>
+				 <if test='null != modifiedBy'>
+				  	  ,MODIFIED_BY
+				 </if>
+				 <if test='null != modifiedDate'>
+				  	 ,MODIFIED_DATE
+				 </if>
+				 <if test='null != commonPwsMappingDetailsVO.ARG_ID'>
+				   	,ARG_ID
+				 </if>
+		)
+		VALUES
+		(
+			 #{commonPwsMappingVO.MAPPING_ID}
+			,#{commonPwsMappingDetailsVO.WS_NAME}
+			,#{commonPwsMappingDetailsVO.OPER_NAME}
+			<if test='null != commonPwsMappingDetailsVO.SOURCE_KEY'>
+			,#{commonPwsMappingDetailsVO.SOURCE_KEY}
+			</if>
+			<if test='null != commonPwsMappingDetailsVO.DESTINATION_KEY'>
+				 ,#{commonPwsMappingDetailsVO.DESTINATION_KEY}
+			</if>
+			 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_TYPE'>
+			  	  ,#{commonPwsMappingDetailsVO.MAPPING_ARG_TYPE}
+			 </if>
+			 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_VALUE'>
+			  	  ,#{commonPwsMappingDetailsVO.MAPPING_ARG_VALUE}
+			 </if>
+			 <if test='null != commonPwsMappingDetailsVO.MAPPING_ARG_MODE'>
+				  ,#{commonPwsMappingDetailsVO.MAPPING_ARG_MODE}
+			 </if>
+			 <if test='null != commonPwsMappingDetailsVO.PARAM_NAME'>
+		  	  	,#{commonPwsMappingDetailsVO.PARAM_NAME}
+			 </if>
+			 <if test='null != userName'>
+			  	  ,#{userName,jdbcType=VARCHAR}
+			 </if>
+			 <if test='null != runningDate'>
+			  	  ,#{runningDate}
+			 </if>
+			 <if test='null != modifiedBy'>
+			  	  ,#{modifiedBy,jdbcType=VARCHAR}
+			 </if>
+			 <if test='null != modifiedDate'>
+			  	 ,#{modifiedDate}
+			 </if>
+			 <if test='null != commonPwsMappingDetailsVO.ARG_ID'>
+			   	,#{commonPwsMappingDetailsVO.ARG_ID}
+			 </if>
+		)
+	END
+</foreach>
+</if>	
+</insert>
+
+<resultMap id="mappingCO" type="com.path.vo.ws.CommonPwsMappingCO">
+		<result property="definitionVO.MAPPING_ID" column="MAPPING_ID" />
+		<result property="definitionVO.MAP_DESCRIPTION" column="MAP_DESCRIPTION" />
+		<result property="definitionVO.APP_NAME" column="APP_NAME" />
+		<result property="mappingVO.MAPPING_ID" column="MAPPING_ID" />
+		<result property="mappingVO.WS_NAME" column="WS_NAME" />
+		<result property="mappingVO.OPER_NAME" column="OPER_NAME" />
+		<result property="mappingVO.SERVICE_APP_NAME" column="SERVICE_APP_NAME" />
+		<result property="mappingVO.API_CODE" column="API_CODE" />
+		<!--  definition section  -->
+		<result property="apiDefinitionVO.SERVICE_TYPE" column="SERVICE_TYPE" />
+		<result property="apiDefinitionVO.WS_ENDPOINT" column="WS_ENDPOINT" />
+		<result property="apiDefinitionVO.WS_CONTENT_TYPE" column="WS_CONTENT_TYPE" />
+		<result property="apiDefinitionVO.WS_ACCEPT_TYPE" column="WS_ACCEPT_TYPE" />
+		<!--  security section -->
+		<result property="apiSecurityVO.AUTHENTICATION_TYPE" column="AUTHENTICATION_TYPE" />
+		<result property="apiSecurityVO.USER_NAME" column="USER_NAME" />
+		<result property="apiSecurityVO.PASSWORD" column="PASSWORD" />
+		<result property="apiSecurityVO.TOKEN_REGISTRATION_URL" column="TOKEN_REGISTRATION_URL" />
+		<result property="apiSecurityVO.TOKEN_REGISTRATION_APP_PWD" column="TOKEN_REGISTRATION_APP_PWD" />
+		<result property="apiSecurityVO.TOKEN_REGISTRATION_APP_NAME" column="TOKEN_REGISTRATION_APP_NAME" />
+		<result property="apiSecurityVO.TOKEN_GENERATION_URL" column="TOKEN_GENERATION_URL" />
+		<result property="apiSecurityVO.TOKEN_AES_KEY" column="TOKEN_AES_KEY" />
+		<result property="apiSecurityVO.TOKEN_LIFETIME" column="TOKEN_LIFETIME" />
+	</resultMap>
+	
+	<resultMap type="hashmap" id="pwsParamMap">
+		<result property="MAPPING_ID" column="MAPPING_ID" javaType="bigdecimal" />
+		<result property="SOURCE_KEY" column="SOURCE_KEY" javaType="string" />
+		<result property="DESTINATION_KEY" column="DESTINATION_KEY" javaType="string" />
+		<result property="MAPPING_ARG_VALUE" column="MAPPING_ARG_VALUE" javaType="string" />
+		<result property="ARG_NAME" column="ARG_NAME" javaType="string" />
+		<result property="ARG_TYPE" column="ARG_TYPE" javaType="string" />
+		<result property="STATUS" column="STATUS" javaType="string" />
+	</resultMap>	
+	
+
+</mapper>

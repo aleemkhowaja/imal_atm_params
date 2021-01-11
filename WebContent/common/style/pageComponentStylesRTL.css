@@ -1,0 +1,125 @@
+
+/*
+ * CSS Framework 
+ *
+ * Copyright Path Solutions
+ *
+ * 
+ */ 
+ 
+ 
+/*--------------------------------------------------------------------------------------------------------------------
+													Component styling
+---------------------------------------------------------------------------------------------------------------------*/
+ 
+
+
+
+
+
+ /* Header Bar Div styling
+----------------------------------*/
+.panel-header-div {
+	direction: rtl;
+}
+
+
+/* -----------------------------------------------------------------------------------------------------------------
+													Layout styling
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+ /* Data Component <td> Styling
+----------------------------------*/
+.fldDataEdit {
+	padding-top: 2px;
+}
+
+/* PathSolutions [Libin] added fldLabelView just to change the padding for RTL */
+ /* Label Component <td> Styling
+----------------------------------*/
+.fldLabelView {
+	padding: 0 10px 0 0;	
+}	
+/*---------------------------------------------------------------------------------------------------------------------------------------
+					Align attribute classes  [ To avoid repeating text or component alignment in each CSS ]
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+.left
+{
+	text-align: right;
+}
+.right
+{
+	text-align: left !important;
+}
+.liveSearchInputCorner
+{
+	-moz-border-radius: 0px 5px 5px 0px;
+	-webkit-border-radius: 0px 5px 5px 0px;
+	border-radius: 0px 5px 5px 0px;
+ }
+ .liveSearchSpanCorner
+{
+	
+	-moz-border-radius: 5px 0px 0px 5px;
+	-webkit-border-radius: 5px 0px 0px 5px;
+	border-radius: 5px 0px 0px 5px;
+ }
+/*[Libin] Lookup Layout adjustment for Arabic/Eng switching*/ 
+.liveSearchInputCornerforRTL
+{
+	-moz-border-radius: 5px 0px 0px 5px;
+	-webkit-border-radius: 5px 0px 0px 5px;
+	border-radius: 5px 0px 0px 5px;
+}
+/*[Libin] Lookup Layout adjustment for Arabic/Eng switching*/
+.liveSearchSpanCornerforRTL
+{
+	-moz-border-radius: 0px 5px 5px 0px;
+	-webkit-border-radius: 0px 5px 5px 0px;
+	border-radius: 0px 5px 5px 0px;
+}
+
+.liveSearchCompSize:hover , .liveSearchCompSize:focus  /* PathSolutions [Libin] separated this entry to handle an IE screen issue of these components on hover and focus*/
+{
+	border-left-width: 2px ;
+}
+
+
+/*-----Spinner ------*/
+.spinnerTextCorners
+{
+	-moz-border-radius:  0px 5px 5px 0px ;
+	-webkit-border-radius: 0px 5px 5px 0px ;
+	border-radius: 0px 5px 5px 0px ;
+	
+}
+
+.spanUpCorners 
+{
+   -moz-border-radius : 5px 0px 0px 0px;
+    -webkit-border-radius: 5px 0px 0px 0px;
+	border-radius: 5px 0px 0px 0px;
+}
+.spanDownCorners
+{
+    -moz-border-radius :  0px 0px 0px 5px;
+    -webkit-border-radius: 0px 0px 0px 5px;
+	border-radius: 0px 0px 0px 5px;
+}
+.header-top-center { 
+	background:linear-gradient(#005981, #0288C4);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#005981', endColorstr='#0288C4')"; /* IE8+ */ 
+	background:-moz-linear-gradient(#005981, #0288C4);
+	background:-webkit-gradient(#005981, #0288C4);
+}
+input[mode="number"]
+{
+  text-align:left !important;
+}
+.liveSearchSpanDisplay
+{
+	padding-right: 4px \0/IE9 !important; 
+	padding-left: 0px \0/IE9 !important; 
+}

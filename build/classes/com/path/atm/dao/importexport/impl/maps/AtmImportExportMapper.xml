@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="importExportAtmInterfaceMapper">
+  
+  	<!-- Result map for Export channel Details -->
+  	<resultMap id="channelExportMap" 						type="channelExporterCO">
+  	    <id column="CHANNEL_ID" 						property="CHANNEL_ID" />
+	    <result column="DESCRIPTION" 					property="DESCRIPTION" />
+	    <result column="USER_ID" 						property="USER_ID" />
+	    <result column="STATUS" 						property="STATUS" />
+	    <result column="ACTIVE_QUEUE_YN" 				property="ACTIVE_QUEUE_YN" />
+	    <result column="COMMUNICATION_PROTOCOL" 		property="COMMUNICATION_PROTOCOL" />
+	    <result column="HTTP_PASSWORD" 					property="HTTP_PASSWORD" />
+	    <result column="HTTP_REQUEST_TIME_OUT" 			property="HTTP_REQUEST_TIME_OUT" />
+	    <result column="HTTP_USER" 						property="HTTP_USER" />
+	    <result column="INTERFACE_CODE" 				property="INTERFACE_CODE" />
+	    <result column="IP_ADDRESS" 					property="IP_ADDRESS" />
+	    <result column="PARALLELISM_CONTROL" 			property="PARALLELISM_CONTROL" />
+	    <result column="PORT" 							property="PORT" />
+	    <result column="SERVER_TYPE" 					property="SERVER_TYPE" />
+	    <result column="SOCKET_RESTART_INTERVAL" 		property="SOCKET_RESTART_INTERVAL" />
+	    <result column="END_POINT" 						property="END_POINT" />
+	    <result column="TO_BE_STATUS" 					property="TO_BE_STATUS" />
+	    
+	    <!-- Map Collection of Channel Interface ISO Params-->
+	    <result column="GTW_CHANNEL_PARAMS_ID" 					property="isoIntParamsCO.GTW_CHANNEL_PARAMS_ID" />
+		<result column="ENGN_ACCEPTOR_WORKER_NO" 				property="isoIntParamsCO.ENGN_ACCEPTOR_WORKER_NO" />
+		<result column="ENGN_WORKER_NO" 						property="isoIntParamsCO.ENGN_WORKER_NO" />
+		<result column="ENGN_ADD_LOGGING_HANDLER_YN"	 		property="isoIntParamsCO.ENGN_ADD_LOGGING_HANDLER_YN" />
+		<result column="ENGN_ADD_ECHO_MSG_LISTENER_YN" 			property="isoIntParamsCO.ENGN_ADD_ECHO_MSG_LISTENER_YN" />
+	    <result column="ENGN_LOG_FIELD_DESCRIPTION_YN" 			property="isoIntParamsCO.ENGN_LOG_FIELD_DESCRIPTION_YN" />
+	    <result column="ENGN_LOG_SENSITIVE_DATA_YN" 			property="isoIntParamsCO.ENGN_LOG_SENSITIVE_DATA_YN" />
+	    <result column="ENGN_REPLY_ON_ERROR_YN" 				property="isoIntParamsCO.ENGN_REPLY_ON_ERROR_YN" />
+	    <result column="ENGN_IDLE_TIMEOUT" 						property="isoIntParamsCO.ENGN_IDLE_TIMEOUT" />
+	    <result column="ENGN_CHARSET" 							property="isoIntParamsCO.ENGN_CHARSET" />
+	    <result column="TASK_CONTAINER_CONSUMER_NO" 			property="isoIntParamsCO.TASK_CONTAINER_CONSUMER_NO" />
+	    <result column="TASK_CONTAINER_SESSION_NO" 				property="isoIntParamsCO.TASK_CONTAINER_SESSION_NO" />
+	    <result column="TASK_CONTAINER_DESTINATION" 			property="isoIntParamsCO.TASK_CONTAINER_DESTINATION" />
+  </resultMap>
+
+	<!-- Select Channel Details for Export by Interface Code -->
+  	<select id="returnChannelDetailsForExport" resultMap="channelExportMap" parameterType="atmInterfaceSC">
+		
+		SELECT 
+		
+			chnl.CHANNEL_ID,
+			chnl.DESCRIPTION, 
+			chnl.USER_ID, 
+			chnl.STATUS, 
+			chnl.ACTIVE_QUEUE_YN, 
+			chnl.COMMUNICATION_PROTOCOL, 
+    		chnl.HTTP_PASSWORD, 
+    		chnl.HTTP_REQUEST_TIME_OUT, 
+    		chnl.HTTP_USER, 
+    		chnl.INTERFACE_CODE, 
+    		chnl.IP_ADDRESS, 
+    		chnl.PARALLELISM_CONTROL, 
+    		chnl.PORT, 
+    		chnl.SERVER_TYPE, 
+    		chnl.SOCKET_RESTART_INTERVAL,
+    		chnl.END_POINT,
+    		chnl.TO_BE_STATUS,
+    
+		    		
+    		chnlParams.GTW_CHANNEL_PARAMS_ID,
+    		chnlParams.ENGN_ACCEPTOR_WORKER_NO,
+    		chnlParams.ENGN_WORKER_NO,
+    		chnlParams.ENGN_ADD_LOGGING_HANDLER_YN,
+    		chnlParams.ENGN_ADD_ECHO_MSG_LISTENER_YN,
+    		chnlParams.ENGN_LOG_FIELD_DESCRIPTION_YN,
+    		chnlParams.ENGN_LOG_SENSITIVE_DATA_YN,
+    		chnlParams.ENGN_REPLY_ON_ERROR_YN,
+    		chnlParams.ENGN_IDLE_TIMEOUT,
+    		chnlParams.ENGN_CHARSET,
+    		chnlParams.TASK_CONTAINER_CONSUMER_NO,
+    		chnlParams.TASK_CONTAINER_SESSION_NO,
+    		chnlParams.TASK_CONTAINER_DESTINATION
+    		
+    		FROM GTW_CHANNEL chnl
+    		
+    			LEFT OUTER JOIN GTW_CHANNEL_ISO_INT_PARAMS chnlParams 
+    				ON
+    				chnl.CHANNEL_ID=chnlParams.CHANNEL_ID
+    			
+    		 where chnl.INTERFACE_CODE = #{interfaceId}
+	</select>
+	
+	<!-- result map for PWS Mapping Export by Mapping i-->
+	<resultMap 	id="commonPwsMappingMap" 						type="commonPwsMapping">
+	
+		<id 	column="MAPPING_ID" 							property="definitionVO.MAPPING_ID" />
+		<result column="MAP_DESCRIPTION" 						property="definitionVO.MAP_DESCRIPTION" />
+	    <result column="APP_NAME" 								property="definitionVO.APP_NAME" />
+	    
+		
+	    <result column="WS_NAME" 								property="mappingVO.WS_NAME" />
+	    <result column="OPER_NAME" 								property="mappingVO.OPER_NAME" />
+	    <result column="API_CODE" 								property="mappingVO.API_CODE" />
+	    <result column="SERVICE_APP_NAME" 						property="mappingVO.SERVICE_APP_NAME" />
+	    
+		<!-- Map Collection of  pws mapping details-->
+		<collection property="listCommonPwsMappingDetailsVO" 	ofType="commonPwsMappingDetails" notNullColumn="MAPPING_DET_ID">
+			<result column="MAPPING_DET_ID" 				property="MAPPING_DET_ID" />
+			<result column="WS_NAME" 						property="WS_NAME" />
+	     	<result column="OPER_NAME" 						property="OPER_NAME" />
+	    	<result column="SOURCE_KEY" 					property="SOURCE_KEY" />
+	    	<result column="DESTINATION_KEY" 				property="DESTINATION_KEY" />
+	    	<result column="MAPPING_ARG_TYPE" 				property="MAPPING_ARG_TYPE" />
+	    	<result column="MAPPING_ARG_VALUE" 				property="MAPPING_ARG_VALUE" />
+	    	<result column="ARG_ID" 						property="ARG_ID" />
+	    	<result column="MAPPING_ARG_MODE" 				property="MAPPING_ARG_MODE" />
+	    	<result column="PARAM_NAME" 					property="PARAM_NAME" />
+		</collection>    
+	</resultMap>
+	
+	<!-- Select PWS Mapping for Export by Interface Code -->
+  	<select id="returnPWSMappingDetailsForExport" resultMap="commonPwsMappingMap" parameterType="isoMessagesDefinitionSC">
+		
+		SELECT 
+				
+			pwsMapDef.MAPPING_ID,		
+			pwsMapDef.MAP_DESCRIPTION,
+			pwsMapDef.APP_NAME,
+			
+			
+			pwsMap.WS_NAME,
+			pwsMap.API_CODE,
+			pwsMap.OPER_NAME,
+			pwsMap.SERVICE_APP_NAME,
+			
+			pwsMapDet.MAPPING_DET_ID,
+			pwsMapDet.WS_NAME,
+			pwsMapDet.OPER_NAME,
+			pwsMapDet.SOURCE_KEY,
+			pwsMapDet.DESTINATION_KEY,
+			pwsMapDet.MAPPING_ARG_TYPE,
+			pwsMapDet.MAPPING_ARG_VALUE,
+			pwsMapDet.ARG_ID,
+			pwsMapDet.MAPPING_ARG_MODE,
+			pwsMapDet.PARAM_NAME
+			
+    		FROM 
+    		
+    			COMMON_PWS_MAPPING_DEF pwsMapDef 
+    		
+    			LEFT OUTER JOIN GTW_ATM_ISO_MSG_DEF msgDef
+    				ON
+    			 	msgDef.MAPPING_ID = pwsMapDef.MAPPING_ID
+    		
+    			LEFT OUTER JOIN COMMON_PWS_MAPPING pwsMap
+    				ON
+    				pwsMap.MAPPING_ID=pwsMapDef.MAPPING_ID
+    			
+    			LEFT OUTER JOIN COMMON_PWS_MAPPING_DETAILS pwsMapDet
+    				ON
+    				pwsMapDet.MAPPING_ID=pwsMapDef.MAPPING_ID
+    				
+    				where msgDef.INTERFACE_CODE=#{interfaceId}
+	</select>
+	
+	<!-- Insert Channel -->
+	<insert id="insertGTW_CHANNEL" parameterType="channelExporterCO" >
+	  
+	  		<selectKey resultType="java.math.BigDecimal" keyProperty="CHANNEL_ID" order="BEFORE" >
+				<if test="isOracle == 1">
+					SELECT GTW_CHANNEL_SEQ.NEXTVAL FROM dual
+				</if>
+				<if test="isSybase == 1 and isSQLServer != 1 " >
+					SELECT next_identity('GTW_CHANNEL')
+				</if>
+				<if test="isSQLServer == 1 " >
+					SELECT IDENT_CURRENT ('GTW_CHANNEL') + 1
+				</if>
+			</selectKey>
+		
+		    insert into GTW_CHANNEL
+		    <trim prefix="(" suffix=")" suffixOverrides="," >
+		    	 <if test="isOracle == 1">
+	        		CHANNEL_ID,
+	      		</if>
+		      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+		        DESCRIPTION,
+		      </if>
+		      <if test="USER_ID != null and !&quot;&quot;.equals(USER_ID)" >
+		        USER_ID,
+		      </if>
+		      <if test="COMMUNICATION_PROTOCOL != null and !&quot;&quot;.equals(COMMUNICATION_PROTOCOL)" >
+		        COMMUNICATION_PROTOCOL,
+		      </if>
+		      <if test="SERVER_TYPE != null and !&quot;&quot;.equals(SERVER_TYPE)" >
+		        SERVER_TYPE,
+		      </if>
+		      <if test="HTTP_USER != null and !&quot;&quot;.equals(HTTP_USER)" >
+		        HTTP_USER,
+		      </if>
+		      <if test="HTTP_PASSWORD != null and !&quot;&quot;.equals(HTTP_PASSWORD)" >
+		        HTTP_PASSWORD,
+		      </if>
+		      <if test="IP_ADDRESS != null and !&quot;&quot;.equals(IP_ADDRESS)" >
+		        IP_ADDRESS,
+		      </if>
+		      <if test="PORT != null and !&quot;&quot;.equals(PORT)" >
+		        PORT,
+		      </if>
+		      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+		        INTERFACE_CODE,
+		      </if>
+		      <if test="ACTIVE_QUEUE_YN != null and !&quot;&quot;.equals(ACTIVE_QUEUE_YN)" >
+		        ACTIVE_QUEUE_YN,
+		      </if>
+		      <if test="PARALLELISM_CONTROL != null and PARALLELISM_CONTROL != emptyBigDecimalValue" >
+		        PARALLELISM_CONTROL,
+		      </if>
+		      <if test="HTTP_REQUEST_TIME_OUT != null and HTTP_REQUEST_TIME_OUT != emptyBigDecimalValue" >
+		        HTTP_REQUEST_TIME_OUT,
+		      </if>
+		      <if test="SOCKET_RESTART_INTERVAL != null and SOCKET_RESTART_INTERVAL != emptyBigDecimalValue" >
+		        SOCKET_RESTART_INTERVAL,
+		      </if>
+		      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+		        CREATED_BY,
+		      </if>
+		      <if test="CREATED_DATE != null" >
+		        CREATED_DATE,
+		      </if>
+		      <if test="STATUS != null and !&quot;&quot;.equals(STATUS)" >
+		        STATUS,
+		      </if>
+		      <if test="END_POINT != null and !&quot;&quot;.equals(END_POINT)" >
+		        END_POINT,
+		      </if>
+		    </trim>
+		    <trim prefix="values (" suffix=")" suffixOverrides="," >
+		    	<if test="isOracle == 1">
+		        	#{CHANNEL_ID},
+		      	</if>
+			      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+			        #{DESCRIPTION},
+			      </if>
+			      <if test="USER_ID != null and !&quot;&quot;.equals(USER_ID)" >
+			        #{USER_ID},
+			      </if>
+			      <if test="COMMUNICATION_PROTOCOL != null and !&quot;&quot;.equals(COMMUNICATION_PROTOCOL)" >
+			        #{COMMUNICATION_PROTOCOL},
+			      </if>
+			      <if test="SERVER_TYPE != null and !&quot;&quot;.equals(SERVER_TYPE)" >
+			        #{SERVER_TYPE},
+			      </if>
+			      <if test="HTTP_USER != null and !&quot;&quot;.equals(HTTP_USER)" >
+			        #{HTTP_USER},
+			      </if>
+			      <if test="HTTP_PASSWORD != null and !&quot;&quot;.equals(HTTP_PASSWORD)" >
+			        #{HTTP_PASSWORD},
+			      </if>
+			      <if test="IP_ADDRESS != null and !&quot;&quot;.equals(IP_ADDRESS)" >
+			        #{IP_ADDRESS},
+			      </if>
+			      <if test="PORT != null and !&quot;&quot;.equals(PORT)" >
+			        #{PORT},
+			      </if>
+			      <if test="INTERFACE_CODE != null and INTERFACE_CODE != emptyBigDecimalValue" >
+			        #{INTERFACE_CODE},
+			      </if>
+			      <if test="ACTIVE_QUEUE_YN != null and !&quot;&quot;.equals(ACTIVE_QUEUE_YN)" >
+			        #{ACTIVE_QUEUE_YN},
+			      </if>
+			      <if test="PARALLELISM_CONTROL != null and PARALLELISM_CONTROL != emptyBigDecimalValue" >
+			        #{PARALLELISM_CONTROL},
+			      </if>
+			      <if test="HTTP_REQUEST_TIME_OUT != null and HTTP_REQUEST_TIME_OUT != emptyBigDecimalValue" >
+			        #{HTTP_REQUEST_TIME_OUT},
+			      </if>
+			      <if test="SOCKET_RESTART_INTERVAL != null and SOCKET_RESTART_INTERVAL != emptyBigDecimalValue" >
+			        #{SOCKET_RESTART_INTERVAL},
+			      </if>
+			      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+			        #{CREATED_BY},
+			      </if>
+			      <if test="CREATED_DATE != null" >
+			        #{CREATED_DATE},
+			      </if>
+			      <if test="STATUS != null and !&quot;&quot;.equals(STATUS)" >
+			        #{STATUS},
+			      </if>
+			      <if test="END_POINT != null and !&quot;&quot;.equals(END_POINT)" >
+			        #{END_POINT},
+			      </if>
+		    </trim>
+  </insert>
+  
+  	<!-- Insert Channel interface Params -->
+  	<insert id="insertGTW_CHANNEL_ISO_INT_PARAMS" parameterType="channelISOParamExporterCO" >
+		<selectKey resultType="java.math.BigDecimal" keyProperty="GTW_CHANNEL_PARAMS_ID" order="BEFORE" >
+			<if test="isOracle == 1">
+				SELECT GTW_CHANNEL_ISO_INT_PARAMS_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+				SELECT next_identity('GTW_CHANNEL_ISO_INT_PARAMS')
+			</if>
+			<if test="isSQLServer == 1 " >
+				SELECT IDENT_CURRENT ('GTW_CHANNEL_ISO_INT_PARAMS') + 1
+			</if>
+		</selectKey>
+    insert into GTW_CHANNEL_ISO_INT_PARAMS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+     <if test="isOracle == 1">
+        GTW_CHANNEL_PARAMS_ID,
+      </if>
+      <if test="CHANNEL_ID != null" >
+        CHANNEL_ID,
+      </if>
+      <if test="ENGN_ACCEPTOR_WORKER_NO != null" >
+        ENGN_ACCEPTOR_WORKER_NO,
+      </if>
+      <if test="ENGN_WORKER_NO != null" >
+        ENGN_WORKER_NO,
+      </if>
+      <if test="ENGN_ADD_LOGGING_HANDLER_YN != null and !&quot;&quot;.equals(ENGN_ADD_LOGGING_HANDLER_YN)" >
+        ENGN_ADD_LOGGING_HANDLER_YN,
+      </if>
+      <if test="ENGN_ADD_ECHO_MSG_LISTENER_YN != null and !&quot;&quot;.equals(ENGN_ADD_ECHO_MSG_LISTENER_YN)" >
+        ENGN_ADD_ECHO_MSG_LISTENER_YN,
+      </if>
+      <if test="ENGN_LOG_FIELD_DESCRIPTION_YN != null and !&quot;&quot;.equals(ENGN_LOG_FIELD_DESCRIPTION_YN)" >
+        ENGN_LOG_FIELD_DESCRIPTION_YN,
+      </if>
+      <if test="ENGN_LOG_SENSITIVE_DATA_YN != null and !&quot;&quot;.equals(ENGN_LOG_SENSITIVE_DATA_YN)" >
+        ENGN_LOG_SENSITIVE_DATA_YN,
+      </if>
+      <if test="ENGN_REPLY_ON_ERROR_YN != null and !&quot;&quot;.equals(ENGN_REPLY_ON_ERROR_YN)" >
+        ENGN_REPLY_ON_ERROR_YN,
+      </if>
+      <if test="ENGN_IDLE_TIMEOUT != null" >
+        ENGN_IDLE_TIMEOUT,
+      </if>
+      <if test="ENGN_CHARSET != null and !&quot;&quot;.equals(ENGN_CHARSET)" >
+        ENGN_CHARSET,
+      </if>
+      <if test="TASK_CONTAINER_CONSUMER_NO != null" >
+        TASK_CONTAINER_CONSUMER_NO,
+      </if>
+      <if test="TASK_CONTAINER_SESSION_NO != null" >
+        TASK_CONTAINER_SESSION_NO,
+      </if>
+      <if test="TASK_CONTAINER_DESTINATION != null and !&quot;&quot;.equals(TASK_CONTAINER_DESTINATION)" >
+        TASK_CONTAINER_DESTINATION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="isOracle == 1">
+        #{GTW_CHANNEL_PARAMS_ID},
+      </if>
+      <if test="CHANNEL_ID != null" >
+        #{CHANNEL_ID},
+      </if>
+      <if test="ENGN_ACCEPTOR_WORKER_NO != null" >
+        #{ENGN_ACCEPTOR_WORKER_NO},
+      </if>
+      <if test="ENGN_WORKER_NO != null" >
+        #{ENGN_WORKER_NO},
+      </if>
+      <if test="ENGN_ADD_LOGGING_HANDLER_YN != null and !&quot;&quot;.equals(ENGN_ADD_LOGGING_HANDLER_YN)" >
+        #{ENGN_ADD_LOGGING_HANDLER_YN},
+      </if>
+      <if test="ENGN_ADD_ECHO_MSG_LISTENER_YN != null and !&quot;&quot;.equals(ENGN_ADD_ECHO_MSG_LISTENER_YN)" >
+        #{ENGN_ADD_ECHO_MSG_LISTENER_YN},
+      </if>
+      <if test="ENGN_LOG_FIELD_DESCRIPTION_YN != null and !&quot;&quot;.equals(ENGN_LOG_FIELD_DESCRIPTION_YN)" >
+        #{ENGN_LOG_FIELD_DESCRIPTION_YN},
+      </if>
+      <if test="ENGN_LOG_SENSITIVE_DATA_YN != null and !&quot;&quot;.equals(ENGN_LOG_SENSITIVE_DATA_YN)" >
+        #{ENGN_LOG_SENSITIVE_DATA_YN},
+      </if>
+      <if test="ENGN_REPLY_ON_ERROR_YN != null and !&quot;&quot;.equals(ENGN_REPLY_ON_ERROR_YN)" >
+        #{ENGN_REPLY_ON_ERROR_YN},
+      </if>
+      <if test="ENGN_IDLE_TIMEOUT != null" >
+        #{ENGN_IDLE_TIMEOUT},
+      </if>
+      <if test="ENGN_CHARSET != null and !&quot;&quot;.equals(ENGN_CHARSET)" >
+        #{ENGN_CHARSET},
+      </if>
+      <if test="TASK_CONTAINER_CONSUMER_NO != null" >
+        #{TASK_CONTAINER_CONSUMER_NO},
+      </if>
+      <if test="TASK_CONTAINER_SESSION_NO != null" >
+        #{TASK_CONTAINER_SESSION_NO},
+      </if>
+      <if test="TASK_CONTAINER_DESTINATION != null and !&quot;&quot;.equals(TASK_CONTAINER_DESTINATION)" >
+        #{TASK_CONTAINER_DESTINATION},
+      </if>
+    </trim>
+  </insert>
+
+	<!-- Return Max Mapping ID -->
+	<select id="returnMaxMappingID"  resultType="java.math.BigDecimal"> 	 
+		 SELECT MAX(MAPPING_ID + 1) 
+		 FROM COMMON_PWS_MAPPING_DEF 
+		 WHERE MAPPING_ID >= 300000 
+	</select>
+	
+	
+	<!-- Insert Common PWS Mapping Definition -->
+    <insert id="insertCOMMON_PWS_MAPPING_DEF" parameterType="com.path.dbmaps.vo.COMMON_PWS_MAPPING_DEFVO" >
+	    insert into COMMON_PWS_MAPPING_DEF
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      MAPPING_ID,
+	      <if test="MAP_DESCRIPTION != null and !&quot;&quot;.equals(MAP_DESCRIPTION)" >
+	        MAP_DESCRIPTION,
+	      </if>
+	      <if test="APP_NAME != null and !&quot;&quot;.equals(APP_NAME)" >
+	        APP_NAME,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      #{MAPPING_ID},
+	      <if test="MAP_DESCRIPTION != null and !&quot;&quot;.equals(MAP_DESCRIPTION)" >
+	        #{MAP_DESCRIPTION},
+	      </if>
+	      <if test="APP_NAME != null and !&quot;&quot;.equals(APP_NAME)" >
+	        #{APP_NAME},
+	      </if>
+	    </trim>
+  	</insert>
+  
+   	<!-- Insert Common PWS Mapping  -->
+    <insert id="insertCOMMON_PWS_MAPPING" parameterType="commonPwsMappingVO" >
+	    insert into COMMON_PWS_MAPPING
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	      MAPPING_ID,
+	      <if test="WS_NAME != null and !&quot;&quot;.equals(WS_NAME)" >
+	        WS_NAME,
+	      </if>
+	      <if test="OPER_NAME != null and !&quot;&quot;.equals(OPER_NAME)" >
+	        OPER_NAME,
+	      </if>
+	      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+	        CREATED_BY,
+	      </if>
+	      <if test="CREATED_DATE != null" >
+	        CREATED_DATE,
+	      </if>
+	      <if test="API_CODE != null and API_CODE != emptyBigDecimalValue" >
+	        API_CODE,
+	      </if>
+	      <if test="SERVICE_APP_NAME != null and !&quot;&quot;.equals(SERVICE_APP_NAME)" >
+	        SERVICE_APP_NAME,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	      #{MAPPING_ID},
+	      <if test="WS_NAME != null and !&quot;&quot;.equals(WS_NAME)" >
+	        #{WS_NAME},
+	      </if>
+	      <if test="OPER_NAME != null and !&quot;&quot;.equals(OPER_NAME)" >
+	        #{OPER_NAME},
+	      </if>
+	      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+	        #{CREATED_BY},
+	      </if>
+	      <if test="CREATED_DATE != null" >
+	        #{CREATED_DATE},
+	      </if>
+	      <if test="API_CODE != null and API_CODE != emptyBigDecimalValue" >
+	        #{API_CODE},
+	      </if>
+	      <if test="SERVICE_APP_NAME != null and !&quot;&quot;.equals(SERVICE_APP_NAME)" >
+	        #{SERVICE_APP_NAME},
+	      </if>
+	    </trim>
+  </insert>
+  
+  	 <!-- Insert Common PWS Mapping Details -->
+	<insert id="insertCOMMON_PWS_MAPPING_DETAILS" parameterType="com.path.dbmaps.vo.COMMON_PWS_MAPPING_DETAILSVO" >
+	    <selectKey resultType="java.math.BigDecimal" keyProperty="MAPPING_DET_ID" order="BEFORE" >
+			<if test="isOracle == 1">
+					SELECT COMMON_PWS_MAPPING_DETAIL_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+					SELECT next_identity('COMMON_PWS_MAPPING_DETAILS')
+			</if>
+			<if test="isSQLServer == 1 " >
+					SELECT IDENT_CURRENT ('COMMON_PWS_MAPPING_DETAILS') + 1
+			</if>
+		</selectKey>
+			
+	    insert into COMMON_PWS_MAPPING_DETAILS
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	       <if test="isOracle == 1">
+	        MAPPING_DET_ID,
+	      </if>
+	      <if test="MAPPING_ID != null and MAPPING_ID != emptyBigDecimalValue" >
+	        MAPPING_ID,
+	      </if>
+	      <if test="WS_NAME != null and !&quot;&quot;.equals(WS_NAME)" >
+	        WS_NAME,
+	      </if>
+	      <if test="OPER_NAME != null and !&quot;&quot;.equals(OPER_NAME)" >
+	        OPER_NAME,
+	      </if>
+	      <if test="SOURCE_KEY != null and !&quot;&quot;.equals(SOURCE_KEY)" >
+	        SOURCE_KEY,
+	      </if>
+	      <if test="DESTINATION_KEY != null and !&quot;&quot;.equals(DESTINATION_KEY)" >
+	        DESTINATION_KEY,
+	      </if>
+	      <if test="MAPPING_ARG_TYPE != null and !&quot;&quot;.equals(MAPPING_ARG_TYPE)" >
+	        MAPPING_ARG_TYPE,
+	      </if>
+	      <if test="MAPPING_ARG_VALUE != null and !&quot;&quot;.equals(MAPPING_ARG_VALUE)" >
+	        MAPPING_ARG_VALUE,
+	      </if>
+	      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+	        CREATED_BY,
+	      </if>
+	      <if test="CREATED_DATE != null" >
+	        CREATED_DATE,
+	      </if>
+	      <if test="ARG_ID != null and ARG_ID != emptyBigDecimalValue" >
+	        ARG_ID,
+	      </if>
+	      <if test="MAPPING_ARG_MODE != null and !&quot;&quot;.equals(MAPPING_ARG_MODE)" >
+	        MAPPING_ARG_MODE,
+	      </if>
+	      <if test="PARAM_NAME != null and !&quot;&quot;.equals(PARAM_NAME)" >
+	        PARAM_NAME,
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	       <if test="isOracle == 1">
+	        #{MAPPING_DET_ID},
+	      </if>
+	      <if test="MAPPING_ID != null and MAPPING_ID != emptyBigDecimalValue" >
+	        #{MAPPING_ID},
+	      </if>
+	      <if test="WS_NAME != null and !&quot;&quot;.equals(WS_NAME)" >
+	        #{WS_NAME},
+	      </if>
+	      <if test="OPER_NAME != null and !&quot;&quot;.equals(OPER_NAME)" >
+	        #{OPER_NAME},
+	      </if>
+	      <if test="SOURCE_KEY != null and !&quot;&quot;.equals(SOURCE_KEY)" >
+	        #{SOURCE_KEY},
+	      </if>
+	      <if test="DESTINATION_KEY != null and !&quot;&quot;.equals(DESTINATION_KEY)" >
+	        #{DESTINATION_KEY},
+	      </if>
+	      <if test="MAPPING_ARG_TYPE != null and !&quot;&quot;.equals(MAPPING_ARG_TYPE)" >
+	        #{MAPPING_ARG_TYPE},
+	      </if>
+	      <if test="MAPPING_ARG_VALUE != null and !&quot;&quot;.equals(MAPPING_ARG_VALUE)" >
+	        #{MAPPING_ARG_VALUE},
+	      </if>
+	      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+	        #{CREATED_BY},
+	      </if>
+	      <if test="CREATED_DATE != null" >
+	        #{CREATED_DATE},
+	      </if>
+	      <if test="ARG_ID != null and ARG_ID != emptyBigDecimalValue" >
+	        #{ARG_ID},
+	      </if>
+	      <if test="MAPPING_ARG_MODE != null and !&quot;&quot;.equals(MAPPING_ARG_MODE)" >
+	        #{MAPPING_ARG_MODE},
+	      </if>
+	      <if test="PARAM_NAME != null and !&quot;&quot;.equals(PARAM_NAME)" >
+	        #{PARAM_NAME},
+	      </if>
+	    </trim>
+	  </insert>
+	  
+	  <resultMap id="returnISOResponseMappingMap" type="atmIsoResponseMapCO">
+		<result column="GTW_ATM_ISO_RESPONSE_MAP_ID" property="atmIsoResponseMapId" />
+		<result column="RESPONSE_TYPE" property="responseType" />
+		<result column="CORE_STATUS_CODE" property="coreStatusCode" />
+		<result column="ISO_RESPONSE_CODE" property="isoStatusCode" />
+	  </resultMap>
+
+	<!--  return ISO Response Mapping -->
+	<select id="returnIsoResponseMappingList" resultMap="returnISOResponseMappingMap" parameterType="atmInterfaceSC">
+		SELECT GTW_ATM_ISO_RESPONSE_MAP_ID, RESPONSE_TYPE, CORE_STATUS_CODE, ISO_RESPONSE_CODE
+		FROM GTW_ATM_ISO_RESPONSE_MAP
+		WHERE INTERFACE_CODE = #{interfaceId}
+	</select>
+	
+	<!-- Insert ISO Resppnse Mapping -->
+	<insert id="insertIsoResponseMapping" parameterType="atmIsoResponseMapCO" >
+	    <selectKey resultType="java.math.BigDecimal" keyProperty="atmIsoResponseMapId" order="BEFORE" >
+			<if test="isOracle == 1">
+					SELECT GTW_ATM_ISO_RESPONSE_MAP_SEQ.NEXTVAL FROM dual
+			</if>
+			<if test="isSybase == 1 and isSQLServer != 1 " >
+					SELECT next_identity('GTW_ATM_ISO_RESPONSE_MAP')
+			</if>
+			<if test="isSQLServer == 1 " >
+					SELECT IDENT_CURRENT ('GTW_ATM_ISO_RESPONSE_MAP') + 1
+			</if>
+		</selectKey>
+			
+	    insert into GTW_ATM_ISO_RESPONSE_MAP
+	    <trim prefix="(" suffix=")" suffixOverrides="," >
+	       <if test="isOracle == 1">
+	        GTW_ATM_ISO_RESPONSE_MAP_ID,
+	      </if>
+	      <if test="responseType != null and !&quot;&quot;.equals(responseType)" >
+	        RESPONSE_TYPE,
+	      </if>
+	      <if test="coreStatusCode != null and !&quot;&quot;.equals(coreStatusCode)" >
+	        CORE_STATUS_CODE,
+	      </if>
+	      <if test="isoStatusCode != null and !&quot;&quot;.equals(isoStatusCode)" >
+	        ISO_RESPONSE_CODE,
+	      </if>
+	      <if test="interfaceCode != null and interfaceCode != emptyBigDecimalValue" >
+	        INTERFACE_CODE
+	      </if>
+	    </trim>
+	    <trim prefix="values (" suffix=")" suffixOverrides="," >
+	       <if test="isOracle == 1">
+	        #{atmIsoResponseMapId},
+	      </if>
+	       <if test="responseType != null and !&quot;&quot;.equals(responseType)" >
+	        #{responseType},
+	      </if>
+	      <if test="coreStatusCode != null and !&quot;&quot;.equals(coreStatusCode)" >
+	       #{coreStatusCode},
+	      </if>
+	      <if test="isoStatusCode != null and !&quot;&quot;.equals(isoStatusCode)" >
+	        #{isoStatusCode},
+	      </if>
+	      <if test="interfaceCode != null and interfaceCode != emptyBigDecimalValue" >
+	        #{interfaceCode}
+	      </if>
+	    </trim>
+	  </insert>
+</mapper>

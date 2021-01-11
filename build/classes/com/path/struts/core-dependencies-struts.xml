@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+
+<package name="coreDependencies" namespace="/pathdesktop"  extends="path-default">
+<!--   Cif Dependencies -->
+  		<action name="CifDependencyAction_*" method="{1}" class="cifDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--   Account Dependencies -->
+  		<action name="AccountDependencyAction_*" method="{1}" class="accountDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--   Currency Dependencies -->
+  		<action name="CurrencyDependencyAction_*" method="{1}" class="currencyDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--   GL Dependencies -->
+  		<action name="GLDependencyAction_*" method="{1}" class="glDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--   Employee Dependencies -->
+  		<action name="EmployeeDependencyAction_*" method="{1}" class="employeeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--   Cif Role Dependencies -->
+  		<action name="CifRoleDependencyAction_*" method="{1}" class="cifRoleDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--   Division Dependencies -->
+  		<action name="DivisionDependencyAction_*" method="{1}" class="divisionDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--   Department Dependencies -->
+  		<action name="DepartmentDependencyAction_*" method="{1}" class="departmentDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!-- FloatingRateCode Dependencies  -->
+		<action name="FloatingRateCodeDependencyAction_*" class="floatingRateCodeDependencyAction"
+			method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+<!--   City Dependencies -->
+  		<action name="CityDependencyAction_*" method="{1}" class="cityDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--   Sector Dependencies  -->
+  		<action name="SectorDependencyAction_*" method="{1}" class="sectorDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!--  CIFProfile Dependencies-->
+		<action name="CifProfileDependencyAction_*" method="{1}" class="cifProfileDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+		 </action>
+<!--  CIFRating Dependencies-->
+		<action name="CifRatingDependencyAction_*" method="{1}" class="cifRatingDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--  Relation Dependencies-->
+		<action name="RelationDependencyAction_*" method="{1}" class="relationDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!--  OneObligor Dependencies--> 	
+		<action name="OneObligorDependencyAction_*" method="{1}" class="oneObligorDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+<!-- Link Dependencies --> 		
+		<action name="LinkDependencyAction_*" class="linkDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+	
+<!-- Cheque Dependencies --> 	
+		<action name="chequeDependencyAction_*" class="chequeDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+ 		 
+<!--   Cheque Book Design Dependencies -->
+  		<action name="ChequeBookDesignDependencyAction_*" method="{1}" class="chequeBookDesignDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		 
+<!--   Cheque Book Leaves Dependencies -->
+  		<action name="ChequeBookLeavesDependencyAction_*" method="{1}" class="chequeBookLeavesDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		 
+<!--   Cheque Book Types Dependencies -->
+  		<action name="ChequeBookTypesDependencyAction_*" method="{1}" class="chequeBookTypesDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+		
+
+ 		
+<!--   IdType Dependencies -->
+  		<action name="IdTypeDependencyAction_*" method="{1}" class="idTypeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+
+		
+<!--   CifType Dependencies -->
+  		<action name="CifTypeDependencyAction_*" method="{1}" class="cifTypeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!--   Religion Dependencies -->
+  		<action name="ReligionDependencyAction_*" method="{1}" class="religionDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!--   Nationality Dependencies -->
+  		<action name="NationalityDependencyAction_*" method="{1}" class="nationalityDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!--   Race Dependencies -->
+  		<action name="RaceDependencyAction_*" method="{1}" class="raceDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!--   Salutation Dependencies -->
+  		<action name="SalutationDependencyAction_*" method="{1}" class="salutationDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!-- Relation b/w Cif -->
+		<action name="RelationBwCifDependencyAction_*" method="{1}" class="relationBetweenCIFDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+
+<!--   Card Type Dependencies -->		
+		<action name="CardTypeDependencyAction_*" method="{1}" class="cardTypeDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+<!--   Credit Type Dependencies -->			
+		<action name="CreditTypeDependencyAction_*" method="{1}" class="creditTypeDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+
+		
+<!--   Educational Level Dependencies -->	
+		<action name="EducationLevelDependencyAction_*" method="{1}" class="educationLevelDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+<!-- Economic Sector Dependencies -->
+		<action name="EconomicSectorDependencyAction_*" method="{1}" class="economicSectorDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+
+<!-- Legal Status Dependencies -->
+		<action name="LegalStatusDependencyAction_*" method="{1}" class="legalStatusDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+<!-- Sub Eco Sector Dependencies -->
+		<action name="SubEcoSectorDependencyAction_*" method="{1}" class="subEcoSectorDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+<!-- Residence Types Dependencies -->
+		<action name="ResidenceTypesDependencyAction_*" method="{1}" class="residenceTypesDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>					
+				
+
+<!--   Position Dependencies -->
+  		<action name="PositionDependencyAction_*" method="{1}" class="positionDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!--   Occupation Dependencies -->
+  		<action name="OccupationDependencyAction_*" method="{1}" class="occupationDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!--   Ranking Dependencies -->
+  		<action name="RankingDependencyAction_*" method="{1}" class="rankingDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>			
+ 		
+<!--   EducationalLevelDependencies -->
+  		<action name="EducationalLevelDependencyAction_*" method="{1}" class="educationalLevelDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>	
+ 		
+<!--   ToDoTemplate Dependencies -->
+  		<action name="ToDoTemplateDependencyAction_*" method="{1}" class="toDoTemplateDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+<!--   TemplateCode Dependencies -->
+  		<action name="TemplateCodeDependencyAction_*" method="{1}" class="templateCodeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+  		
+ 		
+ <!--   Integration Control Dependencies -->
+  		<action name="IntegrationControlDependencyAction_*" method="{1}" class="integrationControlDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		 <!--   Provider Report Dependencies -->
+  		<action name="ProviderReportDependencyAction_*" method="{1}" class="providerReportDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		 <!-- CTS Report Arg Dependencies -->
+  		<action name="CtsReportArgDependencyAction_*" method="{1}" class="ctsReportArgDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		
+  <!--   User Level -->
+  		<action name="UserLevelDependencyAction_*" method="{1}" class="userLevelDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+  <!--   Cif Swift Dependencies -->
+  		<action name="CifSwiftDependencyAction_*" method="{1}" class="cifSwiftDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>	
+
+  <!--   Swift Info Dependencies -->
+  		<action name="SwiftInfoDependencyAction_*" method="{1}" class="swiftInfoDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>	
+ 		  		
+ <!--   Bill Type Dependencies -->		
+		<action name="BillTypeDependencyAction_*" method="{1}" class="billTypeDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+ <!--   Trx Type Dependencies -->		
+		<action name="CtsTrxTypeDependencyAction_*" method="{1}" class="ctsTrxTypeDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+			
+ <!--   Passbook Dependencies -->
+  		<action name="PassbookDependencyAction_*" method="{1}" class="passbookDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+  <!--   RifcttGl Dependencies -->
+  		<action name="RifcttGlDependencyAction_*" method="{1}" class="rifcttGlDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+   <!--   Postal Code Dependencies -->
+  		<action name="PostalCodeDependencyAction_*" method="{1}" class="postalCodeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		<!--   CTS clearing House -->
+  		<action name="CtsClearingHouseDependencyAction_*" method="{1}" class="ctsClearingHouseDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		<!-- CHARGES FEES POLICY -->
+ 		<action name="ChargesFeesPolicyDependencyAction_*" method="{1}" class="chargesFeesPolicyDependencyAction">
+			<result name="success"  type="json" ><param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		<!--   Units Dependencies -->
+  		<action name="UnitsDependencyAction_*" method="{1}" class="unitsDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		<!--   Currency Dependencies -->
+  		<action name="AmfStatusReasonDependencyAction_*" method="{1}" class="amfStatusReasonDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		<!--   AccountNumber Dependencies -->
+  		<action name="AccountNumberDependencyAction_*" method="{1}" class="accountNumberDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		<!--   Charges Schema Dependencies -->
+  		<action name="ChargesSchemaDependencyAction_*" method="{1}" class="chargesSchemaDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		<!--   Facility Number Dependencies -->
+  		<action name="FacilityDependencyAction_*" method="{1}" class="facilityDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		<!--   ChargesCode Dependencies -->
+  		<action name="ChargesDependencyAction_*" method="{1}" class="chargesDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		<!--   VatCode Dependencies -->
+  		<action name="VatCodeDependencyAction_*" method="{1}" class="vatCodeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		 		<!--   ProductClass Dependencies -->
+  		<action name="ProductClassDependencyAction_*" method="{1}" class="productClassDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action> 		
+
+ 		<!-- Fms Drawdowns Dependencies action -->
+		<action name="FmsDrawdownsDependency_*" class="fmsDrawdownsDependencyAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!--   City Dependencies -->
+  		<action name="AccountTypeDependencyAction_*" method="{1}" class="accountTypeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		<!-- Lost Found Dependencies --> 		
+		<action name="LostFoundDependencyAction_*" class="lostFoundDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- Reason Dependencies --> 		
+		<action name="ReasonDependencyAction_*" class="reasonDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- Fms Indicator Dependency --> 		
+		<action name="FmsIndicatorDependencyAction_*" class="fmsIndicatorDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- Pms Deal Dependency --> 		
+		<action name="PmsDealDependency_*" class="pmsDealDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- Black Source Dependency --> 		
+		<action name="BlackSourceDependencyAction_*" class="blackSourceDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+
+		
+		<!-- Black Source Dependency --> 		
+		<action name="BlackListTypeDependencyAction_*" class="blackListTypeDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- Cards Message Dependency --> 		
+		<action name="CardsMessageDependencyAction_*" class="cardsMessageDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- Cards Design Dependency --> 		
+		<action name="CardsDesignDependencyAction_*" class="cardsDesignDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!--   Reference Dependencies -->
+  		<action name="ReferenceDependency_*" method="{1}" class="referenceDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+		
+		<!--   JV type Dependencies -->
+  		<action name="JVTypeDependencyAction_*" method="{1}" class="jvTypeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+		
+		<!--   Bill Collection Dependencies -->
+  		<action name="BillCollectionDependencyAction_*" method="{1}" class="billCollectionDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		<!--   Facility Type Dependencies -->
+  		<action name="FacilityTypeDependencyAction_*" method="{1}" class="facilityTypeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+		
+		<!--   Letter of Guarantee Dependencies -->
+  		<action name="LetterGuaranteeDependencyAction_*" method="{1}" class="letterGuaranteeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+		
+		<!--   Letter of Credit Dependencies -->
+  		<action name="LetterCreditDependencyAction_*" method="{1}" class="letterCreditDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		<!-- Administration Dependencies --> 		
+		<action name="AdministrationDependencyAction_*" class="administrationDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!-- Item Property Details Dependency -->
+		<action name="ItemPropertydetDependency_*" method="{1}" class="itemPropertydetDependencyAction">
+			<result name="success"  type="json" >
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<!--  Cts Request Type lookup Dependencies-->		
+ 		<action name="CtsRequestTypeDependencyAction_*" method="{1}" class="ctsRequestTypeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		<action name="QueryIdDependencyAction_*" class="queryIdDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="ProcedureIdDependencyAction_*" class="procedureIdDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="AvaCategoryDependencyAction_*" class="avaCategoryDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+ 		
+		<action name="AvaBeneciciariesDependencyAction_*" class="avaBeneciciariesDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="OperationTypeDependencyAction_*" class="operationTypeDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="InstructionDependencyAction_*" class="instructionDefinitionDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="RegCenterDependencyAction_*" class="regCenterDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="InstrSubInstrDependencyAction_*" class="instructionSubInstrDependencyAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		<action name="EconomicAgentDependencyAction_*" method="{1}" class="economicAgentDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>			
+
+
+		<action name="ProfessionCategoryDependencyAction_*" method="{1}" class="professionCategoryDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+
+		<action name="ProfessionSegmentDependencyAction_*" method="{1}" class="professionSegmentDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+	
+		<action name="ProfessionDependencyAction_*" method="{1}" class="professionDependencyAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>	
+		
+		<!--  Clubbing lookup Dependencies-->	
+		<action name="ClubbingDependencyAction_*" class="clubbingDependencyAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<!--  Clubbed Accounts lookup Dependencies for tagged groups-->	
+		<action name="ClubbedAccDependencyAction_*" class="clubbedAccDependencyAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+
+		 <!--   Visit Reason  Dependencies -->
+  		<action name="VisitReasonDependencyAction_*" method="{1}" class="visitReasonDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ 		<!--   Division Dependencies -->
+  		<action name="DivisionDependencyAction_*" method="{1}" class="divisionDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+</package>
+</struts>   

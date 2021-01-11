@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="segmentGroupingListAction" class="com.path.core.actions.grouping.SegmentGroupingListAction" scope="prototype" parent="baseAction">
+	 <property name="segmentGroupingBO" ref="segmentGroupingBO"></property>
+	</bean>
+	<bean id="segmentGroupingMaintAction" class="com.path.core.actions.grouping.SegmentGroupingMaintAction" scope="prototype" parent="baseAction">
+	 <property name="segmentGroupingBO" ref="segmentGroupingBO"></property>
+	</bean>
+	<bean id="segmentGroupingStatusAction" class="com.path.core.actions.grouping.SegmentGroupingStatusAction" scope="prototype" parent="baseAction">
+	</bean>
+
+
+</beans>

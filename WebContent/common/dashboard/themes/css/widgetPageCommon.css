@@ -1,0 +1,76 @@
+.linkFont
+{
+	color: blue;
+	font-family:tahoma;
+	font-size: 12px;
+}
+.fontBackground
+{
+	padding: 10px 0px 0px 20px;
+}
+.texta 
+{	
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	background-image: url(../img/txt_bg.JPG);
+	background-repeat: repeat-x;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	width: 95%;
+	height: 20px;
+}
+
+.texta:hover 
+{
+	border-color: #64acd8;
+	border-width: 1px;
+}
+.texta:focus 
+{
+	border-color: #64acd8;
+	border-width: 1px;
+}
+
+#navcontainer ul
+{
+margin: 0;
+padding: 0;
+list-style-type: none;
+}
+
+#navcontainer li 
+{ 
+margin: 0 0 .2em 0; 
+}
+
+#navcontainer a
+{
+display: inline-block;
+color: #FFF;
+font-weight:bold;
+font-family:tahoma;
+
+background: #014464;
+/* For WebKit (Safari, Google Chrome etc) */
+background: -webkit-gradient(linear, top left, bottom right, from(#86B5D9), to(#DFEEF9));
+/* For Mozilla/Gecko (Firefox etc) */
+background: -moz-linear-gradient(left, #86B5D9 , #DFEEF9);
+/* For Internet Explorer 5.5 - 7 */
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FF0000FF, endColorstr=#FFFFFFFF);
+/* For Internet Explorer 8 */
+-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#FF0000FF, endColorstr=#FFFFFFFF)";
+width: 95%;
+padding: .2em .8em;
+text-decoration: none;
+}
+
+#navcontainer a:hover
+{
+background-color: #369;
+background: -moz-linear-gradient(left, #DFEEF9 , #DFEEF9);
+color: #025C86;
+font-weight: bolder;
+
+}

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="atmInterface" namespace="/path/atmInterface" extends="path-default">
+
+		<action name="ATMInterfaceMaintAction_*" class="aTMInterfaceMaintAction" method="{1}">
+			<result name="aTMInterfaceMaint">/WEB-INF/pages/atm/atminterface/ATMInterfaceMaint.jsp</result>
+			<result name="aTMInterfaceList">/WEB-INF/pages/atm/atminterface/ATMInterfaceList.jsp</result>
+			<result name="formatDialog">/WEB-INF/pages/atm/atminterface/FormatDialog.jsp</result>
+			<result name="msgDialog">/WEB-INF/pages/atm/atminterface/ISOInputDialog.jsp</result>
+			<result name="jobDialog">/WEB-INF/pages/atm/atminterface/MsgJobDialog.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="ATMInterfaceListAction_*" class="aTMInterfaceListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="ATMInterfaceStatusAction_*" class="aTMInterfaceStatusAction" method="{1}">
+			<result name="success" type="json"> 
+				<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,400 @@
+/* 2.1	Login Page Branding Requirements original definition file (Login.jsp)*/
+
+/*"Login Background"*/
+/**.loginPage
+{
+	background-color: #009933 !important;
+}
+**/
+/*"Login Screen Labels"*/
+/**.loginPage TD
+{
+	color: #FFFF66 !important;
+	font-family: Trebuchet MS !important;
+}**/
+/*footer may be used as a replacement of the login page footer inline style*/
+/**.loginPage footer
+{
+	text-align:center;
+	font-size:7px;
+}**/
+
+/*text input area in the login page*/
+
+/*"Login Text area"*/
+/**.texta
+{
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FF00FF !important;
+	width: 95%;
+	height: 25px;
+	padding-left: 10px;
+	padding-left: 5px;
+	vertical-align: middle;
+}
+.texta:hover
+{
+	border-color: #2c6da0;
+	border-width: 2px;
+}
+.texta:focus
+{
+	border-color: #2c6da0;
+	border-width: 2px;
+}
+.texta:up
+{
+	text-transform: uppercase;
+}**/
+
+/*session time out*/
+/**form li
+{
+	font: 12px Tahoma !important;
+}**/
+
+/**************************************************************************************/
+
+/*2.2	Desktop Page Branding Requirements*/
+
+/**************************************************************************************/
+
+/*2.2.1	Header */
+/*to be changed in AppMainHeader.jsp*/
+
+/**.headerStyle
+{
+	font-family:Arial, Helvetica, sans-serif !important;
+	font-size: 12px !important; 
+	color: #FFFF66 !important;
+}**/
+
+/*"Header labels"*/
+/**.headerStyle label
+{
+	font-family:Arial, Helvetica, sans-serif !important;
+	font-size: 12px !important; 
+	color: #FFFF66 !important;
+}**/
+
+/*"Header values"*/
+/**.headerStyle td
+{
+	font-family:Arial, Helvetica, sans-serif !important;
+	font-size: 12px !important; 
+	color: #FFFF66 !important; ;
+}**/
+
+/*Header Gradient Color*/
+/**.header-top-left, .header-top-right, .header-top-center
+{
+	background:linear-gradient(#33CC33, #009933) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33CC33', endColorstr='#009933') !important;
+	background:-moz-linear-gradient(#33CC33, #009933) !important;
+	background:-webkit-gradient(#33CC33, #009933) !important;	
+	position: relative !important;
+}**/
+	
+
+/**************************************************************************************/
+
+
+/*2.2.2	Footer*/
+/*Not active to be added in AppMainFooter.jsp*/
+
+/*"Labels"*/
+/**.footerStyle
+{
+	font-family:Arial, Helvetica, sans-serif !important;
+	font-size: 12px !important; 
+	color: #FFFFFF !important; ;
+}**/
+
+/**************************************************************************************/
+
+
+/*2.2.3	Accordion menu*/
+
+/*"Menu Options Header"*/
+/**.ui-layout-west-panel
+{
+	font-weight: bold !important;
+	color: blue !important;
+}**/
+
+/*Menu Item Background & Menu Item text*/
+/**.rootheaderappMenu
+{
+	color: #FFFF00 !important;
+}**/
+
+/*"Sub menu item Background & Sub menu item text"*/
+/**.accordionmenu ul li a
+{
+	color: #8F8F8F !important;
+	background-color: #FFFFFF !important;
+}**/
+/*none hierarchical menu items*/ 
+/**.accordionmenu .accordionheader
+{
+	background:linear-gradient(#33CC33, #99FF33) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#33CC33', endColorstr='#99FF33') !important;
+	background:-moz-linear-gradient(#33CC33, #99FF33) !important;
+	background:-webkit-gradient(#33CC33, #99FF33) !important;	
+	position: relative !important;
+}**/
+/*none hierarchical menu items text*/ 
+/**.accordionmenu h3 a
+{
+	color: #FFFF00 !important;
+}**/
+/**************************************************************************************/
+
+
+/*2.2.4	Tabs and Grids*/
+
+/*Tabs*/
+/********************************/
+
+/*Screen Tab Bg color & Screen Tab text*/
+/**.ui-tabs .ui-tabs-nav li a
+{
+	float: left;
+	padding: .5em 1em;
+	text-decoration: none;
+	color: #CC2900;
+	font-size: 12px !important;
+	background-image: none !important;
+	
+	background:linear-gradient(#FFFFFF, #99FF33) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#99FF33') !important;
+	background:-moz-linear-gradient(#FFFFFF, #99FF33) !important;
+	background:-webkit-gradient(#FFFFFF, #99FF33) !important;	
+	position: relative !important;
+}
+.ui-tabs .ui-tabs-nav li
+{
+	background:linear-gradient(#FFFFFF, #99FF33) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#99FF33') !important;
+	background:-moz-linear-gradient(#FFFFFF, #99FF33) !important;
+	background:-webkit-gradient(#FFFFFF, #99FF33) !important;	
+	position: relative !important;
+}**/
+
+
+/*Selected Screen Tab Bg color & Tab text*/
+/**.ui-tabs .ui-tabs-nav li.ui-tabs-selected a
+{
+	color: #009933;
+	background-color: #FFFFFF;
+	font-color: #0033CC;
+	font-size: 12px !important; 
+	background:linear-gradient(#FFFFFF, #99FF33) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#99FF33') !important;
+	background:-moz-linear-gradient(#FFFFFF, #99FF33) !important;
+	background:-webkit-gradient(#FFFFFF, #99FF33) !important;	
+	position: relative !important;
+}**/
+
+/*.ui-state-active
+{
+	background-color: #FFF8DC !important;
+	background-image: none !important;
+	label color "Account number*/ /*color: blue !important; 
+}*/
+/********************************/
+
+
+
+/*Grids*/
+/********************************/
+
+/*Grid Column Label*/
+/**.ui-th-column, .ui-jqgrid .ui-jqgrid-htable th.ui-th-column
+{
+	color: #CC0000 !important;
+	background:linear-gradient(#FFFFFF, #99FF33) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#99FF33') !important;
+	background:-moz-linear-gradient(#FFFFFF, #99FF33) !important;
+	background:-webkit-gradient(#FFFFFF, #99FF33) !important;	
+	position: relative !important;
+}**/
+
+/*Grid Column Value & Grid Column Value Bg*/
+/**.ui-jqgrid tr.jqgrow td
+{
+	background-color: #FFFFFF; 
+	font-size: 12px; 
+	color: #0033CC !important;
+}**/
+
+/*Grid (inside grid) Footer Color & Grid Footer Text*/ 
+/**.ui-jqgrid tr.footrow td
+{
+	background-color: #FFFFFF;
+	font-size: 12px;
+	color: #0033CC !important;
+}**/
+/********************************/
+
+/*Grid Footer(Pager)*/
+
+/*Grid Footer Buttons*/
+/**.ui-jqgrid .ui-jqgrid-pager .ui-pg-div
+{
+	color: #009933 !important;
+	
+}**/
+
+/*Grid Footer Text*/
+/**.ui-jqgrid td input, .ui-jqgrid td select .ui-jqgrid td textarea
+{
+	color: #0033CC !important;
+}
+.ui-jqgrid .ui-pg-table td 
+{
+	color: #E6E600 !important;
+	background:linear-gradient(#FFFFFF, #99FF33) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#99FF33') !important;
+	background:-moz-linear-gradient(#FFFFFF, #99FF33) !important;
+	background:-webkit-gradient(#FFFFFF, #99FF33) !important;	
+	position: relative !important;
+}**/
+/********************************/
+
+/*Double headers in Grids*/
+.path-double-header
+{
+	background:linear-gradient(#FFD47F, #FFFF7F) !important;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFD47F', endColorstr='#FFFF7F') !important;
+	background:-moz-linear-gradient(#FFD47F, #FFFF7F) !important;
+	background:-webkit-gradient(#FFD47F, #FFFF7F) !important;	
+	position: relative !important;
+}
+
+.path-subgrd-hdr
+{
+	background:linear-gradient(#D4FFD4, #AAFFAA) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#D4FFD4', endColorstr='#AAFFAA') !important;
+	background:-moz-linear-gradient(#D4FFD4, #AAFFAA) !important;
+	background:-webkit-gradient(#D4FFD4, #AAFFAA) !important;
+	position: relative !important;	
+}
+
+.ui-search-toolbar th input
+{
+	background-color: #F2F5F7;
+	
+	border-top-width:1px;
+	border-left-width:1px;
+	border-right-width:1px;
+	border-bottom-width:1px;
+	border-top-style:solid;
+	border-left-style:solid;
+	border-right-style:solid;
+	border-bottom-style:solid;
+	border-top-color:#74b2e2;
+	border-left-color:#74b2e2;
+	border-right-color:#74b2e2;
+	border-bottom-color:#74b2e2;
+}
+/*style of the menu while it is selected highlight details*/
+.path-selected-menu
+{
+	font-weight:bold !important;
+	background:linear-gradient(#FFD47F, #FFFF7F) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFD47F', endColorstr='#FFFF7F') !important;
+	background:-moz-linear-gradient(#FFD47F, #FFFF7F) !important;
+	background:-webkit-gradient(#FFD47F, #FFFF7F) !important;	
+	
+}
+.path-selected-menu-cupertino
+{
+	font-weight:bold !important;
+	background:linear-gradient(#FFD47F, #FFFF7F) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFD47F', endColorstr='#FFFF7F') !important;
+	background:-moz-linear-gradient(#FFD47F, #FFFF7F) !important;
+	background:-webkit-gradient(#FFD47F, #FFFF7F) !important;	
+	
+}
+.path-selected-menu-redmond
+{
+	font-weight:bold !important;
+	color:#000000 !important;
+	background:linear-gradient(#FFD47F, #FFFF7F) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFD47F', endColorstr='#FFFF7F') !important;
+	background:-moz-linear-gradient(#FFD47F, #FFFF7F) !important;
+	background:-webkit-gradient(#FFD47F, #FFFF7F) !important;	
+	
+}
+/**************************************************************************************/
+
+
+/*2.2.5	Window*/
+/********************************/
+
+/*Buttons*/
+
+/*Normal Buttons*/.ui-button 
+/**{
+	color: #E6E600 !important;
+}**/
+
+/*Taskbar Buttons (AUDIT,SMART...)*/
+/**.fg-button 
+{
+	color: #FFCCFF !important;
+}**/
+
+/*Required items Labels*/
+/**.required 
+{
+	color: #FF9900 !important;
+}**/
+
+/*Items Labels*/
+/**.fldLabelView 
+{
+	color: #996633;
+	font-size: 11px !important;
+}**/
+
+/*Text Area*/
+/**.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus
+{
+	font-color:#FF0000;
+	color:#FF0000 !important;
+}**/
+
+/*Disabled Description Area*/
+/**.textCompSize, .ui-state-focus, .ui-corner-all 
+{ 
+	color: #0033CC !important;
+}**/
+
+/*Background color*/
+/**.ui-widget-content 
+{
+	background-image: none !important;
+	background:linear-gradient(#FFFFFF, #EDEDED) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#EDEDED') !important;
+	background:-moz-linear-gradient(#FFFFFF, #EDEDED) !important;
+	background:-webkit-gradient(#FFFFFF, #EDEDED) !important;	
+	position: relative !important;
+}**/
+
+/*used to change the background color of the collapsable header in landing page*/
+/**
+.path-collapsable-header
+{
+	background:linear-gradient(#FFD47F, #FFFF7F) !important;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFD47F', endColorstr='#FFFF7F') !important;
+	background:-moz-linear-gradient(#FFD47F, #FFFF7F) !important;
+	background:-webkit-gradient(#FFD47F, #FFFF7F) !important;	
+	position: relative !important;
+}
+**/

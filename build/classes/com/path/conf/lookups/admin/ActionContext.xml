@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	 <bean id="companiesByUsrLookupAction" class="com.path.actions.lookups.admin.CompaniesLookupAction" scope="prototype" parent="baseAction">
+		<property name="companiesBO" ref="companiesBO"></property>
+	</bean>
+	
+	<bean id="categoryLookupAction" class="com.path.actions.lookups.admin.CategoryLookupAction" scope="prototype" parent="baseAction">
+		<property name="categoryBO" ref="categoryBO"></property>
+	</bean>
+	
+ 	<bean id="branchesByUsrLookupAction" class="com.path.actions.lookups.admin.BranchesLookupAction" scope="prototype" parent="baseAction">
+		<property name="branchesBO" ref="branchesBO"></property>
+	</bean>
+	
+	<bean id="countriesRegionLookupAction" class="com.path.actions.lookups.admin.CountriesRegionLookupAction" scope="prototype" parent="baseAction">
+		<property name="countriesRegionBO" ref="countriesRegionBO"></property>		
+	</bean>
+	
+	<bean id="countriesLookupAction" class="com.path.actions.lookups.admin.CountriesLookupAction" scope="prototype" parent="baseAction">
+		<property name="countriesBO" ref="countriesBO"></property>
+	</bean>
+	<bean id="memoLookupAction" class="com.path.actions.lookups.admin.MemoLookupAction" scope="prototype" parent="baseAction">
+		<property name="memoBO" ref="memoBO"></property>
+	</bean>
+		
+	<bean id="smartAddOptionsLookupAction" class="com.path.actions.lookups.admin.SmartAddOptionsLookupAction" scope="prototype" parent="baseAction">
+		<property name="smartAddOptionsBO" ref="smartAddOptionsBO"></property>		
+	</bean>
+	
+	<bean id="enquiryFileLookupAction" class="com.path.actions.lookups.admin.EnquiryFileLookupAction" scope="prototype" parent="baseAction">
+		<property name="dynFilesBO" ref="dynFilesBO"></property>
+	</bean>
+	
+	<bean id="tagValueLookupAction" class="com.path.actions.lookups.admin.TagValueLookupAction" scope="prototype" parent="baseAction">
+		<property name="dynFilesBO" ref="dynFilesBO"></property>
+	</bean>
+ 
+	
+	<bean id="glLookupAction" class="com.path.actions.lookups.admin.GLCodeLookupAction" scope="prototype" parent="baseAction">
+		<property name="glBO" ref="glBO"></property>
+	</bean>
+	
+	<bean id="additionalFieldsbyTypeLookupAction" class="com.path.actions.lookups.admin.AdditionalFieldsbyTypeLookupAction" scope="prototype" parent="baseAction">
+		<property name="additionalFieldsBO" ref="additionalFieldsBO"></property>
+	</bean>
+	
+	<bean id="applicationsLookupAction" class="com.path.actions.lookups.admin.ApplicationsLookupAction" scope="prototype" parent="baseAction">
+		<property name="applicationsBO" ref="applicationsBO"></property>
+	</bean>
+	
+	<bean id="translationLookupAction" class="com.path.actions.lookups.admin.TranslationLookupAction" scope="prototype" parent="baseAction">
+		<property name="translationBO" ref="translationBO"></property>
+	</bean>
+	
+	<bean id="roleLookupAction" class="com.path.actions.lookups.admin.RoleLookupAction" scope="prototype" parent="baseAction">
+		<property name="roleBO" ref="roleBO"></property>
+	</bean>
+		
+	<bean id="usrLookupAction" class="com.path.actions.lookups.core.UsrLookupAction" scope="prototype" parent="baseAction">
+		<property name="usrBO" ref="usrBO"></property>
+	</bean>
+	<bean id="usrReportsLookup" class="com.path.actions.lookups.admin.UserReportsLookupAction" scope="prototype" parent="baseAction">
+		<property name="usrBO" ref="usrBO"></property>
+	</bean>
+	
+	<bean id="dashboardPortalLookupAction" class="com.path.actions.lookups.admin.DashboardPortalLookupAction" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+		
+	<bean id="dynClientParamsLookupAction" class="com.path.actions.lookups.admin.DynClientParamsLookupAction" scope="prototype" parent="baseAction">
+		<property name="dynClientParamsBO" ref="dynClientParamsBO"></property>
+	</bean>
+	
+</beans>

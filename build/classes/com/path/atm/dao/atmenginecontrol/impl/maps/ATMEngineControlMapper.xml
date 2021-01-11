@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="atmEngineControlMapper">
+
+	<!-- Result Map of Interface Details -->
+	<resultMap id="ATMEngineInterfaceResultMap" 	type="atmEngineControlCO">
+	
+		<id 	column="ATM_ENG_INTERFACE_ID" 		property="atm_ENG_INTERFACEVO.ATM_ENG_INTERFACE_ID" />
+		<result column="INTERFACE_ID" 				property="atm_ENG_INTERFACEVO.INTERFACE_ID" />
+		<result column="START_TIME" 				property="atm_ENG_INTERFACEVO.START_TIME" />
+		<result column="STATUS" 					property="atm_ENG_INTERFACEVO.STATUS" />		
+		<result column="MESSAGE" 					property="atm_ENG_INTERFACEVO.MESSAGE" />
+		<result column="MACHINE_NAME_IP" 			property="atm_ENG_INTERFACEVO.MACHINE_NAME_IP" />
+		<result column="STATUS_DESC" 				property="STATUS_DESC" />
+		
+	</resultMap>
+	
+	<!-- Select of Interface Details List-->
+	<select id="returnATMEngineList" resultMap="ATMEngineInterfaceResultMap" parameterType="atmEngineControlSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="select_ATMEngineInterface" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+	
+	<!-- Select of Interface Details Count-->
+	<select id="returnATMEngineCount" resultType="int" parameterType="atmEngineControlSC">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="select_ATMEngineInterface" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+	
+	<!-- SQL of Interface Details Count-->
+	<sql id="select_ATMEngineInterface" >
+		SELECT 
+		 	   engineInt.ATM_ENG_INTERFACE_ID,
+			   engineInt.INTERFACE_ID,
+			   engineInt.START_TIME,
+			   engineInt.STATUS,
+			   engineInt.MESSAGE,
+			   (SELECT VALUE_DESC FROM 
+			   		SYS_PARAM_LOV_TRANS WHERE LANG_CODE = #{preferredLanguage} 
+			   		AND LOV_TYPE_ID = #{lovTypeId} AND VALUE_CODE = engineInt.STATUS ) STATUS_DESC,
+			   MACHINE_NAME_IP
+			   
+		FROM ATM_ENG_INTERFACE engineInt where engineInt.STATUS IN  ('R', 'D')
+		
+		UNION
+		
+		SELECT 
+			0,
+			interface.INTERFACE_CODE,
+			
+			<choose> 
+			 	<when test="isSybase == 1" >
+			 		GETDATE(),     
+			    </when>
+			    <otherwise >
+			        SYSDATE,
+			    </otherwise>
+			</choose>
+			
+			 'D',
+			'',
+			(SELECT VALUE_DESC 
+				FROM SYS_PARAM_LOV_TRANS WHERE LANG_CODE = #{preferredLanguage} AND 
+					LOV_TYPE_ID = #{lovTypeId} AND VALUE_CODE = 'D' ) STATUS_DESC,
+			''
+			
+			from GTW_ATM_INTERFACES interface 
+				WHERE interface.STATUS = 'P' 
+				and interface.INTERFACE_CODE NOT IN (SELECT  ATM_ENG_INTERFACE.INTERFACE_ID from ATM_ENG_INTERFACE where 
+					ATM_ENG_INTERFACE.STATUS IN  ('R', 'D') )
+	</sql>
+	
+	<!-- Result MAP of ATM Engine Request -->
+	<resultMap id="alertEngineRequestResultMap" 	type="atmEngineControlCO">
+	
+		<!--  Request -->
+		<result column="ATM_ENG_INCOMING_REQUEST_ID" 		property="incoming_ReqVO.ATM_ENG_INCOMING_REQUEST_ID" />
+		<result column="INTERFACE_ID" 				property="incoming_ReqVO.INTERFACE_ID" />
+		<result column="MESSAGE_ID" 				property="incoming_ReqVO.MESSAGE_ID" />
+		<result column="MTI_CODE_REQUEST" 			property="incoming_ReqVO.MTI_CODE_REQUEST" />
+		<result column="MESSAGE_REQUEST" 			property="incoming_ReqVO.MESSAGE_REQUEST" />
+		<result column="RECEIVE_TIME" 				property="incoming_ReqVO.RECEIVE_TIME" />
+		
+		<!--  Req Details  -->
+		<result column="REQUEST_MAP" 				property="incoming_Req_DetailVO.REQUEST_MAP" />
+		<result column="ACQUIRER_CODE" 				property="incoming_Req_DetailVO.ACQUIRER_CODE" />
+		<result column="TELLER_CODE" 				property="incoming_Req_DetailVO.TELLER_CODE" />
+		<result column="COMP_CODE" 					property="incoming_Req_DetailVO.COMP_CODE" />
+		<result column="BRANCH_CODE" 				property="incoming_Req_DetailVO.BRANCH_CODE" />
+		<result column="TRX_TYPE" 					property="incoming_Req_DetailVO.TRX_TYPE" />
+		<result column="CHARGE_TRX_TYPE" 			property="incoming_Req_DetailVO.CHARGE_TRX_TYPE" />
+		<result column="PROCESS_CODE" 				property="incoming_Req_DetailVO.PROCESS_CODE" />
+		<result column="TERMINAL_ID" 				property="incoming_Req_DetailVO.TERMINAL_ID" />
+		<result column="AUTH_CODE" 				    property="incoming_Req_DetailVO.AUTH_CODE" />
+		<result column="RETRIEVAL_REF_NB" 			property="incoming_Req_DetailVO.RETRIEVAL_REF_NB" />
+		
+		<!--  Response  -->
+		<result column="ATM_ENG_OUTGOING_RESPONSE_ID" 		property="outgoing_RespVO.ATM_ENG_OUTGOING_RESPONSE_ID" />
+		<result column="MTI_CODE_RESPONSE" 			property="outgoing_RespVO.MTI_CODE_RESPONSE" />
+		<result column="ISO_RESPONSE" 				property="outgoing_RespVO.ISO_RESPONSE" />
+		<result column="RESPONSE_MAP" 				property="outgoing_RespVO.RESPONSE_MAP" />
+		<result column="START_TIME" 				property="outgoing_RespVO.START_TIME" />
+		<result column="END_TIME" 					property="outgoing_RespVO.END_TIME" />
+		<result column="RESPONSE_CODE" 				property="outgoing_RespVO.RESPONSE_CODE" />
+		<result column="TRS_NO" 					property="outgoing_RespVO.TRS_NO" />
+		
+		<!--  Common -->
+		<result column="ERROR_MESSAGE" 				property="outgoing_RespVO.ERROR_MESSAGE" />
+		<result column="STATUS" 					property="outgoing_RespVO.STATUS" />	
+		<result column="STATUS_DESC"				property="STATUS_DESC" />
+	</resultMap>
+	
+	<!-- Select  MAP of ATM Engine Request Count-->
+	<select id="returnAlertEngineRequestCount" resultType="int" parameterType="atmEngineControlSC">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="select_ATMEngRequest" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+	
+	<!-- Select  MAP of ATM Engine Request List-->
+	<select id="returnAlertEngineRequest" resultMap="alertEngineRequestResultMap" parameterType="atmEngineControlSC">		
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="select_ATMEngRequest" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+	
+	<!-- SQL  MAP of ATM Engine Request List-->
+	<sql id="select_ATMEngRequest">
+		SELECT 
+			req.ATM_ENG_INCOMING_REQUEST_ID,
+			req.INTERFACE_ID,
+			req.MESSAGE_ID,
+			req.MTI_CODE_REQUEST,
+			req.MESSAGE_REQUEST,
+			req.RECEIVE_TIME,
+			
+			reqDetail.REQUEST_MAP,
+			reqDetail.ACQUIRER_CODE,
+			reqDetail.TELLER_CODE,
+			reqDetail.COMP_CODE,
+			reqDetail.BRANCH_CODE,
+			reqDetail.TRX_TYPE,
+			reqDetail.CHARGE_TRX_TYPE,
+			reqDetail.PROCESS_CODE,
+			reqDetail.TERMINAL_ID,
+			reqDetail.AUTH_CODE,
+			reqDetail.RETRIEVAL_REF_NB,
+			
+			
+			res.ATM_ENG_OUTGOING_RESPONSE_ID,
+			res.MTI_CODE_RESPONSE,
+			res.ISO_RESPONSE,
+			res.RESPONSE_MAP,
+			res.START_TIME,
+			res.END_TIME,
+			res.RESPONSE_CODE,
+			res.TRS_NO,
+				<choose> 
+					<when test="isSybase == 1" >
+					 		ISNULL(res.ERROR_MESSAGE, req.ERROR_MESSAGE) ERROR_MESSAGE,
+					</when>
+					<otherwise >	
+					 		 NVL(res.ERROR_MESSAGE, req.ERROR_MESSAGE) ERROR_MESSAGE,
+					</otherwise>
+				</choose>
+				
+				<choose> 
+					<when test="isSybase == 1" >
+					 		ISNULL(res.STATUS, req.STATUS) STATUS,
+					</when>
+					<otherwise >	
+					 		 NVL(res.STATUS, req.STATUS) STATUS,
+					</otherwise>
+				</choose>
+				
+				<choose> 
+				 	<when test="isSybase == 1" >
+				 		ISNULL( 
+				 	 </when>
+				    <otherwise >	
+				 		 NVL(
+				 	</otherwise>
+				</choose>	
+				 		(SELECT 
+								VALUE_DESC 
+								FROM SYS_PARAM_LOV_TRANS WHERE LANG_CODE = #{preferredLanguage} AND 
+								LOV_TYPE_ID = #{lovTypeId} AND VALUE_CODE = res.STATUS ), 
+				
+								 (SELECT 
+									VALUE_DESC 
+								FROM SYS_PARAM_LOV_TRANS WHERE LANG_CODE = #{preferredLanguage} AND 
+								LOV_TYPE_ID = #{lovTypeId} AND VALUE_CODE = req.STATUS )
+							) STATUS_DESC
+				    		 
+			FROM ATM_ENG_INCOMING_REQUEST req
+			LEFT JOIN ATM_ENG_INCOMING_REQ_DETAIL reqDetail 
+				ON req.INTERFACE_ID=reqDetail.INTERFACE_ID AND req.MESSAGE_ID=reqDetail.MESSAGE_ID
+			LEFT JOIN ATM_ENG_OUTGOING_RESPONSE res 
+				ON req.INTERFACE_ID=res.INTERFACE_ID AND req.MESSAGE_ID=res.MESSAGE_ID
+		 <where>
+			<if test="startDate != null">
+				req.RECEIVE_TIME <![CDATA[ >= ]]>
+				#{startDate}
+			</if>
+			<if test="endDate != null">
+				AND req.RECEIVE_TIME <![CDATA[ <= ]]>
+				#{endDate}
+			</if>
+			<if test="status != null and status != '' and status != 'ALL'">
+				AND
+				<choose> 
+				 	<when test="isSybase == 1" >
+				 		 ISNULL(res.STATUS, req.STATUS) = #{status}
+				 	 </when>
+				    <otherwise >	
+				 		 NVL(res.STATUS, req.STATUS) = #{status}
+				 	</otherwise>
+				</choose>	
+			</if>
+		</where>
+	</sql>
+
+	<!-- Select for retrieve REQUEST Message and Response Message for Message Dialog -->
+	<select id="returnRequstAndResponseISOMsg" resultMap="alertEngineRequestResultMap" parameterType="atmEngineControlSC">	
+		select rq.MESSAGE_REQUEST, res.ISO_RESPONSE 	from 	ATM_ENG_REQUEST rq LEFT  JOIN ATM_ENG_RESPONSE res
+						ON rq.INTERFACE_ID=res.INTERFACE_ID AND rq.MESSAGE_ID = res.MESSAGE_ID 
+						WHERE rq.INTERFACE_ID=#{interfaceid} AND rq.MESSAGE_ID=#{messageId}
+	</select>
+
+	<!-- Result  MAP of ATM Engine Request Error Message -->
+	<resultMap id="alertEngineRequestMsgDtlsResultMap" 	type="atmEngineControlCO">
+		<result column="ATM_ENG_REQUEST_ID" 					property="atm_ENG_REQUESTVO.ATM_ENG_REQUEST_ID" />
+		<result column="ERROR_MESSAGE" 							property="atm_ENG_RESPONSEVO.ERROR_MESSAGE" />
+	</resultMap>
+	
+	<!-- Select  MAP of ATM Engine Request Error Message -->
+	<select id="returnAlertEngineRequestMsgDtls" resultMap="alertEngineRequestMsgDtlsResultMap" parameterType="atmEngineControlSC">		
+		<include refid="select_AlertEngineRequestMsgDtls" />
+	</select>
+	
+	<!-- SQL  MAP of ATM Engine Request Error Message -->
+	<sql id="select_AlertEngineRequestMsgDtls">
+			select 
+		res.ERROR_MESSAGE
+		from ATM_ENG_OUTGOING_RESPONSE res
+			where res.ATM_ENG_OUTGOING_RESPONSE_ID = #{responseId}
+	</sql>
+	
+	
+	<!-- Result MAP of ATM Engine Action log -->
+	<resultMap id="ATMEngineActionLogMap" 	type="atmEngineControlCO">
+	
+		<id 	column="ATM_ENG_ACTION_LOG_ID" 		property="atm_ENG_ACTIONLOGVO.ATM_ENG_ACTION_LOG_ID" />
+		<result column="START_TIME" 				property="atm_ENG_ACTIONLOGVO.START_TIME" />
+		<result column="MESSAGE" 					property="atm_ENG_ACTIONLOGVO.MESSAGE" />
+		
+		
+	</resultMap>
+	
+	<!-- Select of Action Log List-->
+	<select id="returnATMEngineActionLogList" resultMap="ATMEngineActionLogMap" parameterType="atmEngineControlSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip" />
+		<include refid="select_ATMEngineActionLogList" />
+		<include refid="servicesCommon.commonGridWrpAftFlip" />
+		<include refid="servicesCommon.commmonGridWrpFlipClose" />
+	</select>
+	
+	<!-- Select of Action Log Count-->
+	<select id="returnATMEngineActionLogCount" resultType="int" parameterType="atmEngineControlSC">
+		<include refid="servicesCommon.commonGridWrpBefCnt" />
+		<include refid="select_ATMEngineActionLogList" />
+		<include refid="servicesCommon.commonGridWrpAftCnt" />
+		<include refid="servicesCommon.commonGridCountWrpClose" />
+	</select>
+	
+	<!-- SQL  MAP of ATM Engine Action Log -->
+	<sql id="select_ATMEngineActionLogList">
+			select 
+				actionLog.ATM_ENG_ACTION_LOG_ID,
+				actionLog.START_TIME,
+				actionLog.MESSAGE
+					from ATM_ENG_ACTION_LOG actionLog
+					
+			<if test="startDate != null">
+				where actionLog.START_TIME = #{startDate}
+			</if>
+	</sql>
+</mapper>

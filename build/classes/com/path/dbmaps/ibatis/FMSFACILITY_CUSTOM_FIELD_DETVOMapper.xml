@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="FMSFACILITY_CUSTOM_FIELD_DET" >
+  <resultMap id="BaseResultMap" type="com.path.dbmaps.vo.FMSFACILITY_CUSTOM_FIELD_DETVO" >
+    <id column="CODE" property="CODE" />
+    <id column="COMP_CODE" property="COMP_CODE" />
+    <id column="LINE_NO" property="LINE_NO" />
+    <result column="NAME" property="NAME" />
+    <result column="TYPE" property="TYPE" />
+    <result column="LENGTH" property="LENGTH" />
+    <result column="MANDATORY_YN" property="MANDATORY_YN" />
+    <result column="CATEGORY" property="CATEGORY" />
+    <result column="LABEL" property="LABEL" />
+    <result column="DECIMALS" property="DECIMALS" />
+    <result column="UNIQUE_YN" property="UNIQUE_YN" />
+    <result column="CREATED_BY" property="CREATED_BY" />
+    <result column="CREATED_DATE" property="CREATED_DATE" />
+    <result column="MODIFIED_BY" property="MODIFIED_BY" />
+    <result column="MODIFIED_DATE" property="MODIFIED_DATE" />
+    <result column="ORDER_NUMBER" property="ORDER_NUMBER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    CODE, COMP_CODE, LINE_NO, NAME, TYPE, LENGTH, MANDATORY_YN, CATEGORY, LABEL, DECIMALS, 
+    UNIQUE_YN, CREATED_BY, CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, ORDER_NUMBER
+  </sql>
+  <select id="selectFMSFACILITY_CUSTOM_FIELD_DET" resultMap="BaseResultMap" parameterType="com.path.dbmaps.vo.FMSFACILITY_CUSTOM_FIELD_DETVOKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from FMSFACILITY_CUSTOM_FIELD_DET
+    where CODE = #{CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and LINE_NO = #{LINE_NO}
+  </select>
+  <delete id="deleteFMSFACILITY_CUSTOM_FIELD_DET" parameterType="com.path.dbmaps.vo.FMSFACILITY_CUSTOM_FIELD_DETVOKey" >
+    delete from FMSFACILITY_CUSTOM_FIELD_DET
+    where CODE = #{CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and LINE_NO = #{LINE_NO}
+  </delete>
+  <insert id="insertFMSFACILITY_CUSTOM_FIELD_DET" parameterType="com.path.dbmaps.vo.FMSFACILITY_CUSTOM_FIELD_DETVO" >
+    insert into FMSFACILITY_CUSTOM_FIELD_DET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="CODE != null and CODE != emptyBigDecimalValue" >
+        CODE,
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        COMP_CODE,
+      </if>
+      <if test="LINE_NO != null and LINE_NO != emptyBigDecimalValue" >
+        LINE_NO,
+      </if>
+      <if test="NAME != null and !&quot;&quot;.equals(NAME)" >
+        NAME,
+      </if>
+      <if test="TYPE != null and !&quot;&quot;.equals(TYPE)" >
+        TYPE,
+      </if>
+      <if test="LENGTH != null and !&quot;&quot;.equals(LENGTH)" >
+        LENGTH,
+      </if>
+      <if test="MANDATORY_YN != null and !&quot;&quot;.equals(MANDATORY_YN)" >
+        MANDATORY_YN,
+      </if>
+      <if test="CATEGORY != null and !&quot;&quot;.equals(CATEGORY)" >
+        CATEGORY,
+      </if>
+      <if test="LABEL != null and !&quot;&quot;.equals(LABEL)" >
+        LABEL,
+      </if>
+      <if test="DECIMALS != null and DECIMALS != emptyBigDecimalValue" >
+        DECIMALS,
+      </if>
+      <if test="UNIQUE_YN != null and !&quot;&quot;.equals(UNIQUE_YN)" >
+        UNIQUE_YN,
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        CREATED_BY,
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE,
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        MODIFIED_BY,
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE,
+      </if>
+      <if test="ORDER_NUMBER != null and ORDER_NUMBER != emptyBigDecimalValue" >
+        ORDER_NUMBER,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="CODE != null and CODE != emptyBigDecimalValue" >
+        #{CODE},
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="LINE_NO != null and LINE_NO != emptyBigDecimalValue" >
+        #{LINE_NO},
+      </if>
+      <if test="NAME != null and !&quot;&quot;.equals(NAME)" >
+        #{NAME},
+      </if>
+      <if test="TYPE != null and !&quot;&quot;.equals(TYPE)" >
+        #{TYPE},
+      </if>
+      <if test="LENGTH != null and !&quot;&quot;.equals(LENGTH)" >
+        #{LENGTH},
+      </if>
+      <if test="MANDATORY_YN != null and !&quot;&quot;.equals(MANDATORY_YN)" >
+        #{MANDATORY_YN},
+      </if>
+      <if test="CATEGORY != null and !&quot;&quot;.equals(CATEGORY)" >
+        #{CATEGORY},
+      </if>
+      <if test="LABEL != null and !&quot;&quot;.equals(LABEL)" >
+        #{LABEL},
+      </if>
+      <if test="DECIMALS != null and DECIMALS != emptyBigDecimalValue" >
+        #{DECIMALS},
+      </if>
+      <if test="UNIQUE_YN != null and !&quot;&quot;.equals(UNIQUE_YN)" >
+        #{UNIQUE_YN},
+      </if>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        #{CREATED_BY},
+      </if>
+      <if test="CREATED_DATE != null" >
+        #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        #{MODIFIED_BY},
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        #{MODIFIED_DATE},
+      </if>
+      <if test="ORDER_NUMBER != null and ORDER_NUMBER != emptyBigDecimalValue" >
+        #{ORDER_NUMBER},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateFMSFACILITY_CUSTOM_FIELD_DET" >
+    update FMSFACILITY_CUSTOM_FIELD_DET
+    <set >
+      <if test="NAME != null" >
+        <choose >
+          <when test="NAME.equals(&quot;&quot;)" >
+            NAME = NULL ,
+          </when>
+          <otherwise >
+            NAME = #{NAME},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="TYPE != null" >
+        <choose >
+          <when test="TYPE.equals(&quot;&quot;)" >
+            TYPE = NULL ,
+          </when>
+          <otherwise >
+            TYPE = #{TYPE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="LENGTH != null" >
+        <choose >
+          <when test="LENGTH.equals(&quot;&quot;)" >
+            LENGTH = NULL ,
+          </when>
+          <otherwise >
+            LENGTH = #{LENGTH},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="MANDATORY_YN != null" >
+        <choose >
+          <when test="MANDATORY_YN.equals(&quot;&quot;)" >
+            MANDATORY_YN = NULL ,
+          </when>
+          <otherwise >
+            MANDATORY_YN = #{MANDATORY_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CATEGORY != null" >
+        <choose >
+          <when test="CATEGORY.equals(&quot;&quot;)" >
+            CATEGORY = NULL ,
+          </when>
+          <otherwise >
+            CATEGORY = #{CATEGORY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="LABEL != null" >
+        <choose >
+          <when test="LABEL.equals(&quot;&quot;)" >
+            LABEL = NULL ,
+          </when>
+          <otherwise >
+            LABEL = #{LABEL},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DECIMALS != null" >
+        <choose >
+          <when test="DECIMALS == emptyBigDecimalValue" >
+            DECIMALS = NULL ,
+          </when>
+          <otherwise >
+            DECIMALS = #{DECIMALS},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="UNIQUE_YN != null" >
+        <choose >
+          <when test="UNIQUE_YN.equals(&quot;&quot;)" >
+            UNIQUE_YN = NULL ,
+          </when>
+          <otherwise >
+            UNIQUE_YN = #{UNIQUE_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CREATED_BY != null" >
+        <choose >
+          <when test="CREATED_BY.equals(&quot;&quot;)" >
+            CREATED_BY = NULL ,
+          </when>
+          <otherwise >
+            CREATED_BY = #{CREATED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE = #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null" >
+        <choose >
+          <when test="MODIFIED_BY.equals(&quot;&quot;)" >
+            MODIFIED_BY = NULL ,
+          </when>
+          <otherwise >
+            MODIFIED_BY = #{MODIFIED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE = #{MODIFIED_DATE},
+      </if>
+      <if test="ORDER_NUMBER != null" >
+        <choose >
+          <when test="ORDER_NUMBER == emptyBigDecimalValue" >
+            ORDER_NUMBER = NULL ,
+          </when>
+          <otherwise >
+            ORDER_NUMBER = #{ORDER_NUMBER},
+          </otherwise>
+        </choose>
+      </if>
+    </set>
+    where CODE = #{CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and LINE_NO = #{LINE_NO}
+  </sql>
+  <update id="updateFMSFACILITY_CUSTOM_FIELD_DET" parameterType="com.path.dbmaps.vo.FMSFACILITY_CUSTOM_FIELD_DETVO" >
+    <include refid="sql_updateFMSFACILITY_CUSTOM_FIELD_DET" />
+  </update>
+</mapper>

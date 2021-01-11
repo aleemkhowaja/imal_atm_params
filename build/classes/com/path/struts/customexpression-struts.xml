@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="customExpressionMaintAction" namespace="/path/customexpression" extends="path-default">
+
+		<action name="CustomExpressionMaintAction_*" class="customExpressionMaintAction" method="{1}">
+
+				<result name="formatExpressionDialog">/WEB-INF/pages/commonexpression/ISOExpressionDialog.jsp</result>
+				
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+				<result name="error" type="json">
+					<param name="ignoreHierarchy">false</param>
+				</result>
+		</action>
+	</package>
+</struts>

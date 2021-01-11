@@ -1,0 +1,52 @@
+			.frm-wizard-container {
+				width : 100%;
+				border: 1px solid black;
+			}
+
+			.frm-wizard-navigation {
+				margin-top : 0.5em;
+				text-align: right;
+				padding: 4px
+			}
+ 
+			label.error {
+				color: red;
+				font: bold 12px Verdana, Arial, Helvetica, sans-serif;
+			}
+
+			.formErrorContent {
+				font: bold 12px Verdana, Arial, Helvetica, sans-serif; 
+				color: red;
+			}
+			
+			.stepSpan {
+				font: 14pt Tahoma !important; 	 
+				float: right;
+				padding:4px;
+				display:block;
+				font-weight: bold;
+			}
+
+
+			.step {
+				float: center;
+				width: 100%;
+			}
+
+			.frm-wizard-navigation_btn {
+				width : 70px;
+			}
+			
+			.frm-wizard-status {
+				overflow : auto;
+				color:red;
+			}
+			
+			.frm-wizard-label {			 
+			 	font: bold 15px Verdana, Arial, Helvetica, sans-serif;  
+			 	float: right;
+			 	font-weight: bold;
+			 	padding: 5px;
+			 	color:#5A5655;
+			}
+			

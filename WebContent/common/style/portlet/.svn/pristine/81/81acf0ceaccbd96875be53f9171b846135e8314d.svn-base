@@ -1,0 +1,54 @@
+#contentShell {
+/*   width: 100%;*/
+   margin: 0;
+   clear: both;
+}
+
+div.portalBox {
+   min-height: 40px;
+}
+
+.placer {
+   border: 1px dotted black;
+   visibility: visible;
+   background: #e2e2e2;
+   margin: 5px;
+}
+
+.placer * {
+   visibility: hidden;
+}
+
+div.portlet {
+   margin: 6px 3px;
+   text-align: left;
+   border: 1px solid #4e93fa;
+   -moz-border-radius: 5px 5px 5px 5px;
+}
+
+div.portlet .portlet-header {
+   padding-left: 4px;
+   font-weight: 600;
+   font-size: 12px;
+   background: #6633FF;
+	color:#fff;
+	-moz-border-radius: 5px 5px 5px 5px;
+}
+
+div.portlet .portlet-header .ui-icon {
+   float: right;
+   margin: 1px 0 2px;
+   padding: 0;
+   border:0;
+   background-color:transparent;
+}
+
+div.portlet .portlet-content {
+   padding: 0;
+   overflow: auto;
+   /*width: 99.5%;*/
+}
+
+div.portlet .loader {
+   padding:10px;
+}

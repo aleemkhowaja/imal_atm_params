@@ -1,0 +1,71 @@
+{
+"layout": "threeColumn",
+"data" : [
+  {
+    "title" : "Business Verticals",
+    "id" : "widget1",
+    "column" : "first",
+    "url" : "/businessVerticalWidget.jsp",
+    "editurl" : "/businessVerticalWidget.jsp",
+    "open" : true
+    
+  },
+  {
+    "title" : "Business Services",
+    "id" : "widget2",
+    "column" : "second",
+    "url" : "/commonBusinessServiceWidget.jsp",
+    "editurl" : "/commonBusinessServiceWidget.jsp",
+    "open" : true
+  },
+  {
+    "title" : "Configuration",
+    "id" : "widget3",
+    "column" : "first",
+    "url" : "/configurationWidget.jsp",
+    "editurl" : "/configurationWidget.jsp",
+    "open" : true
+  },
+  {
+    "title" : "Alerts",
+    "id" : "widget4",
+    "column" : "third",
+    "url" : "/alertWidget.jsp",
+    "editurl" : "/alertWidget.jsp",
+    "open" : true
+  },
+  {
+    "title" : "Periodic Process",
+    "id" : "widget9",
+    "column" : "first",
+    "url" : "/periodicProcessWidget.jsp",
+    "editurl" : "/periodicProcessWidget.jsp",
+    "open" : true
+  },
+   {
+    "title" : "My Favourites",
+    "id" : "widget12",
+    "column" : "second",
+    "url" : "/customWidget.jsp",
+    "editurl" : "/customWidget.jsp",
+    "open" : true
+  },
+  {
+    "title" : "Inbox",
+    "id" : "widget11",
+    "column" : "third",
+    "url" : "/inboxWidget.jsp",
+    "editurl" : "/inboxWidget.jsp",
+    "open" : true
+  },
+   {
+    "title" : "Customer Services",
+    "id" : "widget15",
+    "column" : "second",
+    "url" : "/customerServicesWidget.jsp",
+    "editurl" : "/customerServicesWidget.jsp",
+    "open" : true
+  }
+  
+]
+}

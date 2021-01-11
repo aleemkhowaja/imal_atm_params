@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<!--  653853  WSDL explorer -->
+	<package name="webserviceexplorer" namespace="/path/common/WebserviceExplorer" extends="path-default">
+		<action name="WebServiceExplorerMaint_*" class="webServiceExplorerMaint" method="{1}">
+			<result name="loadWebServiceExplorerSavedConfigurationLookup">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerSearchConfigList.jsp</result>
+			<result name="loadWebServiceExplorerMaintScreen">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerMaint.jsp</result>
+			<result name="loadGridSection">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerList.jsp</result>
+			<result name="loadRequestResponseSection">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerRequestResponse.jsp</result>
+			<result name="loadToolBar">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerToolbar.jsp</result>
+			
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="jsonError" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		
+		<action name="WebServiceExplorerList_*" class="webServiceExplorerList" method="{1}">
+			<result name="loadGridSection">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerList.jsp</result>
+			<result name="loadHashMapSubGrid">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerHashGridList.jsp</result>
+			<result name="loadListSubGrid">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerListSubGridList.jsp</result>
+			<result name="loadSubGrid">/WEB-INF/pages/commonpwsmapping/webserviceexplorer/WebServiceExplorerSubGridList.jsp</result>
+				<result name="success" type="json">
+					<param name="ignoreHierarchy">false</param>
+				</result>
+		</action>
+		
+		<action name="WebServiceExplorerTree_*" class="webServiceExplorerTree" method="{1}">	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<action name="WSDLParsingLookup_*" class="wsdLParsingLookup" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+												 					
+	</package>
+</struts>

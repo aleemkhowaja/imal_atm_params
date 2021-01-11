@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="atmEngineControl" namespace="/path/atmenginecontrol" extends="path-default">
+		<action name="ATMEngineControlListAction_*"	class="atmEngineControlListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		<action name="ATMEngineControlMaintAction_*" class="atmEngineControlMaintAction" method="{1}">
+			<result name="success">/WEB-INF/pages/atm/atmenginecontrol/ATMEngineControlMaint.jsp</result>
+			<result name="isoMessageDilog">/WEB-INF/pages/atm/atmenginecontrol/ISOMessageParse.jsp</result>
+			<result name="jsonSuccess" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+</struts>

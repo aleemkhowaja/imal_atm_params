@@ -1,0 +1,82 @@
+/*
+    Path OverlayBox Core Style:
+     
+*/
+#__overlaybox, #__overlayOverlay, #__overlayWrapper{position:absolute; top:0; left:0; z-index:9999; overflow:hidden;}
+#__overlayOverlay{position:fixed; width:100%; height:100%;}
+#__overlayMiddleLeft, #__overlayBottomLeft{clear:left;}
+#__overlayContent{position:relative;}
+#__overlayLoadedContent{overflow:auto;}
+#__overlayTitle{margin:0;}
+#__overlayLoadingOverlay, #__overlayLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
+#__overlayPrevious, #__overlayNext, #__overlayClose, #__overlaySlideshow{cursor:pointer;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block;}
+.cboxIframe{width:100%; height:100%; display:block; border:0;}
+
+ 
+#__overlayOverlay{background:#fff;}
+#__overlaybox{}
+    #__overlayTopLeft{width:25px; height:25px; background:url(images/border1.png) no-repeat 0 0;}
+    #__overlayTopCenter{height:25px; background:url(images/border1.png) repeat-x 0 -50px;}
+    #__overlayTopRight{width:25px; height:25px; background:url(images/border1.png) no-repeat -25px 0;}
+    #__overlayBottomLeft{width:25px; height:25px; background:url(images/border1.png) no-repeat 0 -25px;}
+    #__overlayBottomCenter{height:25px; background:url(images/border1.png) repeat-x 0 -75px;}
+    #__overlayBottomRight{width:25px; height:25px; background:url(images/border1.png) no-repeat -25px -25px;}
+    #__overlayMiddleLeft{width:25px; background:url(images/border2.png) repeat-y 0 0;}
+    #__overlayMiddleRight{width:25px; background:url(images/border2.png) repeat-y -25px 0;}
+    #__overlayContent{background:#fff; overflow:hidden;}
+        .cboxIframe{background:#fff;}
+        #__overlayError{padding:50px; border:1px solid #ccc;}
+        #__overlayLoadedContent{margin-top:18px;}
+        #__overlayTitle{position:absolute; top:0px; left:0; text-align:center; width:100%; color:#999;}
+        #__overlayCurrent{position:absolute; bottom:0px; left:100px; color:#999;}
+        #__overlaySlideshow{position:absolute; bottom:0px; right:42px; color:#444;}
+        #__overlayPrevious{position:absolute; bottom:0px; left:0; color:#444;}
+        #__overlayNext{position:absolute; bottom:0px; left:63px; color:#444;}
+        #__overlayLoadingOverlay{background:#fff url(images/loading.gif) no-repeat 5px 5px;}
+        #__overlayClose{position:absolute; top:-3px; right:-3px; background:url(images/controls.png) no-repeat -50px 0px; width:20px; height:20px; text-indent:-9999px;}
+        #__overlayClose:hover{background-position:-50px -25px;}
+        
+/* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+#__overlayPrevious, #__overlayNext, #__overlaySlideshow, #__overlayClose {border:0;}
+           
+
+/*
+  The following fixes a problem where IE7 and IE8 replace a PNG's alpha transparency with a black fill
+  when an alpha filter (opacity change) is set on the element or ancestor element.  This style is not applied to or needed in IE9.
+ 
+*/
+.cboxIE #__overlayTopLeft,
+.cboxIE #__overlayTopCenter,
+.cboxIE #__overlayTopRight,
+.cboxIE #__overlayBottomLeft,
+.cboxIE #__overlayBottomCenter,
+.cboxIE #__overlayBottomRight,
+.cboxIE #__overlayMiddleLeft,
+.cboxIE #__overlayMiddleRight {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#00FFFFFF,endColorstr=#00FFFFFF);
+}
+
+/*
+  The following provides PNG transparency support for IE6
+  Feel free to remove this and the /ie6/ directory if you have dropped IE6 support.
+*/
+.cboxIE6 #__overlayTopLeft{background:url(images/ie6/borderTopLeft.png);}
+.cboxIE6 #__overlayTopCenter{background:url(images/ie6/borderTopCenter.png);}
+.cboxIE6 #__overlayTopRight{background:url(images/ie6/borderTopRight.png);}
+.cboxIE6 #__overlayBottomLeft{background:url(images/ie6/borderBottomLeft.png);}
+.cboxIE6 #__overlayBottomCenter{background:url(images/ie6/borderBottomCenter.png);}
+.cboxIE6 #__overlayBottomRight{background:url(images/ie6/borderBottomRight.png);}
+.cboxIE6 #__overlayMiddleLeft{background:url(images/ie6/borderMiddleLeft.png);}
+.cboxIE6 #__overlayMiddleRight{background:url(images/ie6/borderMiddleRight.png);}
+
+.cboxIE6 #__overlayTopLeft,
+.cboxIE6 #__overlayTopCenter,
+.cboxIE6 #__overlayTopRight,
+.cboxIE6 #__overlayBottomLeft,
+.cboxIE6 #__overlayBottomCenter,
+.cboxIE6 #__overlayBottomRight,
+.cboxIE6 #__overlayMiddleLeft,
+.cboxIE6 #__overlayMiddleRight {
+    _behavior: expression(this.src = this.src ? this.src : this.currentStyle.backgroundImage.split('"')[1], this.style.background = "none", this.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src=" + this.src + ", sizingMethod='scale')");
+}

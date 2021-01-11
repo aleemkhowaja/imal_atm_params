@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="custSegmentationListAction" class="com.path.core.actions.segmentation.CustSegmentationListAction" scope="prototype" parent="baseAction">
+		 <property name="custSegmentationBO" ref="custSegmentationBO"></property>
+		 <property name="criteriaBO" ref="criteriaBO"></property>
+	</bean>
+	
+	<bean id="custSegmentationMaintAction" class="com.path.core.actions.segmentation.CustSegmentationMaintAction" scope="prototype" parent="baseAction">
+		 <property name="custSegmentationBO" ref="custSegmentationBO"></property>
+		 <property name="alertsBO" ref="alertsBO"></property>
+	</bean>
+	
+	<bean id="custSegmentationStatusAction" class="com.path.core.actions.segmentation.CustSegmentationStatusAction" scope="prototype" parent="baseAction">
+	</bean>
+    
+    <bean id="custSegmentationDependencyAction" class="com.path.core.actions.segmentation.CustSegmentationDependencyAction" scope="prototype" parent="baseAction">
+		 <property name="custSegmentationBO" ref="custSegmentationBO"></property>
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="TRSDEAL_ASSET_DET" >
+  <resultMap id="BaseResultMap" type="com.path.dbmaps.vo.TRSDEAL_ASSET_DETVO" >
+    <id column="ASSET_CATEGORY_CODE" property="ASSET_CATEGORY_CODE" />
+    <id column="ASSET_CLASS_CODE" property="ASSET_CLASS_CODE" />
+    <id column="ASSET_CODE" property="ASSET_CODE" />
+    <id column="BRANCH_CODE" property="BRANCH_CODE" />
+    <id column="COMP_CODE" property="COMP_CODE" />
+    <id column="SERIAL_NO" property="SERIAL_NO" />
+    <result column="BUY_BACK_YN" property="BUY_BACK_YN" />
+    <result column="ASSET_COST" property="ASSET_COST" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ASSET_CATEGORY_CODE, ASSET_CLASS_CODE, ASSET_CODE, BRANCH_CODE, COMP_CODE, SERIAL_NO, 
+    BUY_BACK_YN, ASSET_COST
+  </sql>
+  <select id="selectTRSDEAL_ASSET_DET" resultMap="BaseResultMap" parameterType="com.path.dbmaps.vo.TRSDEAL_ASSET_DETVOKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TRSDEAL_ASSET_DET
+    where ASSET_CATEGORY_CODE = #{ASSET_CATEGORY_CODE}
+      and ASSET_CLASS_CODE = #{ASSET_CLASS_CODE}
+      and ASSET_CODE = #{ASSET_CODE}
+      and BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and SERIAL_NO = #{SERIAL_NO}
+  </select>
+  <delete id="deleteTRSDEAL_ASSET_DET" parameterType="com.path.dbmaps.vo.TRSDEAL_ASSET_DETVOKey" >
+    delete from TRSDEAL_ASSET_DET
+    where ASSET_CATEGORY_CODE = #{ASSET_CATEGORY_CODE}
+      and ASSET_CLASS_CODE = #{ASSET_CLASS_CODE}
+      and ASSET_CODE = #{ASSET_CODE}
+      and BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and SERIAL_NO = #{SERIAL_NO}
+  </delete>
+  <insert id="insertTRSDEAL_ASSET_DET" parameterType="com.path.dbmaps.vo.TRSDEAL_ASSET_DETVO" >
+    insert into TRSDEAL_ASSET_DET
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="ASSET_CATEGORY_CODE != null and ASSET_CATEGORY_CODE != emptyBigDecimalValue" >
+        ASSET_CATEGORY_CODE,
+      </if>
+      <if test="ASSET_CLASS_CODE != null and ASSET_CLASS_CODE != emptyBigDecimalValue" >
+        ASSET_CLASS_CODE,
+      </if>
+      <if test="ASSET_CODE != null and ASSET_CODE != emptyBigDecimalValue" >
+        ASSET_CODE,
+      </if>
+      <if test="BRANCH_CODE != null and BRANCH_CODE != emptyBigDecimalValue" >
+        BRANCH_CODE,
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        COMP_CODE,
+      </if>
+      <if test="SERIAL_NO != null and SERIAL_NO != emptyBigDecimalValue" >
+        SERIAL_NO,
+      </if>
+      <if test="BUY_BACK_YN != null and !&quot;&quot;.equals(BUY_BACK_YN)" >
+        BUY_BACK_YN,
+      </if>
+      <if test="ASSET_COST != null and ASSET_COST != emptyBigDecimalValue" >
+        ASSET_COST,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="ASSET_CATEGORY_CODE != null and ASSET_CATEGORY_CODE != emptyBigDecimalValue" >
+        #{ASSET_CATEGORY_CODE},
+      </if>
+      <if test="ASSET_CLASS_CODE != null and ASSET_CLASS_CODE != emptyBigDecimalValue" >
+        #{ASSET_CLASS_CODE},
+      </if>
+      <if test="ASSET_CODE != null and ASSET_CODE != emptyBigDecimalValue" >
+        #{ASSET_CODE},
+      </if>
+      <if test="BRANCH_CODE != null and BRANCH_CODE != emptyBigDecimalValue" >
+        #{BRANCH_CODE},
+      </if>
+      <if test="COMP_CODE != null and COMP_CODE != emptyBigDecimalValue" >
+        #{COMP_CODE},
+      </if>
+      <if test="SERIAL_NO != null and SERIAL_NO != emptyBigDecimalValue" >
+        #{SERIAL_NO},
+      </if>
+      <if test="BUY_BACK_YN != null and !&quot;&quot;.equals(BUY_BACK_YN)" >
+        #{BUY_BACK_YN},
+      </if>
+      <if test="ASSET_COST != null and ASSET_COST != emptyBigDecimalValue" >
+        #{ASSET_COST},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateTRSDEAL_ASSET_DET" >
+    update TRSDEAL_ASSET_DET
+    <set >
+      <if test="BUY_BACK_YN != null" >
+        <choose >
+          <when test="BUY_BACK_YN.equals(&quot;&quot;)" >
+            BUY_BACK_YN = NULL ,
+          </when>
+          <otherwise >
+            BUY_BACK_YN = #{BUY_BACK_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="ASSET_COST != null" >
+        <choose >
+          <when test="ASSET_COST == emptyBigDecimalValue" >
+            ASSET_COST = NULL ,
+          </when>
+          <otherwise >
+            ASSET_COST = #{ASSET_COST},
+          </otherwise>
+        </choose>
+      </if>
+    </set>
+    where ASSET_CATEGORY_CODE = #{ASSET_CATEGORY_CODE}
+      and ASSET_CLASS_CODE = #{ASSET_CLASS_CODE}
+      and ASSET_CODE = #{ASSET_CODE}
+      and BRANCH_CODE = #{BRANCH_CODE}
+      and COMP_CODE = #{COMP_CODE}
+      and SERIAL_NO = #{SERIAL_NO}
+  </sql>
+  <update id="updateTRSDEAL_ASSET_DET" parameterType="com.path.dbmaps.vo.TRSDEAL_ASSET_DETVO" >
+    <include refid="sql_updateTRSDEAL_ASSET_DET" />
+  </update>
+</mapper>

@@ -1,0 +1,529 @@
+function checkTmplSelectedTab(selectedTabId, event)
+{
+	var $tabId1 = "custTab1"; //"custTab1TabsContent_"+_pageRef;
+	var $tabId2 = "custTab2"; //"custTab2TabsContent_"+_pageRef;
+	var reqGridId = "webServiceGuiTbl_Id_"+_pageRef;
+	var reqGridParentWidth = $('#gbox_' + reqGridId).parent().width();
+	var respGridId = "webServiceGuiTbl_Id_"+_pageRef+"_response";
+	var respGridParentWidth = $('#gbox_' + respGridId).parent().width();
+	var width = undefined;
+	if(reqGridParentWidth > respGridParentWidth)
+	{
+		width = reqGridParentWidth;
+	}
+	else{
+		width = respGridParentWidth;
+	}
+    $('#' + reqGridId).jqGrid("setGridWidth",width);
+	$('#' + respGridId).jqGrid("setGridWidth",width);
+	fixGridPlusMinusIcons();
+}
+
+function alertWebServiceExplorer_save()
+{
+	var gridId = $("#webServiceExplorerMainGridIds_"+returnOrgiPageRef()).val();
+	
+	if(typeof gridId == "undefined" || gridId == null)
+		return;
+	
+	var mapDesc = $("#mapDescId_"+_pageRef).val();
+	if(mapDesc == "")
+	{
+		var curElemLabel =  $.trim(($("label[for='"+"mapDescId_"+_pageRef+"']").text()).replace("*",""));
+		_showErrorMsg(curElemLabel,missing_elt_msg_key,null,null);
+		return;
+	}
+
+	_showProgressBar(true);
+	
+	var orgiPageRef = returnOrgiPageRef();
+	var x = gridId.split(orgiPageRef);
+	var gSeq = returnGridIndicator(gridId);
+
+	var request_grid = $("#"+gSeq+returnOrgiPageRef());
+	var response_grid = $("#"+gSeq+returnOrgiPageRef()+"_response");
+    var request_json = loadSelectedRows(request_grid);
+    var response_json = loadSelectedRows(response_grid);
+    request_json = "["+request_json+"]";
+    response_json = "["+response_json+"]";
+    var mappingId = $("#pwsMappingId_"+_pageRef).val();
+    var params = "&pwsWebServiceExplorerCO.commonPwsMappingVO.MAPPING_ID="+$("#mappingId_"+_pageRef).val()+ "&pwsWebServiceExplorerCO.commonPwsMappingVO.WS_NAME="+$("#endpointId_"+_pageRef).val()+ "&pwsWebServiceExplorerCO.commonPwsMappingVO.OPER_NAME="+$("#operationId_"+_pageRef).val()+ "&pwsWebServiceExplorerCO.commonPwsMappingDefVO.MAPPING_ID="+$("#mappingId_"+_pageRef).val()+ "&pwsWebServiceExplorerCO.commonPwsMappingDefVO.MAP_DESCRIPTION="+$("#mapDescId_"+_pageRef).val();
+    var loadSrc = jQuery.contextPath +"/path/common/pws/PwsWebServiceExplorerMainAction_save?webServiceExplorerCO.mappingID="+mappingId+"&webServiceExplorerCO.description="+$("#mapDescId_"+_pageRef).val()+params;
+    $("#webServiceExplorerGridUpdates_"+_pageRef).val(request_json);
+	$("#webServiceExplorerResponseGridUpdates_"+_pageRef).val(response_json);
+	var serializedForm = $("#webServiceGuiDefFormId_"+returnOrgiPageRef()).serializeForm();
+	$.ajax( {
+		url : loadSrc,
+		type:"post",
+		dataType:"json",
+		data: serializedForm,					
+		success : function(data) 
+	    {
+			_showProgressBar(false);
+			if (typeof data["_error"] == "undefined" 
+				|| data["_error"] == null) 
+			{
+				_showErrorMsg(record_was_Updated_Successfully_key,success_msg_title);
+				$("#validation_dialog_"+_pageRef).val("0");
+			}
+			$("#pwsMappingId_"+_pageRef).val(data["pwsDefinitionCO"]["definitionVO"]["MAPPING_ID"])
+	    }
+			
+	    });
+	
+	/*
+	 * 
+	 .done(function(result)
+		      {	
+				
+		      }
+			);
+	*/
+}
+
+
+function returnGridIndicator(gridId)
+{
+	var orgiPageRef = returnOrgiPageRef();
+	var x = gridId.split(orgiPageRef);
+	return x[0];
+}
+
+/**
+ * @Auther:Raed Saad
+ * @Date:MARCH 2018
+ * @Team: PEMTS JAVA Team.
+ * @copyright: PathSolution 2018
+ * @User Story: USER STORY #653853  WSDL explorer
+ * @Description: Tree Grid Component JS function
+ **/
+
+function onSuccessWebServiceTopics(event)
+{
+	//$("ins").remove(".jstree-icon");
+	$("ins").remove(".jstree-checkbox");
+	var aElement = $("#webServiceChartTree_Explorer_"+_pageRef+" ul>li.jstree-leaf>a");
+	for (var i = 0; i < aElement.length; i++)
+	{
+		$(aElement[i]).bind('click', function(){
+			treeOnClickEvent(i);			
+		});  
+	}
+}
+
+function treeOnClickEvent(elem)
+{
+	var text = $("ul>li>a.jstree-clicked").text().trim();
+	console.log(text);
+//	alert(text);
+}
+
+function treeMouseClickEvent(event)
+{
+	var text = $("ul>li>input").value;
+	console.log(text);
+	alert(text);
+}
+
+function fillMappingFields(actionUrl,callback)
+{		
+	var jsonLst = [];
+	var jsonObj = {};
+	$.ajax( {
+		url : actionUrl,
+		type : "post",
+		dataType : "json",
+		success : function(data) {
+			if(undefined != data["gridModel"])
+			{
+				$("#mappingFields_"+_pageRef).val(JSON.stringify(data["gridModel"]));
+			}
+		}
+	}).done(function(result) {
+		if (null != callback && undefined != callback && typeof (callback) == "function") {
+			callback();
+		}
+	}
+	);
+}
+
+function afterWebServiceNodeCheckUnchecked(event)
+{	
+	var formId = "webServiceGuiGridForm_"+_pageRef;
+	resetWebserviceExplorerFormCache(formId);
+	var mappingFieldsUrl = $("#mappingFieldsUrl_"+_pageRef).val();
+	if(undefined != mappingFieldsUrl && "" != mappingFieldsUrl)
+	{
+		fillMappingFields(mappingFieldsUrl,function(){
+			var screenName = $("#webServiceExplorerScreenName_"+_pageRef).val();
+			var mainGridActionRef = $("#webServiceExplorerGrid_"+_pageRef).val();
+			var screenNameSpace = $("#webServiceExplorerScreenNameSpace_"+_pageRef).val();
+			if(screenName == "webServiceExplorer")
+			{
+				loadRequestGrid(event,"request");
+			}
+			else{	
+				var ar = _pageRef.split("_");
+				if(ar.length>1)
+				{
+					_pageRef = ar[0];
+				}
+				loadRequestGrid(event,"request",function(){
+					var x = $("#webServiceExplorerGrid_"+_pageRef).val();
+					var y = $("#webServiceExplorerScreenNameSpace_"+_pageRef).val();
+					var z = $("#webServiceExplorerScreenName_"+_pageRef).val();
+					var arr = {};
+					arr['mainGridActionRef'] = x;
+					arr['screenNameSpace'] = y;
+					arr['screenName'] = z;
+					var array = _pageRef.split("_");
+					if(array.length==1)
+					{
+						var pageRef = _pageRef + "_response";
+						//_pageRef = pageRef;
+						$("#webServiceGuiDefFormId_"+returnOrgiPageRef()).children("#pageRef_"+returnOrgiPageRef()).val(pageRef);
+					}
+					loadRequestGrid(event,"response",null,arr);
+					});
+			}
+
+		});
+	}
+	else{
+		var screenName = $("#webServiceExplorerScreenName_"+_pageRef).val();
+		var mainGridActionRef = $("#webServiceExplorerGrid_"+_pageRef).val();
+		var screenNameSpace = $("#webServiceExplorerScreenNameSpace_"+_pageRef).val();
+		if(screenName == "webServiceExplorer")
+		{
+			loadRequestGrid(event,"request");
+		}
+		else{	
+			var ar = _pageRef.split("_");
+			if(ar.length>1)
+			{
+				_pageRef = ar[0];
+			}
+			loadRequestGrid(event,"request",function(){
+				var x = $("#webServiceExplorerGrid_"+_pageRef).val();
+				var y = $("#webServiceExplorerScreenNameSpace_"+_pageRef).val();
+				var z = $("#webServiceExplorerScreenName_"+_pageRef).val();
+				var arr = {};
+				arr['mainGridActionRef'] = x;
+				arr['screenNameSpace'] = y;
+				arr['screenName'] = z;
+				var array = _pageRef.split("_");
+				if(array.length==1)
+				{
+					var pageRef = _pageRef + "_response";
+					//_pageRef = pageRef;
+					$("#webServiceGuiDefFormId_"+returnOrgiPageRef()).children("#pageRef_"+returnOrgiPageRef()).val(pageRef);
+				}
+				loadRequestGrid(event,"response",null,arr);
+				});
+		}
+
+	}
+
+}
+
+function loadRequestGrid(event,requestType,fn,x)
+{
+	var aElement = $("#webServiceChartTree_Explorer_"+_pageRef+" ul>li.jstree-leaf>a");
+	var mainGridActionRef = $("#webServiceExplorerGrid_"+_pageRef).val();
+	var screenNameSpace = $("#webServiceExplorerScreenNameSpace_"+_pageRef).val();
+	var screenName = $("#webServiceExplorerScreenName_"+_pageRef).val();
+	if(null !=x && undefined != x)
+	{
+		$("#webServiceExplorerGrid_"+_pageRef).val(x['mainGridActionRef']);
+		$("#webServiceExplorerScreenNameSpace_"+_pageRef).val(x['screenNameSpace']);
+		$("#webServiceExplorerScreenName_"+_pageRef).val(x['screenName']);
+		mainGridActionRef = x['mainGridActionRef'];
+		screenNameSpace = x['screenNameSpace'];
+		screenName = x['screenName'];
+	}
+	var $mainTab = $("#custTabs_"+_pageRef);
+	var $tabId1 = "custTab1TabsContent_"+_pageRef;
+	var $tabId2 = "custTab2TabsContent_"+_pageRef;
+	currentClickedNode = event.originalEvent.data.rslt.obj;
+	var id = event.originalEvent.data.rslt.obj.attr("id");
+	var operationName = event.originalEvent.data.rslt.obj.attr("nodeCode");
+	var serviceName = event.originalEvent.data.rslt.obj.attr("parentnodecode");
+	var appName = $("#"+id).parent().parent().attr("parentnodecode");
+	if(undefined == appName)
+	{
+		return;
+	}
+	if(undefined == operationName)
+	{
+		return;
+	}
+	else
+	{
+		operationName = operationName.replace(serviceName+"_","");
+	}
+	if(undefined == serviceName)
+	{
+		return;
+	}
+	else{
+		serviceName = serviceName.replace(appName+"_","");
+	}
+	$("#application_name_desc_"+_pageRef).val(appName);
+	$("#webservice_name_desc_"+_pageRef).val(serviceName);
+    $("#operation_name_lkp_desc_"+_pageRef).val(operationName);
+	$("#serviceDataId_"+_pageRef).val("");
+	var id = $("#pwsMappingId_"+_pageRef).val();
+	var serializedForm = $("#webServiceGuiDefFormId_"+returnOrgiPageRef()).serializeForm();
+	_showProgressBar(true);
+	if(operationName != undefined && serviceName != undefined && appName != undefined)
+    {
+    	var	loadSrc = null;
+    	if(screenNameSpace.length ==0 || screenNameSpace == undefined )
+    	{
+    		loadSrc = jQuery.contextPath +"/path/WebserviceExplorer/"+mainGridActionRef+"?webServiceExplorerCO.requestType="+requestType+"&webServiceExplorerCO.mappingID="+$("#pwsMappingId_"+_pageRef).val();
+    		$.ajax( {
+        		url : loadSrc,
+        		type:"post",
+        		dataType:"html",
+        		data: serializedForm,					
+        		success : function(data) 
+        	    {	
+        			if(requestType == "request")
+        			{
+        				$("#webServiceGuiGrid_" +_pageRef).html(data);
+        			}
+        			else if(requestType == "response")
+        			{
+        				$("#webServiceGuiResponseGrid_" +returnOrgiPageRef()).html(data);
+        			}
+        			loadToolbar();
+
+        			clearConfigLookUp();
+        			clearRequestResponse();
+        			
+        			  var xhttp = new XMLHttpRequest();
+        			    xhttp.onreadystatechange = function() {
+        			        if (this.readyState == 4 && this.status == 200) {
+        			            this.responseText;
+        			       }
+        			    };
+        			    
+        			_showProgressBar(false);
+        		}
+        	}).done(function(result)
+        		{	
+    				$mainTab.tabs('disable',$tabId2);
+        			//updateGridCaption(operationName);
+        		}
+        		);
+    	}
+    	else{
+    		var x = screenNameSpace.length;
+    		var n = screenNameSpace.charAt(screenNameSpace.length-1);
+    		if(n == "/")
+    		{
+    			screenNameSpace = screenNameSpace;
+    		}
+    		else{
+    			screenNameSpace = screenNameSpace+"/";
+    		}
+    		loadSrc = jQuery.contextPath +screenNameSpace+mainGridActionRef+"?webServiceExplorerCO.requestType="+requestType+"&webServiceExplorerCO.mappingID="+$("#pwsMappingId_"+_pageRef).val();;
+    		if(screenName != "" || screenName != undefined)
+        	{
+        		loadSrc = loadSrc+"&webServiceExplorerCO.screenName="+screenName;
+        	}
+        	$.ajax({
+        		url : loadSrc,
+        		type:"post",
+        		dataType:"html",
+        		data: serializedForm,					
+        		success : function(data) 
+        	    {	
+        			if(requestType == "request")
+        			{
+        				$("#webServiceGuiGrid_" +_pageRef).html(data);
+        			}
+        			else if(requestType == "response")
+        			{
+        				$("#webServiceGuiResponseGrid_" +returnOrgiPageRef()).html(data);
+        				restoreOrgiPageRef();
+        			}
+        			_showProgressBar(false);
+        		}
+        	}).done(function(result)
+					{
+		        		if(null != fn && undefined != fn && typeof(fn) == "function")
+						{
+							fn();
+						}
+					});
+    	}
+    }	
+}
+
+function returnOrgiPageRef()
+{
+	var array = _pageRef.split("_");
+	var pageRef = _pageRef;
+	if(array.length>1)
+	{
+		return array[0];
+	}
+	return _pageRef;
+}
+
+function restoreOrgiPageRef()
+{
+	var array = _pageRef.split("_");
+	var pageRef = _pageRef;
+	if(array.length>1)
+	{
+		pageRef =  array[0];
+	}
+	$("#webServiceGuiDefFormId_"+returnOrgiPageRef()).children("#pageRef_"+returnOrgiPageRef()).val(pageRef);
+}
+
+function processWebServiceExplorerMainGrid(event)
+{
+	var aElement = $("#webServiceChartTree_Explorer_"+_pageRef+" ul>li.jstree-leaf>a");
+	var mainGridActionRef = $("#webServiceExplorerGrid_"+_pageRef).val();
+	var screenNameSpace = $("#webServiceExplorerScreenNameSpace_"+_pageRef).val();
+	var screenName = $("#webServiceExplorerScreenName_"+_pageRef).val();
+	var $mainTab = $("#custTabs_"+_pageRef);
+	var $tabId1 = "custTab1TabsContent_"+_pageRef;
+	var $tabId2 = "custTab2TabsContent_"+_pageRef;
+	currentClickedNode = event.originalEvent.data.rslt.obj;
+	var id = event.originalEvent.data.rslt.obj.attr("id");
+	var operationName = event.originalEvent.data.rslt.obj.attr("nodeCode");
+	var serviceName = event.originalEvent.data.rslt.obj.attr("parentnodecode");
+	var appName = $("#"+id).parent().parent().attr("parentnodecode");
+	if(undefined == appName)
+	{
+		return;
+	}
+	if(undefined == operationName)
+	{
+		return;
+	}
+	else
+	{
+		operationName = operationName.replace(serviceName+"_","");
+	}
+	if(undefined == serviceName)
+	{
+		return;
+	}
+	else{
+		serviceName = serviceName.replace(appName+"_","");
+	}
+	$("#application_name_desc_"+_pageRef).val(appName);
+	$("#webservice_name_desc_"+_pageRef).val(serviceName);
+    $("#operation_name_lkp_desc_"+_pageRef).val(operationName);
+	$("#serviceDataId_"+_pageRef).val("");
+	var serializedForm = $("#webServiceGuiDefFormId_"+_pageRef).serializeForm();
+	_showProgressBar(true);
+	if(operationName != undefined && serviceName != undefined && appName != undefined)
+    {
+    	var	loadSrc = null;
+    	if(screenNameSpace =="" || screenNameSpace == undefined )
+    	{
+    		loadSrc = jQuery.contextPath +"/path/WebserviceExplorer/"+mainGridActionRef+"?webServiceExplorerCO.requestType=request";
+    		$.ajax( {
+        		url : loadSrc,
+        		type:"post",
+        		dataType:"html",
+        		data: serializedForm,					
+        		success : function(data) 
+        	    {	
+        			$("#webServiceGuiGrid_" +_pageRef).html(data);
+        			loadToolbar();
+
+        			clearConfigLookUp();
+        			clearRequestResponse();
+        			
+        			  var xhttp = new XMLHttpRequest();
+        			    xhttp.onreadystatechange = function() {
+        			        if (this.readyState == 4 && this.status == 200) {
+        			            this.responseText;
+        			       }
+        			    };
+        			    
+        			_showProgressBar(false);
+        		}
+        	}).done(function(result)
+        		{	
+    				$mainTab.tabs('disable',$tabId2);
+        			//updateGridCaption(operationName);
+        		}
+        		);
+    	}
+    	else{
+    		var x = screenNameSpace.length;
+    		var n = screenNameSpace.charAt(screenNameSpace.length-1);
+    		if(n == "/")
+    		{
+    			screenNameSpace = screenNameSpace;
+    		}
+    		else{
+    			screenNameSpace = screenNameSpace+"/";
+    		}
+    		loadSrc = jQuery.contextPath +screenNameSpace+mainGridActionRef+"?webServiceExplorerCO.requestType=request";
+    		if(screenName != "" || screenName != undefined)
+        	{
+        		loadSrc = loadSrc+"&webServiceExplorerCO.screenName="+screenName;
+        	}
+        	$.ajax( {
+        		url : loadSrc,
+        		type:"post",
+        		dataType:"html",
+        		data: serializedForm,					
+        		success : function(data) 
+        	    {	
+        			$("#webServiceGuiGrid_" +_pageRef).html(data);
+        			    
+        			_showProgressBar(false);
+        		}
+        	});
+    	}
+    }	
+}
+
+function buildPoolDetailsTree( object ){
+	
+	//jQuery("#pool_mapper_container_"+ _pageRef).show();
+	// ////debugger;
+	// console.log("building the Pool detail tree");
+	
+	var nodeCode = object.attr('nodecode');	
+	var appName = $("#application_name_desc_"+_pageRef).val(appName);
+	var serviceName = $("#webservice_name_desc_"+_pageRef).val(serviceName);
+    var operationName = $("#operation_name_lkp_desc_"+_pageRef).val(operationName);
+	var serviceDataId = $("#serviceDataId_"+_pageRef).val("");
+	
+	//var nodeCodeParts = nodeCode.split('-');
+	/*
+	// mark node as selected
+	var poolTree = $.jstree._reference("#batchTree_Pool_" + _pageRef);
+	// console.log("deselect all node");
+	poolTree.deselect_all();
+	poolTree.select_node("[nodeCode='"+nodeCode+"']");
+	 
+	// if Company Clicked reset pool mapper
+	if(nodeCodeParts.length <= 1 ){
+		resetPoolMapperDetails();
+		return;
+    }
+	
+	var batchRunType = $("#batchRunType_"+_pageRef)
+		.find(":selected").val();
+	
+	// PB
+	if( "PB" == batchRunType ){
+		// build 
+		buildPoolDetailsPB( object );
+	}else{
+		buildPoolDetailsBP( object );
+	}
+	
+	disableNodeCheck("pool_mapper");*/
+}

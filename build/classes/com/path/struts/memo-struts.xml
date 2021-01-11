@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="memo" namespace="/path/memo" extends="path-default">
+			 		
+		<action name="MemoGrid_*"  class="memoGridAction" method="{1}">
+			<result name="loadDefTrx">/WEB-INF/pages/businesscommon/memo/MemoTrx.jsp</result>
+			<result name="loadDef">/WEB-INF/pages/businesscommon/memo/Memo.jsp</result>
+			<result name="loadMemoLogDef">/WEB-INF/pages/businesscommon/memo/MemoDtlsLog.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>		
+		 
+		<action name="MemoDtlsMaint_*" class="memoDtlsMaintAction"	method="{1}">			
+			<result name="csmMemoDtlsPage">/WEB-INF/pages/businesscommon/memo/MemoDtlsList.jsp</result>
+			<result name="success">/WEB-INF/pages/businesscommon/memo/MemoDtlsMaint.jsp</result>
+			<result name="success_json" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="alert_success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>									 
+		</action>
+		
+		<action name="MemoDtlsSubmit_*" class="memoDtlsMaintAction"	method="{1}">			
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>								 
+		</action>
+	 </package>
+	
+</struts>   

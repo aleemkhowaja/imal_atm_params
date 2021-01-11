@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GTW_ATM_TERMINAL" >
+  <resultMap id="BaseResultMap" type="com.path.atm.dbmaps.vo.GTW_ATM_TERMINALVO" >
+    <id column="COMP_CODE" property="COMP_CODE" />
+    <id column="TERMINAL_ID" property="TERMINAL_ID" />
+    <result column="DESCRIPTION" property="DESCRIPTION" />
+    <result column="MERCHANT_CODE" property="MERCHANT_CODE" />
+    <result column="TRANSACTION_BRANCH_CODE" property="TRANSACTION_BRANCH_CODE" />
+    <result column="TELLER_CODE" property="TELLER_CODE" />
+    <result column="ADDRESS" property="ADDRESS" />
+    <result column="TELEPHONE" property="TELEPHONE" />
+    <result column="EMAIL" property="EMAIL" />
+    <result column="DATE_UPDATED" property="DATE_UPDATED" />
+    <result column="CREATED_BY" property="CREATED_BY" />
+    <result column="CREATED_DATE" property="CREATED_DATE" />
+    <result column="MODIFIED_BY" property="MODIFIED_BY" />
+    <result column="MODIFIED_DATE" property="MODIFIED_DATE" />
+    <result column="DELETED_BY" property="DELETED_BY" />
+    <result column="DELETED_DATE" property="DELETED_DATE" />
+    <result column="TERMINAL_CODE" property="TERMINAL_CODE" />
+    <result column="INTERFACE_CODE" property="INTERFACE_CODE" />
+    <result column="EXPRESSION" property="EXPRESSION" />
+    <result column="TELLER_USER_ID" property="TELLER_USER_ID" />
+    <result column="ACQUIRER_ID" property="ACQUIRER_ID" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    COMP_CODE, TERMINAL_ID, DESCRIPTION, MERCHANT_CODE, TRANSACTION_BRANCH_CODE, TELLER_CODE, 
+    ADDRESS, TELEPHONE, EMAIL, DATE_UPDATED, CREATED_BY, CREATED_DATE, MODIFIED_BY, MODIFIED_DATE, 
+    DELETED_BY, DELETED_DATE, TERMINAL_CODE, INTERFACE_CODE, EXPRESSION, TELLER_USER_ID, 
+    ACQUIRER_ID
+  </sql>
+  <select id="selectGTW_ATM_TERMINAL" resultMap="BaseResultMap" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_TERMINALVO" >
+    select 
+    <include refid="Base_Column_List" />
+    from GTW_ATM_TERMINAL
+    where COMP_CODE = #{COMP_CODE}
+      and TERMINAL_ID = #{TERMINAL_ID}
+  </select>
+  <delete id="deleteGTW_ATM_TERMINAL" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_TERMINALVO" >
+    delete from GTW_ATM_TERMINAL
+    where COMP_CODE = #{COMP_CODE}
+      and TERMINAL_ID = #{TERMINAL_ID}
+  </delete>
+  <insert id="insertGTW_ATM_TERMINAL" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_TERMINALVO" >
+    insert into GTW_ATM_TERMINAL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="COMP_CODE != null" >
+        COMP_CODE,
+      </if>
+      <if test="TERMINAL_ID != null" >
+        TERMINAL_ID,
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        DESCRIPTION,
+      </if>
+      <if test="MERCHANT_CODE != null" >
+        MERCHANT_CODE,
+      </if>
+      <if test="TRANSACTION_BRANCH_CODE != null" >
+        TRANSACTION_BRANCH_CODE,
+      </if>
+      <if test="TELLER_CODE != null" >
+        TELLER_CODE,
+      </if>
+      <if test="ADDRESS != null and !&quot;&quot;.equals(ADDRESS)" >
+        ADDRESS,
+      </if>
+      <if test="TELEPHONE != null and !&quot;&quot;.equals(TELEPHONE)" >
+        TELEPHONE,
+      </if>
+      <if test="EMAIL != null and !&quot;&quot;.equals(EMAIL)" >
+        EMAIL,
+      </if>
+      DATE_UPDATED,
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        CREATED_BY,
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE,
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        MODIFIED_BY,
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE,
+      </if>
+      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+        DELETED_BY,
+      </if>
+      <if test="DELETED_DATE != null" >
+        DELETED_DATE,
+      </if>
+      <if test="TERMINAL_CODE != null and !&quot;&quot;.equals(TERMINAL_CODE)" >
+        TERMINAL_CODE,
+      </if>
+      <if test="INTERFACE_CODE != null" >
+        INTERFACE_CODE,
+      </if>
+      <if test="EXPRESSION != null and !&quot;&quot;.equals(EXPRESSION)" >
+        EXPRESSION,
+      </if>
+      <if test="TELLER_USER_ID != null and !&quot;&quot;.equals(TELLER_USER_ID)" >
+        TELLER_USER_ID,
+      </if>
+      <if test="ACQUIRER_ID != null" >
+        ACQUIRER_ID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="COMP_CODE != null" >
+        #{COMP_CODE},
+      </if>
+      <if test="TERMINAL_ID != null" >
+        #{TERMINAL_ID},
+      </if>
+      <if test="DESCRIPTION != null and !&quot;&quot;.equals(DESCRIPTION)" >
+        #{DESCRIPTION},
+      </if>
+      <if test="MERCHANT_CODE != null" >
+        #{MERCHANT_CODE},
+      </if>
+      <if test="TRANSACTION_BRANCH_CODE != null" >
+        #{TRANSACTION_BRANCH_CODE},
+      </if>
+      <if test="TELLER_CODE != null" >
+        #{TELLER_CODE},
+      </if>
+      <if test="ADDRESS != null and !&quot;&quot;.equals(ADDRESS)" >
+        #{ADDRESS},
+      </if>
+      <if test="TELEPHONE != null and !&quot;&quot;.equals(TELEPHONE)" >
+        #{TELEPHONE},
+      </if>
+      <if test="EMAIL != null and !&quot;&quot;.equals(EMAIL)" >
+        #{EMAIL},
+      </if>
+      <choose >
+        <when test="isSybase == 1" >
+           GETDATE(),
+        </when>
+        <otherwise >
+           SYSDATE,
+        </otherwise>
+      </choose>
+      <if test="CREATED_BY != null and !&quot;&quot;.equals(CREATED_BY)" >
+        #{CREATED_BY},
+      </if>
+      <if test="CREATED_DATE != null" >
+        #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null and !&quot;&quot;.equals(MODIFIED_BY)" >
+        #{MODIFIED_BY},
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        #{MODIFIED_DATE},
+      </if>
+      <if test="DELETED_BY != null and !&quot;&quot;.equals(DELETED_BY)" >
+        #{DELETED_BY},
+      </if>
+      <if test="DELETED_DATE != null" >
+        #{DELETED_DATE},
+      </if>
+      <if test="TERMINAL_CODE != null and !&quot;&quot;.equals(TERMINAL_CODE)" >
+        #{TERMINAL_CODE},
+      </if>
+      <if test="INTERFACE_CODE != null" >
+        #{INTERFACE_CODE},
+      </if>
+      <if test="EXPRESSION != null and !&quot;&quot;.equals(EXPRESSION)" >
+        #{EXPRESSION},
+      </if>
+      <if test="TELLER_USER_ID != null and !&quot;&quot;.equals(TELLER_USER_ID)" >
+        #{TELLER_USER_ID},
+      </if>
+      <if test="ACQUIRER_ID != null" >
+        #{ACQUIRER_ID},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateGTW_ATM_TERMINAL" >
+    update GTW_ATM_TERMINAL
+    <set >
+      <if test="DESCRIPTION != null" >
+        <choose >
+          <when test="DESCRIPTION.equals(&quot;&quot;)" >
+            DESCRIPTION = NULL ,
+          </when>
+          <otherwise >
+            DESCRIPTION = #{DESCRIPTION},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="MERCHANT_CODE != null" >
+        MERCHANT_CODE = #{MERCHANT_CODE},
+      </if>
+      <if test="TRANSACTION_BRANCH_CODE != null" >
+        TRANSACTION_BRANCH_CODE = #{TRANSACTION_BRANCH_CODE},
+      </if>
+      <if test="TELLER_CODE != null" >
+        TELLER_CODE = #{TELLER_CODE},
+      </if>
+      <if test="ADDRESS != null" >
+        <choose >
+          <when test="ADDRESS.equals(&quot;&quot;)" >
+            ADDRESS = NULL ,
+          </when>
+          <otherwise >
+            ADDRESS = #{ADDRESS},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="TELEPHONE != null" >
+        <choose >
+          <when test="TELEPHONE.equals(&quot;&quot;)" >
+            TELEPHONE = NULL ,
+          </when>
+          <otherwise >
+            TELEPHONE = #{TELEPHONE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="EMAIL != null" >
+        <choose >
+          <when test="EMAIL.equals(&quot;&quot;)" >
+            EMAIL = NULL ,
+          </when>
+          <otherwise >
+            EMAIL = #{EMAIL},
+          </otherwise>
+        </choose>
+      </if>
+      DATE_UPDATED = 
+      <choose >
+        <when test="isSybase == 1" >
+           GETDATE(),
+        </when>
+        <otherwise >
+           SYSDATE,
+        </otherwise>
+      </choose>
+      <if test="CREATED_BY != null" >
+        <choose >
+          <when test="CREATED_BY.equals(&quot;&quot;)" >
+            CREATED_BY = NULL ,
+          </when>
+          <otherwise >
+            CREATED_BY = #{CREATED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="CREATED_DATE != null" >
+        CREATED_DATE = #{CREATED_DATE},
+      </if>
+      <if test="MODIFIED_BY != null" >
+        <choose >
+          <when test="MODIFIED_BY.equals(&quot;&quot;)" >
+            MODIFIED_BY = NULL ,
+          </when>
+          <otherwise >
+            MODIFIED_BY = #{MODIFIED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="MODIFIED_DATE != null" >
+        MODIFIED_DATE = #{MODIFIED_DATE},
+      </if>
+      <if test="DELETED_BY != null" >
+        <choose >
+          <when test="DELETED_BY.equals(&quot;&quot;)" >
+            DELETED_BY = NULL ,
+          </when>
+          <otherwise >
+            DELETED_BY = #{DELETED_BY},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="DELETED_DATE != null" >
+        DELETED_DATE = #{DELETED_DATE},
+      </if>
+      <if test="TERMINAL_CODE != null" >
+        <choose >
+          <when test="TERMINAL_CODE.equals(&quot;&quot;)" >
+            TERMINAL_CODE = NULL ,
+          </when>
+          <otherwise >
+            TERMINAL_CODE = #{TERMINAL_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="INTERFACE_CODE != null" >
+        INTERFACE_CODE = #{INTERFACE_CODE},
+      </if>
+      <if test="EXPRESSION != null" >
+        <choose >
+          <when test="EXPRESSION.equals(&quot;&quot;)" >
+            EXPRESSION = NULL ,
+          </when>
+          <otherwise >
+            EXPRESSION = #{EXPRESSION},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="TELLER_USER_ID != null" >
+        <choose >
+          <when test="TELLER_USER_ID.equals(&quot;&quot;)" >
+            TELLER_USER_ID = NULL ,
+          </when>
+          <otherwise >
+            TELLER_USER_ID = #{TELLER_USER_ID},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="ACQUIRER_ID != null" >
+        ACQUIRER_ID = #{ACQUIRER_ID},
+      </if>
+    </set>
+    where COMP_CODE = #{COMP_CODE}
+      and TERMINAL_ID = #{TERMINAL_ID}
+  </sql>
+  <update id="updateGTW_ATM_TERMINAL" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_TERMINALVO" >
+    <include refid="sql_updateGTW_ATM_TERMINAL" />
+    <if test="DATE_UPDATED != null" >
+      AND DATE_UPDATED = #{DATE_UPDATED}
+    </if>
+  </update>
+</mapper>

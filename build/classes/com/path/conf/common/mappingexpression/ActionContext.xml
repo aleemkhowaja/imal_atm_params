@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+<!-- USER STORY #862852 Adding Expressions to Mapping parameters in PWS dialog -->
+	<bean id="pwsMappingExpressionMaint" class="com.path.actions.common.mappingexpression.PwsMappingExpressionMaint" scope="prototype" parent="baseAction"/>
+	
+	<bean id="pwsMappingFieldsList" class="com.path.actions.common.mappingexpression.PwsMappingFieldsList" scope="prototype" parent="baseAction"/>
+	
+
+</beans>

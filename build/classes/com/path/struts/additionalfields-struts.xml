@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="additionalFields" namespace="/path/additionalFields" extends="path-default">
+	
+		<action name="additionalFieldsByType_*" class="additionalFieldsByTypeAction" method="{1}">
+			<result name="populateAdditionalFieldsForm" type="freemarker">/WEB-INF/pages/common/additionalfields/AdditionalFieldsByTypeForm.ftl</result>
+			<result name="populateAdditionalFields" type="freemarker">/WEB-INF/pages/common/additionalfields/AdditionalFieldsByType.ftl</result>
+			<result name="validatepopulateAdditionalFields" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+</struts>   

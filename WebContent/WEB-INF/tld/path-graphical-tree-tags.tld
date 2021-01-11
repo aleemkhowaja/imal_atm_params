@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="2.0" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd">
+  <description><![CDATA["Graphical Tree Tags based on joinJS."]]></description>
+  <display-name>"Graphical Tree Tags"</display-name>
+  <tlib-version>2.2</tlib-version>
+  <short-name>pgt</short-name>
+  <uri>/path-graphical-tree-tags</uri>
+  <tag>
+    <description><![CDATA[A Graphical Tree Element]]></description>
+    <name>gtree</name>
+    <tag-class>com.path.struts2.taglib.gtree.PathGTreeTag</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <description><![CDATA[The json object that contains the cells of the graph]]></description>
+      <name>cells</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[HTML id attribute]]></description>
+      <name>id</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Javascript function fired onDoubleClick event. The id of the node is passed as argument]]></description>
+      <name>onDblClickTopic</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Javascript function fired onDoubleClick event on link element. The source/target nodes are passed as argument]]></description>
+      <name>onLinkDblClickTopic</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Width of the Paper]]></description>
+      <name>width</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Height of the Paper]]></description>
+      <name>height</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Mark the graphical tree as editable,buttons for add/remove/rename node will be enabled]]></description>
+      <name>editable</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Mark the graphical tree links as editable,remove link button will be enabled]]></description>
+      <name>editableLink</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Javascript function called upon adding a node.]]></description>
+      <name>customAddDialog</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Javascript function called upon adding a link.]]></description>
+      <name>customAddLinkDialog</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[Javascript function called to open custon node details dialog.]]></description>
+      <name>customNodeDetailsFunc</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[flag to indicate if the lable text field should be hidden in new link dialog.]]></description>
+      <name>hideLinkLabelField</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[flag to indicate if the rename node button should be enabled at the level of the node.]]></description>
+      <name>hideNodeRenameBtn</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[flag to indicate if the add new link button should be available ate the level of the node.]]></description>
+      <name>hideAddLinkBtn</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[a js function called upon deleting a node]]></description>
+      <name>deleteNodeCallBack</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[a custom css class for Add Btn ]]></description>
+      <name>cssClassAdd</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[a custom css class for Delete Btn ]]></description>
+      <name>cssClassDelete</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[a custom css class for Info Btn ]]></description>
+      <name>cssClassInfo</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[a custom css class for Link Btn ]]></description>
+      <name>cssClassLink</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+      <description><![CDATA[a custom css class for Rename Btn ]]></description>
+      <name>cssClassRename</name>
+      <required>false</required>
+      <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    
+    <dynamic-attributes>true</dynamic-attributes>
+  </tag>
+</taglib>

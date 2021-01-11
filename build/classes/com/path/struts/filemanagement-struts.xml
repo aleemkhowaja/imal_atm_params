@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+	<package name="fileManagement" namespace="/path/fileMngmt" extends="path-default">
+		<action name="DynFileMaint_*"  class="dynFileMaintAction" method="{1}">
+			 <interceptor-ref name="fileUpload">
+				<!-- 
+				<param name="maximumSize">2097152</param>
+				<param name="allowedTypes">
+					image/png,image/gif,image/jpeg,image/pjpeg
+				</param>
+				-->
+			</interceptor-ref>
+			<interceptor-ref name="pathDefaultStack"/>
+			<result name="loadDynFilePage" >/WEB-INF/pages/common/filemanagement/DynFileMaint.jsp</result>
+			<result name="loadDynFileDetails"  >/WEB-INF/pages/common/filemanagement/DynFileMaintDetails.jsp</result>
+			<result name="loadDynFileGrid" >/WEB-INF/pages/common/filemanagement/DynFileImportGrid.jsp</result>
+		    <result name="saveScript" type="stream">	
+		    	  <param name="contentType">application/octet-stream</param>
+				  <param name="inputName">scriptStream</param>		
+				  <param name="contentDisposition">attachment;filename="Script.sql"</param>
+				  <param name="bufferSize">1024</param>						 
+			</result>
+			 <result name="saveExecLog" type="stream">	
+		    	  <param name="contentType">application/octet-stream</param>
+				  <param name="inputName">scriptStream</param>		
+				  <param name="contentDisposition">attachment;filename="Execution.log"</param>
+				  <param name="bufferSize">1024</param>						 
+			</result>
+			<result name="generateFileExport" type="stream">	
+		    	  <param name="contentType">application/octet-stream</param>
+				  <param name="inputName">scriptStream</param>		
+				  <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>
+				  <param name="bufferSize">1024</param>						 
+			</result>
+			<result name="success" type="json">
+				 	<param name="ignoreHierarchy">false</param>	
+				 	<param name="contentType">text/plain</param>
+			</result>	
+			<result name="error" type="json">
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/plain</param>					 
+			</result>
+		 	<result name="downloadError" type="stream">	    	  			
+				  <param name="contentType">text/plain</param>
+				  <param name="inputName">scriptStream</param>					   				   
+			 </result>		
+		 	 
+		</action>	
+		<action name="DynFileGrid_*"  class="dynFileGridAction" method="{1}">			  	
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>			
+			</result>		 
+		</action>				
+	</package>
+</struts>  

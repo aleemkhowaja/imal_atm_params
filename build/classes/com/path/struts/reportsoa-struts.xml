@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="reportsoa" namespace="/path/reports" extends="path-default">
+	
+		<action name="StatementOfAccountMaint_*" class="statementOfAccountMaintAction" method="{1}">
+			<result name="success">/WEB-INF/pages/businesscommon/core/reports/StatementOfAccountMaint.jsp</result>
+			<result name="loadJson" type="json"> 
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			
+			<result name="successPDFStream" type="stream">
+			  <param name="contentType">application/pdf</param>
+			  <param name="contentDisposition">filename="SOAReport.pdf"</param>
+			  <param name="bufferSize">2048</param>			
+		  	  <param name="inputName">inputPDFStream</param>
+			</result>
+		</action>
+	
+		<action name="ReportsDependencyAction_*" class="reportsDependencyAction" method="{1}">
+			<result name="loadJson" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>

@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="webServiceExplorerMapper">
+	
+		<!-- ResultMap -->
+		 <resultMap id="WebServiceExplorerConfigResultMap" type="com.path.dbmaps.vo.IMCO_PWS_TEST_MASTERVOWithBLOBs" >
+		    	<id column="CONFIG_ID" property="CONFIG_ID" />
+			    <result column="CONFIG_NAME" property="CONFIG_NAME" />
+			    <result column="CONFIG_REQUEST" property="CONFIG_REQUEST" />
+			    <result column="CONFIG_RESPONSE" property="CONFIG_RESPONSE" />
+			  	<result column="APPLICATION_NAME" property="APPLICATION_NAME" />
+			    <result column="ENDPOINT_NAME" property="ENDPOINT_NAME" />
+			    <result column="OPERATION_NAME" property="OPERATION_NAME" />
+	 	 </resultMap>
+	  
+	     <resultMap id="webServiceExplorerDataResultMap" type="com.path.dbmaps.vo.IMCO_PWS_TEST_DETAILSVO" >
+		    	<id column="CONFIG_ID" property="CONFIG_ID" />
+			    <result column="FIELD_ROW_ID" property="FIELD_ROW_ID" />
+			    <result column="FIELD_TYPE" property="FIELD_TYPE" />
+			    <result column="VALUE" property="VALUE" />
+	 	 </resultMap>
+	
+		<resultMap id="WebServiceExplorerCommonFieldsResultMap" type="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO">
+			    <result column="CHANNEL_ID" property="imcoPwsChannelVO.CHANNEL_ID" />
+			    <result column="USER_ID" property="imcoPwsChannelVO.USER_ID" />
+			    <result column="HOST_NAME" property="imcoPwsChannelDetVO.HOST_NAME" />
+			  	<result column="HASH_KEY" property="imcoPwsChannelDetVO.HASH_KEY" />
+		</resultMap>
+		
+		<!-- Select -->
+		
+		 <select id="loadWebServiceExplorerSavedConfiguration" resultMap="WebServiceExplorerConfigResultMap" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerSC" >
+			<include refid="servicesCommon.commonGridWrpBefFlip"/>
+			<include refid="loadWebServiceExplorerSavedConfiguration_sql"/>
+			<include refid="servicesCommon.commonGridWrpAftFlip"/>
+			<include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	 	</select>	
+	 		
+	 	<select id="loadWebServiceExplorerSavedConfigurationById" resultMap="WebServiceExplorerConfigResultMap" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerSC" >
+			<include refid="loadWebServiceExplorerSavedConfigurationById_sql"/>
+	 	</select>
+	 	
+	 	 <select id="webServiceExplorerConfigCount" resultType="int" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerSC" > 
+			<include refid="servicesCommon.commonGridWrpBefCnt"/>
+			<include refid="loadWebServiceExplorerSavedConfiguration_sql"/>
+			<include refid="servicesCommon.commonGridWrpAftCnt"/>
+			<include refid="servicesCommon.commonGridCountWrpClose"/>	
+ 		</select>
+ 		
+ 		<select id="loadWebServiceExplorerCommonFieldsLookUp" resultMap="WebServiceExplorerCommonFieldsResultMap" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO" >
+			<include refid="servicesCommon.commonGridWrpBefFlip"/>
+			<include refid="loadWebServiceExplorerCommonFieldsLookUp_sql"/>
+			<include refid="servicesCommon.commonGridWrpAftFlip"/>
+			<include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	 	</select>
+ 		
+ 		<sql id ="loadWebServiceExplorerCommonFieldsLookUp_sql">
+	 			SELECT 
+				        IMCO_PWS_CHANNEL.CHANNEL_ID,
+				        IMCO_PWS_CHANNEL.USER_ID,
+				        IMCO_PWS_CHANNEL_DET.HOST_NAME,
+				        IMCO_PWS_CHANNEL_DET.HASH_KEY  
+				   FROM IMCO_PWS_CHANNEL INNER JOIN IMCO_PWS_CHANNEL_DET 
+	        	   ON IMCO_PWS_CHANNEL.CHANNEL_ID = IMCO_PWS_CHANNEL_DET.CHANNEL_ID
+				        WHERE IMCO_PWS_CHANNEL.STATUS NOT IN ('D')
+ 		</sql>
+ 		
+ 		<sql id="loadWebServiceExplorerSavedConfiguration_sql">
+	 			SELECT
+		 				IMCO_PWS_TEST_MASTER.CONFIG_ID,
+			            IMCO_PWS_TEST_MASTER.CONFIG_NAME,
+			            IMCO_PWS_TEST_MASTER.APPLICATION_NAME,
+			            IMCO_PWS_TEST_MASTER.ENDPOINT_NAME,
+			            IMCO_PWS_TEST_MASTER.OPERATION_NAME
+	 			FROM IMCO_PWS_TEST_MASTER
+	 			<!-- 
+	 				WHERE CONFIG_ID = #{webServiceExplorerConfigVO.CONFIG_ID} 
+					AND CONFIG_NAME = #{webServiceExplorerConfigVO.CONFIG_NAME}
+					-->
+ 		</sql>
+ 		
+ 		<sql id="loadWebServiceExplorerSavedConfigurationById_sql">
+ 				SELECT
+		 				IMCO_PWS_TEST_MASTER.CONFIG_ID,
+			            IMCO_PWS_TEST_MASTER.CONFIG_NAME,
+			            IMCO_PWS_TEST_MASTER.CONFIG_REQUEST,
+			            IMCO_PWS_TEST_MASTER.CONFIG_RESPONSE,
+			            IMCO_PWS_TEST_MASTER.APPLICATION_NAME,
+			            IMCO_PWS_TEST_MASTER.ENDPOINT_NAME,
+			            IMCO_PWS_TEST_MASTER.OPERATION_NAME
+	 			FROM IMCO_PWS_TEST_MASTER
+	 			WHERE 
+	 				IMCO_PWS_TEST_MASTER.CONFIG_ID = #{webServiceExplorerConfigVO.CONFIG_ID}  			
+ 		</sql>
+ 		
+ 		<select id="returnNextCofigIdSequence" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO" resultType = "java.math.BigDecimal" >
+				SELECT CONFIG_ID_SEQ.NEXTVAL FROM DUAL
+		</select>
+
+ 		<select id="loadWebServiceExplorerSavedData" resultMap="webServiceExplorerDataResultMap" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO" >
+				SELECT CONFIG_ID,FIELD_ROW_ID,VALUE 
+				FROM IMCO_PWS_TEST_DETAILS
+					WHERE IMCO_PWS_TEST_DETAILS.CONFIG_ID = #{webServiceExplorerConfigVO.CONFIG_ID}
+					AND IMCO_PWS_TEST_DETAILS.FIELD_ROW_ID IN 
+					<foreach item = "requestResponseCO" index = "index" collection = "lstRequestResposneCO" open = "(" separator = "," close = ")">
+							#{requestResponseCO.ID}
+					</foreach>
+	 	</select>
+	 	
+	 	<select id="loadWebServiceExplorerListSavedData" resultMap="webServiceExplorerDataResultMap" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO" >
+	 			SELECT CONFIG_ID,FIELD_ROW_ID,VALUE,FIELD_TYPE
+				FROM IMCO_PWS_TEST_DETAILS
+					WHERE IMCO_PWS_TEST_DETAILS.CONFIG_ID = #{webServiceExplorerConfigVO.CONFIG_ID}
+					AND FIELD_ROW_ID LIKE #{rowId} ESCAPE '\'
+					AND FIELD_TYPE = #{requestResponseCO.fieldType}
+	 	</select>
+	 	
+	 	<select id="loadWebServiceExplorerHashMapSavedData" resultMap="webServiceExplorerDataResultMap" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO" >
+	 			SELECT CONFIG_ID,FIELD_ROW_ID,VALUE,FIELD_TYPE
+				FROM IMCO_PWS_TEST_DETAILS
+					WHERE IMCO_PWS_TEST_DETAILS.CONFIG_ID = #{webServiceExplorerConfigVO.CONFIG_ID} 
+					AND FIELD_ROW_ID LIKE #{rowId}
+					AND FIELD_TYPE = #{requestResponseCO.fieldType}
+	 	</select>
+	 	
+	    <!-- Insert -->
+ 		 <insert id="insertGridData" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO">
+ 				<selectKey resultType="java.math.BigDecimal" keyProperty="configSequence" order="BEFORE" >
+						<if test="isOracle == 1">
+							SELECT CONFIG_ID_SEQ.NEXTVAL FROM dual
+						</if>
+						<if test="isSybase == 1 and isSQLServer != 1 " >
+							SELECT next_identity('IMCO_PWS_TEST_MASTER')
+						</if>
+						<if test="isSQLServer == 1 " >
+							SELECT IDENT_CURRENT ('IMCO_PWS_TEST_MASTER') + 1
+						</if>
+				</selectKey>
+				<if test="isOracle == 1">
+				 	INSERT ALL
+					<foreach item = "webServiceExplorerDataVO" index = "index" collection = "webServiceExplorerDataVOLst" open = "" separator = "" close = "">
+						 INTO IMCO_PWS_TEST_DETAILS (CONFIG_ID,FIELD_ROW_ID,VALUE,FIELD_TYPE)
+						 		 VALUES (#{configSequence},#{webServiceExplorerDataVO.FIELD_ROW_ID},#{webServiceExplorerDataVO.VALUE},#{webServiceExplorerDataVO.FIELD_TYPE})		
+					</foreach>
+				 INTO IMCO_PWS_TEST_MASTER (<if test="isOracle == 1">CONFIG_ID,</if>CONFIG_NAME,
+					 <if test='null != webServiceExplorerConfigVO.CONFIG_REQUEST'>
+						 CONFIG_REQUEST,
+					 </if>
+					 <if test='null != webServiceExplorerConfigVO.CONFIG_RESPONSE'>
+						 CONFIG_RESPONSE,
+					 </if>
+					 <if test='null != webServiceExplorerConfigVO.JSON_REQUEST'>
+						 JSON_REQUEST,
+					 </if>
+					 <if test='null != webServiceExplorerConfigVO.JSON_FILTERED_REQUEST'>
+						 JSON_FILTERED_REQUEST,
+					 </if>
+					  <if test='null != webServiceExplorerConfigVO.MAPPING_ID'>
+						 MAPPING_ID,
+					 </if>
+					 APPLICATION_NAME,OPERATION_NAME,ENDPOINT_NAME)
+						    VALUES (<if test="isOracle == 1">#{configSequence},</if>#{webServiceExplorerConfigVO.CONFIG_NAME},
+						     <if test='null != webServiceExplorerConfigVO.CONFIG_REQUEST'>
+								 #{webServiceExplorerConfigVO.CONFIG_REQUEST},
+							 </if>
+							 <if test='null != webServiceExplorerConfigVO.CONFIG_RESPONSE'>
+								 #{webServiceExplorerConfigVO.CONFIG_RESPONSE},
+					 		 </if>
+					 		 <if test='null != webServiceExplorerConfigVO.JSON_REQUEST'>
+						 		 #{webServiceExplorerConfigVO.JSON_REQUEST},
+							 </if>
+							  <if test='null != webServiceExplorerConfigVO.JSON_FILTERED_REQUEST'>
+								  #{webServiceExplorerConfigVO.JSON_FILTERED_REQUEST},
+							 </if>
+							 <if test='null != webServiceExplorerConfigVO.MAPPING_ID'>
+								  #{webServiceExplorerConfigVO.MAPPING_ID},
+							 </if>
+						    #{webServiceExplorerConfigVO.APPLICATION_NAME},#{webServiceExplorerConfigVO.OPERATION_NAME},#{webServiceExplorerConfigVO.ENDPOINT_NAME})		    
+				 SELECT * FROM DUAL
+			</if>
+			<if test = "isSybase == 1">			
+					INSERT INTO IMCO_PWS_TEST_MASTER (CONFIG_NAME,
+					 <if test='null != webServiceExplorerConfigVO.CONFIG_REQUEST'>
+						 CONFIG_REQUEST,
+					 </if>
+					 <if test='webServiceExplorerConfigVO.CONFIG_RESPONSE'>
+						 CONFIG_RESPONSE,
+					 </if>
+					 <if test='webServiceExplorerConfigVO.JSON_REQUEST'>
+						 JSON_REQUEST,
+					 </if>
+					  <if test='webServiceExplorerConfigVO.JSON_FILTERED_REQUEST'>
+						 JSON_FILTERED_REQUEST,
+					 </if>
+					 APPLICATION_NAME,OPERATION_NAME,ENDPOINT_NAME)
+						    VALUES (#{webServiceExplorerConfigVO.CONFIG_NAME},
+						     <if test='null != webServiceExplorerConfigVO.CONFIG_REQUEST'>
+								 #{webServiceExplorerConfigVO.CONFIG_REQUEST},
+							 </if>
+							 <if test='webServiceExplorerConfigVO.CONFIG_RESPONSE'>
+								 #{webServiceExplorerConfigVO.CONFIG_RESPONSE},
+					 		 </if>
+					 		 <if test='webServiceExplorerConfigVO.JSON_REQUEST'>
+						 		 #{webServiceExplorerConfigVO.JSON_REQUEST},
+							 </if>
+							  <if test='webServiceExplorerConfigVO.JSON_FILTERED_REQUEST'>
+								  #{webServiceExplorerConfigVO.JSON_FILTERED_REQUEST},
+							 </if>
+						    #{webServiceExplorerConfigVO.APPLICATION_NAME},#{webServiceExplorerConfigVO.OPERATION_NAME},#{webServiceExplorerConfigVO.ENDPOINT_NAME})		    
+					
+					<foreach item = "webServiceExplorerDataVO" index = "index" collection = "webServiceExplorerDataVOLst" open = "" separator = "" close = "">
+						BEGIN
+							INSERT INTO IMCO_PWS_TEST_DETAILS (CONFIG_ID,FIELD_ROW_ID,VALUE,FIELD_TYPE)   
+						 	  VALUES (#{configSequence},#{webServiceExplorerDataVO.FIELD_ROW_ID},#{webServiceExplorerDataVO.VALUE},#{webServiceExplorerDataVO.FIELD_TYPE})	
+						END
+					</foreach>
+			</if>
+		</insert>
+		
+		<delete id="deleteGridData" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO">
+				DELETE FROM IMCO_PWS_TEST_DETAILS WHERE CONFIG_ID = #{webServiceExplorerConfigVO.CONFIG_ID}
+		</delete>
+		
+		<insert id="insertUpdatedGridData" parameterType="com.path.vo.common.webserviceexplorer.WebServiceExplorerCO">
+				<if test="isOracle == 1">
+				 	INSERT ALL
+					<foreach item = "webServiceExplorerDataVO" index = "index" collection = "webServiceExplorerDataVOLst" open = "" separator = "" close = "">
+						 INTO IMCO_PWS_TEST_DETAILS (CONFIG_ID,FIELD_ROW_ID,VALUE,FIELD_TYPE)
+						 	  VALUES (#{webServiceExplorerConfigVO.CONFIG_ID,jdbcType=NUMERIC},#{webServiceExplorerDataVO.FIELD_ROW_ID,jdbcType=VARCHAR},#{webServiceExplorerDataVO.VALUE,jdbcType=VARCHAR},#{webServiceExplorerDataVO.FIELD_TYPE,jdbcType=VARCHAR})		
+					</foreach>
+					SELECT * FROM DUAL
+				</if>
+				<if test = "isSybase == 1">			
+					<foreach item = "webServiceExplorerDataVO" index = "index" collection = "webServiceExplorerDataVOLst" open = "" separator = "" close = "">
+						BEGIN
+							INSERT INTO IMCO_PWS_TEST_DETAILS (CONFIG_ID,FIELD_ROW_ID,VALUE,FIELD_TYPE)   
+						 	  VALUES (#{webServiceExplorerConfigVO.CONFIG_ID,jdbcType=NUMERIC},#{webServiceExplorerDataVO.FIELD_ROW_ID,jdbcType=VARCHAR},#{webServiceExplorerDataVO.VALUE,jdbcType=VARCHAR},#{webServiceExplorerDataVO.FIELD_TYPE,jdbcType=VARCHAR})	
+						END
+					</foreach>
+				</if>
+		</insert>
+</mapper>

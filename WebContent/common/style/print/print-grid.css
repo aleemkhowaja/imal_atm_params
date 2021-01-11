@@ -1,0 +1,3 @@
+.hide {display:none;}
+.ui-jqgrid-bdiv table {border-collapse:collapse;}
+.ui-jqgrid-btable th,.ui-jqgrid-btable td {border:1px solid black; !important}

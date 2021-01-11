@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="GTW_ATM_ISO_NET_MSG_FLDS" >
+  <resultMap id="BaseResultMap" type="com.path.atm.dbmaps.vo.GTW_ATM_ISO_NET_MSG_FLDSVO" >
+    <id column="NET_MSG_FLD_ID" property="NET_MSG_FLD_ID" />
+    <result column="ISO_MSG_DEF_ID" property="ISO_MSG_DEF_ID" />
+    <result column="FIELD_CODE" property="FIELD_CODE" />
+    <result column="REQUEST_FIELD_YN" property="REQUEST_FIELD_YN" />
+    <result column="EXPRESSION" property="EXPRESSION" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    NET_MSG_FLD_ID, ISO_MSG_DEF_ID, FIELD_CODE, REQUEST_FIELD_YN, EXPRESSION
+  </sql>
+  <select id="selectGTW_ATM_ISO_NET_MSG_FLDS" resultMap="BaseResultMap" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_NET_MSG_FLDSVO" >
+    select 
+    <include refid="Base_Column_List" />
+    from GTW_ATM_ISO_NET_MSG_FLDS
+    where NET_MSG_FLD_ID = #{NET_MSG_FLD_ID}
+  </select>
+  <delete id="deleteGTW_ATM_ISO_NET_MSG_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_NET_MSG_FLDSVO" >
+    delete from GTW_ATM_ISO_NET_MSG_FLDS
+    where NET_MSG_FLD_ID = #{NET_MSG_FLD_ID}
+  </delete>
+  <insert id="insertGTW_ATM_ISO_NET_MSG_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_NET_MSG_FLDSVO" >
+    <selectKey resultType="java.math.BigDecimal" keyProperty="NET_MSG_FLD_ID" order="BEFORE" >
+      SELECT <choose><when test="isSybase == 1">ISNULL(MAX(NET_MSG_FLD_ID),0)+1</when><otherwise>NVL(MAX(NET_MSG_FLD_ID),0)+1</otherwise></choose> FROM GTW_ATM_ISO_NET_MSG_FLDS
+    </selectKey>
+    insert into GTW_ATM_ISO_NET_MSG_FLDS
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      NET_MSG_FLD_ID,
+      <if test="ISO_MSG_DEF_ID != null and ISO_MSG_DEF_ID != emptyBigDecimalValue" >
+        ISO_MSG_DEF_ID,
+      </if>
+      <if test="FIELD_CODE != null and FIELD_CODE != emptyBigDecimalValue" >
+        FIELD_CODE,
+      </if>
+      <if test="REQUEST_FIELD_YN != null and !&quot;&quot;.equals(REQUEST_FIELD_YN)" >
+        REQUEST_FIELD_YN,
+      </if>
+      <if test="EXPRESSION != null and !&quot;&quot;.equals(EXPRESSION)" >
+        EXPRESSION,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      #{NET_MSG_FLD_ID},
+      <if test="ISO_MSG_DEF_ID != null and ISO_MSG_DEF_ID != emptyBigDecimalValue" >
+        #{ISO_MSG_DEF_ID},
+      </if>
+      <if test="FIELD_CODE != null and FIELD_CODE != emptyBigDecimalValue" >
+        #{FIELD_CODE},
+      </if>
+      <if test="REQUEST_FIELD_YN != null and !&quot;&quot;.equals(REQUEST_FIELD_YN)" >
+        #{REQUEST_FIELD_YN},
+      </if>
+      <if test="EXPRESSION != null and !&quot;&quot;.equals(EXPRESSION)" >
+        #{EXPRESSION},
+      </if>
+    </trim>
+  </insert>
+  <sql id="sql_updateGTW_ATM_ISO_NET_MSG_FLDS" >
+    update GTW_ATM_ISO_NET_MSG_FLDS
+    <set >
+      <if test="ISO_MSG_DEF_ID != null" >
+        <choose >
+          <when test="ISO_MSG_DEF_ID == emptyBigDecimalValue" >
+            ISO_MSG_DEF_ID = NULL ,
+          </when>
+          <otherwise >
+            ISO_MSG_DEF_ID = #{ISO_MSG_DEF_ID},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="FIELD_CODE != null" >
+        <choose >
+          <when test="FIELD_CODE == emptyBigDecimalValue" >
+            FIELD_CODE = NULL ,
+          </when>
+          <otherwise >
+            FIELD_CODE = #{FIELD_CODE},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="REQUEST_FIELD_YN != null" >
+        <choose >
+          <when test="REQUEST_FIELD_YN.equals(&quot;&quot;)" >
+            REQUEST_FIELD_YN = NULL ,
+          </when>
+          <otherwise >
+            REQUEST_FIELD_YN = #{REQUEST_FIELD_YN},
+          </otherwise>
+        </choose>
+      </if>
+      <if test="EXPRESSION != null" >
+        <choose >
+          <when test="EXPRESSION.equals(&quot;&quot;)" >
+            EXPRESSION = NULL ,
+          </when>
+          <otherwise >
+            EXPRESSION = #{EXPRESSION},
+          </otherwise>
+        </choose>
+      </if>
+    </set>
+    where NET_MSG_FLD_ID = #{NET_MSG_FLD_ID}
+  </sql>
+  <update id="updateGTW_ATM_ISO_NET_MSG_FLDS" parameterType="com.path.atm.dbmaps.vo.GTW_ATM_ISO_NET_MSG_FLDSVO" >
+    <include refid="sql_updateGTW_ATM_ISO_NET_MSG_FLDS" />
+  </update>
+</mapper>

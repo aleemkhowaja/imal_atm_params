@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts> 
+
+<package name="adminDependencies" namespace="/pathdesktop"  extends="path-default">
+<!--   Companies Dependencies -->
+ 		<action name="CompaniesDependencyAction_*" method="{1}" class="companiesDependencyAction">
+			<result name="success"  type="json" >
+				<param name="ignoreHierarchy">false</param> 
+				</result>
+ 		</action>
+ 		 
+<!--   Branches Dependencies -->
+  		<action name="BranchesDependencyAction_*" method="{1}" class="branchesDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		 
+<!--   Country Dependencies -->
+  		<action name="CountriesDependencyAction_*" method="{1}" class="countriesDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+
+<!--   Countries Region Dependencies -->
+  		<action name="CountriesRegionDependencyAction_*" method="{1}" class="countriesRegionDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ <!--  Smart lookup Dependencies-->
+ 		<action name="SmartAddOptionsDependencyAction_*" method="{1}" class="smartAddOptionsDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ <!--  Additional Fields by Type lookup Dependencies-->
+ 		<action name="AdditionalFieldsByTypeDependencyAction_*" method="{1}" class="additionalFieldsByTypeDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ <!--  Translation lookup Dependencies-->
+ 		<action name="TranslationDependencyAction_*" method="{1}" class="translationDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 
+ <!--  Users lookup Dependencies-->
+ 		<action name="UserDependencyAction_*" method="{1}" class="userDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ <!--  Role lookup Dependencies-->
+ 		<action name="RoleDependencyAction_*" method="{1}" class="roleDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ <!--  Application lookup Dependencies-->
+ 		<action name="ApplicationDependencyAction_*" method="{1}" class="applicationDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+ 		
+ <!--  Dashboard portal lookup Dependencies-->
+ 		<action name="DashboardPortalDependencyAction_*" method="{1}" class="dashboardPortalDependencyAction">
+			<result name="success"  type="json" >
+					<param name="ignoreHierarchy">false</param> 
+			</result>
+ 		</action>
+</package>
+
+</struts>   

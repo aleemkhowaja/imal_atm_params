@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<bean id="commonDynamicParamsAction" class="com.path.actions.CommonDynamicParamsAction" scope="prototype" parent="baseAction">
+		<property name="commonReportingBO" ref="commonReportingBO"></property>
+		<property name="commonLibBO" ref="commonLibBO"></property>
+	</bean>
+	
+	<bean id="commonReportingAction" class="com.path.actions.CommonReportingAction" scope="prototype" parent="baseAction">
+		<property name="commonReportingBO" ref="commonReportingBO"></property>
+	</bean>
+	
+	<bean id="reportAction" class="com.path.actions.ReportAction" scope="prototype" parent="baseAction">
+	   <property name="commonReportingBO" ref="commonReportingBO"></property>
+	</bean>
+	
+	<bean id="dynamicLookupAction" class="com.path.actions.DynamicLookupAction" scope="prototype" parent="baseAction">
+		<property name="commonReportingBO" ref="commonReportingBO"></property>
+		<property name="commonLibBO" ref="commonLibBO"></property>
+		
+	</bean>
+	
+</beans>

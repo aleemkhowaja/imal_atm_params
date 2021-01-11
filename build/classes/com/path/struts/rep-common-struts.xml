@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="repCommon" namespace="/path/repCommon" extends="path-default">
+		
+		<action name="commonDynamicParams_*" method="{1}" class="commonDynamicParamsAction">
+			<result name="SUCCESS_DYNAMIC_PARAM" type="freemarker">/WEB-INF/pages/technical/dynamicparams/DynamicParams.ftl</result>
+			<result name="repnotfound" >/login/ErrorAction.jsp</result>
+			<result name="success" type="json">
+	  			<param name="ignoreHierarchy">false</param> 	
+			</result>
+		</action>
+		
+		<action name="commonReporting_*" method="{1}" class="commonReportingAction">
+			<result name="success" type="json"> 
+		    	<param name="ignoreHierarchy">false</param> 
+		    </result>
+		    <result name="order">/WEB-INF/pages/common/reporting/Order.jsp</result>
+		    <result name="conditions">/WEB-INF/pages/common/reporting/Conditions.jsp</result>
+		    <result name="groupBy">/WEB-INF/pages/common/reporting/GroupByList.jsp</result>
+		    <result name="argsFilters" >/WEB-INF/pages/common/reporting/ArgumentsFilters.jsp</result>
+		</action>
+		
+		 <action name="reportAction_*" method="{1}" class="reportAction">
+    		<result name="successtest" type="stream">
+			  <param name="contentType">application/octet-stream</param>
+			  <param name="contentDisposition">attachment;filename="${filename}"</param>
+			  <param name="bufferSize">1024</param>			
+		  	  <param name="inputName">fileStream</param>
+			</result>
+			<result name="successprintpdf" type="stream">
+		     	<param name="contentType">application/pdf</param>
+		     	<param name="contentDisposition">inline;filename="${filename}"</param>
+		     	<param name="bufferSize">1024</param>   
+		        <param name="inputName">fileStream</param>
+		    </result>
+    		<result name="snapShots">/WEB-INF/pages/reporting/reports/Snapshots.jsp</result>
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param> 	
+			</result>
+			  <result name="error" type="json">
+	     		<param name="ignoreHierarchy">false</param> 
+	    	</result> 
+		</action>
+	
+		<action name="dynLkupAction_*" method="{1}" class="dynamicLookupAction">
+    		<result name="success" type="json"> 
+		    	<param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+    </package>
+    
+    <!-- this action is unsecure since it's called by the report hyperlinks in pdf, word... -->
+    <package name="reportsHyp" namespace="/reportsHyp" extends="path-default">
+		<action name="jasperReport" class="reportAction" method="generateReport">   
+			<result name="successtest" type="stream">
+				  <param name="contentType">application/octet-stream</param>
+				  <param name="contentDisposition">attachment;filename="${filename}"</param>
+				  <param name="bufferSize">1024</param>			
+				  <param name="inputName">fileStream</param>
+			</result>
+   		 </action> 
+	</package>
+</struts>

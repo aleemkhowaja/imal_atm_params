@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<!-- Address  -->
+	<bean id="addressListAction" class="com.path.actions.common.address.AddressCommonListAction" scope="prototype" parent="baseAction">
+		<property name="addressBO" ref="addressBO"/>
+	</bean>
+	<bean id="addressMaintAction" class="com.path.actions.common.address.AddressCommonMaintAction" scope="prototype" parent="baseAction">
+		<property name="addressBO" ref="addressBO"/>
+	</bean>
+	<!-- Charges Entity Grid -->
+	<bean id="chargesGridAction" class="com.path.actions.common.charges.ChargesGridAction" scope="prototype" parent="baseAction">
+		<property name="entityChargesBO" ref="entityChargesBO"/>
+	</bean>
+	<!-- Global 360Degree View -->
+	<bean id="dashAccDtlDuesListAction" class="com.path.actions.common.global360view.assetsandliabilities.dues.DashAccDtlDuesListAction" scope="prototype" parent="baseAction">
+		<property name="dashboardBO" ref="dashboardBO"/>
+	</bean>
+	<bean id="dashAccDtlJvsListAction" class="com.path.actions.common.global360view.assetsandliabilities.jvs.DashAccDtlJvsListAction" scope="prototype" parent="baseAction">
+		<property name="dashboardBO" ref="dashboardBO"/>
+	</bean>
+	<bean id="dashAccDtlTrxListAction" class="com.path.actions.common.global360view.assetsandliabilities.transaction.DashAccDtlTrxListAction" scope="prototype" parent="baseAction">
+		<property name="dashboardBO" ref="dashboardBO"/>
+	</bean>
+	<bean id="dashAccDetailsListAction" class="com.path.actions.common.global360view.assetsandliabilities.DashAccountsDetailsListAction" scope="prototype" parent="baseAction">
+		<property name="dashboardBO" ref="dashboardBO"/>
+	</bean>
+	<bean id="dashBankersChequesListAction" class="com.path.actions.common.global360view.bankerscheques.DashBankersChequesListAction" scope="prototype" parent="baseAction">
+		<property name="dashBankersChequesBO" ref="dashBankersChequesBO"/>
+	</bean>
+	<bean id="cardsListAction" class="com.path.actions.common.global360view.cards.CardsListAction" scope="prototype" parent="baseAction">
+		<property name="cardsBO" ref="cardsBO"/>
+	</bean>
+	<bean id="dashChequebooksListAction" class="com.path.actions.common.global360view.chequebooks.DashChequebooksListAction" scope="prototype" parent="baseAction">
+		<property name="dashChequebooksBO" ref="dashChequebooksBO"/>
+	</bean>
+	<bean id="dashChequesForColListAction" class="com.path.actions.common.global360view.cheques.DashChequesForColListAction" scope="prototype" parent="baseAction">
+		<property name="dashChequesServicesBO" ref="dashChequesServicesBO"/>
+	</bean>
+	<bean id="dashVoidedChequesListAction" class="com.path.actions.common.global360view.cheques.DashVoidedChequesListAction" scope="prototype" parent="baseAction">
+		<property name="dashChequesServicesBO" ref="dashChequesServicesBO"/>
+	</bean>
+	<bean id="dashPostDatedChqWDrawalListAction" class="com.path.actions.common.global360view.cheques.DashPostDatedChqWDrawalListAction" scope="prototype" parent="baseAction">
+		<property name="dashChequesServicesBO" ref="dashChequesServicesBO"/>
+	</bean>
+	<bean id="dashPostDatedChqDepListAction" class="com.path.actions.common.global360view.cheques.DashPostDatedChqDepListAction" scope="prototype" parent="baseAction">
+		<property name="dashChequesServicesBO" ref="dashChequesServicesBO"/>
+	</bean>
+	<bean id="financingDealsListAction" class="com.path.actions.common.global360view.financingDeals.FinancingDealsListAction" scope="prototype" parent="baseAction">
+		<property name="financingDealsBO" ref="financingDealsBO"/>
+	</bean>
+	<bean id="fmsCollateralDetailsListAction" class="com.path.actions.common.global360view.fms.FMSCollateralDetailsListAction" scope="prototype" parent="baseAction">
+		<property name="dashFMSBO" ref="dashFMSBO"/>
+	</bean>
+	<bean id="fmsNewAppDetailsListAction" class="com.path.actions.common.global360view.fms.FMSNewApplDetailsListAction" scope="prototype" parent="baseAction">
+		<property name="dashFMSBO" ref="dashFMSBO"/>
+	</bean>
+	<bean id="fmsSuspendedFacilityDetailsListAction" class="com.path.actions.common.global360view.fms.FMSSuspendedFacilityDetailsListAction" scope="prototype" parent="baseAction">
+		<property name="dashFMSBO" ref="dashFMSBO"/>
+	</bean>
+	<bean id="fmsGuarantorDetailsListAction" class="com.path.actions.common.global360view.fms.FMSGuarantorDetailsListAction" scope="prototype" parent="baseAction">
+		<property name="dashFMSBO" ref="dashFMSBO"/>
+	</bean>
+	<bean id="fmsApprovedLineDetailsListAction" class="com.path.actions.common.global360view.fms.FMSApprovedLineDetailsListAction" scope="prototype" parent="baseAction">
+		<property name="dashFMSBO" ref="dashFMSBO"/>
+	</bean>
+	<bean id="fmsDrawdownDetailsListAction" class="com.path.actions.common.global360view.fms.FMSDrawdownDetailsListAction" scope="prototype" parent="baseAction">
+      <property name="dashFMSBO"  ref="dashFMSBO"/>
+    </bean>
+	<!--Investments / Cash-->
+	<bean id="dashInvestmentsListAction" class="com.path.actions.common.global360view.investments.DashInvestmentsListAction" scope="prototype" parent="baseAction">
+		<property name="dashInvestmentsBO" ref="dashInvestmentsBO"/>
+	</bean>
+	<bean id="dashPrtfCashPosHoldPosListAction" class="com.path.actions.common.global360view.investments.DashPrtfCashPosHoldPosListAction" scope="prototype" parent="baseAction">
+		<property name="dashInvestmentsBO" ref="dashInvestmentsBO"/>
+	</bean>
+	<bean id="dashLostDocsListAction" class="com.path.actions.common.global360view.lostdocuments.DashLostDocsListAction" scope="prototype" parent="baseAction">
+		<property name="dashLostDocsBO" ref="dashLostDocsBO"/>
+	</bean>
+	<!-- OneObligor Temp -->
+	<bean id="dashOneObligorListAction" class="com.path.actions.common.global360view.oneobligor.DashOneObligorListAction" scope="prototype" parent="baseAction">
+		<property name="dashOneObligorBO" ref="dashOneObligorBO"/>
+	</bean>
+	<bean id="dashOneObligorMaintAction" class="com.path.actions.common.global360view.oneobligor.DashOneObligorMaintAction" scope="prototype" parent="baseAction">
+		<property name="dashOneObligorBO" ref="dashOneObligorBO"/>
+	</bean>
+	<!-- OneObligor Temp -->
+	<!-- 360Degree Others	-->
+	<bean id="dashSpecialCondListAction" class="com.path.actions.common.global360view.others.DashSpecialCondListAction" scope="prototype" parent="baseAction">
+		<property name="dashOthersBO" ref="dashOthersBO"/>
+	</bean>
+	<bean id="dashRemittancesListAction" class="com.path.actions.common.global360view.others.DashRemittancesListAction" scope="prototype" parent="baseAction">
+		<property name="dashOthersBO" ref="dashOthersBO"/>
+	</bean>
+	<bean id="dashAuthorizedSigListAction" class="com.path.actions.common.global360view.others.DashAuthorizedSigListAction" scope="prototype" parent="baseAction">
+		<property name="dashOthersBO" ref="dashOthersBO"/>
+	</bean>
+	<bean id="dashLinksListAction" class="com.path.actions.common.global360view.others.DashLinksListAction" scope="prototype" parent="baseAction">
+		<property name="dashOthersBO" ref="dashOthersBO"/>
+	</bean>
+	<bean id="dashSOListAction" class="com.path.actions.common.global360view.others.DashSOListAction" scope="prototype" parent="baseAction">
+		<property name="dashOthersBO" ref="dashOthersBO"/>
+	</bean>
+	<bean id="dashMemosListAction" class="com.path.actions.common.global360view.others.DashMemosListAction" scope="prototype" parent="baseAction">
+		<property name="dashOthersBO" ref="dashOthersBO"/>
+	</bean>
+	<bean id="dashPassbooksListAction" class="com.path.actions.common.global360view.passbooks.DashPassbooksListAction" scope="prototype" parent="baseAction">
+		<property name="dashboardBO" ref="dashboardBO"/>
+	</bean>
+	<bean id="safeboxesListAction" class="com.path.actions.common.global360view.safeboxes.SafeboxesListAction" scope="prototype" parent="baseAction">
+		<property name="safeboxesBO" ref="safeboxesBO"/>
+	</bean>
+	<!-- 360Degree Trade Finance	-->
+	<bean id="dashAcceptanceListAction" class="com.path.actions.common.global360view.tradefinance.DashAcceptanceListAction" scope="prototype" parent="baseAction">
+		<property name="dashTradeFinanceBO" ref="dashTradeFinanceBO"/>
+	</bean>
+	<bean id="dashInOutBillsListAction" class="com.path.actions.common.global360view.tradefinance.DashInOutBillsListAction" scope="prototype" parent="baseAction">
+		<property name="dashTradeFinanceBO" ref="dashTradeFinanceBO"/>
+	</bean>
+	<bean id="dashLGListAction" class="com.path.actions.common.global360view.tradefinance.DashLGListAction" scope="prototype" parent="baseAction">
+		<property name="dashTradeFinanceBO" ref="dashTradeFinanceBO"/>
+	</bean>
+	<bean id="dashInOutLCListAction" class="com.path.actions.common.global360view.tradefinance.DashInOutLCListAction" scope="prototype" parent="baseAction">
+		<property name="dashTradeFinanceBO" ref="dashTradeFinanceBO"/>
+	</bean>
+	<bean id="treasuryListAction" class="com.path.actions.common.global360view.treasury.TreasuryListAction" scope="prototype" parent="baseAction">
+		<property name="treasuryBO" ref="treasuryBO"/>
+	</bean>
+	<bean id="dashboardMainAction" class="com.path.actions.common.global360view.DashboardMainAction" scope="prototype" parent="baseAction">
+		<property name="dashboardBO" ref="dashboardBO"/>
+	</bean>
+	<bean id="dashboardGridsListAction" class="com.path.actions.common.global360view.DashboardGridsListAction" scope="prototype" parent="baseAction">
+		<!--
+ <property name="dashboardBO" ref="dashboardBO"></property>  
+		-->
+	</bean>
+	<bean id="dashboardDependencyAction" class="com.path.actions.common.global360view.DashboardDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="dashboardBO" ref="dashboardBO"/>
+		<property name="dashInvestmentsBO" ref="dashInvestmentsBO"/>
+	</bean>
+	<!-- Limit Schema Details -->
+	<bean id="limitSchemaListAction" class="com.path.actions.common.limitschema.LimitSchemaListAction" scope="prototype" parent="baseAction">
+		<property name="limitSchemaBO" ref="limitSchemaBO"/>
+		<property name="coreCommonServiceBO" ref="coreCommonServiceBO"/>
+	</bean>
+	<!-- Memo  -->
+	<bean id="memoGridAction" class="com.path.actions.common.memo.MemoGridAction" scope="prototype" parent="retailBaseAction">
+		<property name="memoBO" ref="memoBO"/>
+	</bean>
+	<bean id="memoDtlsMaintAction" class="com.path.actions.common.memo.MemoDtlsMaintAction" scope="prototype" parent="retailBaseAction">
+		<property name="memoDtlBO" ref="memoBO"/>
+		<property name="alertsBO" ref="alertsBO"/>
+	</bean>
+	<!-- Reason Charges  -->
+	<bean id="reasonChargesListAction" class="com.path.actions.common.reasoncharges.ReasonChargesCommonListAction" scope="prototype" parent="baseAction">
+		<property name="reasonChargesBO" ref="reasonChargesBO"/>
+	</bean>
+	<bean id="ctsRequestCommonMaintAction" class="com.path.actions.common.requests.csm.CtsRequestCommonMaintAction" scope="prototype" parent="baseAction">
+		<property name="ctsRequestBO" ref="ctsRequestBO"/>
+	</bean>
+	<bean id="ctsRequestCommonListAction" class="com.path.actions.common.requests.csm.CtsRequestCommonListAction" scope="prototype" parent="baseAction">
+		<property name="ctsRequestBO" ref="ctsRequestBO"/>
+	</bean>
+	<bean id="ctsRequestStatusAction" class="com.path.actions.common.requests.csm.CtsRequestStatusAction" scope="prototype" parent="baseAction">
+		<property name="ctsRequestBO" ref="ctsRequestBO"/>
+	</bean>
+	<!-- Reserved CIF  -->
+	<bean id="reservedCifListAction" class="com.path.actions.common.reservedcif.ReservedCifListAction" scope="prototype" parent="baseAction">
+		<property name="reservedCifBO" ref="reservedCifBO"/>
+	</bean>
+	<!-- Signature Management -->
+	<bean id="signatureMainAction" class="com.path.actions.common.signature.SignatureMainAction" scope="prototype" parent="baseAction">
+		<property name="signatureBO" ref="signatureBO"/>
+		<property name="limitSchemaBO" ref="limitSchemaBO"/>
+		<property name="coreCommonBO" ref="coreCommonBO"/>
+	</bean>
+	<!-- Signature Management -->
+	<bean id="signatureListAction" class="com.path.actions.common.signature.SignatureListAction" scope="prototype" parent="baseAction">
+		<property name="signatureBO" ref="signatureBO"/>
+	</bean>
+	<!-- Trx Type Charges  -->
+	<bean id="trxTypeChargesListAction" class="com.path.actions.common.trxtypecharges.TrxTypeChargesCommonListAction" scope="prototype" parent="baseAction">
+		<property name="trxTypeChargesBO" ref="trxTypeChargesBO"/>
+	</bean>
+	<bean id="chargesSchemaCommonAction" class="com.path.actions.common.trxtypecharges.ChargesSchemaCommonAction" scope="prototype" parent="baseAction">
+		<property name="chargesSchemaBO" ref="chargesSchemaBO"/>
+	</bean>
+	<bean id="chargesSchemaGridAction" class="com.path.actions.common.trxtypecharges.ChargesSchemaGridAction" scope="prototype" parent="baseAction">
+		<property name="chargesSchemaBO" ref="chargesSchemaBO"/>
+	</bean>
+	<bean id="maintenenceChargesGridAction" class="com.path.actions.common.trxtypecharges.MaintenenceChargesGridAction" scope="prototype" parent="baseAction">
+		<property name="chargesSchemaBO" ref="chargesSchemaBO"/>
+	</bean>
+	<bean id="islamicCalculatorAction" class="com.path.actions.common.islamiccalculator.IslamicCalculatorAction" scope="prototype" parent="baseAction">
+		<property name="iisCommonBO" ref="iisCommonBO"/>
+	</bean>
+	<bean id="islamicCalculatorEventMgmtAction" class="com.path.actions.common.islamiccalculator.IslamicCalculatorEventMgmtAction" scope="prototype" parent="baseAction">
+		<property name="islamicCalculatorEventMgmtBO" ref="islamicCalculatorEventMgmtBO"/>
+		<property name="iisCommonBO" ref="iisCommonBO"/>
+		<property name="iisIslamicCalculatorBO" ref="iisIslamicCalculatorBO"/>
+		<property name="iisDealChargesBO" ref="iisDealChargesBO"/>
+	</bean>
+	<bean id="islamicCalculatorDBRatioAction" class="com.path.actions.common.islamiccalculator.IslamicCalculatorDBRatioAction" scope="prototype" parent="baseAction">
+		<property name="iisCommonBO" ref="iisCommonBO"/>
+	</bean>
+	<bean id="financingDealsMaintAction" class="com.path.actions.common.global360view.financingDeals.FinancingDealsMaintAction" scope="prototype" parent="baseAction">
+		<property name="financingDealsBO" ref="financingDealsBO"/>
+	</bean>
+	<bean id="dashboardSmsSubscriptionListAction" class="com.path.actions.common.global360view.smssubscription.DashboardSmsSubscriptionListAction" scope="prototype" parent="baseAction">
+		<property name="dashboardBO" ref="dashboardBO"/>
+	</bean>
+	<!-- Channel Subscription -->
+	<bean id="channelSubscriptionListAction" class="com.path.actions.common.channelsubscription.ChannelSubscriptionListAction" scope="prototype" parent="baseAction">
+	 <property name="channelSubscriptionBO" ref="channelSubscriptionBO"></property>
+	</bean>
+	
+	<bean id="channelSubscriptionMaintAction" class="com.path.actions.common.channelsubscription.ChannelSubscriptionMaintAction" scope="prototype" parent="baseAction">
+	 <property name="channelSubscriptionBO" ref="channelSubscriptionBO"></property>
+	</bean>
+	
+	<bean id="dashChildCifListAction" class="com.path.actions.common.global360view.others.DashChildCifListAction" scope="prototype" parent="baseAction">
+		<property name="dashOthersBO" ref="dashOthersBO"/>
+	</bean>
+	<bean id="dashChildCifMaintAction" class="com.path.actions.common.global360view.others.DashChildCifMaintAction" scope="prototype" parent="baseAction">
+	</bean>  
+</beans>

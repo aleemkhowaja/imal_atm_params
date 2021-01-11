@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="dynTemplate" namespace="/path/dynamicTemplate"
+		extends="path-default">
+		<action name="DynamicTemplateListAction_*" class="dynamicTemplateListAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="dynamicTemplateMaintAction_*" method="{1}" class="dynamicTemplateMaintAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="error" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="dynamicTemplateList">/WEB-INF/pages/businesscommon/dynamictemplate/DynamicTemplateList.jsp
+			</result>
+			<result name="dynamicTemplateMaint">/WEB-INF/pages/businesscommon/dynamictemplate/DynamicTemplateMaint.jsp
+			</result>
+			<result name="dynTempDetailPopup">/WEB-INF/pages/businesscommon/dynamictemplate/DynamicTemplateDetailsPopup.jsp
+			</result>
+			<result name="dynamicTemplateDivs">/WEB-INF/pages/businesscommon/dynamictemplate/DynamicTemplateDivs.jsp
+			</result>
+			<result name="dynamicTemplatePreview" type="freemarker">/WEB-INF/pages/businesscommon/dynamictemplate/DynamicTemplatePreview.ftl</result>
+		</action>
+		<action name="DynamicTemplateLookupAction_*" class="dynamicTemplateLookupAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="DynamicTemplateDepAction_*" class="dynamicTemplateDepAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="DynamicTemplateConvListAction_*" class="dynamicTemplateConventionListAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="dynamicTemplateConvMaintAction_*" method="{1}" class="dynamicTemplateConventionMaintAction">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="error" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="dynamicTemplateConvList">/WEB-INF/pages/businesscommon/dynamictemplate/DynamicTemplateConventionList.jsp
+			</result>
+			<result name="dynamicTemplateConvMaint">/WEB-INF/pages/businesscommon/dynamictemplate/DynamicTemplateConventionMaint.jsp
+			</result>
+		</action>
+		<action name="dynamicTemplateConvStatusAction_*" class="dynamicTemplateConvStatusAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		<action name="DynamicTemplateAppDepAction_*" class="dynamicTemplateAppDepAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+	</package>
+</struts>

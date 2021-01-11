@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="unSecureAction" class="com.path.actions.common.login.UnSecureAction" scope="prototype" parent="baseAction">
+		<property name="companiesBO" ref="companiesBO"></property>
+	  	<property name="branchesBO" ref="branchesBO"></property>
+	  	<property name="themeCustomizationBO" ref="themeCustomizationBO"></property>
+	  	<property name="loginBO" ref="loginBO"></property>
+	</bean>
+	
+	<bean id="configurationValidationAction" class="com.path.actions.common.login.ConfigurationValidationAction" scope="prototype" parent="baseAction">
+	</bean>
+	
+	<bean id="initializationAction" class="com.path.actions.common.login.UnSecureAction" init-method="initializeClientData" destroy-method="destroyData" >
+		<property name="enableScrConf" value="${customizatation.field.enabled}"></property>
+	</bean>
+	
+	<bean id="scanAction" class="com.path.actions.common.scan.ScanAction" scope="prototype" parent="baseAction">
+	</bean>
+	
+	<bean id="desktopAction" class="com.path.actions.common.login.DesktopAction" scope="prototype" parent="baseAction">
+	  <property name="secureFilter" ref="secureFilter"></property>
+	  <property name="companiesBO" ref="companiesBO"></property>
+	  <property name="loginBO" ref="loginBO"></property>
+	  <property name="alertsEngineBO" ref="alertsEngineBO"></property>
+	  <property name="alertsAppName" value="${alert.engine.appName}"></property>
+	</bean>
+	
+	
+	<bean id="pwdChangeAction" class="com.path.actions.common.pwdchange.PwdChangeAction" scope="prototype" parent="baseAction">
+		<property name="loginBO" ref="loginBO"></property>
+	</bean>
+	<bean id="customizationAction" class="com.path.actions.common.customization.CustomizationAction" scope="prototype" parent="baseAction">
+		<property name="customizationBO" ref="customizationBO"></property>
+	</bean>
+	<bean id="objectCustomizationMainAction" class="com.path.actions.common.customization.object.ObjectCustomizationMainAction" scope="prototype" parent="baseAction">
+		<property name="objectCustomizationBO" ref="objectCustomizationBO"></property>
+	</bean>
+	<bean id="objectCustomizationDetailsListAction" class="com.path.actions.common.customization.object.ObjectCustomizationListAction" scope="prototype" parent="baseAction">
+		<property name="objectCustomizationBO" ref="objectCustomizationBO"></property>
+	</bean>
+	<bean id="customElementActivity" class="com.path.actions.common.customization.CustomElementActivityAction" scope="prototype" parent="baseAction">
+		<property name="customizationBO" ref="customizationBO"></property>
+		<property name="buttonCustomizationBO" ref="buttonCustomizationBO"></property>
+	</bean>
+	
+	<bean id="fileCustomizationAction" class="com.path.actions.common.customization.file.FileCustomizationAction" 
+		scope="prototype" parent="baseAction">
+		<property name="fileCustomizationBO" ref="fileCustomizationBO"></property>
+	</bean>
+	
+	<bean id="saveAsSeriesListAction" class="com.path.actions.common.customization.SaveAsSeriesListAction" scope="prototype" parent="baseAction">
+		<property name="customizationBO" ref="customizationBO"></property>
+	</bean>
+	<bean id="statusCustomizationListAction" class="com.path.actions.common.statuscustomization.StatusCustomizationListAction" scope="prototype" parent="baseAction">
+	    <property name="statusCustomizationBO" ref="statusCustomizationBO"></property>
+	</bean>
+	<bean id="statusCustomizationMaintAction" class="com.path.actions.common.statuscustomization.StatusCustomizationMaintAction" scope="prototype" parent="baseAction">
+	    <property name="statusCustomizationBO" ref="statusCustomizationBO"></property>
+	</bean>
+	<bean id="statusCustLookupAction" class="com.path.actions.common.statuscustomization.StatusCustLookupAction" scope="prototype" parent="baseAction">
+	    <property name="statusCustomizationBO" ref="statusCustomizationBO"></property>
+	</bean>
+
+	<bean id="portletAssignAction" class="com.path.actions.common.dashboard.PortletAssignAction" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+	<bean id="themeCustomizationAction" class="com.path.actions.common.customization.ThemeCustomizationAction" scope="prototype" parent="baseAction">
+		<property name="themeCustomizationBO" ref="themeCustomizationBO"></property>
+	</bean>
+	<!-- Label Translation  -->
+	<bean id="translationAction" class="com.path.actions.common.translation.TranslationAction" scope="prototype" parent="baseAction">
+		<property name="translationBO" ref="translationBO"></property>
+	</bean>
+
+	<!-- Button Customization -->
+	<bean id="buttonCustomizationGridAction" class="com.path.actions.common.customization.button.ButtonCustomizationGridAction" scope="prototype" parent="baseAction">
+		<property name="buttonCustomizationBO" ref="buttonCustomizationBO"></property>
+	</bean>
+	<bean id="buttonCustomizationMaintAction" class="com.path.actions.common.customization.button.ButtonCustomizationMaintAction" scope="prototype" parent="baseAction">
+		<property name="buttonCustomizationBO" ref="buttonCustomizationBO"></property>
+	</bean>
+	<bean id="buttonCustomizationLookupAction" class="com.path.actions.common.customization.button.ButtonCustomizationLookupAction" scope="prototype" parent="baseAction">
+		<property name="buttonCustomizationBO" ref="buttonCustomizationBO"></property>
+		<property name="usrBO" ref="usrBO"></property>
+	</bean>	
+	<bean id="buttonCustomizationParamListAction" class="com.path.actions.common.customization.button.ButtonCustomizationParamListAction" scope="prototype" parent="baseAction">
+		<property name="buttonCustomizationBO" ref="buttonCustomizationBO"></property>
+	</bean>	
+	<bean id="buttonCustomizationOutMapListAction" class="com.path.actions.common.customization.button.ButtonCustomizationOutMapListAction" scope="prototype" parent="baseAction">
+		<property name="buttonCustomizationBO" ref="buttonCustomizationBO"></property>
+	</bean>	
+	<bean id="buttonCustomizationArgListAction" class="com.path.actions.common.customization.button.ButtonCustomizationArgListAction" scope="prototype" parent="baseAction">
+		<property name="buttonCustomizationBO" ref="buttonCustomizationBO"></property>
+	</bean>	
+		
+	<!-- Alerts  -->
+	<bean id="alertsGridAction" class="com.path.actions.common.alerts.AlertsGridAction" scope="prototype" parent="baseAction">
+		<property name="alertsBO" ref="alertsBO"></property>
+		<property name="loginBO" ref="loginBO"></property>
+	</bean>
+	
+	<bean id="alertsMaintAction" class="com.path.actions.common.alerts.AlertsMaintAction" scope="prototype" parent="baseAction">		
+		<property name="alertsBO" ref="alertsBO"></property>
+		<property name="loginBO" ref="loginBO"></property>
+	</bean>	 
+	<bean id="alertsForwardMaintAction" class="com.path.actions.common.alerts.AlertsForwardMaintAction" scope="prototype" parent="baseAction">		
+		<property name="alertsBO" ref="alertsBO"></property>
+	</bean>	 
+	<bean id="alertsForwardGridAction" class="com.path.actions.common.alerts.AlertsForwardGridAction" scope="prototype" parent="baseAction">		
+		<property name="alertsBO" ref="alertsBO"></property>
+	</bean>	 
+	<bean id="approveAlertsMaintAction" class="com.path.actions.common.alerts.ApproveAlertsMaintAction" scope="prototype" parent="baseAction">		
+		<property name="alertsBO" ref="alertsBO"></property>
+		<property name="loginBO" ref="loginBO"></property>
+	</bean>	
+	<bean id="alertsLoginMgntAction" class="com.path.actions.common.alerts.AlertsLoginMgntAction" scope="prototype" parent="baseAction">		
+		<property name="alertsBO" ref="alertsBO"></property>
+		<property name="usrBO" ref="usrBO"></property>
+	</bean>	 
+	<bean id="trsAckTOutAlertsAction" class="com.path.actions.common.alerts.TrsAckTOutAlertsGridAction" scope="prototype" parent="baseAction">		
+		<property name="alertsBO" ref="alertsBO"></property>
+		<property name="alertsEngineBO" ref="alertsEngineBO"></property>
+		<property name="loginBO" ref="loginBO"></property>
+	</bean>	 
+	<bean id="trsAckTOutAlertsMaintAction" class="com.path.actions.common.alerts.TrsAckTOutAlertsMaintAction" scope="prototype" parent="baseAction">		
+		<property name="alertsBO" ref="alertsBO"></property>
+	</bean>	 
+	<!--  -->
+	
+	<bean id="treeMenuAction" class="com.path.actions.common.menu.TreeMenuAction" scope="prototype" parent="baseAction">
+		<property name="menuBO" ref="menuBO"></property>
+	</bean>
+	<bean id="treeGridMenuAction" class="com.path.actions.common.menu.TreeGridMenuAction" scope="prototype" parent="baseAction">
+		<property name="menuBO" ref="menuBO"></property>
+	</bean>
+	<bean id="horizontalmenuaction" class="com.path.actions.common.horizontalmenu.HorizontalMenuAction" scope="prototype" parent="baseAction">	
+		<property name="menuBO" ref="menuBO"></property>
+	</bean>
+	
+	
+	<bean id="auditReportAction" class="com.path.actions.common.audit.AuditReportAction" scope="prototype" parent="baseAction">
+	  <property name="auditBO" ref="auditBO"></property>
+	</bean>
+	
+	<bean id="smartAction" class="com.path.actions.common.smart.SmartAction" scope="prototype" parent="baseAction">
+	  <property name="smartBO" ref="smartBO"></property>
+	</bean>
+	
+	
+	<bean id="dynFileMaintAction" class="com.path.actions.common.filemanagement.DynFileMaintAction" scope="prototype" parent="baseAction">
+		<property name="dynFilesBO" ref="dynFilesBO"></property>
+	</bean>
+	
+	<bean id="dynFileGridAction" class="com.path.actions.common.filemanagement.DynFileGridAction" scope="prototype" parent="baseAction">
+		<property name="dynFilesBO" ref="dynFilesBO"></property>
+	</bean>
+	
+	
+	
+	<!-- Integration Action -->
+	<bean id="integrationAction" class="com.path.actions.common.integration.IntegrationAction" scope="prototype" parent="baseAction">
+	</bean>
+	
+	<!-- Additional Fields by Type -->
+	<bean id="additionalFieldsByTypeAction" class="com.path.actions.common.additionalfields.AdditionalFieldsByTypeAction" scope="prototype" parent="baseAction">
+	  <property name="additionalFieldsBO" ref="additionalFieldsBO"></property>
+	  <property name="coreCommonServiceBO" ref="coreCommonServiceBO"></property>
+	</bean>
+	
+	<!-- Reports Action -->
+	<bean id="reportsAction" class="com.path.actions.common.reports.ReportsAction" scope="prototype" parent="baseAction">
+	</bean>
+	<bean id="commonCustomReportAction" class="com.path.actions.CommonCustomReportAction" scope="prototype" parent="reportsAction">
+	 	<property name="commonReportingBO" ref="commonReportingBO"></property>
+	</bean>
+	
+	<!-- Print Swift  -->
+	<bean id="printSwiftAction" class="com.path.actions.common.printswift.PrintSwiftMainAction" scope="prototype" parent="baseAction">
+		<property name="swiftOutwardNonTransBO" ref="swiftOutwardNonTransBO"></property>
+	</bean>
+
+	<bean id="frameLoaderAction" class="com.path.actions.common.frameloader.FrameLoaderAction" scope="prototype" parent="baseAction">
+		 <property name="companiesBO" ref="companiesBO"></property>
+	  	 <property name="loginBO" ref="loginBO"></property>
+	  	 <property name="alertsEngineBO" ref="alertsEngineBO"></property>
+	  	 <property name="alertsAppName" value="${alert.engine.appName}"></property>
+	</bean>
+	<bean id="portalDashboardAction" class="com.path.actions.common.dashboard.PortalDashboardAction" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+		<property name="loginBO" ref="loginBO"></property>
+		<property name="usrBO" ref="usrBO"></property>
+	</bean>
+	<bean id="dashboardReportsAction" class="com.path.actions.common.dashboard.DashboardReportsAction" scope="prototype" parent="baseAction">
+	   <property name="commonReportingBO" ref="commonReportingBO"></property>
+	</bean>
+	<bean id="dashboardJsonWidget" class="com.path.actions.common.dashboard.DashboardJsonWidget" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+	<bean id="dashboardFavoriteAction" class="com.path.actions.common.dashboard.favorites.FavoriteMainAction" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+	<bean id="dashboardApplicationAction" class="com.path.actions.common.dashboard.applications.ApplicationsMainAction" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+	<bean id="dashboardAlertsAction" class="com.path.actions.common.dashboard.alerts.DashPortalAlertsMainAction" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+	<bean id="dashboardWorkspaceAction" class="com.path.actions.common.dashboard.workspace.DashWorkspaceAction" scope="prototype" parent="baseAction">
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+	<bean id="portalDashboardListAction" class="com.path.actions.common.dashboard.PortalDashboardListAction" scope="prototype" parent="baseAction">
+		<property name="loginBO" ref="loginBO"></property>
+		<property name="dashboardPortalBO" ref="dashboardPortalBO"></property>
+	</bean>
+	
+	<bean id="recordLogsListAction" class="com.path.actions.common.recordlogs.RecordLogsListAction" scope="prototype" parent="baseAction">
+	 <property name="recordLogsBO" ref="recordLogsBO"></property>
+	</bean>
+	
+	<bean id="recordLogsMaintAction" class="com.path.actions.common.recordlogs.RecordLogsMaintAction" scope="prototype" parent="baseAction">
+	 <property name="recordLogsBO" ref="recordLogsBO"></property>
+	</bean>
+	<bean id="gridBaseAction" class="com.path.struts2.lib.common.base.GridBaseAction" scope="prototype" parent="baseAction">
+	</bean>
+	<bean id="treeBaseAction" class="com.path.struts2.lib.common.base.TreeBaseAction" scope="prototype" parent="baseAction">
+	</bean>
+	
+	<bean id="usrListAction" class="com.path.actions.admin.user.UsrListAction" scope="prototype" parent="baseAction">
+	  <property name="usrBO" ref="usrBO"></property>
+	</bean>
+	
+	<bean id="screenGeneratorListAction" class="com.path.actions.common.screengenerator.ScreenGeneratorListAction" scope="prototype" parent="baseAction">
+	 <property name="screenGeneratorBO" ref="screenGeneratorBO"></property>
+	</bean>
+	<bean id="screenGeneratorMaintAction" class="com.path.actions.common.screengenerator.ScreenGeneratorMaintAction" scope="prototype" parent="baseAction">
+	 <property name="generatorBO"       ref="generatorBO"></property>
+	 <property name="screenGeneratorBO" ref="screenGeneratorBO"></property>
+	</bean>
+	<bean id="generatorMaintAction" class="com.path.actions.common.screengenerator.GeneratorMaintAction" scope="prototype"  parent="baseAction">
+	     <property name="generatorBO" ref="generatorBO"></property>
+	</bean>
+	<bean id="generatorLookupAction" class="com.path.actions.common.screengenerator.GeneratorLookupAction" scope="prototype"  parent="baseAction">
+	     <property name="screenGeneratorBO" ref="screenGeneratorBO"></property>
+	</bean>
+	<bean id="propertiesDetailsDynAction" class="com.path.actions.common.screengenerator.PropertiesDetailsDynAction" scope="prototype" parent="baseAction">
+	     <property name="screenGeneratorBO" ref="screenGeneratorBO"></property>
+	</bean>
+	
+	<bean id="elementsOptionsListAction" class="com.path.actions.common.screengenerator.ElementsOptionsListAction" scope="prototype" parent="baseAction">
+	</bean>
+	
+	<bean id="tabbedPanelListAction" class="com.path.actions.common.screengenerator.TabbedPanelListAction" scope="prototype" parent="baseAction">
+	</bean>
+	
+	<bean id="dynamicScreenMainAction" class="com.path.actions.common.dynamicscreen.DynamicScreenMainAction" scope="prototype" parent="baseAction">
+	     <property name="generatorBO" ref="generatorBO"></property>
+	     <property name="dynamicScreenBO" ref="dynamicScreenBO"></property>
+	</bean>
+	<bean id="linkDynScreenMainAction" class="com.path.actions.common.dynamicscreen.LinkDynamicScreenMaintAction" scope="prototype" parent="baseAction">
+	     <property name="dynamicScreenBO" ref="dynamicScreenBO"></property>
+	</bean>
+	<bean id="linkDynScreenListAction" class="com.path.actions.common.dynamicscreen.LinkDynamicScreenListAction" scope="prototype" parent="baseAction">
+	     <property name="dynamicScreenBO" ref="dynamicScreenBO"></property>
+	</bean>
+	
+	<bean id="linkDynScrTabMainAction" class="com.path.actions.common.dynamicscreen.LinkDynScrTabMaintAction" scope="prototype" parent="baseAction">
+	     <property name="dynamicScreenBO" ref="dynamicScreenBO"></property>
+	</bean>
+	<bean id="linkDynScrTabListAction" class="com.path.actions.common.dynamicscreen.LinkDynScrTabListAction" scope="prototype" parent="baseAction">
+	     <property name="dynamicScreenBO" ref="dynamicScreenBO"></property>
+	</bean>
+	
+	<bean id="dynDependencyAction" class="com.path.actions.common.dynamicscreen.DynDependencyAction" scope="prototype" parent="baseAction">
+	   <property name="dynamicScreenBO" ref="dynamicScreenBO"></property>
+	   <property name="dynClientParamsBO" ref="dynClientParamsBO"></property>
+	</bean>
+	<bean id="dynLookupAction" class="com.path.actions.common.dynamicscreen.DynLookupAction" scope="prototype" parent="baseAction">
+	   <property name="dynamicScreenBO" ref="dynamicScreenBO"></property>
+	   <property name="generatorBO" ref="generatorBO"></property> 
+	</bean>
+	<bean id="dynScreenLookupAction" class="com.path.actions.common.dynamicscreen.DynScreenLookupAction" scope="prototype" parent="baseAction">
+	   <property name="dynamicScreenBO" ref="dynamicScreenBO"></property> 
+	</bean>
+	<bean id="screenGeneratorDepAction" class="com.path.actions.common.screengenerator.ScreenGeneratorDepAction" scope="prototype" parent="baseAction">
+	   <property name="screenGeneratorBO" ref="screenGeneratorBO"></property> 
+	    <property name="dynamicScreenBO" ref="dynamicScreenBO"></property> 
+	</bean>
+	<bean id="dynScreenParamListAction" class="com.path.actions.common.dynamicscreen.DynamicScreenParamListAction" scope="prototype" parent="baseAction">
+	   <property name="dynamicScreenBO" ref="dynamicScreenBO"></property> 
+	</bean>
+	<bean id="dynScrTablesListAction" class="com.path.actions.common.screengenerator.DynScrTablesListAction" scope="prototype" parent="baseAction">
+	   <property name="screenGeneratorBO" ref="screenGeneratorBO"></property> 
+	</bean>
+	<bean id="DynScrGridListAction" class="com.path.actions.common.dynamicscreen.DynScrGridListAction" scope="prototype" parent="baseAction">
+	   <property name="dynamicScreenBO" ref="dynamicScreenBO"></property> 
+	   <property name="generatorBO" ref="generatorBO"></property> 
+	</bean>
+	
+	<!-- BPM -->
+	<bean id="bpmMaintAction" class="com.path.actions.common.bpm.BpmMaintAction" scope="prototype" parent="baseAction">		
+		<property name="bpmBO" ref="bpmBO"></property>
+	</bean>	
+	<bean id="bpmGridAction" class="com.path.actions.common.bpm.BpmGridAction" scope="prototype" parent="baseAction">		
+		<property name="bpmBO" ref="bpmBO"></property>
+	</bean>
+	<bean id="bpmLookupAction" class="com.path.actions.common.bpm.BpmLookupAction" scope="prototype" parent="baseAction">		
+		<property name="bpmBO" ref="bpmBO"></property>
+	</bean>
+	
+	<!-- Dynamic Client Params -->
+	<bean id="dynClientParamsAction" class="com.path.actions.common.dynclientparams.DynClientParamsAction" scope="prototype" parent="baseAction">
+		<property name="dynClientParamsBO" ref="dynClientParamsBO"></property>
+	</bean>
+	<!-- Dynamic Client Params Dynamic Form-->
+	<bean id="dynClientDynamicParamsAction" class="com.path.actions.common.dynclientparams.DynClientDynamicParamsAction" scope="prototype" parent="baseAction">
+		<property name="dynClientParamsBO" ref="dynClientParamsBO"></property>
+	</bean>
+	<!-- #973978 Nazim Jassar PCS - KanbanBoard-->
+	<bean id="kanbanBoardBaseAction" class="com.path.struts2.lib.common.base.KanbanBoardBaseAction" scope="prototype" parent="baseAction">
+	</bean>	
+	
+</beans>

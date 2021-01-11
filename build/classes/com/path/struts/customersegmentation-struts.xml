@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="segmentation" namespace="/path/segmentation" extends="path-default">
+		
+		 <action name="CustSegmentationListAction_*" class="custSegmentationListAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+			    <result name="loadGrid" type="json">
+		             <param name="ignoreHierarchy">false</param>
+		        </result>
+		 </action>
+		 
+		 <action name="CustSegmentationMaintAction_*" class="custSegmentationMaintAction" method="{1}">
+				<result name="custSegmentationList">/WEB-INF/pages/businesscommon/core/segmentation/CustSegmentationList.jsp</result>
+				<result name="custSegmentationMaint">/WEB-INF/pages/businesscommon/core/segmentation/CustSegmentationMaint.jsp</result>
+				<result name="successjson" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+
+				<result name="populateExcludeCifPopup">/WEB-INF/pages/businesscommon/core/segmentation/ExcludeCIFs.jsp</result>
+				<result name="cifTrialSegmentationPopup">/WEB-INF/pages/businesscommon/core/segmentation/CifTrialSegmentationPopup.jsp</result>
+				<result name="success" type="json"> 
+			  		 <param name="ignoreHierarchy">false</param> 
+				</result>
+				<result name="loadSegParams">/WEB-INF/pages/businesscommon/core/segmentation/SegmentationParamsList.jsp</result>
+				<result name="loadSegDefPriorities">/WEB-INF/pages/businesscommon/core/segmentation/SegmentationDefinePriorities.jsp</result>
+				<result name="loadCustSegmentationProcessPage">/WEB-INF/pages/businesscommon/core/segmentation/CustSegmentationProcessMaint.jsp</result>
+				<result name="loadCustSegProcessGrid">/WEB-INF/pages/businesscommon/core/segmentation/CustomerSegmentationProcessGrid.jsp</result>
+				<result name="custScoringProcess">/WEB-INF/pages/businesscommon/core/segmentation/CustScoringProcess.jsp</result>
+				<result name="loadSegSelectParams">/WEB-INF/pages/businesscommon/core/segmentation/SegmentationSelectParamList.jsp</result>
+		</action>
+		
+		<action name="CustSegmentationStatusAction_*" class="custSegmentationStatusAction" method="{1}">
+				<result name="success" type="json"> 
+					<param name="ignoreHierarchy">false</param> 
+				</result>
+		</action>
+		
+		<action name="CustSegmentationDependencyAction_*" class="custSegmentationDependencyAction" method="{1}">
+			<result name="loadJson" type="json">
+		     	<param name="ignoreHierarchy">false</param> 
+		    </result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<package name="merchants" namespace="/path/merchants" extends="path-default">
+	
+		<!-- used for maint form -->
+		<action name="MerchantMgntMaint_*" class="merchantMgntMaintAction" method="{1}">
+			<result name="loadMerchantMgntPage">/WEB-INF/pages/atm/merchants/MerchantMgntList.jsp</result>
+			<result name="loadMerchantMgntMaintPage">/WEB-INF/pages/atm/merchants/MerchantMgntMaint.jsp</result>			
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="alert_success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- used for grid -->
+		<action name="merchantMgntList_*" class="merchantMgntListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action> 
+		
+		<!-- used for status button -->
+		<action name="MerchantMgntStatus_*" class="MerchantMgntStatusAction" method="{1}">
+		    <result name="loadGrid" type="json">
+		      <param name="ignoreHierarchy">false</param>
+		    </result>
+		</action>
+		
+		<!-- used for grid -->
+		<action name="merchantMgntList_*" class="merchantMgntListAction" method="{1}">
+			<result name="success" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action> 
+		
+		<action name="merchantMgntStatusAction_*" class="merchantMgntStatusAction" method="{1}">
+			<result name="loadGrid" type="json">
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>
+

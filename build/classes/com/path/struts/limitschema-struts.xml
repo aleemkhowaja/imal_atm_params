@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<package name="limitSchema" namespace="/path/limitSchema" extends="path-default">
+		<!-- Audit Report Action and Action Details-->
+		<action name="limitSchema_*" class="limitSchemaListAction" method="{1}">
+			<result name="populateLimitSchema">/WEB-INF/pages/businesscommon/limitschema/LimitSchema.jsp</result>
+			<result name="populateLimitSchemaList">/WEB-INF/pages/businesscommon/limitschema/LimitSchemaList.jsp</result>
+			<result name="loadLimitSchema" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+			<result name="success" type="json"> 
+			   <param name="ignoreHierarchy">false</param> 
+			</result>
+		</action>
+		
+		
+			
+	</package>
+
+</struts>   

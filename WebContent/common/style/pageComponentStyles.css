@@ -1,0 +1,501 @@
+/*
+* TP 861837, BBLI190212
+*/
+@media print {
+    body.print-element-body-no-print {
+        display: none;
+    }
+}
+
+/*
+ * CSS Framework 
+ *
+ * Copyright Path Solutions
+ *
+ * 
+ */ 
+ 
+ 
+/*--------------------------------------------------------------------------------------------------------------------
+													Component styling
+---------------------------------------------------------------------------------------------------------------------*/
+ 
+ /* Text Box styling
+----------------------------------*/
+
+.textField {
+	background:url(images/text-bg.gif) repeat-x scroll 0 0 white;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	font-family: tahoma !important;
+	font-size: 12px !important;
+	color: #333333;
+	width: 95%;
+	height: 22px !important;
+	padding-left: 2px;
+	vertical-align: middle;
+	margin-bottom: 2px !important;
+	border-radius:10px;
+	
+}
+
+/* Text Box hover effect*/
+.textField:hover {
+	border-color: #2c6da0;
+	border-width: 2px;
+}
+
+/* Text Box focus effect*/
+.textField:focus {
+	border-color: #2c6da0;
+	border-width: 2px;
+}
+/* color the required inputs with red Shadow */ 
+input[required="true"],select[required="true"],textarea[required="true"],
+input[required="required"],select[required="required"],textarea[required="required"]{
+
+    -moz-box-shadow:inset 0 0 2px red;
+     box-shadow:inset  0 0 2px red;
+    -webkit-box-shadow:inset 0 0  2px red;
+}
+
+
+
+.FreezePaneOn
+ {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    visibility: visible;
+    width: 100%;
+    height: 100%;
+    z-index: 1111;
+    opacity:0.25;
+    padding-top: 20%;
+    background-color: #DDD;
+ }
+.label
+{
+	margin-right: 6px;
+}
+
+.textInput
+{
+border:1px solid #ACB5B5;
+font-family:Arial;
+font-size:14;
+font-weight:normal;
+height:20;
+width: 156;
+}
+
+.selectInput
+{
+border-top: 1px #316D6E solid;
+text-indent: 1; 
+font-weight: normal;
+font-family: Arial; 
+font-size: 14; 
+height: 20;
+width: 156;
+border-right: 1 #316D6E solid; 
+border-bottom: 1 #316D6E solid; 
+border-left: 1 #8D8E8E solid;
+}
+
+
+ /* Date Picker styling
+----------------------------------*/
+
+.dateField {
+	background:url(images/text-bg.gif) repeat-x scroll 0 0 white;
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	font-family: tahoma !important;
+	font-size: 12px !important;
+	color: #333333;
+	width: 88%;
+	height: 22px !important;
+	padding-left: 2px;
+	vertical-align: middle;
+	margin-bottom: 2px !important;
+	border-radius:10px;
+	
+}
+
+/* Date Picker hover effect*/
+.dateField:hover {
+	border-color: #2c6da0;
+	border-width: 2px;
+}
+/* Date Picker focus effect*/
+.dateField:focus {
+	border-color: #2c6da0;
+	border-width: 2px;
+}
+
+ /* Check Box styling
+----------------------------------*/
+.checkBoxField
+{
+	width: 15px;
+	height: 15px;
+	cursor: pointer;
+}
+
+ /* Header Bar Div styling
+----------------------------------*/
+.panel-header-div {
+	background-color: #CBDDF3;
+	background-image:-moz-linear-gradient(center top, #DAE7F6, #CDDEF3 45%, #ABC7EC 46%,#ABC7EC 50%, #B8CFEE 51%, #CBDDF3);
+	background-image:linear-gradient(top,#dae7f6,#cddef3 45%,#abc7ec 46%,#abc7ec 50%,#b8cfee 51%,#cbddf3);
+	background-image:-webkit-gradient(linear,50% 0,50% 100%,color-stop(0%,#dae7f6),color-stop(45%,#cddef3),color-stop(46%,#abc7ec),color-stop(50%,#abc7ec),color-stop(51%,#b8cfee),color-stop(100%,#cbddf3));
+	border-style: solid;
+	border-width: 1px;
+	padding: 5px 5px;
+	border-color: #99BBE8;
+}
+
+ /* Header Bar Text styling
+----------------------------------*/
+.panel-header-text {
+	color: #04468C;
+	font-family: tahoma, arial, verdana, sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	-moz-user-select: none;
+	cursor: default;
+	white-space: nowrap;
+}
+
+/* -----------------------------------------------------------------------------------------------------------------
+													Layout styling
+---------------------------------------------------------------------------------------------------------------------*/
+
+
+ /* Data Component <td> Styling
+----------------------------------*/
+.fldDataEdit {
+	white-space: nowrap;
+}
+
+ /* Label Component <td> Styling
+----------------------------------*/
+.fldLabelView {
+	/* PathSolutions [Libin] modified by removing font, font-color and size to make label display theme specific*/
+	padding: 0 0 0 10px; 
+	white-space: nowrap;
+}
+
+
+/*---------------------------------------------------------------------------------------------------------------------------------------
+					Align attribute classes  [ To avoid repeating text or component alignment in each CSS ]
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+.left
+{
+	text-align: left;
+}
+.right
+{
+	text-align: right !important;
+}
+.center
+{
+	text-align: center;
+}
+
+ /* Blank line <td> or <tr> styling class to provide space between two items
+ 	eg. 				<tr><td class="blankLine"></td></tr>
+--------------------------------------------------------------------------*/
+.blankLine 
+{
+	background:url(images/blank-line.gif) repeat-x;
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------------------
+					Section background shadow image classes[ To give a shadowed border to the component tables ]
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+.section-top-left {background: url(images/top_lef.gif);}
+.section-top-center { background: url(images/top_mid.gif) repeat-x;}
+.section-top-right {background: url(images/top_rig.gif);}
+.section-left {  background:url(images/cen_lef.gif) repeat-y;}
+.section-right {  background: url(images/cen_rig.gif) repeat-y;}
+.section-bottom-left {background: url(images/bot_lef.gif);}
+.section-bottom-center {background: url(images/bot_mid.gif);}
+.section-bottom-right {background: url(images/bot_rig.gif);}
+
+
+ /* Show Loading animation before screen loading [Progress Bars]
+--------------------------------------------------------------------------*/
+.showLoading
+{
+	background:url(images/loaderRectangle.gif)no-repeat;
+	background-position:center;
+	width: 100%;
+	
+}
+
+.showPageLoadingWithLabel
+{
+	background-image:url(images/pageLoading.gif) ;
+	background-repeat: no-repeat;
+	background-position:center;
+	width: 100%;
+	
+}
+
+.showPageLoadingOnTreeClick
+{
+	background-image:url(images/loadingTreeClick.gif);
+	background-position:center;
+	background-repeat: no-repeat;
+	width: 100%;
+	
+}
+/* PathSolutions [Libin] added 2 new styles for the progress bar */
+.progBarBackGound
+{
+ 	position:absolute;
+ 	top:0;
+ 	z-index:2147483645;
+    opacity:0.1;
+	width:100%;
+	height: 100%;
+}
+.progBarContent
+{
+ 	position:absolute;
+ 	z-index:2147483646;
+ 	text-align:center;
+	top:45%;
+	width:100%;
+}
+/* -- */
+.textCompSize
+{
+	width: 100%;
+	box-sizing: border-box; /*to not make Text overlap TD in which it is wrapped*/
+	 
+}
+.textCompSize[type='text']
+{
+  height: 20px !important;
+}
+.selectCompSize /* PathSolutions [Libin] added to separate the style for select inputs*/
+{
+	width: 100%;
+	padding: 2px; 
+}
+.textCompSize:focus ,.dateCompSize:focus ,.liveSearchCompSize:focus ,.selectCompSize:focus /* PathSolutions [Libin] added to change the appearance(border boldness) for input fields on focus*/
+{
+	border-width: 2px;
+}
+
+.textCompSize:hover ,.dateCompSize:hover ,.liveSearchCompSize:hover ,.selectCompSize:hover /* PathSolutions [Libin] added to change the appearance(border boldness) for input fields on mouse hover*/
+{
+	border-width: 2px ;
+	/* border-width: 2px\0/IE9 !important; */
+}
+
+.liveSearchCompSize:hover , .liveSearchCompSize:focus  /* PathSolutions [Libin] separated this entry to handle an IE screen issue of these components on hover and focus*/
+{
+	border-width: 2px ;
+	border-right-width: 2px ;
+	/* border-width: 2px\0/IE9 !important;*/
+}
+
+
+.dateCompDiv
+{
+	white-space:nowrap;
+}
+
+.lookupCompSize
+{
+	width: 82% !important;
+}
+
+
+.liveSearchGridCompSize
+{
+/*width: 100% !important;*/
+}
+.liveSearchText
+{
+	width: 100%;
+	/* IE9 Added to  eliminate padding in live search and it container 
+	 margin-left:-2px \0/IE9 !important; */
+}
+.liveSearchSpanDisplay
+{
+	display: table-cell;/*inline-block; */
+	vertical-align:top;
+	padding-left: 4px \0/IE9 !important; 
+	padding-right: 0px \0/IE9 !important; 
+}
+.liveSearchInputCorner
+{
+	-moz-border-radius: 5px 0px 0px 5px;
+	-webkit-border-radius: 5px 0px 0px 5px;
+	border-radius: 5px 0px 0px 5px;
+}
+.liveSearchSpanCorner
+{
+	-moz-border-radius: 0px 5px 5px 0px;
+	-webkit-border-radius: 0px 5px 5px 0px;
+	border-radius: 0px 5px 5px 0px;
+}
+/*[Libin] Lookup Layout adjustment for Arabic/Eng switching*/
+.liveSearchInputCornerforRTL
+{
+	-moz-border-radius: 0px 5px 5px 0px;
+	-webkit-border-radius: 0px 5px 5px 0px;
+	border-radius: 0px 5px 5px 0px;
+}
+/*[Libin] Lookup Layout adjustment for Arabic/Eng switching*/
+.liveSearchSpanCornerforRTL
+{
+	-moz-border-radius: 5px 0px 0px 5px;
+	-webkit-border-radius: 5px 0px 0px 5px;
+	border-radius: 5px 0px 0px 5px;
+}
+
+.liveSearchSpanSize
+{
+	width: 16px;
+
+}
+.liveSearchOverlay
+{
+	border: 0px;display:none;
+}
+
+.liveSearchLookupIdDiv
+{
+  white-space: nowrap;
+  display: table;
+  width: 100%;
+}
+
+.live-search-ui{
+		height:18px !important;;
+}
+
+.liveSearchGridTd
+{
+	border-right-style:hidden !important;
+	border-bottom-style:hidden !important;
+	padding: 0 0 0 0;
+	width: 100%;	
+}
+
+/*------Spinner--------*/
+
+.spinnerTextCorners
+{
+	-moz-border-radius: 5px 0px 0px 5px;
+	-webkit-border-radius: 5px 0px 0px 5px;
+	border-radius: 5px 0px 0px 5px;
+}
+.spanUpCorners 
+{
+   -moz-border-radius : 0px 5px 0px 0px;
+    -webkit-border-radius: 0px 5px 0px 0px;
+	border-radius: 0px 5px 0px 0px;
+}
+.spanDownCorners
+{
+    -moz-border-radius :  0px 0px 5px 0px;
+    -webkit-border-radius: 0px 0px 5px 0px;
+	border-radius: 0px 0px 5px 0px;
+}
+
+/*---------------------------------------------------------------------------------------------------------------------------------------
+																Header Banner
+----------------------------------------------------------------------------------------------------------------------------------------*/
+
+.header-top-left 
+{
+	/*background: url(images/headerBannerTopLeft.png);*/
+	background:linear-gradient(#005981, #0288C4);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#005981', endColorstr='#0288C4')"; /* IE8+ */ 
+	background:-moz-linear-gradient(#005981, #0288C4);
+	background:-webkit-gradient(#005981, #0288C4);
+	background:-webkit-linear-gradient(#005981, #0288C4);/*Safari*/
+}
+.header-top-center 
+{
+	/* background: url(images/headerBannerTopCenter.png);*/
+	background:linear-gradient(#005981, #0288C4);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#005981', endColorstr='#0288C4')"; /* IE8+ */ 
+	background:-moz-linear-gradient(#005981, #0288C4);
+	background:-webkit-gradient(#005981, #0288C4);
+	background:-webkit-linear-gradient(#005981, #0288C4);/*Safari*/
+}
+.header-top-right 
+{
+	/*background: url(images/headerBannerTopRight.png);*/
+	background:linear-gradient(#005981, #0288C4);
+	-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr='#005981', endColorstr='#0288C4')"; /* IE8+ */ 
+	background:-moz-linear-gradient(#005981, #0288C4);
+	background:-webkit-gradient(#005981, #0288C4);
+	background:-webkit-linear-gradient(#005981, #0288C4);/*Safari*/
+}
+
+
+/* readonly/disabled inputs*/
+input[readonly],input[disabled],textarea[readonly]
+{ 
+	border : 1px solid #999999 !important;
+	color:#3C3C3C !important;
+}
+/* readonly/disabled inputs*/
+input[readonly]:not(.pathHighlights),input[disabled]:not(.pathHighlights),textarea[readonly]:not(.pathHighlights)
+{ 
+	background:#E1E1E1  !important;
+}
+input[mode="number"]
+{
+  text-align:right !important;
+}
+/*Context Menu*/
+.context-menu {
+    background-color: #F2F2F2;
+    border: 1px solid #74b2e2;
+    list-style-type: none;
+    /*margin: 0;*/
+    padding: 0;
+}
+.context-menu a
+{
+    color: #0070a3;
+    text-decoration: none;
+}
+.context-menu a:hover {
+    background-color: #FFD47F;
+    color: #0070a3;
+    text-decoration: none;
+}
+.icon-context-menu
+{
+  display:inline-block !important;
+  height:12px !important
+}
+
+.pathHighlights
+{
+	background: #FFFF7F !important;
+}
+.checkboxHighlights
+{
+	outline: 4px #FFFF7F solid;
+}
+.pathMinWidth {
+	width: 100%;
+	min-width: 500px;
+	overflow: auto;
+}

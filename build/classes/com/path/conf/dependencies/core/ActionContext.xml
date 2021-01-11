@@ -1,0 +1,379 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+ 	<bean id="cifDependencyAction" class="com.path.actions.dependencies.core.CifDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="cifBO" ref="cifBO"></property>
+	</bean>
+ 	<bean id="accountDependencyAction" class="com.path.actions.dependencies.core.AccountDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="accountBO" ref="accountBO"></property>
+	</bean>
+ 	<bean id="currencyDependencyAction" class="com.path.actions.dependencies.core.CurrencyDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="currencyBO" ref="currencyBO"></property>
+	</bean>
+ 	<bean id="glDependencyAction" class="com.path.actions.dependencies.core.GLDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="glBO" ref="glBO"></property>
+	</bean>
+	<bean id="employeeDependencyAction" class="com.path.actions.dependencies.core.EmployeeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="employeeBO" ref="employeeBO"></property>
+	</bean>
+	<bean id="cifRoleDependencyAction" class="com.path.actions.dependencies.core.CifRoleDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="cifRoleBO" ref="cifRoleBO"></property>
+	</bean>
+	<bean id="divisionDependencyAction" class="com.path.actions.dependencies.core.DivisionDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="divisionBO" ref="divisionBO"></property>
+	</bean>
+	<bean id="departmentDependencyAction" class="com.path.actions.dependencies.core.DepartmentDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="departmentBO" ref="departmentBO"></property>
+	</bean>
+	<bean id="floatingRateCodeDependencyAction" class="com.path.actions.dependencies.core.FloatingRateCodeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="floatingRateCodeBO" ref="floatingRateCodeBO"></property>
+	</bean>
+	<bean id="cityDependencyAction" class="com.path.actions.dependencies.core.CitiesDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="citiesBO" ref="citiesBO"></property>
+		<property name="coreCommonServiceBO" ref="coreCommonServiceBO"></property>
+	</bean>
+	<bean id="sectorDependencyAction" class="com.path.actions.dependencies.core.SectorsDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="sectorsBO" ref="sectorsBO"></property>
+		<property name="coreCommonServiceBO" ref="coreCommonServiceBO"></property>
+	</bean>
+	
+	<bean id="oneObligorDependencyAction" class="com.path.actions.dependencies.core.OneObligorDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="oneObligorBO" ref="oneObligorBO"></property>
+	</bean>
+	
+	<bean id="relationDependencyAction" class="com.path.actions.dependencies.core.RelationDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="relationBO" ref="relationBO"></property>
+	</bean>
+	
+	<bean id="cifRatingDependencyAction" class="com.path.actions.dependencies.core.CifRatingDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="cifRatingBO" ref="cifRatingBO"></property>
+	</bean>
+	
+	<bean id="cifProfileDependencyAction" class="com.path.actions.dependencies.core.CifProfileDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="cifProfileBO" ref="cifProfileBO"></property>
+	</bean>
+ 	<bean id="linkDependencyAction" class="com.path.actions.dependencies.core.LinkDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="linkBO" ref="linkBO"></property>
+	</bean>
+ 	<bean id="chequeDependencyAction" class="com.path.actions.dependencies.core.ChequeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="chequeBO" ref="chequeBO"></property>
+	</bean>
+	
+	<bean id="chequeBookDesignDependencyAction" class="com.path.actions.dependencies.core.ChequeBookDesignDependencyAction" scope="prototype" parent="baseAction">
+		<property name="chequeBookDesignBO" ref="chequeBookDesignBO"></property>
+	</bean>	
+ 	
+ 	<bean id="chequeBookLeavesDependencyAction" class="com.path.actions.dependencies.core.ChequeBookLeavesDependencyAction" scope="prototype" parent="baseAction">
+		<property name="chequeBookLeavesBO" ref="chequeBookLeavesBO"></property>
+	</bean>
+	
+	<bean id="visitReasonDependencyAction" class="com.path.actions.dependencies.core.VisitReasonDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="visitReasonBO" ref="visitReasonBO"></property>
+	</bean>	
+ 	
+ 	<bean id="chequeBookTypesDependencyAction" class="com.path.actions.dependencies.core.ChequeBookTypesDependencyAction" scope="prototype" parent="baseAction">
+		<property name="chequeBookTypesBO" ref="chequeBookTypesBO"></property>
+	</bean>
+	
+	<bean id="cifTypeDependencyAction" class="com.path.actions.dependencies.core.CifTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="cifTypeBO" ref="cifTypeBO"></property>
+	</bean>
+	
+	<bean id="idTypeDependencyAction" class="com.path.actions.dependencies.core.IdTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="idTypeBO" ref="idTypeBO"></property>
+	</bean>
+	
+	<bean id="religionDependencyAction" class="com.path.actions.dependencies.core.ReligionDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="religionBO" ref="religionBO"></property>
+	</bean>
+	
+	<bean id="nationalityDependencyAction" class="com.path.actions.dependencies.core.NationalityDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="nationalityBO" ref="nationalityBO"></property>
+	</bean>
+	
+	<bean id="raceDependencyAction" class="com.path.actions.dependencies.core.RaceDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="raceBO" ref="raceBO"></property>
+	</bean>
+	
+	<bean id="salutationDependencyAction" class="com.path.actions.dependencies.core.SalutationDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="salutationBO" ref="salutationBO"></property>
+	</bean>
+	
+	<bean id="relationBetweenCIFDependencyAction" class="com.path.actions.dependencies.core.RelationBetweenCIFDependencyAction" scope="prototype" parent="retailBaseAction">
+		 <property name="cifRelationBO" ref="cifRelationBO"></property>
+	</bean>
+	
+	<bean id="cardTypeDependencyAction" class="com.path.actions.dependencies.core.CardTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		 <property name="cardTypeBO" ref="cardTypeBO"></property>
+	</bean>
+	
+	<bean id="creditTypeDependencyAction" class="com.path.actions.dependencies.core.CreditTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		 <property name="creditTypeBO" ref="creditTypeBO"></property>
+	</bean>
+	
+	<bean id="positionDependencyAction" class="com.path.actions.dependencies.core.PositionDependencyAction" scope="prototype" parent="retailBaseAction">
+		 <property name="positionBO" ref="positionBO"></property>
+	</bean>
+		
+	<bean id="educationLevelDependencyAction" class="com.path.actions.dependencies.core.EducationLevelDependency" scope="prototype" parent="retailBaseAction">
+		 <property name="educationalLevelBO" ref="educationalLevelBO"></property>
+	</bean>
+		
+	
+	<bean id="economicSectorDependencyAction" class="com.path.actions.dependencies.core.EconomicSectorDependencyAction" scope="prototype" parent="retailBaseAction" >
+		<property name="economicSectorBO" ref="economicSectorBO"></property>
+	</bean>
+	
+	<bean id="legalStatusDependencyAction" class="com.path.actions.dependencies.core.LegalStatusDependencyAction" scope="prototype" parent="retailBaseAction" >
+		<property name="legalStatusBO" ref="legalStatusBO"></property>
+	</bean>
+	
+	<bean id="subEcoSectorDependencyAction" class="com.path.actions.dependencies.core.SubEcoSectorDependencyAction" scope="prototype" parent="retailBaseAction" >
+		<property name="subEcoSectorBO" ref="subEcoSectorBO"></property>
+	</bean>
+	
+	<bean id="residenceTypesDependencyAction" class="com.path.actions.lookups.core.ResidenceTypesDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="residenceTypesBO" ref="residenceTypesBO"></property>		
+	</bean>
+	
+	<bean id="occupationDependencyAction" class="com.path.actions.dependencies.core.OccupationDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="occupationBO" ref="occupationBO"></property>
+	</bean>
+	
+	<bean id="rankingDependencyAction" class="com.path.actions.dependencies.core.RankingDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="rankingBO" ref="rankingBO"></property>
+	</bean>
+	
+	<bean id="educationalLevelDependencyAction" class="com.path.actions.dependencies.core.EducationalLevelDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="educationalLevelBO" ref="educationalLevelBO"></property>
+	</bean>
+	
+	<bean id="templateCodeDependencyAction" class="com.path.actions.dependencies.core.TemplateCodeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="tempCodeBO" ref="tempCodeBO"></property>
+	</bean>
+	
+	<bean id="vatCodeDependencyAction" class="com.path.actions.dependencies.core.VatCodeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="vatCodeBO" ref="vatCodeBO"></property>
+	</bean>
+	
+	<bean id="chargesDependencyAction" class="com.path.actions.dependencies.core.ChargesDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="chargesBO" ref="chargesBO"></property>
+	</bean>	
+	
+	<bean id="toDoTemplateDependencyAction" class="com.path.actions.dependencies.core.ToDoTemplateDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="toDoTemplateBO" ref="toDoTemplateBO"></property>
+	</bean>
+	
+	<bean id="integrationControlDependencyAction" class="com.path.actions.dependencies.core.IntegrationControlDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="integrationControlBO" ref="integrationControlBO"></property>
+	</bean>
+	
+	<bean id="providerReportDependencyAction" class="com.path.actions.dependencies.core.ProviderReportDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="providerReportBO" ref="providerReportBO"></property>
+	</bean>
+	
+	<bean id="ctsReportArgDependencyAction" class="com.path.actions.dependencies.core.CtsReportArgDependencyAction" scope="prototype" parent="baseAction">
+		<property name="ctsReportArgBO" ref="ctsReportArgBO"></property>
+	</bean>
+	
+	<bean id="userLevelDependencyAction" class="com.path.actions.dependencies.core.UserLevelDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="userLevelBO" ref="userLevelBO"></property>
+	</bean>
+	
+	<bean id="cifSwiftDependencyAction" class="com.path.actions.dependencies.core.CifSwiftDependencyAction" scope="prototype" parent="baseAction">
+		<property name="cifSwiftBO" ref="cifSwiftBO"></property>		
+	</bean>
+	
+	<bean id="swiftInfoDependencyAction" class="com.path.actions.dependencies.core.SwiftInfoDependencyAction" scope="prototype" parent="baseAction">
+		<property name="swiftInfoBO" ref="swiftInfoBO"></property>		
+	</bean>
+	
+	<bean id="billTypeDependencyAction" class="com.path.actions.dependencies.core.BillTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		 <property name="billTypeBO" ref="billTypeBO"></property>
+	</bean>
+	
+	<bean id="passbookDependencyAction" class="com.path.actions.dependencies.core.PassbookDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="passbookBO" ref="passbookBO"></property>
+	</bean>
+	
+	<bean id="rifcttGlDependencyAction" class="com.path.actions.dependencies.core.RifcttGlDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="rifcttGlBO" ref="rifcttGlBO"></property>
+	</bean>
+	
+	 <bean id="ctsTrxTypeDependencyAction" class="com.path.actions.dependencies.core.CtsTrxTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		 <property name="trxTypeBO" ref="trxTypeBO"></property>
+	</bean>
+	<bean id="postalCodeDependencyAction" class="com.path.actions.dependencies.core.PostalCodeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="postalCodeBO" ref="postalCodeBO"></property>
+	</bean>
+	
+	<bean id="ctsClearingHouseDependencyAction" class="com.path.actions.dependencies.core.CtsClearingHouseDependencyAction" scope="prototype" parent="retailBaseAction">
+		 <property name="ctsClearingHouseBO" ref="ctsClearingHouseBO"></property>
+	</bean>
+	
+	<bean id="chargesFeesPolicyDependencyAction" class="com.path.actions.dependencies.core.ChargesFeesPolicyDependencyAction" scope="prototype" parent="retailBaseAction">
+		 <property name="chargesFeesPolicyBO" ref="chargesFeesPolicyBO"></property>
+	</bean>
+	
+	<bean id="unitsDependencyAction" class="com.path.actions.dependencies.core.UnitsDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="unitsBO" ref="unitsBO"></property>
+	</bean>
+	
+	<bean id="amfStatusReasonDependencyAction" class="com.path.actions.dependencies.core.AmfStatusReasonDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="amfStatusReasonBO" ref="amfStatusReasonBO"></property>
+	</bean>
+	
+	<bean id="accountNumberDependencyAction" class="com.path.actions.dependencies.core.AccountNumberDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="accountBO" ref="accountBO"></property>
+	</bean>
+	
+	<bean id="chargesSchemaDependencyAction" class="com.path.actions.dependencies.core.ChargesSchemaDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="chargesSchemaBO" ref="chargesSchemaBO"></property>
+	</bean>
+	
+	<bean id="facilityDependencyAction" class="com.path.actions.dependencies.core.FacilityDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="facilityTypeBO" ref="facilityTypeBO"></property>
+	</bean> 
+	
+	<bean id="fmsDrawdownsDependencyAction" class="com.path.actions.dependencies.core.FmsDrawdownsDependencyAction" scope="prototype" parent="baseAction">
+		<property name="fmsDrawdownsBO" ref="fmsDrawdownsBO"></property>		
+	</bean>
+		<bean id="productClassDependencyAction" class="com.path.actions.dependencies.core.ProductClassDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="productClassBO" ref="productClassBO"></property>
+	</bean> 
+	
+	<bean id="accountTypeDependencyAction" class="com.path.actions.dependencies.core.AccountTypeDependencyAction" scope="prototype" parent="baseAction">
+		<property name="accountTypeBO" ref="accountTypeBO"></property>		
+	</bean>
+	
+	<bean id="lostFoundDependencyAction" class="com.path.actions.dependencies.core.LostFoundDependencyAction" scope="prototype" parent="retailBaseAction">
+		<!-- <property name="lostFoundBO" ref="lostFoundBO"></property>  -->
+	</bean>
+	
+	<bean id="reasonDependencyAction" class="com.path.actions.dependencies.core.ReasonDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="reasonBO" ref="reasonBO"></property>
+	</bean>
+	
+	<bean id="fmsIndicatorDependencyAction" class="com.path.actions.dependencies.core.FmsIndicatorDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="fmsIndicatorBO" ref="fmsIndicatorBO"></property>
+	</bean>
+	
+	<bean id="pmsDealDependencyAction" class="com.path.actions.dependencies.core.PmsDealDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="pmsDealBO" ref="pmsDealBO"></property>
+	</bean>
+	<bean id="blackSourceDependencyAction" class="com.path.actions.dependencies.core.BlackSourceDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="blackSourceBO" ref="blackSourceBO"></property>
+	</bean>
+	
+	<bean id="blackListTypeDependencyAction" class="com.path.actions.dependencies.core.BlackListTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="blackListTypeBO" ref="blackListTypeBO"></property>
+	</bean>
+	
+	<bean id="cardsMessageDependencyAction" class="com.path.actions.dependencies.core.CardsMessageDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="cardsMessageBO" ref="cardsMessageBO"></property>
+	</bean>
+	<bean id="cardsDesignDependencyAction" class="com.path.actions.dependencies.core.CardsDesignDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="cardsDesignBO" ref="cardsDesignBO"></property>
+	</bean>
+		<bean id="referenceDependencyAction" class="com.path.actions.dependencies.core.ReferenceDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="referenceBO" ref="referenceBO"></property>
+	</bean>
+	
+	<bean id="jvTypeDependencyAction" class="com.path.actions.dependencies.core.JVTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="jvTypesBO" ref="jvTypesBO"></property>
+	</bean>
+	<bean id="billCollectionDependencyAction" class="com.path.actions.dependencies.core.BillCollectionDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="billCollectionBO" ref="billCollectionBO"></property>
+	</bean>	
+	
+	<bean id="facilityTypeDependencyAction" class="com.path.actions.dependencies.core.FacilityTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="facilityTypeBO" ref="facilityTypeBO"></property>
+	</bean>
+	<bean id="letterGuaranteeDependencyAction" class="com.path.actions.dependencies.core.LetterGuaranteeDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="letterGuaranteeBO" ref="letterGuaranteeBO"></property>
+	</bean>
+	<bean id="letterCreditDependencyAction" class="com.path.actions.dependencies.core.LetterCreditDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="letterCreditBO" ref="letterCreditBO"></property>
+	</bean>
+	<bean id="administrationDependencyAction" class="com.path.actions.dependencies.core.AdministrationDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="administrationBO" ref="administrationBO"></property>
+	</bean>
+	
+	<bean id="itemPropertydetDependencyAction" class="com.path.actions.dependencies.core.ItemPropertydetDependencyAction" scope="prototype" parent="baseAction">
+		<property name="itemPropertydetBO" ref="itemPropertydetBO"></property>
+	</bean>
+	<bean id="ctsRequestTypeDependencyAction" class="com.path.actions.dependencies.core.CtsRequestTypeDependencyAction" scope="prototype" parent="baseAction">
+		<property name="ctsRequestBO" ref="ctsRequestBO"></property>
+	</bean>
+	
+	<bean id="procedureIdDependencyAction" class="com.path.actions.dependencies.core.ProcedureIdDependencyAction" scope="prototype" parent="baseAction">
+	 	<property name="procedureIdBO" ref="procedureIdBO"></property>
+	</bean>
+	
+	<bean id="queryIdDependencyAction" class="com.path.actions.dependencies.core.QueryIdDependencyAction" scope="prototype" parent="baseAction">
+	 	<property name="queryIdBO" ref="queryIdBO"></property>
+	</bean>
+
+	<bean id="providerBO" factory-bean="pathBeanFactory" factory-method="getInstance" parent="baseBO">
+		<constructor-arg name="implClassName" value="com.path.bo.core.provider.impl.ProviderBOImpl" />
+		<constructor-arg name="interfaceName" value="com.path.bo.core.provider.ProviderBO" />
+		<constructor-arg name="remoteServiceName" value="providerBOService" />
+		<property name="providerDAO" ref="providerDAO"></property>
+	</bean>
+	
+	<bean id="avaCategoryDependencyAction" class="com.path.actions.dependencies.core.AvaCategoryDependencyAction" scope="prototype" parent="baseAction">
+	 <property name="avaCategoryBO" ref="avaCategoryBO"></property>
+	</bean>
+	
+	<bean id="avaBeneciciariesDependencyAction" class="com.path.actions.dependencies.core.AvaBeneciciariesDependencyAction" scope="prototype" parent="baseAction">
+	 	<property name="avaBeneficiariesLkpBO" ref="avaBeneficiariesLkpBO"></property>
+	</bean>
+	
+	<bean id="operationTypeDependencyAction" class="com.path.actions.dependencies.core.OperationTypeDependencyAction" scope="prototype" parent="retailBaseAction">
+	 	<property name="ctsOperationsTypeLkpBO" ref="ctsOperationsTypeLkpBO"></property>
+	</bean>
+	
+	<bean id="clubbingDependencyAction" class="com.path.actions.dependencies.core.ClubbingDependencyAction" scope="prototype" parent="baseAction">
+	 	<property name="clubbingBO" ref="clubbingBO"></property>
+	</bean>
+	<bean id="clubbedAccDependencyAction" class="com.path.actions.dependencies.core.ClubbedAccDependencyAction" scope="prototype" parent="baseAction">
+	 	<property name="clubbingBO" ref="clubbingBO"></property>
+	</bean>
+	<bean id="criteriaLkpBO" factory-bean="pathBeanFactory" factory-method="getInstance" parent="baseBO">
+		<constructor-arg name="implClassName" value="com.path.bo.core.criteria.impl.CriteriaLkpBOImpl" />
+		<constructor-arg name="interfaceName" value="com.path.bo.core.criteria.CriteriaLkpBO" />
+		<constructor-arg name="remoteServiceName" value="criteriaLkpBOService" />
+		<property name="criteriaLkpDAO" ref="criteriaLkpDAO"></property>
+	</bean>
+	
+	<bean id="instructionDefinitionDependencyAction" class="com.path.actions.dependencies.core.InstructionDefinitionDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="instructionDefinitionBO" ref="instructionDefinitionBO"></property> 
+	</bean>
+	
+	<bean id="regCenterDependencyAction" class="com.path.actions.dependencies.core.RegistrationCenterDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="registrationCenterBO" ref="registrationCenterBO"></property> 
+	</bean>
+	
+	<bean id="instructionSubInstrDependencyAction" class="com.path.actions.dependencies.core.InstructionSubInstrDependencyAction" scope="prototype" parent="retailBaseAction">
+		<property name="instructionSubInstrBO" ref="instructionSubInstrBO"></property> 
+	</bean>
+
+	<bean id="economicAgentDependencyAction" class="com.path.actions.dependencies.core.EconomicAgentDependencyAction" scope="prototype" parent="retailBaseAction" >
+		<property name="economicAgentBO" ref="economicAgentBO"></property>
+	</bean>	
+
+	<bean id="professionCategoryDependencyAction" class="com.path.actions.dependencies.core.ProfessionCategoryDependencyAction" scope="prototype" parent="retailBaseAction" >
+		<property name="professionCategoryBO" ref="professionCategoryBO"></property>
+	</bean>		
+	
+	<bean id="professionSegmentDependencyAction" class="com.path.actions.dependencies.core.ProfessionSegmentDependencyAction" scope="prototype" parent="retailBaseAction" >
+		<property name="professionSegmentBO" ref="professionSegmentBO"></property>
+	</bean>	
+	
+	<bean id="professionDependencyAction" class="com.path.actions.dependencies.core.ProfessionDependencyAction" scope="prototype" parent="retailBaseAction" >
+		<property name="professionBO" ref="professionBO"></property>
+	</bean>	
+	
+</beans>

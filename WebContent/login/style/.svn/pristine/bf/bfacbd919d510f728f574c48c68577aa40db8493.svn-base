@@ -1,0 +1,235 @@
+/*******for new layout**********/
+body {
+    
+	margin-top: 200px;
+}
+.style2 {font-family: Calibri}
+.style5 {
+	font-family: Arial, Helvetica, sans-serif;
+	color: #FFFFFF;
+	font-size: 12px;
+	font-weight: bold;
+}
+.style9 {color: #FFFFFF}
+.style23 {color: #FFFFFF; font-family: Calibri; font-size: 14; }
+.style35 {font-size: 12px}
+.style36 {color: #003366; font-family: Calibri; font-size: 12px; }
+.style37 {color: #003366; font-size: 12px; }
+.style38 {
+	font-family: Calibri;
+	color: #FFFFFF;
+	font-weight: bold;
+	font-size: 12;
+}
+.style40 {color: #000000; font-family: Calibri; font-size: 10px; }
+.style43 {
+	color: #003366;
+	font-weight: bold;
+	font-size: 24px;
+}
+.style44 {
+	color: #FF6600;
+	font-weight: bold;
+	font-size: 24px;
+}
+.style46 {color: #003366; font-weight: bold; font-size: 12px; }
+a:link {
+	color: #003366;
+	text-decoration: none;
+}
+a:visited {
+	color: #003366;
+	text-decoration: none;
+}
+a:hover {
+	color: #FF6600;
+	text-decoration: none;
+}
+a:active {
+	color: #003366;
+	text-decoration: none;
+}
+/*************/
+
+.top
+{
+	font-size : 10px;
+	font-family: verdana;
+	color : #686868;
+  font-weight :normal;
+	cursor:hand;
+}
+.bot
+{
+	font-size : 10px;
+	font-family: verdana;
+	color : #777777;
+  font-weight :normal;
+	cursor:hand;
+}
+.bote
+{
+	font-size : 10px;
+	font-family: verdana;
+	color : #000000;
+  font-weight :normal;
+}
+.wel
+{
+	font-size : 14px;
+	font-family: verdana;
+	color : #327DAA;
+  font-weight :bold;
+}
+.wele
+{
+	font-size : 12px;
+	font-family: verdana;
+	color : #FFFFFF;
+  font-weight :bold;
+}
+.note
+{
+	font-size : 10px;
+	font-family: verdana;
+	color : #D1325B;
+  font-weight :bold;
+}
+.ntext
+{
+	font-size : 10px;
+	font-family: verdana;
+	color : #7D7E7E;
+  font-weight :normal;
+}
+
+.white
+{
+  font-size:11px;
+  font-family:verdana;
+  color:#FFFFFF;
+  font-weight:bold;
+}
+
+
+
+.black
+{
+      font-size:11px;
+      font-family:arial;
+      color:#000000;
+      font-weight:bold;
+
+}
+
+.blk
+{
+      font-size:11px;
+      font-family:arial;
+      color:#000000;
+      font-weight:bold;
+}
+
+.ent
+{
+	font-size : 13px;
+	font-family: arial;
+	color : #378DC1;
+  font-weight :bold;
+	cursor:hand;
+}
+input
+{
+    font: 8pt Arial;
+    height: 19px;
+    color: #1F5647;
+    border: 1pt solid;
+}
+
+input.radioBtn
+{
+    font: 8pt Arial;
+    height: 19px;
+    color: #1F5647;
+    border: 0pt solid;
+    height: 12pt;
+}
+tt
+{
+	font-size: 10px;
+	font-family:Arial;
+	color : #000000;
+  font-weight : normal;
+	cursor:hand;
+}
+
+td
+{
+	font-size: 10px;
+	font-family:Arial;
+	color : #000000;
+  font-weight : normal;
+}
+
+.kadet
+{
+	font-size : 11px;
+	font-family:Arial;
+	color : #000000;
+  font-weight : normal;
+}
+
+select
+
+{
+	 border-top: 1px #316D6E solid;
+	 width: 130pt; 
+	 text-indent: 1px; 
+	 font-weight: normal;
+	 font-family: Arial; 
+	 font-size: 10px; 
+	 height: 12pt; 
+	 border-right: 1px #316D6E solid; 
+	 border-bottom: 1px #316D6E solid; 
+	 border-left: 1px #8D8E8E solid
+}
+
+legend
+{
+  border: 1px #ACB5B5 solid;
+  border: 1px #ACB5B5 solid;
+  border: 1px #ACB5B5 solid;
+  border: 1px #ACB5B5 solid;
+  width:260px;
+  height: 100%;
+  font-weight: bold;
+  font-family: Arial;
+  font-size: 11px;
+  color:#575757;
+  background-color:#EEF0F0;
+}
+
+BODY
+{
+ scrollbar-3d-light-color: #ffffff;
+ scrollbar-arrow-color: #ffffff;
+ scrollbar-base-color: #ffffff;
+ scrollbar-dark-shadow-color: #F9F9F9;
+ scrollbar-face-color: #D3D3D3;
+ scrollbar-highlight-color: #F2F2F4;
+ scrollbar-shadow-color:#FDFDFD
+}
+.copyRight
+{
+	padding-left: 5;
+	font-family: verdana;
+	font-weight: bold;
+	color: white;
+}
+
+
+
+
+
+
+

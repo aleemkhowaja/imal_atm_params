@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	
+	<!-- 799705 PWS mapping screen -->
+	
+	<bean id="commonPwsMappingAction" class="com.path.actions.common.pwsmapping.CommonPwsMappingAction"  scope="prototype" parent="baseAction">
+		<property name="commonPwsMappingBO" ref="commonPwsMappingBO"></property>
+	</bean>
+	
+	<bean id="commonPwsMappingGridAction" class="com.path.actions.common.pwsmapping.CommonPwsMappingGridAction"  scope="prototype" parent="baseAction">
+		<property name="commonPwsMappingBO" ref="commonPwsMappingBO"></property>
+	</bean>
+	
+</beans>

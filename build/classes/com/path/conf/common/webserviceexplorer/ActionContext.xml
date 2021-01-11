@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<!--  653853  WSDL explorer -->
+	<bean id="webServiceExplorerMaint" class="com.path.actions.common.webserviceexplorer.WebServiceExplorerMaintAction" scope="prototype" parent="baseAction">
+		<property name="webServiceExplorerBO" ref="webServiceExplorerBO"> </property>
+	</bean>
+	
+	<bean id="webServiceExplorerList" class="com.path.actions.common.webserviceexplorer.WebServiceExplorerList" scope="prototype" parent="WebServiceExplorerGridBaseList">
+		<property name="webServiceExplorerBO" ref="webServiceExplorerBO"> </property>
+	</bean>
+	
+	<bean id="WebServiceExplorerGridBaseList" class="com.path.actions.common.webserviceexplorer.WebServiceExplorerGridBaseList" scope="prototype" parent="baseAction">
+		<property name="webServiceExplorerBO" ref="webServiceExplorerBO"> </property>
+	</bean>
+	
+	<bean id="webServiceExplorerTree" class="com.path.actions.common.webserviceexplorer.WebServiceExplorerTreeAction" scope="prototype" parent="baseAction">
+		<property name="webServiceExplorerBO" ref="webServiceExplorerBO"> </property>
+	</bean>
+	
+	<bean id="wsdLParsingLookup" class="com.path.actions.common.webserviceexplorer.WSDLParsingLookup" scope="prototype" parent="baseAction">
+		<property name="webServiceExplorerBO" ref="webServiceExplorerBO"> </property>
+	</bean>
+	
+</beans>

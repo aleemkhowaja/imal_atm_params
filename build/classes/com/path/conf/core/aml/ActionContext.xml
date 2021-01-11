@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+	<bean id="kycManagementListAction" class="com.path.core.actions.aml.KycManagementListAction" scope="prototype" parent="baseAction">
+	 <property name="kycManagementBO" ref="kycManagementBO"></property>
+	</bean>
+	<bean id="kycManagementMaintAction" class="com.path.core.actions.aml.KycManagementMaintAction" scope="prototype" parent="baseAction">
+	 <property name="kycManagementBO" ref="kycManagementBO"></property>
+	  <property name="cifBO" ref="cifBO"></property>
+	</bean>
+	<bean id="kycManagementStatusAction" class="com.path.core.actions.aml.KycManagementStatusAction" scope="prototype" parent="baseAction">
+	</bean>
+	<bean id="kycManagementLookupAction" class="com.path.core.actions.aml.KycManagementLookupAction" scope="prototype" parent="baseAction">
+	 <property name="kycManagementBO" ref="kycManagementBO"></property>
+	</bean>
+
+
+</beans>

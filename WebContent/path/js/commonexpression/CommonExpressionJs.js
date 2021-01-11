@@ -1,0 +1,300 @@
+/**
+ * 
+ * @param evt event object of grid 
+ * event object is used to get the if grid
+ * @param columnName it is single column from where you need to get value
+ * @returns
+ */
+function common_dialogGridDBClick(evt, columnName)
+{
+	//check if the form is readonly then doesn't set grid parameter value in textarea.
+	var checkDisable = $("#_recReadOnly_"+_pageRef).val();
+	if(checkDisable == "true")
+	return;
+	
+	var gridId = evt.id;
+	var $table = $("#"+gridId);
+	var selectedRowId = $table.jqGrid('getGridParam', 'selrow');
+	var myObject = $table.jqGrid('getRowData', selectedRowId);
+	var field = myObject[columnName];
+	//var ele = field.split(' -')[0];
+	var cursorPos = $('#expressionTextArea_'+_pageRef).prop('selectionStart');
+    var v =  $('#expressionTextArea_'+_pageRef).val();
+    var textBefore = v.substring(0,  cursorPos );
+    var textAfter  = v.substring( cursorPos, v.length );
+    var data = field;
+    $('#expressionTextArea_'+_pageRef).val(textBefore+data+textAfter );
+}
+
+/**
+ * 
+ * @param dialogId it is id of dialog which needs to be opened
+ * @param url url of dialog page
+ * @param additionalParams these are params like return page name, width, height
+ *  [0] = width of dialog
+ *  [1] = height of dialog
+ *  [2] = function of ok button
+ *  [3] = save expression url
+ *  [4] = Expression form Id
+ *  [5] = function to get ISO list and set into dialog Grid for Interface Screen
+ * @param gridId is a id of grid from where dialog is opened
+ * @returns
+ */
+function common_openExpressionDialog(url, params, additionalParams)
+{
+
+	url = jQuery.contextPath+url;
+	
+	_showProgressBar(true);
+	
+	var	openEventFilterPopup = $("<div id='dialogId_"+_pageRef+"' class='path-common-sceen'></div>");
+	openEventFilterPopup.css("padding","0");
+	openEventFilterPopup.insertAfter($('body'));
+	var dialogOptions = {
+		modal:true, 
+		title:parameters_key,
+	    autoOpen:false,
+	    show:'slide',
+	    width:returnMaxWidth(620),
+	    height:returnMaxHeight(400),
+	    position:'center', 
+	    closeOnEscape: true,
+	    //to hide the x button in the dialogue
+	    open: function(event, ui) {
+	  	  // $(".ui-dialog-titlebar-close", ui.dialog | ui).hide();
+	    },
+	    buttons: {
+		       OK:function()
+		    {
+		    	   var theDialog = $(this);
+		    	   
+		    	   var isValidate =  common_validateForm(additionalParams[4]);
+		    	   
+		    	   if(isValidate)
+		    	   {
+		    		   var isGlobal =  $("#isGlobal_"+_pageRef+":checked").val();
+		    		   /*if(variableValueNotEmpty(isGlobal) &&  isGlobal)
+		    		   {*/
+		    			 //save the expression
+				    	var result = common_expression_save(theDialog, isGlobal, additionalParams);
+		    		   /*}
+		    		   if(result != -1)
+		    		   {
+		    			   //call the ok button whatever pass in additionalParams[2]
+			    		   var expression = $("#expressionTextArea_"+_pageRef).val();
+				    	   eval(additionalParams[2])(expression);
+				    	   
+				    	   //Close the dialog
+				   		   theDialog.dialog( 'close' );
+		    		   }*/
+		    	   }
+			},
+			Cancel: function()
+			{
+				var theDialog = $(this);
+				theDialog.dialog( 'close' );
+			}
+	    },
+	    position:'center', 
+	};
+	
+	$("#dialogId_"+ _pageRef).load(url,params, function() {
+		_showProgressBar(false);
+
+		/*
+		 * Chack if additionalParameter[5] is requird for interface screen
+		 */
+		if(variableValueNotEmpty(additionalParams[5]))
+		{
+			eval(additionalParams[5]);
+		}
+		
+		//set Data inside dialog textarea while dialog opens from from
+		//is autocomplete need in the dialog
+		common_fillAutoComplete("expressionTextArea_"+_pageRef);
+
+		
+	});
+	$("#dialogId_"+ _pageRef).dialog(dialogOptions);
+	$("#dialogId_"+ _pageRef).dialog("open");
+}
+
+
+
+function common_fillAutoComplete(textAreaId)
+{
+	var  operators = $("#operators_"+_pageRef).val();
+	var expression_comparison = operators.split(";");
+	common_autoCompleteConstraints(textAreaId,expression_comparison);
+}
+
+/**
+ * Auto complete while down key press 
+ */
+common_autoCompleteConstraints = function(theInputId,expression_cust_tags)
+{ 
+	var theInput = $("#"+theInputId);
+	// don't navigate away from the field on tab when selecting an item
+    theInput.bind( "keydown", function( event )
+    {
+    	if( event.keyCode === $.ui.keyCode.DOWN && !theInput.isopened)
+	   	{
+	       	theInput.autocomplete( "search", "" );
+	   	}
+    })
+    .autocomplete({
+    	minLength: 0,
+    	inputId:theInputId,
+    	source: expression_cust_tags,
+    	open: function( event, ui )
+    	{
+    		theInput.isopened = true;
+    	},
+    	close: function( event, ui )
+    	{
+    		theInput.isopened = false;
+    	},
+    	focus: function()
+    	{
+    		// prevent value inserted on focus
+    		return false;
+    	},
+    	select: function( event, ui )
+    	{
+			var cursPosition   = returnCursorPosStart(document.getElementById(theInputId));
+			var strTillCurrPos = this.value.substring(0,cursPosition)
+/*			*//**
+			 * [MarwanMaddah]: this pattern will catch all the words 
+			 * that are exists in the input from index 0 untill the current cursor position
+			 * then the last word will be replaced by the selected value from the Search result
+			 *//*
+			var patt       = /\w+/g;
+			var result     = strTillCurrPos.match(patt);
+			var firstPart  = "";
+			if(result!= null && result.length > 0)
+			{        	  
+				var resultLgth = result.length;
+				
+				firstPart  = strTillCurrPos.substring(0,strTillCurrPos.lastIndexOf(result[resultLgth-1])); 
+			}
+			else
+			{
+				firstPart = strTillCurrPos; 
+			}*/
+			
+			var isGlobal = false;
+			/**
+			 * select Global expression 
+			 */
+			var globalExpressions = $("#globalExpression_"+_pageRef).val();
+
+			if(variableValueNotEmpty(globalExpressions))
+			{
+				for (var i = 0; i < JSON.parse(globalExpressions).root.length; i++)
+				{
+			        var attrValue = JSON.parse(globalExpressions).root[i];
+			        if(attrValue.SHORT_NAME == ui.item.value)
+			        {
+			        	var cursPosition   = returnCursorPosStart(document.getElementById(theInputId));
+						var strTillCurrPos = this.value.substring(0,cursPosition)
+						
+						//this.value = firstPart + " " +ui.item.value +" "+ this.value.substring(cursPosition);
+						this.value = strTillCurrPos + " " +attrValue.EXPRESSION+" "+this.value.substring(cursPosition);
+						isGlobal = true;
+			        	break;
+			        }
+				}
+			}
+			
+			if(!isGlobal)
+			{
+				this.value = strTillCurrPos + " " +ui.item.value +" "+ this.value.substring(cursPosition);
+			}
+			
+			
+			return false;
+    	}
+    });
+};	
+
+
+/**
+ * validate Expression Form
+ * @param formId
+ * @returns
+ */
+function common_validateForm(formId)
+{
+	var isValidate = true;
+	var isGlobal =  $("#isGlobal_"+_pageRef+":checked").val();
+	if(isGlobal)
+	{
+		isValidate = $("#customExpressionFormId_"+_pageRef).valid();
+	}
+	return isValidate;
+}
+
+
+/**
+ * Save Global Expression
+ * @param theDialog
+ * @param isGlobal
+ * @param additionalParams
+ * @returns
+ */
+function common_expression_save(theDialog, isGlobal, additionalParams)
+{
+	
+	if($("#validation_dialog_"+_pageRef).html() != null)
+	{
+		//setting flag as changed for the mapping dialog
+		$("#validation_dialog_"+_pageRef).val("1");
+	}
+	//get Expression dialog iso fields and set to hidden field in order to send to action
+	var expressionISOFields = $("#dialogGridTbl_Id_"+_pageRef).jqGrid('getAllRows');
+	$("#isofieldsGrid_"+_pageRef).val(expressionISOFields);
+	
+	var action = jQuery.contextPath+additionalParams[3];
+
+	var formData = $("#"+additionalParams[4]+"_"+_pageRef).serializeForm();
+		
+	_showProgressBar(true);
+	$.ajax({
+		url : action,
+		type : "post",
+		data : formData,
+		dataType : "json",
+		success : function(data)
+		{
+			if (typeof data["_error"] != "undefined" && data["_error"] != null)
+			{
+				// call clear function
+				_showProgressBar(false);
+			}
+			else
+			{
+				//call the ok button whatever pass in additionalParams[2]
+				var expression = $("#expressionTextArea_"+_pageRef).val();
+				eval(additionalParams[2])(expression);
+		    	   
+				//Close the dialog
+				theDialog.dialog( 'close' );
+		   		   
+				_showProgressBar(false);
+			}
+		}
+	});
+}
+
+/**
+ * validate if value is not Empty
+ * @param value
+ * @returns
+ */
+function variableValueNotEmpty(value)
+{
+	if( typeof value != "undefined" && value != null && $.trim(value) != "")
+	{
+		return true;
+	}
+}

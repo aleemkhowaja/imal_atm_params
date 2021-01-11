@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="portal_common_resources_JQ_3_3_1"/>
+	<classpathentry kind="src" path="portal_common_src_JQ_3_3_1"/>
+	<classpathentry kind="src" path="library_src"/>
+	<classpathentry kind="src" path="services_common"/>
+	<classpathentry kind="src" path="service_client_common_src"/>
+	<classpathentry kind="src" path="service_client_common_resources"/>
+	<classpathentry kind="src" path="services_common_business"/>
+	<classpathentry kind="src" path="service_client_common_src_business"/>
+	<classpathentry excluding="**/.svn/**|com/path/actions/common/login/DesktopAction.java" kind="src" path="portal_common_src"/>
+	<classpathentry excluding="**/.svn/**|template/jquery/grid-close.ftl|template/jquery/grid.ftl|template/jquery/head.ftl|template/path-xhtml/submit_simple.ftl" kind="src" path="portal_common_resources"/>
+	<classpathentry kind="src" path="portal_common_resources_business"/>
+	<classpathentry kind="src" path="portal_common_src_business"/>
+	<classpathentry kind="src" path="service_client_common_resources_business"/>
+	<classpathentry kind="src" path="reporting_portal_common_src"/>
+	<classpathentry kind="src" path="reporting_portal_common_resources"/>
+	<classpathentry kind="src" path="reporting_services_common_src"/>
+	<classpathentry kind="src" path="reporting_services_common_resources"/>
+	<classpathentry kind="src" path="gateway_portal_common_resource"/>
+	<classpathentry kind="src" path="gateway_portal_common_src"/>
+	<classpathentry kind="src" path="gateway_service_client_common_resource"/>
+	<classpathentry kind="src" path="gateway_service_client_common_src"/>
+	<classpathentry kind="src" path="gateway_service_common"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/custom_libs">
+		<attributes>
+			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-11">
+		<attributes>
+			<attribute name="module" value="true"/>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

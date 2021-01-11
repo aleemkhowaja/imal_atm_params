@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN"
+        "http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+<mapper namespace="atmBranchMapper">
+
+	<resultMap id="branchResultMap" type="atmBranchCO" >
+	    <id 	column="BRANCH_CODE" 		property="branchCode" />
+	    <result column="BRIEF_DESC_ENG" 	property="briefNameEnglish" />
+	    <result column="LONG_DESC_ENG"  	property="longNameEnglish" />
+	    <result column="BRIEF_DESC_ARAB" 	property="briefNameArabic" />
+	    <result column="LONG_DESC_ARAB"  	property="longNameArabic" />
+	    <result column="BASE_CURRENCY"  	property="baseCurrency" />
+	    <result column="REMARK"  			property="remarks" />
+	</resultMap>
+
+	<select id="returnBranchByCompCodeList"  resultMap="branchResultMap" parameterType="atmBranchSC">
+		<include refid="servicesCommon.commonGridWrpBefFlip"/>
+		<include refid="branchByCompCodeSql"/>
+		<include refid="servicesCommon.commonGridWrpAftFlip"/>
+		<include refid="servicesCommon.commmonGridWrpFlipClose"/>
+	</select>
+	
+	<select id="returnBranchByCompCodeCount"  resultType="int" parameterType="atmBranchSC" > 
+		<include refid="servicesCommon.commonGridWrpBefCnt"/>
+		<include refid="branchByCompCodeSql"/>
+		<include refid="servicesCommon.commonGridWrpAftCnt"/>
+		<include refid="servicesCommon.commonGridCountWrpClose"/>
+	</select>
+
+		<select id="returnBranchDetails" resultMap="branchResultMap" parameterType="atmBranchSC">
+			<include refid="branchByCompCodeSql" />
+			AND BRANCH_CODE = #{branchCode}
+	</select>
+	
+
+	<sql id="branchByCompCodeSql">
+		SELECT 
+			BRANCH_CODE , 
+			BRIEF_DESC_ENG ,
+			LONG_DESC_ENG,
+			BRIEF_DESC_ARAB,
+			LONG_DESC_ARAB, 
+			BASE_CURRENCY, 
+			REMARK
+		FROM 
+			BRANCHES 
+					WHERE COMP_CODE = #{compCode}
+	</sql>
+
+
+</mapper>
